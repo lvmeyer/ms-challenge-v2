@@ -1,4 +1,4 @@
-import { Controller, Get } from '@nestjs/common';
+import { Controller } from '@nestjs/common';
 import { BillingsService } from './billings.service';
 import { EventPattern } from '@nestjs/microservices';
 

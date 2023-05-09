@@ -1,4 +1,22 @@
 services:
+  gateway:
+    build:
+      context: ./apis
+      dockerfile: ./apps/gateway/Dockerfile
+      target: development
+    container_name: gateway_c
+    hostname: gateway
+    command: npm run start:dev gateway
+    env_file:
+      - ./apis/apps/gateway/.env
+    depends_on:
+      - rabbitmq
+    volumes:
+      - ./apis:/usr/src/app
+      - /usr/src/app/node_modules
+    ports:
+      - '3000:3000'
+
   orders:
     build:
       context: ./apis
@@ -15,7 +33,7 @@ services:
       - ./apis:/usr/src/app
       - /usr/src/app/node_modules
     ports:
-      - '3000:3000'
+      - '3001:3001'
 
   billings:
     build:
