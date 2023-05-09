@@ -13,6 +13,7 @@ import { BILLING_SERVICE } from './constants/services';
       validationSchema: Joi.object({
         RABBITMQ_URI: Joi.string().required(),
         PORT: Joi.number().required(),
+        PORT_ORDERS: Joi.string().required(),
       }),
       envFilePath: './apps/gateway/.env',
     }),

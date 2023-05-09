@@ -6,6 +6,8 @@ import { ConfigModule } from '@nestjs/config';
 import * as Joi from 'joi';
 import { RmqModule } from '@app/common';
 import { BILLING_SERVICE } from './constants/services';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { Order } from './order.entity';
 
 @Module({
   imports: [
@@ -18,6 +20,17 @@ import { BILLING_SERVICE } from './constants/services';
       envFilePath: './apps/orders/.env',
     }),
     RmqModule.register({ name: BILLING_SERVICE }),
+    TypeOrmModule.forRoot({
+      type: 'postgres',
+      host: 'database',
+      port: 5432,
+      username: 'user',
+      password: 'user',
+      database: 'app',
+      autoLoadEntities: true,
+      synchronize: true,
+    }),
+    TypeOrmModule.forFeature([Order]),
   ],
   controllers: [OrdersController],
   providers: [OrdersService],

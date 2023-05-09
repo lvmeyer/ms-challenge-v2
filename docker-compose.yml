@@ -11,6 +11,7 @@ services:
       - ./apis/apps/gateway/.env
     depends_on:
       - rabbitmq
+      - database
     volumes:
       - ./apis:/usr/src/app
       - /usr/src/app/node_modules
@@ -29,6 +30,7 @@ services:
       - ./apis/apps/orders/.env
     depends_on:
       - rabbitmq
+      - database
     volumes:
       - ./apis:/usr/src/app
       - /usr/src/app/node_modules
@@ -62,3 +64,19 @@ services:
       - '15672:15672'
     env_file:
       - .env
+
+  database:
+    image: postgres:14-alpine
+    container_name: db_c
+    hostname: db
+    environment:
+      - POSTGRES_USER=user
+      - POSTGRES_PASSWORD=user
+      - POSTGRES_DB=app
+    ports:
+      - 5432:5432
+    volumes:
+      - db_data:/var/lib/postgresql/data
+
+volumes:
+  db_data:
