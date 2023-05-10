@@ -18,7 +18,7 @@ export class OrdersService {
   async createOrder(createOrderRequest: CreateOrderRequest): Promise<Order> {
     this.billingClient.emit('create-order', {});
 
-    console.log('==here', createOrderRequest);
+    console.log('==heree', createOrderRequest);
     return this.orderRepository.save(createOrderRequest);
   }
 }
