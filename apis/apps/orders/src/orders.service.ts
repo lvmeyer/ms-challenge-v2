@@ -27,10 +27,10 @@ export class OrdersService {
 
   async find(uuid: string): Promise<Order> {
     const order = await this.orderRepository.findOneBy({ id: uuid });
+
     if (!order) {
       throw new NotFoundException('Order not found');
     }
-
     return order;
   }
 

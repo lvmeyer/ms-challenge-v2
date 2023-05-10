@@ -12,10 +12,7 @@ import {
   ValidationPipe,
 } from '@nestjs/common';
 import { GatewayService } from './gateway.service';
-import {
-  CreateOrderRequest,
-  UpdateOrderRequest,
-} from './dto/orders/orders.request';
+import { CreateOrderRequest, UpdateOrderRequest } from '@app/common';
 import { Response } from 'express';
 import { gatewayResponse } from './utils/gatewayResponse';
 
