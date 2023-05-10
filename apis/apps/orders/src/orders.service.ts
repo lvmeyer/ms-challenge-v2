@@ -1,11 +1,11 @@
-import { Inject, Injectable } from '@nestjs/common';
+import { Inject, Injectable, NotFoundException } from '@nestjs/common';
 import { ClientProxy } from '@nestjs/microservices';
 import { BILLING_SERVICE } from './constants/services';
 import { Order } from './order.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 // import { ConfigService } from '@nestjs/config';
-import { CreateOrderRequest } from './dto/orders.request';
+import { CreateOrderRequest, UpdateOrderRequest } from './dto/orders.request';
 
 @Injectable()
 export class OrdersService {
@@ -18,7 +18,32 @@ export class OrdersService {
   async createOrder(createOrderRequest: CreateOrderRequest): Promise<Order> {
     this.billingClient.emit('create-order', {});
 
-    console.log('==heree', createOrderRequest);
     return this.orderRepository.save(createOrderRequest);
+  }
+
+  async findAll(): Promise<Order[]> {
+    return this.orderRepository.find();
+  }
+
+  async find(uuid: string): Promise<Order> {
+    const order = await this.orderRepository.findOneBy({ id: uuid });
+
+    if (!order) {
+      throw new NotFoundException('Order not found');
+    }
+    console.log('==order serv', order);
+    return order;
+  }
+
+  async update(
+    uuid: string,
+    updateOrderRequest: UpdateOrderRequest,
+  ): Promise<any> {
+    const order = await this.orderRepository.findOneBy({ id: uuid });
+    if (!order) {
+      throw new NotFoundException('Order not found');
+    }
+
+    return await this.orderRepository.update(uuid, updateOrderRequest);
   }
 }
