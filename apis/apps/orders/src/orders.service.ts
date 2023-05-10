@@ -27,11 +27,10 @@ export class OrdersService {
 
   async find(uuid: string): Promise<Order> {
     const order = await this.orderRepository.findOneBy({ id: uuid });
-
     if (!order) {
       throw new NotFoundException('Order not found');
     }
-    console.log('==order serv', order);
+
     return order;
   }
 
@@ -45,5 +44,14 @@ export class OrdersService {
     }
 
     return await this.orderRepository.update(uuid, updateOrderRequest);
+  }
+
+  async delete(uuid: string): Promise<void> {
+    const order = await this.orderRepository.findOneBy({ id: uuid });
+    if (!order) {
+      throw new NotFoundException('Order not found');
+    }
+
+    await this.orderRepository.remove(order);
   }
 }

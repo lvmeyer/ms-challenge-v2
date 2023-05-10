@@ -1,4 +1,9 @@
-import { HttpStatus, Inject, Injectable } from '@nestjs/common';
+import {
+  HttpStatus,
+  Inject,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { BILLING_SERVICE } from './constants/services';
 import { ClientProxy } from '@nestjs/microservices';
 import {
@@ -69,12 +74,11 @@ export class GatewayService {
       );
 
       if (response.status !== HttpStatus.OK) {
-        throw new ErrorResponse('Order not found', response.status);
+        throw new ErrorResponse('Failed to fetch order', response.status);
       }
-      console.log('syst OK');
       return response.json();
     } catch (error) {
-      throw new ErrorResponse('Failed to fetch order', HttpStatus.NOT_FOUND);
+      throw error;
     }
   }
 
@@ -94,7 +98,20 @@ export class GatewayService {
     );
 
     if (response.status !== HttpStatus.OK) {
-      throw new Error('Failed to update order');
+      throw new ErrorResponse('Failed to update order', response.status);
+    }
+  }
+
+  async deleteOrder(id: string): Promise<void> {
+    const { status } = await fetch(
+      `${this.configService.get<string>('PORT_ORDERS')}${PATH}/${id}`,
+      {
+        method: 'DELETE',
+      },
+    );
+
+    if (status !== HttpStatus.NO_CONTENT) {
+      throw new ErrorResponse('Failed to delete order', status);
     }
   }
 }

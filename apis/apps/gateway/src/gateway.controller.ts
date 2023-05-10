@@ -3,7 +3,6 @@ import {
   Controller,
   Delete,
   Get,
-  HttpCode,
   HttpStatus,
   Param,
   ParseUUIDPipe,
@@ -18,6 +17,7 @@ import {
   UpdateOrderRequest,
 } from './dto/orders/orders.request';
 import { Response } from 'express';
+import { gatewayResponse } from './utils/gatewayResponse';
 
 @Controller()
 export class GatewayController {
@@ -26,22 +26,45 @@ export class GatewayController {
   @Post('orders')
   async createOrder(
     @Body(ValidationPipe) createOrderRequest: CreateOrderRequest,
-  ): Promise<{ success: boolean; order?: any; message?: any }> {
+    @Res() res: Response,
+  ): Promise<any> {
     try {
       const order = await this.gatewayService.createOrder(createOrderRequest);
-      return { success: true, order };
+
+      return gatewayResponse({
+        res,
+        status: HttpStatus.CREATED,
+        success: true,
+        data: order,
+      });
     } catch (err) {
-      console.error(err);
-      return { success: false, message: 'Failed to create order' };
+      return gatewayResponse({
+        res,
+        status: err.status,
+        success: false,
+        message: err.message,
+      });
     }
   }
 
   @Get('orders')
-  async findAllOrders() {
+  async findAllOrders(@Res() res: Response) {
     try {
-      return await this.gatewayService.findAllOrders();
+      const orders = await this.gatewayService.findAllOrders();
+
+      return gatewayResponse({
+        res,
+        status: HttpStatus.OK,
+        success: true,
+        data: orders,
+      });
     } catch (err) {
-      return { success: false, message: err.message };
+      return gatewayResponse({
+        res,
+        status: err.status,
+        success: false,
+        message: err.message,
+      });
     }
   }
 
@@ -52,50 +75,70 @@ export class GatewayController {
   ): Promise<any> {
     try {
       const order = await this.gatewayService.findOrder(uuid);
-      return res.status(HttpStatus.OK).json({
+
+      return gatewayResponse({
+        res,
+        status: HttpStatus.OK,
         success: true,
-        order,
+        data: order,
       });
     } catch (err) {
-      console.log(err);
-
-      res.status(err.status).json({
-        message: err.message,
+      console.log(err.message);
+      return gatewayResponse({
+        res,
+        status: err.status,
         success: false,
-        // name: err.name,
-        // status: err.status,
+        message: err.message,
       });
-      // return {
-      //   success: false,
-      //   name: err.name,
-      //   message: err.message,
-      //   status: err.status,
-      // };
     }
   }
 
   @Patch('orders/:uuid')
-  @HttpCode(HttpStatus.OK)
   async updateOrder(
     @Param('uuid', ParseUUIDPipe) uuid: string,
     @Body(ValidationPipe) updateOrderRequest: UpdateOrderRequest,
+    @Res() res: Response,
   ) {
     try {
       await this.gatewayService.updateOrder(uuid, updateOrderRequest);
-      return { success: true, message: 'Order updated' };
+
+      return gatewayResponse({
+        res,
+        status: HttpStatus.OK,
+        success: true,
+        message: 'Order updated',
+      });
     } catch (err) {
-      return { success: false, message: err.message };
+      return gatewayResponse({
+        res,
+        status: err.status,
+        success: false,
+        message: err.message,
+      });
     }
   }
 
-  // @Delete('orders/:uuid')
-  // @HttpCode(HttpStatus.NO_CONTENT)
-  // async deleteOrder(@Param('uuid', ParseUUIDPipe) uuid: string) {
-  //   try {
-  //     await this.gatewayService.deleteOrder(uuid);
-  //     return { success: true, message: 'Order deleted' };
-  //   } catch (err) {
-  //     return { success: false, message: err.message };
-  //   }
-  // }
+  @Delete('orders/:uuid')
+  async deleteOrder(
+    @Param('uuid', ParseUUIDPipe) uuid: string,
+    @Res() res: Response,
+  ) {
+    try {
+      await this.gatewayService.deleteOrder(uuid);
+
+      return gatewayResponse({
+        res,
+        status: HttpStatus.NO_CONTENT,
+        success: true,
+        message: 'Order deleted',
+      });
+    } catch (err) {
+      return gatewayResponse({
+        res,
+        status: err.status,
+        success: false,
+        message: err.message,
+      });
+    }
+  }
 }

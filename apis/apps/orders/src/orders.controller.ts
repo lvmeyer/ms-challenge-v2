@@ -1,6 +1,7 @@
 import {
   Body,
   Controller,
+  Delete,
   Get,
   HttpCode,
   HttpStatus,
@@ -41,10 +42,9 @@ export class OrdersController {
   async find(@Param('uuid', ParseUUIDPipe) uuid: string): Promise<Order> {
     try {
       const order = await this.ordersService.find(uuid);
-      console.error('==err from order controller1', order);
       return order;
     } catch (err) {
-      console.error('==err from order controller', err);
+      console.log(err);
       throw err;
     }
   }
@@ -57,7 +57,17 @@ export class OrdersController {
   ): Promise<any> {
     try {
       await this.ordersService.update(uuid, updateOrderRequest);
-      console.log('PROC');
+    } catch (err) {
+      console.error(err);
+      throw err;
+    }
+  }
+
+  @Delete(':uuid')
+  @HttpCode(HttpStatus.NO_CONTENT)
+  async delete(@Param('uuid', ParseUUIDPipe) uuid: string): Promise<void> {
+    try {
+      await this.ordersService.delete(uuid);
     } catch (err) {
       console.error(err);
       throw err;
