@@ -3,9 +3,8 @@ import { ProductsController } from './products.controller';
 import { ProductsService } from './products.service';
 import { ConfigModule } from '@nestjs/config';
 import * as Joi from 'joi';
-import { BILLING_SERVICE, RmqModule } from '@app/common';
+import { BILLING_SERVICE, RmqModule, Product } from '@app/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { Product } from './product.entity';
 
 @Module({
   imports: [

@@ -3,9 +3,8 @@ import { BasketController } from './basket.controller';
 import { BasketService } from './basket.service';
 import { ConfigModule } from '@nestjs/config';
 import * as Joi from 'joi';
-import { BILLING_SERVICE, RmqModule } from '@app/common';
+import { BILLING_SERVICE, RmqModule, Basket } from '@app/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { Basket } from './basket.entity';
 
 @Module({
   imports: [

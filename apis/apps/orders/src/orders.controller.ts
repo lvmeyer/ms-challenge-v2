@@ -12,8 +12,7 @@ import {
   ValidationPipe,
 } from '@nestjs/common';
 import { OrdersService } from './orders.service';
-import { Order } from './order.entity';
-import { CreateOrderRequest, UpdateOrderRequest } from '@app/common';
+import { CreateOrderRequest, UpdateOrderRequest, Order } from '@app/common';
 
 @Controller('orders')
 export class OrdersController {

@@ -2,17 +2,24 @@ import {
   Column,
   CreateDateColumn,
   Entity,
+  ManyToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
 
 @Entity()
-export class Basket {
+export class Product {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
+  @Column({ unique: true })
+  name: string;
+
   @Column()
   price: number;
+
+  @Column()
+  description: string;
 
   @CreateDateColumn()
   createdDate: Date;

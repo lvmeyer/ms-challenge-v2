@@ -5,9 +5,8 @@ import { ConfigModule } from '@nestjs/config';
 
 import * as Joi from 'joi';
 import { RmqModule } from '@app/common';
-import { BILLING_SERVICE } from '@app/common';
+import { BILLING_SERVICE, Order } from '@app/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { Order } from './order.entity';
 
 @Module({
   imports: [

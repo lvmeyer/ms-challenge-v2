@@ -7,18 +7,12 @@ import {
 } from 'typeorm';
 
 @Entity()
-export class Product {
+export class Basket {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @Column({ unique: true })
-  name: string;
-
   @Column()
   price: number;
-
-  @Column()
-  description: string;
 
   @CreateDateColumn()
   createdDate: Date;
@@ -26,6 +20,6 @@ export class Product {
   @UpdateDateColumn()
   updatedDate: Date;
 
-  // @ManyToOne(() => Order, (order) => order.products)
+  // @OneToMany(() => Product, (order) => order.products)
   // order: Order;
 }

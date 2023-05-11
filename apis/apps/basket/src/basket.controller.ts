@@ -12,8 +12,7 @@ import {
   ValidationPipe,
 } from '@nestjs/common';
 import { BasketService } from './basket.service';
-import { Basket } from './basket.entity';
-import { CreateBasketRequest, UpdateBasketRequest } from '@app/common';
+import { CreateBasketRequest, UpdateBasketRequest, Basket } from '@app/common';
 
 @Controller('basket')
 export class BasketController {
