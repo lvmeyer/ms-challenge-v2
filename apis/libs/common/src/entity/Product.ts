@@ -6,6 +6,7 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
+import { Basket } from './Basket';
 
 @Entity()
 export class Product {
@@ -27,6 +28,6 @@ export class Product {
   @UpdateDateColumn()
   updatedDate: Date;
 
-  // @ManyToOne(() => Order, (order) => order.products)
-  // order: Order;
+  @ManyToOne(() => Basket, (basket) => basket.products)
+  basket: Basket;
 }

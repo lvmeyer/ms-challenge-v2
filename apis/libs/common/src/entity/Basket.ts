@@ -2,9 +2,11 @@ import {
   Column,
   CreateDateColumn,
   Entity,
+  OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
+import { Product } from './Product';
 
 @Entity()
 export class Basket {
@@ -20,6 +22,6 @@ export class Basket {
   @UpdateDateColumn()
   updatedDate: Date;
 
-  // @OneToMany(() => Product, (order) => order.products)
-  // order: Order;
+  @OneToMany(() => Product, (product) => product.basket)
+  products: Product[];
 }

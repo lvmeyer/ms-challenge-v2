@@ -3,7 +3,7 @@ import { ProductsController } from './products.controller';
 import { ProductsService } from './products.service';
 import { ConfigModule } from '@nestjs/config';
 import * as Joi from 'joi';
-import { BILLING_SERVICE, RmqModule, Product } from '@app/common';
+import { BILLING_SERVICE, RmqModule, Product, Basket } from '@app/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
 @Module({
@@ -27,7 +27,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
       autoLoadEntities: true,
       synchronize: true,
     }),
-    TypeOrmModule.forFeature([Product]),
+    TypeOrmModule.forFeature([Product, Basket]),
   ],
   controllers: [ProductsController],
   providers: [ProductsService],

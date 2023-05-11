@@ -14,6 +14,6 @@ export * from './constants/services';
 export * from './errors/ErrorResponse';
 
 // ENTITY
-export { Basket } from './entity/basket.entity';
-export { Product } from './entity/product.entity';
-export { Order } from './entity/order.entity';
+export { Basket } from './entity/Basket';
+export { Product } from './entity/Product';
+export { Order } from './entity/Order';
