@@ -22,10 +22,12 @@ export class GatewayService {
       },
       body: JSON.stringify(createOrderRequest),
     });
+    const res = await response.json();
+
     if (response.status !== HttpStatus.CREATED) {
-      throw new ErrorResponse('Failed to create order', response.status);
+      throw new ErrorResponse(res.message, response.status);
     }
-    return response.json();
+    return res;
   }
 
   async findAllOrders() {
@@ -35,29 +37,28 @@ export class GatewayService {
         'Content-Type': 'application/json',
       },
     });
+    const res = await response.json();
 
     if (response.status !== HttpStatus.OK) {
-      throw new ErrorResponse('Failed to fetch orders', response.status);
+      throw new ErrorResponse(res.message, response.status);
     }
-    return response.json();
+    return res;
   }
 
   async findOrder(id: string) {
-    try {
-      const response = await fetch(`${this.PATH}/${id}`, {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      });
+    const response = await fetch(`${this.PATH}/${id}`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
 
-      if (response.status !== HttpStatus.OK) {
-        throw new ErrorResponse('Failed to fetch order', response.status);
-      }
-      return response.json();
-    } catch (error) {
-      throw error;
+    const res = await response.json();
+    if (response.status !== HttpStatus.OK) {
+      throw new ErrorResponse(res.message, response.status);
     }
+
+    return res;
   }
 
   async updateOrder(
@@ -73,17 +74,19 @@ export class GatewayService {
     });
 
     if (response.status !== HttpStatus.OK) {
-      throw new ErrorResponse('Failed to update order', response.status);
+      const res = await response.json();
+      throw new ErrorResponse(res.message, response.status);
     }
   }
 
   async deleteOrder(id: string): Promise<void> {
-    const { status } = await fetch(`${this.PATH}/${id}`, {
+    const response = await fetch(`${this.PATH}/${id}`, {
       method: 'DELETE',
     });
 
-    if (status !== HttpStatus.NO_CONTENT) {
-      throw new ErrorResponse('Failed to delete order', status);
+    if (response.status !== HttpStatus.NO_CONTENT) {
+      const res = await response.json();
+      throw new ErrorResponse(res.message, response.status);
     }
   }
 }

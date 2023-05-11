@@ -13,7 +13,7 @@ import {
 } from '@nestjs/common';
 import { OrdersService } from './orders.service';
 import { Order } from './order.entity';
-import { CreateOrderRequest, UpdateOrderRequest } from './dto/orders.request';
+import { CreateOrderRequest, UpdateOrderRequest } from '@app/common';
 
 @Controller('api/orders')
 export class OrdersController {
@@ -23,7 +23,7 @@ export class OrdersController {
   @HttpCode(HttpStatus.CREATED)
   async createOrder(
     @Body(ValidationPipe) createOrderRequest: CreateOrderRequest,
-  ): Promise<any> {
+  ): Promise<Order> {
     return await this.ordersService.createOrder(createOrderRequest);
   }
 
@@ -36,13 +36,7 @@ export class OrdersController {
   @Get(':uuid')
   @HttpCode(HttpStatus.OK)
   async find(@Param('uuid', ParseUUIDPipe) uuid: string): Promise<Order> {
-    try {
-      const order = await this.ordersService.find(uuid);
-      return order;
-    } catch (err) {
-      console.log(err);
-      throw err;
-    }
+    return this.ordersService.find(uuid);
   }
 
   @Patch(':uuid')
@@ -51,22 +45,12 @@ export class OrdersController {
     @Param('uuid', ParseUUIDPipe) uuid: string,
     @Body(ValidationPipe) updateOrderRequest: UpdateOrderRequest,
   ): Promise<any> {
-    try {
-      await this.ordersService.update(uuid, updateOrderRequest);
-    } catch (err) {
-      console.error(err);
-      throw err;
-    }
+    return await this.ordersService.update(uuid, updateOrderRequest);
   }
 
   @Delete(':uuid')
   @HttpCode(HttpStatus.NO_CONTENT)
   async delete(@Param('uuid', ParseUUIDPipe) uuid: string): Promise<void> {
-    try {
-      await this.ordersService.delete(uuid);
-    } catch (err) {
-      console.error(err);
-      throw err;
-    }
+    return await this.ordersService.delete(uuid);
   }
 }

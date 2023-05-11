@@ -35,6 +35,7 @@ export class GatewayController {
         data: order,
       });
     } catch (err) {
+      console.error(err);
       return gatewayResponse({
         res,
         status: err.status,
@@ -56,6 +57,7 @@ export class GatewayController {
         data: orders,
       });
     } catch (err) {
+      console.error(err);
       return gatewayResponse({
         res,
         status: err.status,
@@ -80,7 +82,7 @@ export class GatewayController {
         data: order,
       });
     } catch (err) {
-      console.log(err.message);
+      console.error(err);
       return gatewayResponse({
         res,
         status: err.status,
@@ -106,6 +108,7 @@ export class GatewayController {
         message: 'Order updated',
       });
     } catch (err) {
+      console.error(err);
       return gatewayResponse({
         res,
         status: err.status,
@@ -130,6 +133,7 @@ export class GatewayController {
         message: 'Order deleted',
       });
     } catch (err) {
+      console.error(err);
       return gatewayResponse({
         res,
         status: err.status,

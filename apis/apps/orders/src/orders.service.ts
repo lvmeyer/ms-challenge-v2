@@ -4,8 +4,7 @@ import { BILLING_SERVICE } from './constants/services';
 import { Order } from './order.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-// import { ConfigService } from '@nestjs/config';
-import { CreateOrderRequest, UpdateOrderRequest } from './dto/orders.request';
+import { CreateOrderRequest, UpdateOrderRequest } from '@app/common';
 
 @Injectable()
 export class OrdersService {
@@ -15,9 +14,8 @@ export class OrdersService {
     @Inject(BILLING_SERVICE) private billingClient: ClientProxy,
   ) {} // private readonly configService: ConfigService,
 
-  async createOrder(createOrderRequest: CreateOrderRequest): Promise<Order> {
+  async createOrder(createOrderRequest: CreateOrderRequest): Promise<any> {
     this.billingClient.emit('create-order', {});
-
     return this.orderRepository.save(createOrderRequest);
   }
 
@@ -27,10 +25,10 @@ export class OrdersService {
 
   async find(uuid: string): Promise<Order> {
     const order = await this.orderRepository.findOneBy({ id: uuid });
-
     if (!order) {
       throw new NotFoundException('Order not found');
     }
+
     return order;
   }
 
@@ -40,16 +38,16 @@ export class OrdersService {
   ): Promise<any> {
     const order = await this.orderRepository.findOneBy({ id: uuid });
     if (!order) {
-      throw new NotFoundException('Order not found');
+      throw new NotFoundException('Order not found for update');
     }
 
     return await this.orderRepository.update(uuid, updateOrderRequest);
   }
 
-  async delete(uuid: string): Promise<void> {
+  async delete(uuid: string): Promise<any> {
     const order = await this.orderRepository.findOneBy({ id: uuid });
     if (!order) {
-      throw new NotFoundException('Order not found');
+      throw new NotFoundException('Order not found for deletion');
     }
 
     await this.orderRepository.remove(order);
