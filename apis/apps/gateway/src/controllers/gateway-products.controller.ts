@@ -11,30 +11,30 @@ import {
   Res,
   ValidationPipe,
 } from '@nestjs/common';
-import { GatewayOrderService } from '../services/gateway-orders.service';
-import { CreateOrderRequest, UpdateOrderRequest } from '@app/common';
+import { GatewayProductService } from '../services/gateway-products.service';
+import { CreateProductRequest, UpdateProductRequest } from '@app/common';
 import { Response } from 'express';
 import { gatewayResponse } from '../utils/gatewayResponse';
 
-@Controller('api/orders')
-export class GatewayOrderController {
-  constructor(private readonly gatewayOrderService: GatewayOrderService) {}
+@Controller('api/products')
+export class GatewayProductController {
+  constructor(private readonly gatewayProductService: GatewayProductService) {}
 
   @Post()
-  async createOrder(
-    @Body(ValidationPipe) createOrderRequest: CreateOrderRequest,
+  async createProduct(
+    @Body(ValidationPipe) createProductRequest: CreateProductRequest,
     @Res() res: Response,
   ): Promise<any> {
     try {
-      const order = await this.gatewayOrderService.createOrder(
-        createOrderRequest,
+      const product = await this.gatewayProductService.createProduct(
+        createProductRequest,
       );
 
       return gatewayResponse({
         res,
         status: HttpStatus.CREATED,
         success: true,
-        data: order,
+        data: product,
       });
     } catch (err) {
       console.error(err);
@@ -48,15 +48,15 @@ export class GatewayOrderController {
   }
 
   @Get()
-  async findAllOrders(@Res() res: Response) {
+  async findAllProducts(@Res() res: Response) {
     try {
-      const orders = await this.gatewayOrderService.findAllOrders();
+      const products = await this.gatewayProductService.findAllProducts();
 
       return gatewayResponse({
         res,
         status: HttpStatus.OK,
         success: true,
-        data: orders,
+        data: products,
       });
     } catch (err) {
       console.error(err);
@@ -70,18 +70,18 @@ export class GatewayOrderController {
   }
 
   @Get(':uuid')
-  async findOrder(
+  async findProduct(
     @Param('uuid', ParseUUIDPipe) uuid: string,
     @Res() res: Response,
   ): Promise<any> {
     try {
-      const order = await this.gatewayOrderService.findOrder(uuid);
+      const product = await this.gatewayProductService.findProduct(uuid);
 
       return gatewayResponse({
         res,
         status: HttpStatus.OK,
         success: true,
-        data: order,
+        data: product,
       });
     } catch (err) {
       console.error(err);
@@ -95,19 +95,22 @@ export class GatewayOrderController {
   }
 
   @Patch(':uuid')
-  async updateOrder(
+  async updateProduct(
     @Param('uuid', ParseUUIDPipe) uuid: string,
-    @Body(ValidationPipe) updateOrderRequest: UpdateOrderRequest,
+    @Body(ValidationPipe) updateProductRequest: UpdateProductRequest,
     @Res() res: Response,
   ) {
     try {
-      await this.gatewayOrderService.updateOrder(uuid, updateOrderRequest);
+      await this.gatewayProductService.updateProduct(
+        uuid,
+        updateProductRequest,
+      );
 
       return gatewayResponse({
         res,
         status: HttpStatus.OK,
         success: true,
-        message: 'Order updated',
+        message: 'Product updated',
       });
     } catch (err) {
       console.error(err);
@@ -121,18 +124,18 @@ export class GatewayOrderController {
   }
 
   @Delete(':uuid')
-  async deleteOrder(
+  async deleteProduct(
     @Param('uuid', ParseUUIDPipe) uuid: string,
     @Res() res: Response,
   ) {
     try {
-      await this.gatewayOrderService.deleteOrder(uuid);
+      await this.gatewayProductService.deleteProduct(uuid);
 
       return gatewayResponse({
         res,
         status: HttpStatus.NO_CONTENT,
         success: true,
-        message: 'Order deleted',
+        message: 'Product deleted',
       });
     } catch (err) {
       console.error(err);

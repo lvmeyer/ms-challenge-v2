@@ -1,26 +1,26 @@
 import { HttpStatus, Inject, Injectable } from '@nestjs/common';
 import { BILLING_SERVICE } from '@app/common';
 import { ClientProxy } from '@nestjs/microservices';
-import { CreateOrderRequest, UpdateOrderRequest } from '@app/common';
+import { CreateProductRequest, UpdateProductRequest } from '@app/common';
 import { ConfigService } from '@nestjs/config';
 import { ErrorResponse } from '@app/common';
 
 @Injectable()
-export class GatewayOrderService {
+export class GatewayProductService {
   constructor(
     @Inject(BILLING_SERVICE) private billingClient: ClientProxy,
     private readonly configService: ConfigService,
   ) {}
 
-  PATH = this.configService.get<string>('PORT_ORDERS') + '/orders';
+  PATH = this.configService.get<string>('PORT_PRODUCTS') + '/products';
 
-  async createOrder(createOrderRequest: CreateOrderRequest) {
+  async createProduct(createProductRequest: CreateProductRequest) {
     const response = await fetch(this.PATH, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify(createOrderRequest),
+      body: JSON.stringify(createProductRequest),
     });
     const res = await response.json();
 
@@ -30,7 +30,7 @@ export class GatewayOrderService {
     return res;
   }
 
-  async findAllOrders() {
+  async findAllProducts() {
     const response = await fetch(this.PATH, {
       method: 'GET',
       headers: {
@@ -45,7 +45,7 @@ export class GatewayOrderService {
     return res;
   }
 
-  async findOrder(id: string) {
+  async findProduct(id: string) {
     const response = await fetch(`${this.PATH}/${id}`, {
       method: 'GET',
       headers: {
@@ -61,16 +61,16 @@ export class GatewayOrderService {
     return res;
   }
 
-  async updateOrder(
+  async updateProduct(
     id: string,
-    updateOrderRequest: UpdateOrderRequest,
+    updateProductRequest: UpdateProductRequest,
   ): Promise<void> {
     const response = await fetch(`${this.PATH}/${id}`, {
       method: 'PATCH',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify(updateOrderRequest),
+      body: JSON.stringify(updateProductRequest),
     });
 
     if (response.status !== HttpStatus.OK) {
@@ -79,7 +79,7 @@ export class GatewayOrderService {
     }
   }
 
-  async deleteOrder(id: string): Promise<void> {
+  async deleteProduct(id: string): Promise<void> {
     const response = await fetch(`${this.PATH}/${id}`, {
       method: 'DELETE',
     });

@@ -1,13 +1,11 @@
 import { Module } from '@nestjs/common';
-import { OrdersController } from './orders.controller';
-import { OrdersService } from './orders.service';
+import { ProductsController } from './products.controller';
+import { ProductsService } from './products.service';
 import { ConfigModule } from '@nestjs/config';
-
 import * as Joi from 'joi';
-import { RmqModule } from '@app/common';
-import { BILLING_SERVICE } from '@app/common';
+import { BILLING_SERVICE, RmqModule } from '@app/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { Order } from './order.entity';
+import { Product } from './product.entity';
 
 @Module({
   imports: [
@@ -17,7 +15,7 @@ import { Order } from './order.entity';
         RABBITMQ_URI: Joi.string().required(),
         PORT: Joi.number().required(),
       }),
-      envFilePath: './apps/orders/.env',
+      envFilePath: './apps/products/.env',
     }),
     RmqModule.register({ name: BILLING_SERVICE }),
     TypeOrmModule.forRoot({
@@ -30,9 +28,9 @@ import { Order } from './order.entity';
       autoLoadEntities: true,
       synchronize: true,
     }),
-    TypeOrmModule.forFeature([Order]),
+    TypeOrmModule.forFeature([Product]),
   ],
-  controllers: [OrdersController],
-  providers: [OrdersService],
+  controllers: [ProductsController],
+  providers: [ProductsService],
 })
-export class OrdersModule {}
+export class ProductsModule {}

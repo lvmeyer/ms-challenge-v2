@@ -37,6 +37,25 @@ services:
     ports:
       - '3001:3001'
 
+  products:
+    build:
+      context: ./apis
+      dockerfile: ./apps/products/Dockerfile
+      target: development
+    container_name: products_c
+    hostname: products
+    command: npm run start:dev products
+    env_file:
+      - ./apis/apps/products/.env
+    depends_on:
+      - rabbitmq
+      - database
+    volumes:
+      - ./apis:/usr/src/app
+      - /usr/src/app/node_modules
+    ports:
+      - '3002:3002'
+
   billings:
     build:
       context: ./apis

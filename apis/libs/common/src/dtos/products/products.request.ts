@@ -1,12 +1,12 @@
 import { IsString, Length } from 'class-validator';
 
-export class CreateOrderRequest {
+export class CreateProductRequest {
   @IsString()
   @Length(3, 50)
   name: string;
 }
 
-export class UpdateOrderRequest {
+export class UpdateProductRequest {
   @IsString()
   @Length(3, 50)
   name: string;

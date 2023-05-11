@@ -15,7 +15,7 @@ import { OrdersService } from './orders.service';
 import { Order } from './order.entity';
 import { CreateOrderRequest, UpdateOrderRequest } from '@app/common';
 
-@Controller('api/orders')
+@Controller('orders')
 export class OrdersController {
   constructor(private readonly ordersService: OrdersService) {}
 

@@ -1,1 +1,2 @@
 export const BILLING_SERVICE = 'BILLINGS';
+export const PRODUCT_SERVICE = 'PRODUCTS';
