@@ -11,32 +11,33 @@ import {
   Res,
   ValidationPipe,
 } from '@nestjs/common';
-import { GatewayProductService } from '../services/gateway-products.service';
-import { CreateProductRequest, UpdateProductRequest } from '@app/common';
+import { GatewayBasketService } from '../services/gateway-basket.service';
+import { CreateBasketRequest, UpdateBasketRequest } from '@app/common';
 import { Response } from 'express';
 import { gatewayResponse } from '../utils/gatewayResponse';
 
-@Controller('api/products')
-export class GatewayProductController {
-  constructor(private readonly gatewayProductService: GatewayProductService) {}
+@Controller('api/basket')
+export class GatewayBasketController {
+  constructor(private readonly gatewayBasketService: GatewayBasketService) {}
 
   @Post()
-  async createProduct(
-    @Body(ValidationPipe) createProductRequest: CreateProductRequest,
+  async createBasket(
+    @Body(ValidationPipe) createBasketRequest: CreateBasketRequest,
     @Res() res: Response,
   ): Promise<any> {
     try {
-      const product = await this.gatewayProductService.createProduct(
-        createProductRequest,
+      const basket = await this.gatewayBasketService.createBasket(
+        createBasketRequest,
       );
 
       return gatewayResponse({
         res,
         status: HttpStatus.CREATED,
         success: true,
-        data: product,
+        data: basket,
       });
     } catch (err) {
+      console.error('==ERR', err);
       return gatewayResponse({
         res,
         status: err.status,
@@ -47,15 +48,15 @@ export class GatewayProductController {
   }
 
   @Get()
-  async findAllProducts(@Res() res: Response) {
+  async findAllBaskets(@Res() res: Response) {
     try {
-      const products = await this.gatewayProductService.findAllProducts();
+      const basket = await this.gatewayBasketService.findAllBaskets();
 
       return gatewayResponse({
         res,
         status: HttpStatus.OK,
         success: true,
-        data: products,
+        data: basket,
       });
     } catch (err) {
       console.error(err);
@@ -69,18 +70,18 @@ export class GatewayProductController {
   }
 
   @Get(':uuid')
-  async findProduct(
+  async findBasket(
     @Param('uuid', ParseUUIDPipe) uuid: string,
     @Res() res: Response,
   ): Promise<any> {
     try {
-      const product = await this.gatewayProductService.findProduct(uuid);
+      const basket = await this.gatewayBasketService.findBasket(uuid);
 
       return gatewayResponse({
         res,
         status: HttpStatus.OK,
         success: true,
-        data: product,
+        data: basket,
       });
     } catch (err) {
       console.error(err);
@@ -94,26 +95,22 @@ export class GatewayProductController {
   }
 
   @Patch(':uuid')
-  async updateProduct(
+  async updateBasket(
     @Param('uuid', ParseUUIDPipe) uuid: string,
-    @Body(ValidationPipe) updateProductRequest: UpdateProductRequest,
+    @Body(ValidationPipe) updateBasketRequest: UpdateBasketRequest,
     @Res() res: Response,
   ) {
     try {
-      await this.gatewayProductService.updateProduct(
-        uuid,
-        updateProductRequest,
-      );
-      console.error('POUET1=');
+      await this.gatewayBasketService.updateBasket(uuid, updateBasketRequest);
 
       return gatewayResponse({
         res,
         status: HttpStatus.OK,
         success: true,
-        message: 'Product updated',
+        message: 'Basket updated',
       });
     } catch (err) {
-      console.error('POUET2==', err);
+      console.error('wwww===', err);
       return gatewayResponse({
         res,
         status: err.status,
@@ -124,18 +121,18 @@ export class GatewayProductController {
   }
 
   @Delete(':uuid')
-  async deleteProduct(
+  async deleteBasket(
     @Param('uuid', ParseUUIDPipe) uuid: string,
     @Res() res: Response,
   ) {
     try {
-      await this.gatewayProductService.deleteProduct(uuid);
+      await this.gatewayBasketService.deleteBasket(uuid);
 
       return gatewayResponse({
         res,
         status: HttpStatus.NO_CONTENT,
         success: true,
-        message: 'Product deleted',
+        message: 'Basket deleted',
       });
     } catch (err) {
       console.error(err);

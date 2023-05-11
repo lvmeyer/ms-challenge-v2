@@ -7,6 +7,8 @@ import { RmqModule } from '@app/common';
 import { BILLING_SERVICE } from '@app/common';
 import { GatewayProductController } from './controllers/gateway-products.controller';
 import { GatewayProductService } from './services/gateway-products.service';
+import { GatewayBasketController } from './controllers/gateway-basket.controller';
+import { GatewayBasketService } from './services/gateway-basket.service';
 
 @Module({
   imports: [
@@ -22,7 +24,11 @@ import { GatewayProductService } from './services/gateway-products.service';
     }),
     RmqModule.register({ name: BILLING_SERVICE }),
   ],
-  controllers: [GatewayOrderController, GatewayProductController],
-  providers: [GatewayOrderService, GatewayProductService],
+  controllers: [
+    GatewayOrderController,
+    GatewayProductController,
+    GatewayBasketController,
+  ],
+  providers: [GatewayOrderService, GatewayProductService, GatewayBasketService],
 })
 export class GatewayModule {}

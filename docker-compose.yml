@@ -56,6 +56,25 @@ services:
     ports:
       - '3002:3002'
 
+  basket:
+    build:
+      context: ./apis
+      dockerfile: ./apps/basket/Dockerfile
+      target: development
+    container_name: basket_c
+    hostname: basket
+    command: npm run start:dev basket
+    env_file:
+      - ./apis/apps/basket/.env
+    depends_on:
+      - rabbitmq
+      - database
+    volumes:
+      - ./apis:/usr/src/app
+      - /usr/src/app/node_modules
+    ports:
+      - '3003:3003'
+
   billings:
     build:
       context: ./apis

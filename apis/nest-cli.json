@@ -54,6 +54,15 @@
       "compilerOptions": {
         "tsConfigPath": "apps/products/tsconfig.app.json"
       }
+    },
+    "basket": {
+      "type": "application",
+      "root": "apps/basket",
+      "entryFile": "main",
+      "sourceRoot": "apps/basket/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/basket/tsconfig.app.json"
+      }
     }
   }
 }

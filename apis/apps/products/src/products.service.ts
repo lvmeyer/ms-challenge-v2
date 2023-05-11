@@ -1,4 +1,6 @@
 import {
+  BadGatewayException,
+  BadRequestException,
   Inject,
   Injectable,
   InternalServerErrorException,
@@ -25,8 +27,7 @@ export class ProductsService {
     // this.billingClient.emit('create-product', {});
 
     try {
-      const a = await this.productRepository.save(createProductRequest);
-      return a;
+      return await this.productRepository.save(createProductRequest);
     } catch (err) {
       throw new InternalServerErrorException(err.driverError.message);
     }
@@ -54,10 +55,9 @@ export class ProductsService {
       if (!product) {
         throw new NotFoundException('Product not found for update');
       }
-
       return await this.productRepository.update(uuid, updateProductRequest);
     } catch (err) {
-      throw new InternalServerErrorException(err.driverError.message);
+      throw new BadRequestException(err.message);
     }
   }
 
