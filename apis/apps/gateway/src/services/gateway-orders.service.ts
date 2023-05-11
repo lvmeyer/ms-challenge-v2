@@ -1,12 +1,12 @@
 import { HttpStatus, Inject, Injectable } from '@nestjs/common';
-import { BILLING_SERVICE } from './constants/services';
+import { BILLING_SERVICE } from '../constants/services';
 import { ClientProxy } from '@nestjs/microservices';
 import { CreateOrderRequest, UpdateOrderRequest } from '@app/common';
 import { ConfigService } from '@nestjs/config';
 import { ErrorResponse } from '@app/common';
 
 @Injectable()
-export class GatewayService {
+export class GatewayOrderService {
   constructor(
     @Inject(BILLING_SERVICE) private billingClient: ClientProxy,
     private readonly configService: ConfigService,

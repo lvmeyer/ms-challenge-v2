@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
-import { GatewayController } from './gateway.controller';
-import { GatewayService } from './gateway.service';
+import { GatewayOrderController } from './controllers/gateway-orders.controller';
+import { GatewayOrderService } from './services/gateway-orders.service';
 import { ConfigModule } from '@nestjs/config';
 import * as Joi from 'joi';
 import { RmqModule } from '@app/common';
@@ -19,7 +19,7 @@ import { BILLING_SERVICE } from './constants/services';
     }),
     RmqModule.register({ name: BILLING_SERVICE }),
   ],
-  controllers: [GatewayController],
-  providers: [GatewayService],
+  controllers: [GatewayOrderController],
+  providers: [GatewayOrderService],
 })
 export class GatewayModule {}

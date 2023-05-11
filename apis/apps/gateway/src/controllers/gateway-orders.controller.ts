@@ -11,14 +11,14 @@ import {
   Res,
   ValidationPipe,
 } from '@nestjs/common';
-import { GatewayService } from './gateway.service';
+import { GatewayOrderService } from '../services/gateway-orders.service';
 import { CreateOrderRequest, UpdateOrderRequest } from '@app/common';
 import { Response } from 'express';
-import { gatewayResponse } from './utils/gatewayResponse';
+import { gatewayResponse } from '../utils/gatewayResponse';
 
 @Controller()
-export class GatewayController {
-  constructor(private readonly gatewayService: GatewayService) {}
+export class GatewayOrderController {
+  constructor(private readonly gatewayOrderService: GatewayOrderService) {}
 
   @Post('orders')
   async createOrder(
@@ -26,7 +26,9 @@ export class GatewayController {
     @Res() res: Response,
   ): Promise<any> {
     try {
-      const order = await this.gatewayService.createOrder(createOrderRequest);
+      const order = await this.gatewayOrderService.createOrder(
+        createOrderRequest,
+      );
 
       return gatewayResponse({
         res,
@@ -48,7 +50,7 @@ export class GatewayController {
   @Get('orders')
   async findAllOrders(@Res() res: Response) {
     try {
-      const orders = await this.gatewayService.findAllOrders();
+      const orders = await this.gatewayOrderService.findAllOrders();
 
       return gatewayResponse({
         res,
@@ -73,7 +75,7 @@ export class GatewayController {
     @Res() res: Response,
   ): Promise<any> {
     try {
-      const order = await this.gatewayService.findOrder(uuid);
+      const order = await this.gatewayOrderService.findOrder(uuid);
 
       return gatewayResponse({
         res,
@@ -99,7 +101,7 @@ export class GatewayController {
     @Res() res: Response,
   ) {
     try {
-      await this.gatewayService.updateOrder(uuid, updateOrderRequest);
+      await this.gatewayOrderService.updateOrder(uuid, updateOrderRequest);
 
       return gatewayResponse({
         res,
@@ -124,7 +126,7 @@ export class GatewayController {
     @Res() res: Response,
   ) {
     try {
-      await this.gatewayService.deleteOrder(uuid);
+      await this.gatewayOrderService.deleteOrder(uuid);
 
       return gatewayResponse({
         res,
