@@ -19,6 +19,9 @@ export class ProductsService {
     @Inject(BILLING_SERVICE) private billingClient: ClientProxy,
   ) {} // private readonly configService: ConfigService,
 
+  // ---------------------------------------
+  // ---------------- CRUD -----------------
+  // ---------------------------------------
   async createProduct(
     createProductRequest: CreateProductRequest,
   ): Promise<any> {

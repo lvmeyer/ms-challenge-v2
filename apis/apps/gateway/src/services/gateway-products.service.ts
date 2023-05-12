@@ -14,6 +14,9 @@ export class GatewayProductService {
 
   PATH = this.configService.get<string>('PORT_PRODUCTS') + '/products';
 
+  // ---------------------------------------
+  // ---------------- CRUD -----------------
+  // ---------------------------------------
   async createProduct(createProductRequest: CreateProductRequest) {
     const response = await fetch(this.PATH, {
       method: 'POST',

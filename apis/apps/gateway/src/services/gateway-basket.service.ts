@@ -14,6 +14,9 @@ export class GatewayBasketService {
 
   PATH = this.configService.get<string>('PORT_BASKET') + '/basket';
 
+  // ---------------------------------------
+  // ---------------- CRUD -----------------
+  // ---------------------------------------
   async createBasket(createBasketRequest: CreateBasketRequest) {
     console.log('PROC', this.PATH);
     const response = await fetch(this.PATH, {

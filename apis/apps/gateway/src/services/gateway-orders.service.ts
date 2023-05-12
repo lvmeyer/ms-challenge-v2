@@ -14,6 +14,9 @@ export class GatewayOrderService {
 
   PATH = this.configService.get<string>('PORT_ORDERS') + '/orders';
 
+  // ---------------------------------------
+  // ---------------- CRUD -----------------
+  // ---------------------------------------
   async createOrder(createOrderRequest: CreateOrderRequest) {
     const response = await fetch(this.PATH, {
       method: 'POST',

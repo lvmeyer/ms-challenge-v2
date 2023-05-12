@@ -13,6 +13,9 @@ export class OrdersService {
     @Inject(BILLING_SERVICE) private billingClient: ClientProxy,
   ) {} // private readonly configService: ConfigService,
 
+  // ---------------------------------------
+  // ---------------- CRUD -----------------
+  // ---------------------------------------
   async createOrder(createOrderRequest: CreateOrderRequest): Promise<any> {
     this.billingClient.emit('create-order', {});
     return this.orderRepository.save(createOrderRequest);

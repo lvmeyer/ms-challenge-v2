@@ -2,6 +2,8 @@
 export * from './rmq/rmq.service';
 export * from './rmq/rmq.module';
 
+export * from './typeorm/typeorm.module';
+
 // DTO
 export * from './dtos/orders/orders.request';
 export * from './dtos/products/products.request';

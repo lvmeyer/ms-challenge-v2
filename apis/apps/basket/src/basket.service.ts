@@ -19,6 +19,9 @@ export class BasketService {
     @Inject(BILLING_SERVICE) private billingClient: ClientProxy,
   ) {} // private readonly configService: ConfigService,
 
+  // ---------------------------------------
+  // ---------------- CRUD -----------------
+  // ---------------------------------------
   async createBasket(createBasketRequest: CreateBasketRequest): Promise<any> {
     // this.billingClient.emit('create-basket', {});
     try {

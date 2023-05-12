@@ -3,7 +3,13 @@ import { ProductsController } from './products.controller';
 import { ProductsService } from './products.service';
 import { ConfigModule } from '@nestjs/config';
 import * as Joi from 'joi';
-import { BILLING_SERVICE, RmqModule, Product, Basket } from '@app/common';
+import {
+  BILLING_SERVICE,
+  RmqModule,
+  Product,
+  Basket,
+  TypeOrmCustonModule,
+} from '@app/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
 @Module({
@@ -17,16 +23,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
       envFilePath: './apps/products/.env',
     }),
     RmqModule.register({ name: BILLING_SERVICE }),
-    TypeOrmModule.forRoot({
-      type: 'postgres',
-      host: 'database',
-      port: 5432,
-      username: 'user',
-      password: 'user',
-      database: 'app',
-      autoLoadEntities: true,
-      synchronize: true,
-    }),
+    TypeOrmCustonModule.register(),
     TypeOrmModule.forFeature([Product, Basket]),
   ],
   controllers: [ProductsController],
