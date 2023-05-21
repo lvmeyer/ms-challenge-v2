@@ -12,7 +12,12 @@ import {
   ValidationPipe,
 } from '@nestjs/common';
 import { GatewayBasketService } from '../services/gateway-basket.service';
-import { CreateBasketRequest, UpdateBasketRequest } from '@app/common';
+import {
+  AddProductToBasketRequest,
+  CreateBasketRequest,
+  RemoveProductToBasketRequest,
+  UpdateBasketRequest,
+} from '@app/common';
 import { Response } from 'express';
 import { gatewayResponse } from '../utils/gatewayResponse';
 
@@ -20,6 +25,93 @@ import { gatewayResponse } from '../utils/gatewayResponse';
 export class GatewayBasketController {
   constructor(private readonly gatewayBasketService: GatewayBasketService) {}
 
+  @Get(':uuid/products')
+  async findBasketWithProducts(
+    @Param('uuid', ParseUUIDPipe) uuid: string,
+    @Res() res: Response,
+  ): Promise<any> {
+    try {
+      const basket = await this.gatewayBasketService.findBasketWithProducts(
+        uuid,
+      );
+
+      return gatewayResponse({
+        res,
+        status: HttpStatus.OK,
+        success: true,
+        data: basket,
+      });
+    } catch (err) {
+      console.error(err);
+      return gatewayResponse({
+        res,
+        status: err.status,
+        success: false,
+        message: err.message,
+      });
+    }
+  }
+
+  @Patch('add/:uuid')
+  async addProductToBasket(
+    @Param('uuid', ParseUUIDPipe) uuid: string,
+    @Body(ValidationPipe) addProductToBasketRequest: AddProductToBasketRequest,
+    @Res() res: Response,
+  ) {
+    try {
+      await this.gatewayBasketService.addProduct(
+        uuid,
+        addProductToBasketRequest.productId,
+      );
+
+      return gatewayResponse({
+        res,
+        status: HttpStatus.OK,
+        success: true,
+        message: 'Product added to basket',
+      });
+    } catch (err) {
+      return gatewayResponse({
+        res,
+        status: err.status,
+        success: false,
+        message: err.message,
+      });
+    }
+  }
+
+  @Patch('remove/:uuid')
+  async removeProductToBasket(
+    @Param('uuid', ParseUUIDPipe) uuid: string,
+    @Body(ValidationPipe)
+    removeProductToBasketRequest: RemoveProductToBasketRequest,
+    @Res() res: Response,
+  ) {
+    try {
+      await this.gatewayBasketService.removeProduct(
+        uuid,
+        removeProductToBasketRequest.productId,
+      );
+
+      return gatewayResponse({
+        res,
+        status: HttpStatus.OK,
+        success: true,
+        message: 'Product removed from basket',
+      });
+    } catch (err) {
+      return gatewayResponse({
+        res,
+        status: err.status,
+        success: false,
+        message: err.message,
+      });
+    }
+  }
+
+  // ---------------------------------------
+  // ---------------- CRUD -----------------
+  // ---------------------------------------
   @Post()
   async createBasket(
     @Body(ValidationPipe) createBasketRequest: CreateBasketRequest,
@@ -37,7 +129,7 @@ export class GatewayBasketController {
         data: basket,
       });
     } catch (err) {
-      console.error('==ERR', err);
+      console.error(err);
       return gatewayResponse({
         res,
         status: err.status,
@@ -110,7 +202,7 @@ export class GatewayBasketController {
         message: 'Basket updated',
       });
     } catch (err) {
-      console.error('wwww===', err);
+      console.error(err);
       return gatewayResponse({
         res,
         status: err.status,

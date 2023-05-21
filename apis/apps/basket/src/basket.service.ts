@@ -6,18 +6,91 @@ import {
   NotFoundException,
 } from '@nestjs/common';
 import { ClientProxy } from '@nestjs/microservices';
-import { BILLING_SERVICE } from '@app/common';
+import {
+  BILLING_SERVICE,
+  Product,
+  Basket,
+  CreateBasketRequest,
+  UpdateBasketRequest,
+} from '@app/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { CreateBasketRequest, UpdateBasketRequest, Basket } from '@app/common';
 
 @Injectable()
 export class BasketService {
   constructor(
     @InjectRepository(Basket)
     private readonly basketRepository: Repository<Basket>,
+    @InjectRepository(Product)
+    private readonly productRepository: Repository<Product>,
     @Inject(BILLING_SERVICE) private billingClient: ClientProxy,
   ) {} // private readonly configService: ConfigService,
+
+  async addProduct(basketId: string, productId: string): Promise<any> {
+    try {
+      const basket = await this.basketRepository.findOne({
+        where: {
+          id: basketId,
+        },
+        relations: {
+          products: true,
+        },
+      });
+      if (!basket) {
+        throw new NotFoundException('Basket not found to remove product');
+      }
+
+      const product = await this.productRepository.findOneBy({
+        id: productId,
+      });
+      if (!product) {
+        throw new NotFoundException(
+          'Product not found to update (remove) Basket',
+        );
+      }
+
+      await this.basketRepository
+        .createQueryBuilder()
+        .relation(Basket, 'products')
+        .of(basketId)
+        .add(productId);
+    } catch (err) {
+      throw new BadRequestException(err.message);
+    }
+  }
+
+  async removeProduct(basketId: string, productId: string): Promise<void> {
+    try {
+      const basket = await this.basketRepository.findOne({
+        where: {
+          id: basketId,
+        },
+        relations: {
+          products: true,
+        },
+      });
+      if (!basket) {
+        throw new NotFoundException('Basket not found to remove product');
+      }
+
+      const product = await this.productRepository.findOneBy({
+        id: productId,
+      });
+      if (!product) {
+        throw new NotFoundException(
+          'Product not found to update (remove) Basket',
+        );
+      }
+
+      await this.basketRepository
+        .createQueryBuilder()
+        .relation(Basket, 'products')
+        .of(basketId)
+        .remove(productId);
+    } catch (err) {
+      throw new BadRequestException(err.message);
+    }
+  }
 
   // ---------------------------------------
   // ---------------- CRUD -----------------
@@ -41,6 +114,18 @@ export class BasketService {
       throw new NotFoundException('Basket not found');
     }
 
+    return basket;
+  }
+
+  async findWithProducts(uuid: string): Promise<Basket> {
+    const basket = await this.basketRepository.findOne({
+      where: {
+        id: uuid,
+      },
+      relations: {
+        products: true,
+      },
+    });
     return basket;
   }
 

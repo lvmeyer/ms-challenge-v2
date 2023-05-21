@@ -14,6 +14,56 @@ export class GatewayBasketService {
 
   PATH = this.configService.get<string>('PORT_BASKET') + '/basket';
 
+  async findBasketWithProducts(id: string) {
+    try {
+      const response = await fetch(`${this.PATH}/${id}/products`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+
+      const res = await response.json();
+      if (response.status !== HttpStatus.OK) {
+        throw new ErrorResponse(res?.message, response.status);
+      }
+
+      return res;
+    } catch (err) {
+      throw err;
+    }
+  }
+
+  async addProduct(basketId: string, productId: string): Promise<void> {
+    const response = await fetch(`${this.PATH}/add/${basketId}`, {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ productId }),
+    });
+
+    if (response.status !== HttpStatus.OK) {
+      const res = await response.json();
+      throw new ErrorResponse(res.message, response.status);
+    }
+  }
+
+  async removeProduct(basketId: string, productId: string): Promise<void> {
+    const response = await fetch(`${this.PATH}/remove/${basketId}`, {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ productId }),
+    });
+
+    if (response.status !== HttpStatus.OK) {
+      const res = await response.json();
+      throw new ErrorResponse(res.message, response.status);
+    }
+  }
+
   // ---------------------------------------
   // ---------------- CRUD -----------------
   // ---------------------------------------
