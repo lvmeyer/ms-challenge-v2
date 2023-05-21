@@ -17,7 +17,7 @@ import {
   UpdateBasketRequest,
   Basket,
   AddProductToBasketRequest,
-  RemoveProductToBasketRequest,
+  RemoveProductFromBasketRequest,
 } from '@app/common';
 
 @Controller('basket')
@@ -38,14 +38,14 @@ export class BasketController {
 
   @Patch('remove/:uuid')
   @HttpCode(HttpStatus.OK)
-  async removeProductToBasket(
+  async removeProductFromBasket(
     @Param('uuid', ParseUUIDPipe) uuid: string,
     @Body(ValidationPipe)
-    removeProductToBasketRequest: RemoveProductToBasketRequest,
+    removeProductFromBasketRequest: RemoveProductFromBasketRequest,
   ): Promise<any> {
     return await this.basketService.removeProduct(
       uuid,
-      removeProductToBasketRequest.productId,
+      removeProductFromBasketRequest.productId,
     );
   }
 

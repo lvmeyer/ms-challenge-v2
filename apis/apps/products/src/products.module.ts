@@ -8,7 +8,7 @@ import {
   RmqModule,
   Product,
   Basket,
-  TypeOrmCustonModule,
+  TypeOrmCustomModule,
 } from '@app/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
@@ -23,7 +23,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
       envFilePath: './apps/products/.env',
     }),
     RmqModule.register({ name: BILLING_SERVICE }),
-    TypeOrmCustonModule.register(),
+    TypeOrmCustomModule.register(),
     TypeOrmModule.forFeature([Product, Basket]),
   ],
   controllers: [ProductsController],

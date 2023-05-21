@@ -15,7 +15,7 @@ export class AddProductToBasketRequest {
   productId: string;
 }
 
-export class RemoveProductToBasketRequest {
+export class RemoveProductFromBasketRequest {
   @IsString()
   productId: string;
 }

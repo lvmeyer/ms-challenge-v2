@@ -3,10 +3,10 @@ import { ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
 @Module({})
-export class TypeOrmCustonModule {
+export class TypeOrmCustomModule {
   static register() {
     return {
-      module: TypeOrmCustonModule,
+      module: TypeOrmCustomModule,
       imports: [
         TypeOrmModule.forRootAsync({
           useFactory: (configService: ConfigService) => {

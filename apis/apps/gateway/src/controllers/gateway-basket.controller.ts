@@ -15,7 +15,7 @@ import { GatewayBasketService } from '../services/gateway-basket.service';
 import {
   AddProductToBasketRequest,
   CreateBasketRequest,
-  RemoveProductToBasketRequest,
+  RemoveProductFromBasketRequest,
   UpdateBasketRequest,
 } from '@app/common';
 import { Response } from 'express';
@@ -81,16 +81,16 @@ export class GatewayBasketController {
   }
 
   @Patch('remove/:uuid')
-  async removeProductToBasket(
+  async removeProductFromBasket(
     @Param('uuid', ParseUUIDPipe) uuid: string,
     @Body(ValidationPipe)
-    removeProductToBasketRequest: RemoveProductToBasketRequest,
+    removeProductFromBasketRequest: RemoveProductFromBasketRequest,
     @Res() res: Response,
   ) {
     try {
       await this.gatewayBasketService.removeProduct(
         uuid,
-        removeProductToBasketRequest.productId,
+        removeProductFromBasketRequest.productId,
       );
 
       return gatewayResponse({

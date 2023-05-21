@@ -4,7 +4,7 @@ import { OrdersService } from './orders.service';
 import { ConfigModule } from '@nestjs/config';
 
 import * as Joi from 'joi';
-import { RmqModule, TypeOrmCustonModule } from '@app/common';
+import { RmqModule, TypeOrmCustomModule } from '@app/common';
 import { BILLING_SERVICE, Order } from '@app/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
@@ -22,7 +22,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
       envFilePath: './apps/orders/.env',
     }),
     RmqModule.register({ name: BILLING_SERVICE }),
-    TypeOrmCustonModule.register(),
+    TypeOrmCustomModule.register(),
     TypeOrmModule.forFeature([Order]),
   ],
   controllers: [OrdersController],
