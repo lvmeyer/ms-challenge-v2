@@ -96,7 +96,7 @@ export class BasketService {
   // ---------------- CRUD -----------------
   // ---------------------------------------
   async createBasket(createBasketRequest: CreateBasketRequest): Promise<any> {
-    // this.billingClient.emit('create-basket', {});
+    this.billingClient.emit('create-billing', {});
     try {
       return await this.basketRepository.save(createBasketRequest);
     } catch (err) {

@@ -18,25 +18,6 @@ services:
     ports:
       - '3000:3000'
 
-  orders:
-    build:
-      context: ./apis
-      dockerfile: ./apps/orders/Dockerfile
-      target: development
-    container_name: orders_c
-    hostname: orders
-    command: npm run start:dev orders
-    env_file:
-      - ./apis/apps/orders/.env
-    depends_on:
-      - rabbitmq
-      - database
-    volumes:
-      - ./apis:/usr/src/app
-      - /usr/src/app/node_modules
-    ports:
-      - '3001:3001'
-
   products:
     build:
       context: ./apis

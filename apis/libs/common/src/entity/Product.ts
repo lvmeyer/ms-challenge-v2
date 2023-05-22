@@ -22,6 +22,9 @@ export class Product {
   @Column()
   description: string;
 
+  @Column({ nullable: true })
+  image?: string;
+
   @CreateDateColumn()
   createdDate: Date;
 
