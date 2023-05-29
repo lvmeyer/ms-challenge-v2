@@ -22,7 +22,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
       }),
       envFilePath: './apps/products/.env',
     }),
-    RmqModule.register({ name: BILLING_SERVICE }),
+    // RmqModule.register({ name: BILLING_SERVICE }),
     TypeOrmCustomModule.register(),
     TypeOrmModule.forFeature([Product, Basket]),
   ],

@@ -22,6 +22,12 @@ import {
 export class ProductsController {
   constructor(private readonly productsService: ProductsService) {}
 
+  @Get('hello')
+  @HttpCode(HttpStatus.OK)
+  async sayHello(): Promise<string> {
+    return this.productsService.sayHello();
+  }
+
   @Post()
   @HttpCode(HttpStatus.CREATED)
   async createProduct(

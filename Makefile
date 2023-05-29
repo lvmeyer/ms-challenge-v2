@@ -11,3 +11,12 @@ stop:
 
 restart: stop start
 
+img:
+	docker build -t products -f ./apis/apps/products/Dockerfile ./apis
+
+runcont:
+	docker run -p 3002:80 --name products_c -t -d products
+
+stopcont:
+	docker rm products_c -f
+	
