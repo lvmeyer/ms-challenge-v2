@@ -18,11 +18,11 @@ import { TypeOrmModule } from '@nestjs/typeorm';
       isGlobal: true,
       validationSchema: Joi.object({
         RABBITMQ_URI: Joi.string().required(),
-        PORT: Joi.number().required(),
+        // PORT: Joi.number().required(),
       }),
       envFilePath: './apps/products/.env',
     }),
-    RmqModule.register({ name: BILLING_SERVICE }),
+    // RmqModule.register({ name: BILLING_SERVICE }),
     TypeOrmCustomModule.register(),
     TypeOrmModule.forFeature([Product, Basket]),
   ],

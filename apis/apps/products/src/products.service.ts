@@ -16,9 +16,11 @@ export class ProductsService {
   constructor(
     @InjectRepository(Product)
     private readonly productRepository: Repository<Product>,
-    @Inject(BILLING_SERVICE) private billingClient: ClientProxy,
-  ) {} // private readonly configService: ConfigService,
+  ) {}
 
+  sayHello(): string {
+    return 'Hello World!';
+  }
   // ---------------------------------------
   // ---------------- CRUD -----------------
   // ---------------------------------------
