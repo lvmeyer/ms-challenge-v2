@@ -14,13 +14,13 @@ provider "aws" {
 }
 
 resource "aws_instance" "products_instance" {
-  ami           = "ami-05a8450aee7da05fb"
-  instance_type = "t2.micro"
+  ami               = "ami-05a8450aee7da05fb"
+  instance_type     = "t2.micro"
   availability_zone = "eu-west-3a"
-  
-  subnet_id = aws_subnet.bando_subnet_a.id
+
+  subnet_id                   = aws_subnet.bando_subnet_a.id
   associate_public_ip_address = true
-  vpc_security_group_ids = [ aws_security_group.bando_sg.id ]
+  vpc_security_group_ids      = [aws_security_group.bando_sg.id]
   tags = {
     Name = "Products Instance"
   }
@@ -88,8 +88,8 @@ resource "aws_route_table_association" "bando_rt_association" {
 }
 
 resource "aws_security_group" "bando_sg" {
-  name        = "bando_sg"
-  vpc_id      = aws_vpc.bando_vpc.id
+  name   = "bando_sg"
+  vpc_id = aws_vpc.bando_vpc.id
   # description = "Allow TLS inbound traffic"
 
   ingress {
@@ -101,7 +101,7 @@ resource "aws_security_group" "bando_sg" {
     ipv6_cidr_blocks = ["::/0"]
   }
 
-    ingress {
+  ingress {
     description      = "80 from VPC"
     from_port        = 80
     to_port          = 80
@@ -130,4 +130,69 @@ resource "aws_security_group" "bando_sg" {
   tags = {
     Name = "allow_tls"
   }
+}
+
+// Create Subnet for DB
+resource "aws_subnet" "db_subnet_a" {
+  vpc_id     = aws_vpc.bando_vpc.id
+  cidr_block = "10.0.24.0/24"
+
+  availability_zone = "eu-west-3a"
+  tags = {
+    Name = "DB Subnet 1"
+  }
+}
+
+resource "aws_subnet" "db_subnet_b" {
+  vpc_id     = aws_vpc.bando_vpc.id
+  cidr_block = "10.0.32.0/24"
+
+  availability_zone = "eu-west-3b"
+  tags = {
+    Name = "DB Subnet 2"
+  }
+}
+
+resource "aws_security_group" "db_sg" {
+  name        = "DB SG"
+  description = "Allow DB traffic"
+  vpc_id      = aws_vpc.bando_vpc.id
+
+  ingress {
+    description = "DB from VPC"
+    from_port   = 5432
+    to_port     = 5432
+    protocol    = "tcp"
+    cidr_blocks      = ["0.0.0.0/0"]
+    # security_groups = [aws_security_group.bando_sg.id]
+  }
+
+  tags = {
+    Name = "Database Security Group"
+  }
+}
+
+resource "aws_db_subnet_group" "dbpdt-subnet-group" {
+  name       = "db-subnet-group"
+  subnet_ids = [aws_subnet.db_subnet_a.id, aws_subnet.db_subnet_b.id]
+
+  tags = {
+    Name = "My DB subnet group"
+  }
+}
+
+resource "aws_db_instance" "db_instance" {
+  db_name                = "dbpdt"
+  engine                 = "postgres"
+  engine_version         = "14.6"
+  multi_az               = false
+  identifier             = "pdt-rds-instance"
+  username               = "dbproducts"
+  password               = "dbproducts"
+  instance_class         = "db.t3.micro"
+  allocated_storage      = 10
+  db_subnet_group_name   = aws_db_subnet_group.dbpdt-subnet-group.name
+  vpc_security_group_ids = [aws_security_group.db_sg.id]
+  availability_zone      = "eu-west-3a"
+  skip_final_snapshot    = true
 }
