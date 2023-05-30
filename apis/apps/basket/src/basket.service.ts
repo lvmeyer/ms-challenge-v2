@@ -92,11 +92,10 @@ export class BasketService {
     }
   }
 
-  // ---------------------------------------
-  // ---------------- CRUD -----------------
-  // ---------------------------------------
   async createBasket(createBasketRequest: CreateBasketRequest): Promise<any> {
-    this.billingClient.emit('create-billing', {});
+    this.billingClient.emit('create-billing', {
+      data: 'PC basket',
+    });
     try {
       return await this.basketRepository.save(createBasketRequest);
     } catch (err) {

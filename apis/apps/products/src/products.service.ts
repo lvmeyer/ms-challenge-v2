@@ -1,12 +1,10 @@
 import {
   BadRequestException,
-  Inject,
   Injectable,
   InternalServerErrorException,
   NotFoundException,
 } from '@nestjs/common';
-import { ClientProxy } from '@nestjs/microservices';
-import { BILLING_SERVICE, Product } from '@app/common';
+import { Product } from '@app/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { CreateProductRequest, UpdateProductRequest } from '@app/common';
@@ -21,14 +19,10 @@ export class ProductsService {
   sayHello(): string {
     return 'Hello World!';
   }
-  // ---------------------------------------
-  // ---------------- CRUD -----------------
-  // ---------------------------------------
+
   async createProduct(
     createProductRequest: CreateProductRequest,
   ): Promise<any> {
-    // this.billingClient.emit('create-product', {});
-
     try {
       return await this.productRepository.save(createProductRequest);
     } catch (err) {

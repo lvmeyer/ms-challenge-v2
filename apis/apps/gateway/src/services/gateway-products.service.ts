@@ -1,22 +1,14 @@
-import { HttpStatus, Inject, Injectable } from '@nestjs/common';
-import { BILLING_SERVICE } from '@app/common';
-import { ClientProxy } from '@nestjs/microservices';
+import { HttpStatus, Injectable } from '@nestjs/common';
 import { CreateProductRequest, UpdateProductRequest } from '@app/common';
 import { ConfigService } from '@nestjs/config';
 import { ErrorResponse } from '@app/common';
 
 @Injectable()
 export class GatewayProductService {
-  constructor(
-    @Inject(BILLING_SERVICE) private billingClient: ClientProxy,
-    private readonly configService: ConfigService,
-  ) {}
+  constructor(private readonly configService: ConfigService) {}
 
   PATH = this.configService.get<string>('PORT_PRODUCTS') + '/products';
 
-  // ---------------------------------------
-  // ---------------- CRUD -----------------
-  // ---------------------------------------
   async createProduct(createProductRequest: CreateProductRequest) {
     const response = await fetch(this.PATH, {
       method: 'POST',

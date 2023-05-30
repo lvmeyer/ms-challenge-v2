@@ -64,11 +64,11 @@ export class GatewayBasketService {
     }
   }
 
-  // ---------------------------------------
-  // ---------------- CRUD -----------------
-  // ---------------------------------------
   async createBasket(createBasketRequest: CreateBasketRequest) {
     console.log('PROC', this.PATH);
+    this.billingClient.emit('create-billing', {
+      data: 'PC GW Basket',
+    });
     const response = await fetch(this.PATH, {
       method: 'POST',
       headers: {
