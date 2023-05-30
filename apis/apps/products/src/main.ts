@@ -11,7 +11,7 @@ async function bootstrap() {
       ? configService.get('PORT_DEV')
       : configService.get('PORT_PROD');
 
-  console.log('Service product on port:', PORT);
+  console.log(`Service Product on port: ${PORT}`);
   await app.listen(PORT);
 }
 bootstrap();

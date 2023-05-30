@@ -13,13 +13,15 @@ import { GatewayBasketService } from './services/gateway-basket.service';
     ConfigModule.forRoot({
       isGlobal: true,
       validationSchema: Joi.object({
-        RABBITMQ_URI: Joi.string().required(),
-        PORT: Joi.number().required(),
+        ENV_APP: Joi.string().required(),
         PORT_PRODUCTS: Joi.string().required(),
+        PORT_BASKET: Joi.string().required(),
+        RABBITMQ_URI: Joi.string().required(),
+        RABBITMQ_BILLINGS_QUEUE: Joi.string().required(),
       }),
       envFilePath: './apps/gateway/.env',
     }),
-    RmqModule.register({ name: BILLING_SERVICE }),
+    RmqModule.register({ name: BILLING_SERVICE }), // AUTH
   ],
   controllers: [GatewayProductController, GatewayBasketController],
   providers: [GatewayProductService, GatewayBasketService],
