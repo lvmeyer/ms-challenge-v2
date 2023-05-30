@@ -2,4 +2,4 @@
 
 Change port run cont aws + env
 
-apply -var-file=xx
+terraform apply -var-file=prod.tfvars

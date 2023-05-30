@@ -11,7 +11,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
     ConfigModule.forRoot({
       isGlobal: true,
       validationSchema: Joi.object({
-        ENV_APP: Joi.string().required(),
+        PORT: Joi.number().required(),
         POSTGRES_HOST: Joi.string().required(),
         POSTGRES_DB: Joi.string().required(),
         POSTGRES_PORT: Joi.number().required(),

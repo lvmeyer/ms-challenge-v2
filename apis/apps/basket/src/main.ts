@@ -6,10 +6,7 @@ async function bootstrap() {
   const app = await NestFactory.create(BasketModule);
   const configService = app.get(ConfigService);
 
-  const PORT =
-    configService.get('ENV_APP') === 'dev'
-      ? configService.get('PORT_DEV')
-      : configService.get('PORT_PROD');
+  const PORT = configService.get('PORT');
 
   console.log(`Service Basket on port: ${PORT}`);
   await app.listen(PORT);
