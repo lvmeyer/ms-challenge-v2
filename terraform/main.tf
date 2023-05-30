@@ -21,6 +21,9 @@ resource "aws_instance" "products_instance" {
   subnet_id                   = aws_subnet.bando_subnet_a.id
   associate_public_ip_address = true
   vpc_security_group_ids      = [aws_security_group.bando_sg.id]
+
+  user_data = "${file("launch.sh")}"
+
   tags = {
     Name = "Products Instance"
   }
