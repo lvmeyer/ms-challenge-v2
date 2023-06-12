@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+
+kind: Deployment
+
+metadata:
+  name: front-deploy
+
+spec:
+  selector:
+    matchLabels:
+      app: front
+
+  replicas: 1
+
+  template:
+    metadata:
+      labels:
+        app: front
+    spec:
+      containers:
+        - name: front
+          image: danlevypro/test-env:1.0
+          ports:
+            - containerPort: 80
+          imagePullPolicy: Always
