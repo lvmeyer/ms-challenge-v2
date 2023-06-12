@@ -1,9 +1,17 @@
 services:
+  front:
+    image: node:19-alpine
+    ports:
+      - '80:80'
+    volumes:
+      - ./vite-front:/app
+    working_dir: /app
+    command: sh -c "npm install && npm run dev"
+
   gateway:
     build:
       context: ./apis
       dockerfile: ./apps/gateway/Dockerfile
-      target: development
     container_name: gateway_c
     hostname: gateway
     command: npm run start:dev gateway
@@ -22,7 +30,6 @@ services:
     build:
       context: ./apis
       dockerfile: ./apps/products/Dockerfile
-      target: development
     container_name: products_c
     hostname: products
     command: npm run start:dev products
@@ -41,7 +48,6 @@ services:
     build:
       context: ./apis
       dockerfile: ./apps/basket/Dockerfile
-      target: development
     container_name: basket_c
     hostname: basket
     command: npm run start:dev basket
@@ -60,7 +66,6 @@ services:
     build:
       context: ./apis
       dockerfile: ./apps/billings/Dockerfile
-      target: development
     container_name: billings_c
     hostname: billings
     command: npm run start:dev billings

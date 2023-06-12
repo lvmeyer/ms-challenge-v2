@@ -7,6 +7,7 @@ import { GatewayProductController } from './controllers/gateway-products.control
 import { GatewayProductService } from './services/gateway-products.service';
 import { GatewayBasketController } from './controllers/gateway-basket.controller';
 import { GatewayBasketService } from './services/gateway-basket.service';
+import { GatewayPingController } from './controllers/gateway-ping.controller';
 
 @Module({
   imports: [
@@ -23,7 +24,11 @@ import { GatewayBasketService } from './services/gateway-basket.service';
     }),
     RmqModule.register({ name: BILLING_SERVICE }), // AUTH
   ],
-  controllers: [GatewayProductController, GatewayBasketController],
+  controllers: [
+    GatewayProductController,
+    GatewayBasketController,
+    GatewayPingController,
+  ],
   providers: [GatewayProductService, GatewayBasketService],
 })
 export class GatewayModule {}

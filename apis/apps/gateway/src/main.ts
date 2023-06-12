@@ -9,6 +9,7 @@ async function bootstrap() {
   const PORT = configService.get('PORT');
 
   console.log(`Service GW on port: ${PORT}`);
+  app.enableCors();
   await app.listen(PORT);
 }
 bootstrap();
