@@ -5,7 +5,10 @@ import './App.css';
 function App() {
 	const pingServer = async () => {
 		const res = await fetch('http://localhost:3000');
-		console.log(res);
+		const obj = await res.json();
+
+		console.log(obj);
+		alert(JSON.stringify(obj));
 	};
 
 	return (

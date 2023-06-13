@@ -8,6 +8,7 @@ import { GatewayProductService } from './services/gateway-products.service';
 import { GatewayBasketController } from './controllers/gateway-basket.controller';
 import { GatewayBasketService } from './services/gateway-basket.service';
 import { GatewayPingController } from './controllers/gateway-ping.controller';
+import { GatewayPingService } from './services/gateway-ping.service';
 
 @Module({
   imports: [
@@ -20,7 +21,6 @@ import { GatewayPingController } from './controllers/gateway-ping.controller';
         RABBITMQ_URI: Joi.string().required(),
         RABBITMQ_BILLINGS_QUEUE: Joi.string().required(),
       }),
-      envFilePath: './apps/gateway/.env',
     }),
     RmqModule.register({ name: BILLING_SERVICE }), // AUTH
   ],
@@ -29,6 +29,6 @@ import { GatewayPingController } from './controllers/gateway-ping.controller';
     GatewayBasketController,
     GatewayPingController,
   ],
-  providers: [GatewayProductService, GatewayBasketService],
+  providers: [GatewayProductService, GatewayBasketService, GatewayPingService],
 })
 export class GatewayModule {}
