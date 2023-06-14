@@ -7,42 +7,44 @@ services:
       - ./vite-front:/app
     working_dir: /app
     command: sh -c "npm install && npm run dev"
-
-  gateway:
-    build:
-      context: ./apis
-      dockerfile: ./apps/gateway/Dockerfile
-    container_name: gateway_c
-    hostname: gateway
-    command: npm run start:dev gateway
     env_file:
-      - ./apis/apps/gateway/.env
-    # depends_on:
-    #   - rabbitmq
-    #   - database
-    volumes:
-      - ./apis:/app
-      - /app/node_modules
-    ports:
-      - '3000:3000'
-#   products:
-#     build:
-#       context: ./apis
-#       dockerfile: ./apps/products/Dockerfile
-#     container_name: products_c
-#     hostname: products
-#     command: npm run start:dev products
-#     env_file:
-#       - ./apis/apps/products/.env
-#     depends_on:
-#       - rabbitmq
-#       - database
-#     volumes:
-#       - ./apis:/usr/src/app
-#       - /usr/src/app/node_modules
-#     ports:
-#       - '3002:3002'
+      - ./vite-front/.env
 
+  # gateway:
+  #   build:
+  #     context: ./apis
+  #     dockerfile: ./apps/gateway/Dockerfile
+  #   container_name: gateway_c
+  #   hostname: gateway
+  #   command: npm run start:dev gateway
+  #   env_file:
+  #     - ./apis/apps/gateway/.env
+  #   # depends_on:
+  #   #   - rabbitmq
+  #   #   - database
+  #   volumes:
+  #     - ./apis:/app
+  #     - /app/node_modules
+  #   ports:
+  #     - '3000:3000'
+
+  # products:
+  #   build:
+  #     context: ./apis
+  #     dockerfile: ./apps/products/Dockerfile
+  #   container_name: products_c
+  #   hostname: products
+  #   command: npm run start:dev products
+  #   env_file:
+  #     - ./apis/apps/products/.env
+  #   depends_on:
+  #     # - rabbitmq
+  #     - database
+  #   volumes:
+  #     - ./apis:/app
+  #     - /app/node_modules
+  #   ports:
+  #     - '3002:3002'
 #   basket:
 #     build:
 #       context: ./apis
@@ -56,8 +58,8 @@ services:
 #       - rabbitmq
 #       - database
 #     volumes:
-#       - ./apis:/usr/src/app
-#       - /usr/src/app/node_modules
+#       - ./apis:/app
+#       - /app/node_modules
 #     ports:
 #       - '3003:3003'
 
@@ -73,8 +75,8 @@ services:
 #     depends_on:
 #       - rabbitmq
 #     volumes:
-#       - ./apis:/usr/src/app
-#       - /usr/src/app/node_modules
+#       - ./apis:/app
+#       - /app/node_modules
 
 #   rabbitmq:
 #     image: rabbitmq:3-management

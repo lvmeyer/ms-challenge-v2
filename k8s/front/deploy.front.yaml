@@ -16,7 +16,14 @@ spec:
     spec:
       containers:
         - name: front
-          image: danlevypro/test-env:1.0
+          image: danlevypro/front:1.0
           ports:
             - containerPort: 80
           imagePullPolicy: Always
+
+          env:
+            - name: VITE_IP_GW
+              valueFrom:
+                configMapKeyRef:
+                  name: front-configmap
+                  key: VITE_IP_GW

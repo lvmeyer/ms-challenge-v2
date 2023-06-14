@@ -25,6 +25,7 @@ import { gatewayResponse } from '../utils/gatewayResponse';
 export class GatewayBasketController {
   constructor(private readonly gatewayBasketService: GatewayBasketService) {}
 
+  // FIXME: wrong basket response
   @Get(':uuid/products')
   async findBasketWithProducts(
     @Param('uuid', ParseUUIDPipe) uuid: string,

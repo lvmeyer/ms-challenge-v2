@@ -4,7 +4,10 @@ import './App.css';
 
 function App() {
 	const pingServer = async () => {
-		const res = await fetch('http://localhost:3000');
+		console.log(import.meta.env.VITE_IP_GW);
+		const res = await fetch(
+			`http://${import.meta.env.VITE_IP_GW}` || 'http://localhost:6666'
+		);
 		const obj = await res.json();
 
 		console.log(obj);

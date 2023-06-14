@@ -4,7 +4,7 @@ metadata:
   name: gw-service
 spec:
   selector:
-    app: front
+    app: gw
   type: NodePort
   ports:
     - protocol: TCP
