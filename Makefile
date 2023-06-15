@@ -13,6 +13,7 @@ stop:
 restart: stop start
 
 runcont:
+	docker run -p 80:80 --name front_c -t -d front:1.0
 	docker run -p 3000:3000 --name gw_c -t -d gw:1.0
 	docker run -p 3002:3002 --name products_c -t -d products:1.0
 

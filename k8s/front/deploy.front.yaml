@@ -22,8 +22,12 @@ spec:
           imagePullPolicy: Always
 
           env:
-            - name: VITE_IP_GW
-              valueFrom:
-                configMapKeyRef:
-                  name: front-configmap
-                  key: VITE_IP_GW
+            - name: VITE_GW_HOSTNAME
+              value: gw-service
+          resources:
+            limits:
+              cpu: '500m'
+              memory: '128Mi'
+            requests:
+              cpu: '250m'
+              memory: '64Mi'
