@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: front
+  name: front
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: front
+  template:
+    metadata:
+      labels:
+        app: front
+    spec:
+      containers:
+        - image: danlevypro/front:1.0
+          name: front
+
+          resources:
+            limits:
+              cpu: '500m'
+              memory: '128Mi'
+            requests:
+              cpu: '250m'
+              memory: '64Mi'

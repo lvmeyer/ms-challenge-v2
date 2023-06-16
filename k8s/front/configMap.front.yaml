@@ -1,7 +1,0 @@
-# apiVersion: v1
-# kind: ConfigMap
-# metadata:
-#   name: front-configmap
-# data:
-#   # VITE_GW_HOSTNAME: '10.244.0.19'
-#   PORT: '80'

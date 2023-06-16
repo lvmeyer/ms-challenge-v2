@@ -22,17 +22,17 @@ stopcont:
 
 # Dockerhub 
 img:
-#	docker build -t front:1.0 -f ./vite-front/Dockerfile ./vite-front
+	docker build -t front:1.0 -f ./vite-front/Dockerfile ./vite-front
 	docker build -t gw:1.0 -f ./apis/apps/gateway/Dockerfile ./apis
 #	docker build -t products:1.0 -f ./apis/apps/products/Dockerfile ./apis
 
 tag:
-#	docker tag front:1.0 danlevypro/front:1.0
+	docker tag front:1.0 danlevypro/front:1.0
 	docker tag gw:1.0 danlevypro/gw:1.0
 #	docker tag products:1.0 danlevypro/products:1.0
 
 pushimg:
-#	docker push danlevypro/front:1.0
+	docker push danlevypro/front:1.0
 	docker push danlevypro/gw:1.0
 #	docker push danlevypro/products:1.0
 
