@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: gw-configmap
+data:
+  PORT: '80'
+
+  PORT_PRODUCTS: 'http://products:3002'
+  PORT_BASKET: 'http://basket:3003'
+
+  RABBITMQ_URI: 'amqp://user:password@rabbitmq:5672'
+  RABBITMQ_BILLINGS_QUEUE: 'billings'

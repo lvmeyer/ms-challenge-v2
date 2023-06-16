@@ -1,101 +1,107 @@
 services:
-  gateway:
-    build:
-      context: ./apis
-      dockerfile: ./apps/gateway/Dockerfile
-      target: development
-    container_name: gateway_c
-    hostname: gateway
-    command: npm run start:dev gateway
-    env_file:
-      - ./apis/apps/gateway/.env
-    depends_on:
-      - rabbitmq
-      - database
-    volumes:
-      - ./apis:/usr/src/app
-      - /usr/src/app/node_modules
+  front:
+    image: node:19-alpine
     ports:
-      - '3000:3000'
-
-  products:
-    build:
-      context: ./apis
-      dockerfile: ./apps/products/Dockerfile
-      target: development
-    container_name: products_c
-    hostname: products
-    command: npm run start:dev products
+      - '80:80'
+    volumes:
+      - ./vite-front:/app
+    working_dir: /app
+    command: sh -c "npm install && npm run dev"
     env_file:
-      - ./apis/apps/products/.env
-    depends_on:
-      - rabbitmq
-      - database
-    volumes:
-      - ./apis:/usr/src/app
-      - /usr/src/app/node_modules
-    ports:
-      - '3002:3002'
+      - ./vite-front/.env
 
-  basket:
-    build:
-      context: ./apis
-      dockerfile: ./apps/basket/Dockerfile
-      target: development
-    container_name: basket_c
-    hostname: basket
-    command: npm run start:dev basket
-    env_file:
-      - ./apis/apps/basket/.env
-    depends_on:
-      - rabbitmq
-      - database
-    volumes:
-      - ./apis:/usr/src/app
-      - /usr/src/app/node_modules
-    ports:
-      - '3003:3003'
+  # gateway:
+  #   build:
+  #     context: ./apis
+  #     dockerfile: ./apps/gateway/Dockerfile
+  #   container_name: gateway_c
+  #   hostname: gateway
+  #   command: npm run start:dev gateway
+  #   env_file:
+  #     - ./apis/apps/gateway/.env
+  #   # depends_on:
+  #   #   - rabbitmq
+  #   #   - database
+  #   volumes:
+  #     - ./apis:/app
+  #     - /app/node_modules
+  #   ports:
+  #     - '3000:3000'
 
-  billings:
-    build:
-      context: ./apis
-      dockerfile: ./apps/billings/Dockerfile
-      target: development
-    container_name: billings_c
-    hostname: billings
-    command: npm run start:dev billings
-    env_file:
-      - ./apis/apps/billings/.env
-    depends_on:
-      - rabbitmq
-    volumes:
-      - ./apis:/usr/src/app
-      - /usr/src/app/node_modules
+  # products:
+  #   build:
+  #     context: ./apis
+  #     dockerfile: ./apps/products/Dockerfile
+  #   container_name: products_c
+  #   hostname: products
+  #   command: npm run start:dev products
+  #   env_file:
+  #     - ./apis/apps/products/.env
+  #   depends_on:
+  #     # - rabbitmq
+  #     - database
+  #   volumes:
+  #     - ./apis:/app
+  #     - /app/node_modules
+  #   ports:
+  #     - '3002:3002'
+#   basket:
+#     build:
+#       context: ./apis
+#       dockerfile: ./apps/basket/Dockerfile
+#     container_name: basket_c
+#     hostname: basket
+#     command: npm run start:dev basket
+#     env_file:
+#       - ./apis/apps/basket/.env
+#     depends_on:
+#       - rabbitmq
+#       - database
+#     volumes:
+#       - ./apis:/app
+#       - /app/node_modules
+#     ports:
+#       - '3003:3003'
 
-  rabbitmq:
-    image: rabbitmq:3-management
-    container_name: rabbitmq_c
-    hostname: rabbitmq
-    volumes:
-      - /var/lib/rabbitmq
-    ports:
-      - '5672:5672'
-      - '15672:15672'
-    env_file:
-      - .env
+#   billings:
+#     build:
+#       context: ./apis
+#       dockerfile: ./apps/billings/Dockerfile
+#     container_name: billings_c
+#     hostname: billings
+#     command: npm run start:dev billings
+#     env_file:
+#       - ./apis/apps/billings/.env
+#     depends_on:
+#       - rabbitmq
+#     volumes:
+#       - ./apis:/app
+#       - /app/node_modules
 
-  database:
-    image: postgres:14-alpine
-    container_name: db_c
-    hostname: db
-    environment:
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=postgres
-      - POSTGRES_DB=dbpdt
-    ports:
-      - 5432:5432
-    volumes:
-      - db_data:/var/lib/postgresql/data
+#   rabbitmq:
+#     image: rabbitmq:3-management
+#     container_name: rabbitmq_c
+#     hostname: rabbitmq
+#     volumes:
+#       - /var/lib/rabbitmq
+#     ports:
+#       - '5672:5672'
+#       - '15672:15672'
+#     env_file:
+#       - .env
 
-volumes:
-  db_data:
+#   database:
+#     image: postgres:14-alpine
+#     container_name: db_c
+#     hostname: db
+#     environment:
+#       - POSTGRES_USER=postgres
+#       - POSTGRES_PASSWORD=postgres
+#       - POSTGRES_DB=dbpdt
+#     ports:
+#       - 5432:5432
+#     volumes:
+#       - db_data:/var/lib/postgresql/data
+
+# volumes:
+#   db_data:
