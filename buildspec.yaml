@@ -7,7 +7,7 @@ phases:
 
   build:
     commands:
-      - docker build -t front ./vite-front/Dockerfile ./vite-front
+      - docker build -t front -f ./vite-front/Dockerfile ./vite-front
       - docker tag front:latest 872288361518.dkr.ecr.eu-west-3.amazonaws.com/front:latest
 
   post_build:
