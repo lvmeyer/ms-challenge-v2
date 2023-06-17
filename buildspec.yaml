@@ -7,7 +7,7 @@ env:
 phases:
   pre_build:
     commands:
-      - docker login -u danlevypro -p $DOCKER_PASSWORD
+      - docker login -u danlevypro -p $DOCKER_PWD
       # - aws ecr get-login-password --region eu-west-3 | docker login --username AWS --password-stdin 872288361518.dkr.ecr.eu-west-3.amazonaws.com
 
   build:
