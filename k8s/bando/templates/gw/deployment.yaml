@@ -15,7 +15,7 @@ spec:
         app: gw
     spec:
       containers:
-        - image: danlevypro/gw:1.0
+        - image: danlevypro/gw:latest
           name: gw
 
           resources:
