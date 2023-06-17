@@ -10,6 +10,10 @@ phases:
       - docker build -t front -f ./vite-front/Dockerfile ./vite-front
       - docker tag front:latest 872288361518.dkr.ecr.eu-west-3.amazonaws.com/front:latest
 
+      - docker build -t front -f ./apis/apps/gateway/Dockerfile ./apis
+      - docker tag gw:latest 872288361518.dkr.ecr.eu-west-3.amazonaws.com/gw:latest
+
   post_build:
     commands:
       - docker push 872288361518.dkr.ecr.eu-west-3.amazonaws.com/front:latest
+      - docker push 872288361518.dkr.ecr.eu-west-3.amazonaws.com/gw:latest
