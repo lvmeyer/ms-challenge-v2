@@ -15,7 +15,7 @@ spec:
         app: front
     spec:
       containers:
-        - image: danlevypro/front:1.6
+        - image: danlevypro/front:latest
           imagePullPolicy: Always
           name: front
 

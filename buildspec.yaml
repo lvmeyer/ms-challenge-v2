@@ -1,0 +1,15 @@
+version: 0.2
+
+phases:
+  pre_build:
+    commands:
+      - aws ecr get-login-password --region eu-west-3 | docker login --username AWS --password-stdin 872288361518.dkr.ecr.eu-west-3.amazonaws.com
+
+  build:
+    commands:
+      - docker build -t front ./vite-front/Dockerfile ./vite-front
+      - docker tag front:latest 872288361518.dkr.ecr.eu-west-3.amazonaws.com/front:latest
+
+  post_build:
+    commands:
+      - docker push 872288361518.dkr.ecr.eu-west-3.amazonaws.com/front:latest
