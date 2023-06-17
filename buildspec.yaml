@@ -8,12 +8,16 @@ phases:
   build:
     commands:
       - docker build -t front -f ./vite-front/Dockerfile ./vite-front
-      - docker tag front:latest 872288361518.dkr.ecr.eu-west-3.amazonaws.com/front:latest
+      - docker tag front danlevypro/front
+      # - docker tag front:latest 872288361518.dkr.ecr.eu-west-3.amazonaws.com/front:latest
 
       - docker build -t gw -f ./apis/apps/gateway/Dockerfile ./apis
-      - docker tag gw:latest 872288361518.dkr.ecr.eu-west-3.amazonaws.com/gw:latest
+      - docker tag gw danlevypro/gw
+      # - docker tag gw:latest 872288361518.dkr.ecr.eu-west-3.amazonaws.com/gw:latest
 
   post_build:
     commands:
-      - docker push 872288361518.dkr.ecr.eu-west-3.amazonaws.com/front:latest
-      - docker push 872288361518.dkr.ecr.eu-west-3.amazonaws.com/gw:latest
+      - docker push danlevypro/front
+      - docker push danlevypro/gw
+      # - docker push 872288361518.dkr.ecr.eu-west-3.amazonaws.com/front:latest
+      # - docker push 872288361518.dkr.ecr.eu-west-3.amazonaws.com/gw:latest
