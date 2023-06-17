@@ -1,29 +1,23 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: front-deploy
   labels:
-    app: front
+    app: gw
+  name: gw
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: front
+      app: gw
   template:
     metadata:
       labels:
-        app: front
+        app: gw
     spec:
       containers:
-        - name: front
-          image: danlevypro/front:1.0
-          ports:
-            - containerPort: 80
-          imagePullPolicy: Always
+        - image: danlevypro/gw:1.0
+          name: gw
 
-          env:
-            - name: VITE_GW_HOSTNAME
-              value: gw-service
           resources:
             limits:
               cpu: '500m'
