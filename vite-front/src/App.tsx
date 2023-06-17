@@ -5,7 +5,7 @@ function App() {
 	const pingServer = async () => {
 		console.log('VITE_GW_HOSTNAME', import.meta.env.VITE_GW_HOSTNAME);
 		const res = await fetch(
-			'http://k8s-default-bando-bb95bbe7b5-1421794689.eu-west-3.elb.amazonaws.com/api/'
+			`${import.meta.env.VITE_GW_HOSTNAME}/api` || 'http://localhost:80'
 		);
 		const obj = await res.json();
 
@@ -15,7 +15,7 @@ function App() {
 
 	return (
 		<>
-			<button onClick={() => pingServer()}>Ping gateway -_-</button>
+			<button onClick={() => pingServer()}>Ping gateway -_- Secrets NEW</button>
 		</>
 	);
 }

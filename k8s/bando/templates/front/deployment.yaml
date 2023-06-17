@@ -15,7 +15,8 @@ spec:
         app: front
     spec:
       containers:
-        - image: danlevypro/front:1.0
+        - image: danlevypro/front:1.6
+          imagePullPolicy: Always
           name: front
 
           resources:
@@ -25,3 +26,14 @@ spec:
             requests:
               cpu: '250m'
               memory: '64Mi'
+
+          # env:
+          #   - name: VITE_GW_HOSTNAME
+          #     valueFrom:
+          #       secretKeyRef:
+          #         name: front-secrets
+          #         key: VITE_GW_HOSTNAME
+
+          envFrom:
+            - secretRef:
+                name: front-secrets
