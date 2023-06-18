@@ -12,7 +12,7 @@ export class GatewayBasketService {
     private readonly configService: ConfigService,
   ) {}
 
-  PATH = this.configService.get<string>('PORT_BASKET') + '/basket';
+  PATH = this.configService.get<string>('HOSTNAME_BASKET') + '/pv/basket';
 
   async findBasketWithProducts(id: string) {
     try {

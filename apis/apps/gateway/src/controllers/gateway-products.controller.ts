@@ -16,7 +16,7 @@ import { CreateProductRequest, UpdateProductRequest } from '@app/common';
 import { Response } from 'express';
 import { gatewayResponse } from '../utils/gatewayResponse';
 
-@Controller('api/products')
+@Controller('api/v1/products')
 export class GatewayProductController {
   constructor(private readonly gatewayProductService: GatewayProductService) {}
 
@@ -37,6 +37,8 @@ export class GatewayProductController {
         data: product,
       });
     } catch (err) {
+      console.error(err);
+
       return gatewayResponse({
         res,
         status: err.status,

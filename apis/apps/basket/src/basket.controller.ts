@@ -20,7 +20,7 @@ import {
   RemoveProductFromBasketRequest,
 } from '@app/common';
 
-@Controller('basket')
+@Controller('pv/basket')
 export class BasketController {
   constructor(private readonly basketService: BasketService) {}
 

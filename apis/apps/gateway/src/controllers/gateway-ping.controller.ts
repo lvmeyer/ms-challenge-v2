@@ -1,7 +1,7 @@
 import { Controller, Get } from '@nestjs/common';
 import { GatewayPingService } from '../services/gateway-ping.service';
 
-@Controller('api')
+@Controller('api/v1')
 export class GatewayPingController {
   constructor(private readonly gatewayPingService: GatewayPingService) {}
 
