@@ -12,3 +12,4 @@ override.tf.json
 .terraformrc
 terraform.rc
 **/secrets.yaml
+**/back-secrets.yaml

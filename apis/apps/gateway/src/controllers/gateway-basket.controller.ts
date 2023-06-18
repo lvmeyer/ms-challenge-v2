@@ -21,7 +21,7 @@ import {
 import { Response } from 'express';
 import { gatewayResponse } from '../utils/gatewayResponse';
 
-@Controller('api/basket')
+@Controller('api/v1/basket')
 export class GatewayBasketController {
   constructor(private readonly gatewayBasketService: GatewayBasketService) {}
 

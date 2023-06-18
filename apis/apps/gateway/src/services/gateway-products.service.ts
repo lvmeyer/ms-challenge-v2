@@ -7,7 +7,7 @@ import { ErrorResponse } from '@app/common';
 export class GatewayProductService {
   constructor(private readonly configService: ConfigService) {}
 
-  PATH = this.configService.get<string>('PORT_PRODUCTS') + '/products';
+  PATH = this.configService.get<string>('HOSTNAME_PRODUCTS') + '/pv/products';
 
   async createProduct(createProductRequest: CreateProductRequest) {
     const response = await fetch(this.PATH, {
@@ -26,6 +26,7 @@ export class GatewayProductService {
   }
 
   async findAllProducts() {
+    console.log(this.PATH, 'HERE');
     const response = await fetch(this.PATH, {
       method: 'GET',
       headers: {

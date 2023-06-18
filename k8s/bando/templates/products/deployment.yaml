@@ -2,21 +2,21 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    app: gw
-  name: gw
+    app: products
+  name: products
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: gw
+      app: products
   template:
     metadata:
       labels:
-        app: gw
+        app: products
     spec:
       containers:
-        - image: danlevypro/gw:latest
-          name: gw
+        - image: danlevypro/products:latest
+          name: products
 
           resources:
             limits:

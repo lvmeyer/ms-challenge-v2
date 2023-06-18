@@ -18,7 +18,7 @@ import {
   Product,
 } from '@app/common';
 
-@Controller('products')
+@Controller('pv/products')
 export class ProductsController {
   constructor(private readonly productsService: ProductsService) {}
 
