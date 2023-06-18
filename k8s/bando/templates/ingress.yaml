@@ -9,11 +9,18 @@ spec:
   rules:
     - http:
         paths:
-          - path: /api*
+          - path: /api/v1**
             pathType: ImplementationSpecific
             backend:
               service:
                 name: gw
+                port:
+                  number: 80
+          - path: /pv/products*
+            pathType: ImplementationSpecific
+            backend:
+              service:
+                name: products
                 port:
                   number: 80
           - path: /*

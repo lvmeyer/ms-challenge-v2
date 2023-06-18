@@ -5,7 +5,7 @@ import { ConfigService } from '@nestjs/config';
 export class GatewayPingService {
   constructor(private readonly configService: ConfigService) {}
 
-  // PATH = this.configService.get<string>('PORT_PRODUCTS') + '/products';
+  // PATH = this.configService.get<string>('PORT_PRODUCTS') + '/pv/products';
 
   async ping() {
     return { pong: 'pong' };

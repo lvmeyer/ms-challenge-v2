@@ -14,13 +14,12 @@ import { GatewayPingService } from './services/gateway-ping.service';
   imports: [
     ConfigModule.forRoot({
       isGlobal: true,
-      // validationSchema: Joi.object({
-      //   PORT: Joi.number().required(),
-      //   PORT_PRODUCTS: Joi.string().required(),
-      //   PORT_BASKET: Joi.string().required(),
-      //   RABBITMQ_URI: Joi.string().required(),
-      //   RABBITMQ_BILLINGS_QUEUE: Joi.string().required(),
-      // }),
+      validationSchema: Joi.object({
+        HOSTNAME_PRODUCTS: Joi.string().required(),
+        HOSTNAME_BASKET: Joi.string().required(),
+        //   RABBITMQ_URI: Joi.string().required(),
+        //   RABBITMQ_BILLINGS_QUEUE: Joi.string().required(),
+      }),
     }),
     RmqModule.register({ name: BILLING_SERVICE }), // AUTH
   ],
