@@ -15,7 +15,7 @@ function App() {
 
 	return (
 		<>
-			<button onClick={() => pingServer()}>Ping gateway -_- LATEST</button>
+			<button onClick={() => pingServer()}>Ping gateway -_- DEPLOYMENT</button>
 		</>
 	);
 }

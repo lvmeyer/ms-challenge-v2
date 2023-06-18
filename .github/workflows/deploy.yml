@@ -1,0 +1,72 @@
+name: Publish Docker image
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  build:
+    name: Push images to Docker Hub
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Login to Docker Hub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+
+      - name: Front Image
+        uses: docker/build-push-action@v4
+        with:
+          context: ./vite-front
+          file: ./vite-front/Dockerfile
+          push: true
+          tags: ${{ secrets.DOCKER_USERNAME }}/front:latest
+
+      - name: GW Image
+        uses: docker/build-push-action@v4
+        with:
+          context: ./apis
+          file: ./apis/apps/gateway/Dockerfile
+          push: true
+          tags: ${{ secrets.DOCKER_USERNAME }}/gw:latest
+
+  deploy:
+    name: Deploy services to Amazon EKS
+    needs: build
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v2
+
+      - name: Install kubectl
+        uses: azure/setup-kubectl@v1
+        with:
+          version: 'v1.21.3'
+        id: install
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: eu-west-3
+
+      - name: Update kube config
+        run: aws eks update-kubeconfig --name bando --region eu-west-3
+
+      - name: Delete deployments
+        run: |
+          kubectl delete deploy front
+          kubectl delete deploy gw
+
+      - name: Apply deployments
+        run: |
+          kubectl apply -f ./k8s/bando/templates/front/deployment.yaml
+          kubectl apply -f ./k8s/bando/templates/gw/deployment.yaml
