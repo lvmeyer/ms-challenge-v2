@@ -12,10 +12,16 @@ export class UpdateBasketRequest {
 
 export class AddProductToBasketRequest {
   @IsString()
+  basketId: string;
+
+  @IsString()
   productId: string;
 }
 
 export class RemoveProductFromBasketRequest {
+  @IsString()
+  basketId: string;
+
   @IsString()
   productId: string;
 }

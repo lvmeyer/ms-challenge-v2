@@ -1,6 +1,7 @@
 services:
   front:
     image: node:19-alpine
+    container_name: front_c
     ports:
       - '80:80'
     volumes:
@@ -18,10 +19,9 @@ services:
     hostname: gateway
     command: npm run start:dev gateway
     env_file:
-      - ./apis/apps/gateway/.env
+      - ./apis/.env
     # depends_on:
     #   - rabbitmq
-    #   - database
     volumes:
       - ./apis:/app
       - /app/node_modules
@@ -36,33 +36,31 @@ services:
     hostname: products
     command: npm run start:dev products
     env_file:
-      - ./apis/apps/products/.env
-    depends_on:
-      # - rabbitmq
-      - database
+      - ./apis/.env
+    # depends_on:
+    # - rabbitmq
     volumes:
       - ./apis:/app
       - /app/node_modules
     ports:
       - '3002:3002'
 
-  #   basket:
-  #     build:
-  #       context: ./apis
-  #       dockerfile: ./apps/basket/Dockerfile
-  #     container_name: basket_c
-  #     hostname: basket
-  #     command: npm run start:dev basket
-  #     env_file:
-  #       - ./apis/apps/basket/.env
-  #     depends_on:
-  #       - rabbitmq
-  #       - database
-  #     volumes:
-  #       - ./apis:/app
-  #       - /app/node_modules
-  #     ports:
-  #       - '3003:3003'
+  basket:
+    build:
+      context: ./apis
+      dockerfile: ./apps/basket/Dockerfile
+    container_name: basket_c
+    hostname: basket
+    command: npm run start:dev basket
+    env_file:
+      - ./apis/.env
+    # depends_on:
+    # - rabbitmq
+    volumes:
+      - ./apis:/app
+      - /app/node_modules
+    ports:
+      - '3003:3003'
 
   #   billings:
   #     build:
@@ -72,7 +70,7 @@ services:
   #     hostname: billings
   #     command: npm run start:dev billings
   #     env_file:
-  #       - ./apis/apps/billings/.env
+  # - ./apis/.env
   #     depends_on:
   #       - rabbitmq
   #     volumes:
@@ -89,36 +87,4 @@ services:
   #       - '5672:5672'
   #       - '15672:15672'
   #     env_file:
-  #       - .env
-
-  #   database:
-  #     image: mysql
-  #     container_name: db_c
-  #     hostname: db
-  #     environment:
-  #       - MYSQL_USER=mysql
-  #       - MYSQL_PASSWORD=mysql
-  #       - MYSQL_DB=dbpdt
-  #     ports:
-  #       - 5432:5432
-  #     volumes:
-  #       - db_data:/var/lib/mysqlql/data
-
-  database:
-    image: mysql:5.7
-    restart: always
-    environment:
-      MYSQL_DATABASE: mysql
-      MYSQL_USER: mysql
-      MYSQL_PASSWORD: mysql
-      MYSQL_ROOT_PASSWORD: mysql
-    ports:
-      - '3306:3306'
-    expose:
-      - '3306'
-    volumes:
-      - my-db:/var/lib/mysql
-
-volumes:
-  my-db:
-#   db_data:
+  # - ./apis/.env
