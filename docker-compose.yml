@@ -22,7 +22,6 @@ services:
       - ./apis/.env
     # depends_on:
     #   - rabbitmq
-    #   - database
     volumes:
       - ./apis:/app
       - /app/node_modules
@@ -38,9 +37,8 @@ services:
     command: npm run start:dev products
     env_file:
       - ./apis/.env
-    depends_on:
-      - database
-      # - rabbitmq
+    # depends_on:
+    # - rabbitmq
     volumes:
       - ./apis:/app
       - /app/node_modules
