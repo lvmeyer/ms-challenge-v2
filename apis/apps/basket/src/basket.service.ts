@@ -125,6 +125,9 @@ export class BasketService {
         products: true,
       },
     });
+    if (!basket) {
+      throw new NotFoundException('Basket not found');
+    }
     return basket;
   }
 

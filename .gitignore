@@ -13,3 +13,4 @@ override.tf.json
 terraform.rc
 **/secrets.yaml
 **/back-secrets.yaml
+apis/.env

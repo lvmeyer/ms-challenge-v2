@@ -11,19 +11,6 @@ services:
     env_file:
       - ./vite-front/.env
 
-  database:
-    image: mysql:8.0
-    container_name: db_c
-    environment:
-      MYSQL_DATABASE: bando
-      MYSQL_USER: user
-      MYSQL_PASSWORD: password
-      MYSQL_ROOT_PASSWORD: root
-    ports:
-      - '3306:3306'
-    volumes:
-      - db_data:/var/lib/mysqlql/data
-
   gateway:
     build:
       context: ./apis
@@ -32,7 +19,7 @@ services:
     hostname: gateway
     command: npm run start:dev gateway
     env_file:
-      - ./apis/apps/gateway/.env
+      - ./apis/.env
     # depends_on:
     #   - rabbitmq
     #   - database
@@ -50,7 +37,7 @@ services:
     hostname: products
     command: npm run start:dev products
     env_file:
-      - ./apis/apps/products/.env
+      - ./apis/.env
     depends_on:
       - database
       # - rabbitmq
@@ -68,10 +55,9 @@ services:
     hostname: basket
     command: npm run start:dev basket
     env_file:
-      - ./apis/apps/basket/.env
-    depends_on:
-      - database
-      # - rabbitmq
+      - ./apis/.env
+    # depends_on:
+    # - rabbitmq
     volumes:
       - ./apis:/app
       - /app/node_modules
@@ -86,7 +72,7 @@ services:
   #     hostname: billings
   #     command: npm run start:dev billings
   #     env_file:
-  #       - ./apis/apps/billings/.env
+  # - ./apis/.env
   #     depends_on:
   #       - rabbitmq
   #     volumes:
@@ -103,20 +89,4 @@ services:
   #       - '5672:5672'
   #       - '15672:15672'
   #     env_file:
-  #       - .env
-
-  #   database:
-  #     image: mysql
-  #     container_name: db_c
-  #     hostname: db
-  #     environment:
-  #       - MYSQL_USER=mysql
-  #       - MYSQL_PASSWORD=mysql
-  #       - MYSQL_DB=dbpdt
-  #     ports:
-  #       - 5432:5432
-  #     volumes:
-  #       - db_data:/var/lib/mysqlql/data
-
-volumes:
-  db_data:
+  # - ./apis/.env

@@ -6,7 +6,7 @@ async function bootstrap() {
   const app = await NestFactory.create(GatewayModule);
   const configService = app.get(ConfigService);
 
-  const PORT = configService.get('PORT') || 80;
+  const PORT = configService.get('PORT_GW') || 80;
 
   console.log(`Service GW on port: ${PORT}`);
   // console.log(`Service GW on port: 80`);

@@ -27,24 +27,24 @@ export class BasketController {
   @Patch('add')
   @HttpCode(HttpStatus.OK)
   async addProductToBasket(
-    @Param('uuid', ParseUUIDPipe) uuid: string,
+    // @Param('uuid', ParseUUIDPipe) uuid: string,
     @Body(ValidationPipe) addProductToBasketRequest: AddProductToBasketRequest,
   ): Promise<any> {
     return await this.basketService.addProduct(
-      uuid,
+      addProductToBasketRequest.basketId,
       addProductToBasketRequest.productId,
     );
   }
 
-  @Patch('remove/:uuid')
+  @Patch('remove')
   @HttpCode(HttpStatus.OK)
   async removeProductFromBasket(
-    @Param('uuid', ParseUUIDPipe) uuid: string,
+    // @Param('uuid', ParseUUIDPipe) uuid: string,
     @Body(ValidationPipe)
     removeProductFromBasketRequest: RemoveProductFromBasketRequest,
   ): Promise<any> {
     return await this.basketService.removeProduct(
-      uuid,
+      removeProductFromBasketRequest.basketId,
       removeProductFromBasketRequest.productId,
     );
   }

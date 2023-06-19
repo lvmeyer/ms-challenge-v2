@@ -53,15 +53,15 @@ export class GatewayBasketController {
     }
   }
 
-  @Patch('add/:uuid')
+  @Patch('add')
   async addProductToBasket(
-    @Param('uuid', ParseUUIDPipe) uuid: string,
+    // @Param('uuid', ParseUUIDPipe) uuid: string,
     @Body(ValidationPipe) addProductToBasketRequest: AddProductToBasketRequest,
     @Res() res: Response,
   ) {
     try {
       await this.gatewayBasketService.addProduct(
-        uuid,
+        addProductToBasketRequest.basketId,
         addProductToBasketRequest.productId,
       );
 
@@ -81,16 +81,16 @@ export class GatewayBasketController {
     }
   }
 
-  @Patch('remove/:uuid')
+  @Patch('remove')
   async removeProductFromBasket(
-    @Param('uuid', ParseUUIDPipe) uuid: string,
+    // @Param('uuid', ParseUUIDPipe) uuid: string,
     @Body(ValidationPipe)
     removeProductFromBasketRequest: RemoveProductFromBasketRequest,
     @Res() res: Response,
   ) {
     try {
       await this.gatewayBasketService.removeProduct(
-        uuid,
+        removeProductFromBasketRequest.basketId,
         removeProductFromBasketRequest.productId,
       );
 

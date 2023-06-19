@@ -10,13 +10,6 @@ export class TypeOrmCustomModule {
       imports: [
         TypeOrmModule.forRootAsync({
           useFactory: (configService: ConfigService) => {
-            console.log(
-              configService.get<string>('MYSQL_HOST'),
-              configService.get<string>('MYSQL_USER'),
-              configService.get<string>('MYSQL_PASSWORD'),
-              configService.get<string>('MYSQL_DATABASE'),
-            );
-
             return {
               type: 'mysql',
               // host: 'database',
