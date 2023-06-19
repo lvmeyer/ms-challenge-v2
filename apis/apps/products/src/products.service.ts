@@ -8,7 +8,7 @@ import { Product } from '@app/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { CreateProductRequest, UpdateProductRequest } from '@app/common';
-
+import { productsSeed } from './seed';
 @Injectable()
 export class ProductsService {
   constructor(
@@ -65,5 +65,11 @@ export class ProductsService {
     }
 
     await this.productRepository.remove(product);
+  }
+
+  public async seed() {
+    await this.productRepository.delete({});
+
+    await this.productRepository.save(productsSeed);
   }
 }

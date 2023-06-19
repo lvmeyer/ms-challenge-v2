@@ -1,4 +1,4 @@
-.PHONY: build start stop restart img runcont stopcont tag pushimg sendtohub
+.PHONY: build start stop restart img runcont stopcont tag pushimg hub
 
 # Local
 build:
