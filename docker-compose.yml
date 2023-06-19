@@ -1,6 +1,7 @@
 services:
   front:
     image: node:19-alpine
+    container_name: front_c
     ports:
       - '80:80'
     volumes:
@@ -9,6 +10,19 @@ services:
     command: sh -c "npm install && npm run dev"
     env_file:
       - ./vite-front/.env
+
+  database:
+    image: mysql:8.0
+    container_name: db_c
+    environment:
+      MYSQL_DATABASE: bando
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
+      MYSQL_ROOT_PASSWORD: root
+    ports:
+      - '3306:3306'
+    volumes:
+      - db_data:/var/lib/mysqlql/data
 
   gateway:
     build:
@@ -38,31 +52,31 @@ services:
     env_file:
       - ./apis/apps/products/.env
     depends_on:
-      # - rabbitmq
       - database
+      # - rabbitmq
     volumes:
       - ./apis:/app
       - /app/node_modules
     ports:
       - '3002:3002'
 
-  #   basket:
-  #     build:
-  #       context: ./apis
-  #       dockerfile: ./apps/basket/Dockerfile
-  #     container_name: basket_c
-  #     hostname: basket
-  #     command: npm run start:dev basket
-  #     env_file:
-  #       - ./apis/apps/basket/.env
-  #     depends_on:
-  #       - rabbitmq
-  #       - database
-  #     volumes:
-  #       - ./apis:/app
-  #       - /app/node_modules
-  #     ports:
-  #       - '3003:3003'
+  basket:
+    build:
+      context: ./apis
+      dockerfile: ./apps/basket/Dockerfile
+    container_name: basket_c
+    hostname: basket
+    command: npm run start:dev basket
+    env_file:
+      - ./apis/apps/basket/.env
+    depends_on:
+      - database
+      # - rabbitmq
+    volumes:
+      - ./apis:/app
+      - /app/node_modules
+    ports:
+      - '3003:3003'
 
   #   billings:
   #     build:
@@ -104,21 +118,5 @@ services:
   #     volumes:
   #       - db_data:/var/lib/mysqlql/data
 
-  database:
-    image: mysql:5.7
-    restart: always
-    environment:
-      MYSQL_DATABASE: mysql
-      MYSQL_USER: mysql
-      MYSQL_PASSWORD: mysql
-      MYSQL_ROOT_PASSWORD: mysql
-    ports:
-      - '3306:3306'
-    expose:
-      - '3306'
-    volumes:
-      - my-db:/var/lib/mysql
-
 volumes:
-  my-db:
-#   db_data:
+  db_data:

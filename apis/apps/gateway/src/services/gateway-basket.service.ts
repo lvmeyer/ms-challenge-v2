@@ -35,12 +35,12 @@ export class GatewayBasketService {
   }
 
   async addProduct(basketId: string, productId: string): Promise<void> {
-    const response = await fetch(`${this.PATH}/add/${basketId}`, {
+    const response = await fetch(`${this.PATH}/add`, {
       method: 'PATCH',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ productId }),
+      body: JSON.stringify({ basketId, productId }),
     });
 
     if (response.status !== HttpStatus.OK) {
@@ -50,12 +50,12 @@ export class GatewayBasketService {
   }
 
   async removeProduct(basketId: string, productId: string): Promise<void> {
-    const response = await fetch(`${this.PATH}/remove/${basketId}`, {
+    const response = await fetch(`${this.PATH}/remove`, {
       method: 'PATCH',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ productId }),
+      body: JSON.stringify({ basketId, productId }),
     });
 
     if (response.status !== HttpStatus.OK) {

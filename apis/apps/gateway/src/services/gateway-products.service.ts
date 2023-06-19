@@ -10,6 +10,7 @@ export class GatewayProductService {
   PATH = this.configService.get<string>('HOSTNAME_PRODUCTS') + '/pv/products';
 
   async createProduct(createProductRequest: CreateProductRequest) {
+    console.log(this.PATH, 'HERE');
     const response = await fetch(this.PATH, {
       method: 'POST',
       headers: {

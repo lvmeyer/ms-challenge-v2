@@ -24,7 +24,7 @@ import {
 export class BasketController {
   constructor(private readonly basketService: BasketService) {}
 
-  @Patch('add/:uuid')
+  @Patch('add')
   @HttpCode(HttpStatus.OK)
   async addProductToBasket(
     @Param('uuid', ParseUUIDPipe) uuid: string,
