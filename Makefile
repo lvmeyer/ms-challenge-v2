@@ -20,6 +20,9 @@ runcont:
 stopcont:
 	docker rm products_c -f
 
+seed:
+	docker compose exec gateway npm run seed
+
 # Dockerhub 
 img:
 	docker build -t front:latest -f ./vite-front/Dockerfile ./vite-front

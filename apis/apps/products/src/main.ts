@@ -9,7 +9,7 @@ async function bootstrap() {
 
   const PORT = configService.get('PORT_PRODUCTS') || 80;
 
-  console.log(`Service Product on port: ${PORT}`);
+  console.info(`Service Product on port: ${PORT}`);
   await app.listen(PORT);
 }
 bootstrap();

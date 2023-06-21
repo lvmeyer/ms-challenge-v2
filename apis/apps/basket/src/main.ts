@@ -9,7 +9,7 @@ async function bootstrap() {
 
   const PORT = configService.get('PORT_BASKET') || 80;
 
-  console.log(`Service Basket on port: ${PORT}`);
+  console.info(`Service Basket on port: ${PORT}`);
   await app.listen(PORT);
 }
 bootstrap();

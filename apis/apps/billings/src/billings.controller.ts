@@ -9,7 +9,7 @@ export class BillingsController {
 
   @EventPattern('create-billing')
   getHello(data): string {
-    console.log('PROC', data);
+    console.info('PROC', data);
     return this.billingsService.getHello();
   }
 }

@@ -66,7 +66,7 @@ export class GatewayBasketService {
   }
 
   async createBasket(createBasketRequest: CreateBasketRequest) {
-    console.log('PROC', this.PATH);
+    console.info('PROC', this.PATH);
     this.billingClient.emit('create-billing', {
       data: 'PC GW Basket',
     });
