@@ -1,3 +1,5 @@
+import { hash } from 'bcryptjs';
+import { JwtService } from '@nestjs/jwt';
 import {
   BadRequestException,
   Injectable,
@@ -6,13 +8,12 @@ import {
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
+
 import {
   CreateUserRequest,
   UpdateProfileRequest,
   UpdatePasswordRequest,
 } from './dto/users.request';
-import { hash } from 'bcryptjs';
-import { JwtService } from '@nestjs/jwt';
 import { User } from './User';
 import { Role } from '../auth/auth.enum';
 

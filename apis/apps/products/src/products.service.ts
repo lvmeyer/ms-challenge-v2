@@ -7,6 +7,7 @@ import {
 import { Product } from '@app/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
+
 import { CreateProductRequest, UpdateProductRequest } from '@app/common';
 import { productsSeed } from './seed';
 

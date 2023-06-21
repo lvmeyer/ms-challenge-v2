@@ -1,6 +1,7 @@
 import { HttpStatus, Injectable } from '@nestjs/common';
-import { CreateProductRequest, UpdateProductRequest } from '@app/common';
 import { ConfigService } from '@nestjs/config';
+
+import { CreateProductRequest, UpdateProductRequest } from '@app/common';
 import { ErrorResponse } from '@app/common';
 
 @Injectable()

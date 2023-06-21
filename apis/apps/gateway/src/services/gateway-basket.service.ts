@@ -1,9 +1,10 @@
 import { HttpStatus, Inject, Injectable } from '@nestjs/common';
-import { BILLING_SERVICE } from '@app/common';
 import { ClientProxy } from '@nestjs/microservices';
-import { CreateBasketRequest, UpdateBasketRequest } from '@app/common';
 import { ConfigService } from '@nestjs/config';
+
 import { ErrorResponse } from '@app/common';
+import { BILLING_SERVICE } from '@app/common';
+import { CreateBasketRequest, UpdateBasketRequest } from '@app/common';
 
 @Injectable()
 export class GatewayBasketService {

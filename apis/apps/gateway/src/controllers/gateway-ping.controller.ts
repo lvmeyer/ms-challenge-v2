@@ -1,4 +1,5 @@
 import { Controller, Get } from '@nestjs/common';
+
 import { GatewayPingService } from '../services/gateway-ping.service';
 
 @Controller('api/v1')

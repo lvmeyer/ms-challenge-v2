@@ -1,7 +1,8 @@
 import { DynamicModule, Module } from '@nestjs/common';
-import { RmqService } from './rmq.service';
 import { ClientsModule, Transport } from '@nestjs/microservices';
 import { ConfigService } from '@nestjs/config';
+
+import { RmqService } from './rmq.service';
 
 interface RmqModuleOptions {
   name: string;

@@ -1,3 +1,4 @@
+import { Request } from 'express';
 import {
   Body,
   Controller,
@@ -14,7 +15,9 @@ import {
   BadRequestException,
   Headers,
 } from '@nestjs/common';
-import { UsersService } from './users.service';
+
+import { User } from './User';
+import { Role } from '../auth/auth.enum';
 import {
   CreateUserRequest,
   UpdateProfileRequest,
@@ -22,9 +25,7 @@ import {
   UpdatePasswordRequest,
 } from './dto/users.request';
 import { AuthRequired, HasRole } from '../auth/auth.decorator';
-import { Request } from 'express';
-import { Role } from '../auth/auth.enum';
-import { User } from './User';
+import { UsersService } from './users.service';
 
 @Controller('api/v1/users')
 export class UsersController {

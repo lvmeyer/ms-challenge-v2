@@ -11,12 +11,13 @@ import {
   Post,
   ValidationPipe,
 } from '@nestjs/common';
-import { ProductsService } from './products.service';
+
 import {
   CreateProductRequest,
   UpdateProductRequest,
   Product,
 } from '@app/common';
+import { ProductsService } from './products.service';
 
 @Controller('pv/products')
 export class ProductsController {
