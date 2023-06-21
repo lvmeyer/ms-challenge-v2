@@ -88,3 +88,18 @@ services:
   #       - '15672:15672'
   #     env_file:
   # - ./apis/.env
+
+  # database:
+  #   image: mysql:8.0
+  #   container_name: db_c
+  #   environment:
+  #     MYSQL_DATABASE: bando
+  #     MYSQL_USER: user
+  #     MYSQL_PASSWORD: password
+  #     MYSQL_ROOT_PASSWORD: root
+  #   ports:
+  #     - '3306:3306'
+  #   volumes:
+  #     - db_data:/var/lib/mysqlql/data
+# volumes:
+#   db_data:
