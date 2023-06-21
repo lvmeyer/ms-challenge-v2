@@ -62,20 +62,20 @@ services:
     ports:
       - '3003:3003'
 
-  #   billings:
-  #     build:
-  #       context: ./apis
-  #       dockerfile: ./apps/billings/Dockerfile
-  #     container_name: billings_c
-  #     hostname: billings
-  #     command: npm run start:dev billings
-  #     env_file:
-  # - ./apis/.env
-  #     depends_on:
-  #       - rabbitmq
-  #     volumes:
-  #       - ./apis:/app
-  #       - /app/node_modules
+  # billings:
+  #   build:
+  #     context: ./apis
+  #     dockerfile: ./apps/billings/Dockerfile
+  #   container_name: billings_c
+  #   hostname: billings
+  #   command: npm run start:dev billings
+  #   env_file:
+  #     - ./apis/.env
+  # depends_on:
+  #   - rabbitmq
+  # volumes:
+  #   - ./apis:/app
+  #   - /app/node_modules
 
   #   rabbitmq:
   #     image: rabbitmq:3-management

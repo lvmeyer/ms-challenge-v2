@@ -1,8 +1,8 @@
-import { Module } from '@nestjs/common';
-import { BasketController } from './basket.controller';
-import { BasketService } from './basket.service';
-import { ConfigModule } from '@nestjs/config';
 import * as Joi from 'joi';
+import { Module } from '@nestjs/common';
+import { ConfigModule } from '@nestjs/config';
+import { TypeOrmModule } from '@nestjs/typeorm';
+
 import {
   BILLING_SERVICE,
   RmqModule,
@@ -10,7 +10,8 @@ import {
   Product,
   TypeOrmCustomModule,
 } from '@app/common';
-import { TypeOrmModule } from '@nestjs/typeorm';
+import { BasketService } from './basket.service';
+import { BasketController } from './basket.controller';
 
 @Module({
   imports: [

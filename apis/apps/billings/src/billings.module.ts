@@ -1,9 +1,10 @@
+import * as Joi from 'joi';
 import { Module } from '@nestjs/common';
+import { ConfigModule } from '@nestjs/config';
+
+import { RmqModule } from '@app/common';
 import { BillingsController } from './billings.controller';
 import { BillingsService } from './billings.service';
-import { RmqModule } from '@app/common';
-import { ConfigModule } from '@nestjs/config';
-import * as Joi from 'joi';
 
 @Module({
   imports: [

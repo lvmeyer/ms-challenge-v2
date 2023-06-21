@@ -1,3 +1,4 @@
+import { ClientProxy } from '@nestjs/microservices';
 import {
   BadRequestException,
   Inject,
@@ -5,7 +6,9 @@ import {
   InternalServerErrorException,
   NotFoundException,
 } from '@nestjs/common';
-import { ClientProxy } from '@nestjs/microservices';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
+
 import {
   BILLING_SERVICE,
   Product,
@@ -13,8 +16,6 @@ import {
   CreateBasketRequest,
   UpdateBasketRequest,
 } from '@app/common';
-import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
 
 @Injectable()
 export class BasketService {

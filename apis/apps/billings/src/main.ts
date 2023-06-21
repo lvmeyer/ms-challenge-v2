@@ -1,6 +1,7 @@
 import { NestFactory } from '@nestjs/core';
-import { BillingsModule } from './billings.module';
 import { RmqService } from '@app/common';
+
+import { BillingsModule } from './billings.module';
 
 async function bootstrap() {
   const app = await NestFactory.create(BillingsModule);

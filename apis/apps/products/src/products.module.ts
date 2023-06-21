@@ -1,10 +1,11 @@
+import * as Joi from 'joi';
 import { Module } from '@nestjs/common';
+import { ConfigModule } from '@nestjs/config';
+import { TypeOrmModule } from '@nestjs/typeorm';
+
+import { Product, Basket, TypeOrmCustomModule } from '@app/common';
 import { ProductsController } from './products.controller';
 import { ProductsService } from './products.service';
-import { ConfigModule } from '@nestjs/config';
-import * as Joi from 'joi';
-import { Product, Basket, TypeOrmCustomModule } from '@app/common';
-import { TypeOrmModule } from '@nestjs/typeorm';
 
 @Module({
   imports: [

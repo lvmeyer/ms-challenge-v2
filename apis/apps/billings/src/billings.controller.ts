@@ -1,6 +1,7 @@
 import { Controller } from '@nestjs/common';
-import { BillingsService } from './billings.service';
 import { EventPattern } from '@nestjs/microservices';
+
+import { BillingsService } from './billings.service';
 
 @Controller()
 export class BillingsController {
@@ -8,7 +9,7 @@ export class BillingsController {
 
   @EventPattern('create-billing')
   getHello(data): string {
-    console.log('PROC', data);
+    console.info('PROC', data);
     return this.billingsService.getHello();
   }
 }

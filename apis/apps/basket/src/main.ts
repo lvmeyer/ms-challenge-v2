@@ -1,6 +1,7 @@
 import { NestFactory } from '@nestjs/core';
-import { BasketModule } from './basket.module';
 import { ConfigService } from '@nestjs/config';
+
+import { BasketModule } from './basket.module';
 
 async function bootstrap() {
   const app = await NestFactory.create(BasketModule);
@@ -8,7 +9,7 @@ async function bootstrap() {
 
   const PORT = configService.get('PORT_BASKET') || 80;
 
-  console.log(`Service Basket on port: ${PORT}`);
+  console.info(`Service Basket on port: ${PORT}`);
   await app.listen(PORT);
 }
 bootstrap();

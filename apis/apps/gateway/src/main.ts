@@ -8,10 +8,8 @@ async function bootstrap() {
 
   const PORT = configService.get('PORT_GW') || 80;
 
-  console.log(`Service GW on port: ${PORT}`);
-  // console.log(`Service GW on port: 80`);
+  console.info(`Service GW on port: ${PORT}`);
   app.enableCors();
   await app.listen(PORT);
-  // await app.listen(PORT);
 }
 bootstrap();

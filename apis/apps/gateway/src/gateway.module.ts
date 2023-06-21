@@ -1,6 +1,7 @@
+import * as Joi from 'joi';
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
-import * as Joi from 'joi';
+
 import { RmqModule } from '@app/common';
 import { BILLING_SERVICE } from '@app/common';
 import { GatewayProductController } from './controllers/gateway-products.controller';
@@ -9,6 +10,9 @@ import { GatewayBasketController } from './controllers/gateway-basket.controller
 import { GatewayBasketService } from './services/gateway-basket.service';
 import { GatewayPingController } from './controllers/gateway-ping.controller';
 import { GatewayPingService } from './services/gateway-ping.service';
+import { UsersModule } from './users/users.module';
+import { AuthModule } from './auth/auth.module';
+import { SeedService } from './seed/seed.service';
 
 @Module({
   imports: [
@@ -22,12 +26,20 @@ import { GatewayPingService } from './services/gateway-ping.service';
       }),
     }),
     RmqModule.register({ name: BILLING_SERVICE }), // AUTH
+    UsersModule,
+    AuthModule,
   ],
   controllers: [
     GatewayProductController,
     GatewayBasketController,
     GatewayPingController,
   ],
-  providers: [GatewayProductService, GatewayBasketService, GatewayPingService],
+  providers: [
+    GatewayProductService,
+    GatewayBasketService,
+    GatewayPingService,
+    SeedService,
+  ],
+  exports: [SeedService],
 })
 export class GatewayModule {}

@@ -1,3 +1,4 @@
+import { Response } from 'express';
 import {
   Body,
   Controller,
@@ -11,15 +12,15 @@ import {
   Res,
   ValidationPipe,
 } from '@nestjs/common';
-import { GatewayBasketService } from '../services/gateway-basket.service';
+
 import {
   AddProductToBasketRequest,
   CreateBasketRequest,
   RemoveProductFromBasketRequest,
   UpdateBasketRequest,
 } from '@app/common';
-import { Response } from 'express';
 import { gatewayResponse } from '../utils/gatewayResponse';
+import { GatewayBasketService } from '../services/gateway-basket.service';
 
 @Controller('api/v1/basket')
 export class GatewayBasketController {
