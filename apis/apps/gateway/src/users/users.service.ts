@@ -13,7 +13,7 @@ import {
   CreateUserRequest,
   UpdateProfileRequest,
   UpdatePasswordRequest,
-} from './dto/users.request';
+} from '../../../../libs/common/src/dtos/users/users.request';
 import { User } from './User';
 import { Role } from '../auth/auth.enum';
 

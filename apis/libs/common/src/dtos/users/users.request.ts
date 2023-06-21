@@ -19,13 +19,6 @@ export class CreateUserRequest {
   lastname: string;
 }
 
-export class UpdateUserRequest {
-  @IsDefined()
-  @IsString()
-  @IsEmail()
-  public email: string;
-}
-
 export class UpdateProfileRequest {
   @IsString()
   firstname?: string;

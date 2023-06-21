@@ -9,21 +9,15 @@ import {
   Param,
   ParseUUIDPipe,
   Patch,
-  Post,
   ValidationPipe,
   Req,
   BadRequestException,
   Headers,
 } from '@nestjs/common';
 
+import { UpdateProfileRequest, UpdatePasswordRequest } from '@app/common';
 import { User } from './User';
 import { Role } from '../auth/auth.enum';
-import {
-  CreateUserRequest,
-  UpdateProfileRequest,
-  UpdateUserRequest,
-  UpdatePasswordRequest,
-} from './dto/users.request';
 import { AuthRequired, HasRole } from '../auth/auth.decorator';
 import { UsersService } from './users.service';
 
