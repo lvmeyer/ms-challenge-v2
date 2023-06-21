@@ -15,8 +15,8 @@ Build the project
   make start
 ```
 
-Use your own .env based on the .env.local we provide
-Database is not provided with docker-compose
+Use your own .env based on the .env.local we provide.
+Database is not provided with docker-compose.
 
 Tests
 
@@ -26,8 +26,6 @@ Tests
 
 ## API Reference
 
-#### HTTP: Salons (admin)
-
 ```http
   POST http://0.0.0.0:3000/api/v1/auth/register
 ```
@@ -36,11 +34,7 @@ Tests
   POST http://0.0.0.0:3000/api/v1/auth/login
 ```
 
-| Parameter | Type     | Description                       |
-| :-------- | :------- | :-------------------------------- |
-| `id`      | `string` | **Required**. Id of item to fetch |
-
-example of admin role endpoint
+#### example of admin role endpoint
 
 ```http
   GET http://0.0.0.0:3000/api/v1/users
@@ -58,7 +52,7 @@ example of admin role endpoint
 | :-------- | :----- | :-------------------------------- |
 | `id`      | `uuid` | **Required**. Id of item to fetch |
 
-example of admin role endpoint
+#### example of user role endpoint
 
 ```http
   PATCH http://0.0.0.0:3000/api/v1/users/updateprofile
