@@ -12,9 +12,6 @@ import { GatewayPingController } from './controllers/gateway-ping.controller';
 import { GatewayPingService } from './services/gateway-ping.service';
 import { UsersModule } from './users/users.module';
 import { AuthModule } from './auth/auth.module';
-import { AuthController } from './auth/auth.controller';
-import { AuthService } from './auth/auth.service';
-import { UsersService } from './users/users.service';
 
 @Module({
   imports: [

@@ -1,6 +1,7 @@
 import { NestFactory } from '@nestjs/core';
-import { BasketModule } from './basket.module';
 import { ConfigService } from '@nestjs/config';
+
+import { BasketModule } from './basket.module';
 
 async function bootstrap() {
   const app = await NestFactory.create(BasketModule);

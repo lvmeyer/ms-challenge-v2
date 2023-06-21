@@ -1,6 +1,7 @@
 import { Controller } from '@nestjs/common';
-import { BillingsService } from './billings.service';
 import { EventPattern } from '@nestjs/microservices';
+
+import { BillingsService } from './billings.service';
 
 @Controller()
 export class BillingsController {
