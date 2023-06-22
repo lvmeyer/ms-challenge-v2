@@ -16,7 +16,7 @@ Build the project
 ```
 
 Use your own .env based on the .env.local we provide.
-Database is not provided with docker-compose.
+⚠️ Database has to be uncommented in docker-compose
 
 Tests
 
