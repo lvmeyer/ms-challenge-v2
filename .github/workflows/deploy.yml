@@ -36,6 +36,14 @@ jobs:
           push: true
           tags: ${{ secrets.DOCKER_USERNAME }}/gw:latest
 
+      - name: GW Image
+        uses: docker/build-push-action@v4
+        with:
+          context: ./apis
+          file: ./apis/apps/products/Dockerfile
+          push: true
+          tags: ${{ secrets.DOCKER_USERNAME }}/products:latest
+
   deploy:
     name: Deploy services to Amazon EKS
     needs: build
@@ -65,8 +73,10 @@ jobs:
         run: |
           kubectl delete deploy front
           kubectl delete deploy gw
+          kubectl delete deploy products
 
       - name: Apply deployments
         run: |
           kubectl apply -f ./k8s/bando/templates/front/deployment.yaml
           kubectl apply -f ./k8s/bando/templates/gw/deployment.yaml
+          kubectl apply -f ./k8s/bando/templates/products/deployment.yaml
