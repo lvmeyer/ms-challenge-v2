@@ -6,21 +6,21 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { Product, Basket, TypeOrmCustomModule } from '@app/common';
 import { ProductsController } from './products.controller';
 import { ProductsService } from './products.service';
+import { Category } from '@app/common/entity/Category';
 
 @Module({
   imports: [
     ConfigModule.forRoot({
       isGlobal: true,
       validationSchema: Joi.object({
-        MYSQL_HOST: Joi.string().required(),
-        MYSQL_DATABASE: Joi.string().required(),
-        MYSQL_USER: Joi.string().required(),
-        MYSQL_PASSWORD: Joi.string().required(),
+        POSTGRES_HOST: Joi.string().required(),
+        POSTGRES_DB: Joi.string().required(),
+        POSTGRES_USER: Joi.string().required(),
+        POSTGRES_PASSWORD: Joi.string().required(),
       }),
-      // envFilePath: './apps/products/.env',
     }),
     TypeOrmCustomModule.register(),
-    TypeOrmModule.forFeature([Product, Basket]),
+    TypeOrmModule.forFeature([Product, Basket, Category]),
   ],
   controllers: [ProductsController],
   providers: [ProductsService],
