@@ -22,8 +22,13 @@ function App() {
 	};
 
 	const pingFromPdt = async () => {
-		console.log('VITE_GW_HOSTNAME', import.meta.env.VITE_GW_HOSTNAME);
-		const res = await fetch(`${import.meta.env.VITE_GW_HOSTNAME}/pv/products`);
+		console.log(
+			'VITE_PRODUCTS_HOSTNAME',
+			import.meta.env.VITE_PRODUCTS_HOSTNAME
+		);
+		const res = await fetch(
+			`${import.meta.env.VITE_PRODUCTS_HOSTNAME}/pv/products`
+		);
 		const obj = await res.json();
 
 		console.log(obj);

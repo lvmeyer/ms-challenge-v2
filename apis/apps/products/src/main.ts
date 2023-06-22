@@ -9,6 +9,7 @@ async function bootstrap() {
 
   const PORT = configService.get('PORT_PRODUCTS') || 80;
 
+  app.enableCors();
   console.info(`Service Product on port: ${PORT}`);
   await app.listen(PORT);
 }
