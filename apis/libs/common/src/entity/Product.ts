@@ -8,6 +8,7 @@ import {
 } from 'typeorm';
 
 import { Basket } from './Basket';
+import { Category } from './Category';
 
 @Entity()
 export class Product {
@@ -31,6 +32,9 @@ export class Product {
 
   @UpdateDateColumn()
   updatedDate: Date;
+
+  @ManyToOne(() => Category, (category) => category.products)
+  category: Category;
 
   @ManyToOne(() => Basket, (basket) => basket.products)
   basket: Basket;

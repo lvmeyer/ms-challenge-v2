@@ -15,8 +15,7 @@ Build the project
   make start
 ```
 
-Use your own .env based on the .env.local we provide.
-⚠️ Database has to be uncommented in docker-compose
+⚠️ To setup your DB, use your own .env based on the .env.local we provide.
 
 Tests
 
@@ -74,7 +73,7 @@ Tests
 | NestJS         | npm v9.4.0  | Framework for building Node.js web applications |
 | Typeorm        | npm v9.0.1  | Object-relational mapping ou ORM                |
 | Nestjs/jwt     | npm v10.1.0 | JSON Web Token                                  |
-| MySQL          | npm v8.0    | Database                                        |
+| PostgreSQL     |             | Database                                        |
 | React          | npm v18.2.0 | Javascript library                              |
 | AWS            |             | Cloud Platform                                  |
 | Terraform      | npm v1.5.0  | Infrastructure As Code                          |

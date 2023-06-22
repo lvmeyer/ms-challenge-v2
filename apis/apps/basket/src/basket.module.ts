@@ -9,6 +9,7 @@ import {
   Basket,
   Product,
   TypeOrmCustomModule,
+  Category,
 } from '@app/common';
 import { BasketService } from './basket.service';
 import { BasketController } from './basket.controller';
@@ -19,10 +20,10 @@ import { BasketController } from './basket.controller';
       isGlobal: true,
       validationSchema: Joi.object({
         PORT_BASKET: Joi.number().required(),
-        MYSQL_HOST: Joi.string().required(),
-        MYSQL_DATABASE: Joi.string().required(),
-        MYSQL_USER: Joi.string().required(),
-        MYSQL_PASSWORD: Joi.string().required(),
+        POSTGRES_HOST: Joi.string().required(),
+        POSTGRES_DB: Joi.string().required(),
+        POSTGRES_USER: Joi.string().required(),
+        POSTGRES_PASSWORD: Joi.string().required(),
         RABBITMQ_URI: Joi.string().required(),
         RABBITMQ_BILLINGS_QUEUE: Joi.string().required(),
       }),
@@ -30,7 +31,7 @@ import { BasketController } from './basket.controller';
     }),
     RmqModule.register({ name: BILLING_SERVICE }),
     TypeOrmCustomModule.register(),
-    TypeOrmModule.forFeature([Basket, Product]),
+    TypeOrmModule.forFeature([Basket, Product, Category]),
   ],
   controllers: [BasketController],
   providers: [BasketService],

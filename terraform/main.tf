@@ -12,8 +12,8 @@ provider "aws" {
 }
 
 resource "aws_db_instance" "db_instance" {
-  db_name                = "dbpdt"
-  engine                 = "mysql"
+  db_name                = "bando"
+  engine                 = "postgres"
   engine_version         = "14.6"
   multi_az               = false
   identifier             = "pdt-rds-instance"

@@ -11,14 +11,14 @@ export class TypeOrmCustomModule {
         TypeOrmModule.forRootAsync({
           useFactory: (configService: ConfigService) => {
             return {
-              type: 'mysql',
-              host: configService.get<string>('MYSQL_HOST'),
-              port: 3306,
-              username: configService.get<string>('MYSQL_USER'),
-              password: configService.get<string>('MYSQL_PASSWORD'),
-              database: configService.get<string>('MYSQL_DATABASE'),
+              type: 'postgres',
+              host: configService.get<string>('POSTGRES_HOST'),
+              port: 5432,
+              username: configService.get<string>('POSTGRES_USER'),
+              password: configService.get<string>('POSTGRES_PASSWORD'),
+              database: configService.get<string>('POSTGRES_DB'),
               autoLoadEntities: true,
-              synchronize: false,
+              synchronize: true,
             };
           },
           inject: [ConfigService],
