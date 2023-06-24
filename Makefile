@@ -1,4 +1,4 @@
-.PHONY: build start stop restart img runcont stopcont tag pushimg hub
+.PHONY: build start stop restart img runcont stopcont tag pushimg hub seed
 
 # Local
 build:
@@ -21,7 +21,8 @@ stopcont:
 	docker rm products_c -f
 
 seed:
-	docker compose exec gateway npm run seed
+	npm install --prefix ./seed
+	npm run start --prefix ./seed
 
 # Dockerhub 
 img:

@@ -123,7 +123,9 @@ export class BasketService {
         id: uuid,
       },
       relations: {
-        products: true,
+        products: {
+          category: true,
+        },
       },
     });
     if (!basket) {
@@ -148,11 +150,28 @@ export class BasketService {
   }
 
   async delete(uuid: string): Promise<any> {
-    const basket = await this.basketRepository.findOneBy({ id: uuid });
+    const basket = await this.basketRepository.findOne({
+      where: {
+        id: uuid,
+      },
+      relations: {
+        products: {
+          category: true,
+        },
+      },
+    });
     if (!basket) {
       throw new NotFoundException('Basket not found for deletion');
     }
 
-    await this.basketRepository.remove(basket);
+    for (const product of basket.products) {
+      await this.basketRepository
+        .createQueryBuilder()
+        .relation(Basket, 'products')
+        .of(uuid)
+        .remove(product);
+    }
+
+    return;
   }
 }

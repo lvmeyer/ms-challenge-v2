@@ -14,3 +14,4 @@ override.tf.json
 terraform.rc
 **/secrets.yaml
 **/back-secrets.yaml
+seed/node_modules

@@ -13,7 +13,6 @@ import {
   Req,
   BadRequestException,
   Headers,
-  Post,
 } from '@nestjs/common';
 
 import { UpdateProfileRequest, UpdatePasswordRequest } from '@app/common';
@@ -92,12 +91,6 @@ export class UsersController {
   @HttpCode(HttpStatus.NO_CONTENT)
   async delete(@Param('uuid', ParseUUIDPipe) uuid: string): Promise<void> {
     return await this.usersService.delete(uuid);
-  }
-
-  @Post('seed')
-  @HttpCode(HttpStatus.CREATED)
-  async seed(): Promise<void> {
-    return await this.usersService.seed();
   }
 
   // @Post()

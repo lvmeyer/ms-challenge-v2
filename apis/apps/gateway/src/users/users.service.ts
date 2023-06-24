@@ -98,29 +98,4 @@ export class UsersService {
 
     await this.usersRepository.remove(user);
   }
-
-  public async seed() {
-    const userPassword = await hash('password', 10);
-    const administratorPassword = await hash('password', 10);
-
-    await this.usersRepository.delete({});
-
-    const administrator = this.usersRepository.create({
-      role: Role.ADMINISTRATOR,
-      email: 'admin@admin.com',
-      firstname: 'Pierre',
-      lastname: 'Boitelle',
-      password: administratorPassword,
-    });
-    await this.usersRepository.save(administrator);
-
-    const user = this.usersRepository.create({
-      role: Role.USER,
-      email: 'user@user.com',
-      firstname: 'Odessa',
-      lastname: 'Chesneau',
-      password: userPassword,
-    });
-    await this.usersRepository.save(user);
-  }
 }

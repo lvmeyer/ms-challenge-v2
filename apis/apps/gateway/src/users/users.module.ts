@@ -1,13 +1,16 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
-import { TypeOrmCustomModule } from '@app/common';
+import { Basket, Category, Product, TypeOrmCustomModule } from '@app/common';
 import { User } from './User';
 import { UsersController } from './users.controller';
 import { UsersService } from './users.service';
 
 @Module({
-  imports: [TypeOrmCustomModule.register(), TypeOrmModule.forFeature([User])],
+  imports: [
+    TypeOrmCustomModule.register(),
+    TypeOrmModule.forFeature([User, Basket, Product, Category]),
+  ],
   controllers: [UsersController],
   providers: [UsersService],
   exports: [UsersService],

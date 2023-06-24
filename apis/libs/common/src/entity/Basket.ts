@@ -2,6 +2,7 @@ import {
   Column,
   CreateDateColumn,
   Entity,
+  JoinColumn,
   OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
@@ -23,6 +24,10 @@ export class Basket {
   @UpdateDateColumn()
   updatedDate: Date;
 
-  @OneToMany(() => Product, (product) => product.basket)
+  @OneToMany(() => Product, (product) => product.basket, {
+    cascade: false,
+    onDelete: 'RESTRICT',
+  })
+  @JoinColumn()
   products: Product[];
 }

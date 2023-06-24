@@ -90,10 +90,4 @@ export class ProductsController {
   async delete(@Param('uuid', ParseUUIDPipe) uuid: string): Promise<void> {
     return await this.productsService.delete(uuid);
   }
-
-  @Post('seed')
-  @HttpCode(HttpStatus.CREATED)
-  async seed(): Promise<void> {
-    return await this.productsService.seed();
-  }
 }

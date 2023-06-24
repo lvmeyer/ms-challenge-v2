@@ -82,7 +82,7 @@ export class GatewayProductService {
   }
 
   async findAllProducts() {
-    console.debug(this.PATH, 'HERE');
+    console.debug('GET', this.PATH);
     const response = await fetch(this.PATH, {
       method: 'GET',
       headers: {
