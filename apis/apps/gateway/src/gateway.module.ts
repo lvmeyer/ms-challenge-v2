@@ -12,7 +12,6 @@ import { GatewayPingController } from './controllers/gateway-ping.controller';
 import { GatewayPingService } from './services/gateway-ping.service';
 import { UsersModule } from './users/users.module';
 import { AuthModule } from './auth/auth.module';
-import { SeedService } from './seed/seed.service';
 
 @Module({
   imports: [
@@ -34,12 +33,7 @@ import { SeedService } from './seed/seed.service';
     GatewayBasketController,
     GatewayPingController,
   ],
-  providers: [
-    GatewayProductService,
-    GatewayBasketService,
-    GatewayPingService,
-    SeedService,
-  ],
-  exports: [SeedService],
+  providers: [GatewayProductService, GatewayBasketService, GatewayPingService],
+  exports: [],
 })
 export class GatewayModule {}

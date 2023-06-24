@@ -5,17 +5,19 @@ We provide the environment to deploy it on any cloud provider.
 
 ## Run Locally
 
+⚠️ To setup your DB, create 2 `.env` inside `apis` and `vite-front` repositories, based on their respective `.env.local`
+
 Build the project
 
 ```bash
   make build
 ```
 
-```bash
-  make start
-```
+Seeders
 
-⚠️ To setup your DB, use your own .env based on the .env.local we provide.
+```bash
+  make seed
+```
 
 Tests
 

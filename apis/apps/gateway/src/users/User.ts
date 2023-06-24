@@ -3,11 +3,14 @@ import {
   Column,
   CreateDateColumn,
   Entity,
+  JoinColumn,
+  OneToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
 
 import { Role } from '../auth/auth.enum';
+import { Basket } from '@app/common';
 
 @Entity()
 export class User {
@@ -36,6 +39,10 @@ export class User {
     default: Role.USER,
   })
   public role: Role;
+
+  @OneToOne(() => Basket)
+  @JoinColumn()
+  basket: Basket;
 
   @CreateDateColumn()
   createdDate: Date;
