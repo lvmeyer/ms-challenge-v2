@@ -1,11 +1,11 @@
 # ms-challenge-v2
 
-This project is a small micro services project for an e-commerce site.
+We share a is a micro services project for an e-commerce site.
 We provide the environment to deploy it on any cloud provider.
 
 ## Run Locally
 
-⚠️ To setup your DB, create 2 `.env` inside `apis` and `vite-front` repositories, based on their respective `.env.local`
+⚠️ To setup your project localy, create 2 `.env` inside `apis` and `vite-front` repositories, based on their respective `.env.local`. Only the mailer won't work as you need specific credentials for it.
 
 Build the project
 
@@ -27,21 +27,21 @@ Tests
 
 ## API Reference
 
-```http
+```
   POST http://0.0.0.0:3000/api/v1/auth/register
 ```
 
-```http
+```
   POST http://0.0.0.0:3000/api/v1/auth/login
 ```
 
 #### example of admin role endpoint
 
-```http
+```
   GET http://0.0.0.0:3000/api/v1/users
 ```
 
-```http
+```
   DELETE http://0.0.0.0:3000/api/v1/users/{id}
 ```
 
@@ -55,7 +55,7 @@ Tests
 
 #### example of user role endpoint
 
-```http
+```
   PATCH http://0.0.0.0:3000/api/v1/users/updateprofile
 ```
 
@@ -85,5 +85,5 @@ Tests
 
 ## Authors
 
-- [@DanLevyM](https://www.github.com/DanLevyM)
+- [@DanLevyM](https://www.github.com/lvmeyer)
 - [@OdessaCh](https://github.com/OdessaCh)
