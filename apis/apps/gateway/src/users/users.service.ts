@@ -15,10 +15,13 @@ import {
   UpdatePasswordRequest,
 } from '../../../../libs/common/src/dtos/users/users.request';
 import { User } from './User';
-import { Role } from '../auth/auth.enum';
+import { PutObjectCommand, S3Client } from '@aws-sdk/client-s3';
+
 
 @Injectable()
 export class UsersService {
+  private readonly s3Client = new S3Client({ region: 'eu-west-3' });
+
   constructor(
     @InjectRepository(User)
     private readonly usersRepository: Repository<User>,
@@ -97,5 +100,15 @@ export class UsersService {
     }
 
     await this.usersRepository.remove(user);
+  }
+  
+  async upload(fileName: string, file: Buffer) {
+    await this.s3Client.send(
+      new PutObjectCommand({
+        Bucket: 'nest-project-1',
+        Key: fileName,
+        Body: file,
+      }),
+    );
   }
 }
