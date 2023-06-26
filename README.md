@@ -1,6 +1,6 @@
 # ms-challenge-v2
 
-We share a is a micro services project for an e-commerce site.
+A micro services project for an e-commerce site.
 We provide the environment to deploy it on any cloud provider.
 
 ## Run Locally
@@ -85,5 +85,5 @@ Tests
 
 ## Authors
 
-- [@DanLevyM](https://www.github.com/lvmeyer)
-- [@OdessaCh](https://github.com/OdessaCh)
+[@lvmeyer](https://www.github.com/lvmeyer)
+[@OdessaCh](https://github.com/OdessaCh)

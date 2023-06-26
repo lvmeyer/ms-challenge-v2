@@ -1,4 +1,4 @@
-.PHONY: build start stop restart img runcont stopcont tag pushimg hub seed
+.PHONY: build start stop restart img runcont stopcont tag pushimg hub seed test
 
 # Local
 build:
@@ -23,6 +23,9 @@ stopcont:
 seed:
 	npm install --prefix ./seed
 	npm run start --prefix ./seed
+
+test:
+	npm run test --prefix ./apis
 
 # Dockerhub 
 img:
