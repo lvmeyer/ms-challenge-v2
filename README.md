@@ -5,7 +5,7 @@ We provide the environment to deploy it on any cloud provider.
 
 ## Run Locally
 
-⚠️ To setup your project localy, create 2 `.env` inside `apis` and `vite-front` repositories, based on their respective `.env.local`. Only the mailer won't work as you need specific credentials for it.
+⚠️ To setup your project localy, create 2 `.env` inside `apis` and `vite-front` repositories, based on their respective `.env.local`. Mailer and s3 bucket won't work as you need specific credentials for it.
 
 Build the project
 

@@ -13,6 +13,12 @@ import {
   Req,
   BadRequestException,
   Headers,
+  Post,
+  UploadedFile,
+  ParseFilePipe,
+  MaxFileSizeValidator,
+  FileTypeValidator,
+  UseInterceptors,
 } from '@nestjs/common';
 
 import { UpdateProfileRequest, UpdatePasswordRequest } from '@app/common';
@@ -20,17 +26,18 @@ import { User } from './User';
 import { Role } from '../auth/auth.enum';
 import { AuthRequired, HasRole } from '../auth/auth.decorator';
 import { UsersService } from './users.service';
+import { FileInterceptor } from '@nestjs/platform-express';
 
-@Controller('api/v1/users')
+@Controller('api/v1')
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
-  @Get('ping')
+  @Get('users/ping')
   ping() {
     return { message: 'pong' };
   }
 
-  @Get('me')
+  @Get('users/me')
   @AuthRequired()
   getMe(@Headers() headers: any) {
     const access_token = headers.authorization.split(' ')[1];
@@ -42,7 +49,7 @@ export class UsersController {
     }
   }
 
-  @Patch('/updateprofile')
+  @Patch('users/updateprofile')
   @AuthRequired()
   updateProfile(
     @Req() req: Request,
@@ -54,7 +61,7 @@ export class UsersController {
     return this.usersService.updateProfile(access_token, updateProfileRequest);
   }
 
-  @Patch('/updatepassword')
+  @Patch('users/updatepassword')
   @AuthRequired()
   updatePassword(
     @Req() req: Request,
@@ -69,7 +76,7 @@ export class UsersController {
     );
   }
 
-  @Get()
+  @Get('users')
   @HasRole(Role.ADMINISTRATOR)
   @AuthRequired()
   @HttpCode(HttpStatus.OK)
@@ -77,7 +84,7 @@ export class UsersController {
     return this.usersService.getUsers();
   }
 
-  @Get(':uuid')
+  @Get('users/:uuid')
   @HasRole(Role.ADMINISTRATOR)
   @AuthRequired()
   @HttpCode(HttpStatus.OK)
@@ -85,13 +92,32 @@ export class UsersController {
     return this.usersService.getUserById(uuid);
   }
 
-  @Delete(':uuid')
+  @Delete('users/:uuid')
   @AuthRequired()
   @HasRole(Role.ADMINISTRATOR)
   @HttpCode(HttpStatus.NO_CONTENT)
   async delete(@Param('uuid', ParseUUIDPipe) uuid: string): Promise<void> {
     return await this.usersService.delete(uuid);
   }
+
+  @Post('upload')
+  @AuthRequired()
+  @HasRole(Role.ADMINISTRATOR)
+  @UseInterceptors(FileInterceptor('file'))
+  async uploadFile(
+    @UploadedFile(
+      new ParseFilePipe({
+        validators: [
+          new MaxFileSizeValidator({ maxSize: 100_000 }),
+          new FileTypeValidator({ fileType: 'image/png' }),
+        ],
+      }),
+    )
+    file: Express.Multer.File,
+  ) {
+    await this.usersService.upload(file.originalname, file.buffer);
+  }
+
 
   // @Post()
   // @HttpCode(HttpStatus.CREATED)
