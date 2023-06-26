@@ -13,6 +13,12 @@ import {
   Req,
   BadRequestException,
   Headers,
+  Post,
+  UploadedFile,
+  ParseFilePipe,
+  MaxFileSizeValidator,
+  FileTypeValidator,
+  UseInterceptors,
 } from '@nestjs/common';
 
 import { UpdateProfileRequest, UpdatePasswordRequest } from '@app/common';
@@ -20,12 +26,13 @@ import { User } from './User';
 import { Role } from '../auth/auth.enum';
 import { AuthRequired, HasRole } from '../auth/auth.decorator';
 import { UsersService } from './users.service';
+import { FileInterceptor } from '@nestjs/platform-express';
 
-@Controller('api/v1/users')
+@Controller('api/v1')
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
-  @Get('ping')
+  @Get('users/ping')
   ping() {
     return { message: 'pong' };
   }
