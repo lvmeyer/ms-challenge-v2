@@ -1,6 +1,3 @@
-import reactLogo from './assets/react.svg';
-import viteLogo from '/vite.svg';
-
 function Pingpage() {
 	const pingServer = async () => {
 		console.log('VITE_GW_HOSTNAME', import.meta.env.VITE_GW_HOSTNAME);
