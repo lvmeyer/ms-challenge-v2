@@ -13,7 +13,7 @@ export const VideosSection = () => {
         <Tilt transitionSpeed={1000} scale={1.07} className="video-card">
           <ReactPlayer
             onClick={() => navigate("/product-details/26")}
-            url={`${process.env.PUBLIC_URL}/assets/videos/hero-video-1.mp4`}
+            url={`./assets/videos/hero-video-1.mp4`}
             playing
             playbackRate={1.15}
             muted
@@ -29,7 +29,7 @@ export const VideosSection = () => {
         <Tilt transitionSpeed={1000} scale={1.07} className="video-card">
           <ReactPlayer
             onClick={() => navigate("/product-details/39")}
-            url={`${process.env.PUBLIC_URL}/assets/videos/hero-video-2.mp4`}
+            url={`./assets/videos/hero-video-2.mp4`}
             playing
             playbackRate={1.6}
             muted
@@ -45,7 +45,7 @@ export const VideosSection = () => {
         <Tilt transitionSpeed={1000} scale={1.07} className="video-card">
           <ReactPlayer
             onClick={() => navigate("/product-details/50")}
-            url={`${process.env.PUBLIC_URL}/assets/videos/hero-video-3.mp4`}
+            url={`./assets/videos/hero-video-3.mp4`}
             playing
             playbackRate={2.8}
             muted
@@ -64,7 +64,7 @@ export const VideosSection = () => {
           {" "}
           <ReactPlayer
             onClick={() => navigate("/product-details/76")}
-            url={`${process.env.PUBLIC_URL}/assets/videos/hero-video-4.mp4`}
+            url={`./assets/videos/hero-video-4.mp4`}
             playing
             playbackRate={1}
             muted

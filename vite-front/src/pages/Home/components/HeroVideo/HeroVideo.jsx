@@ -10,7 +10,7 @@ export const HeroVideo = () => {
     <div className="hero-video-container">
       <div className="hero-video">
         <ReactPlayer
-          url={`${process.env.PUBLIC_URL}/assets/videos/video-3.mp4`}
+          url={`./assets/videos/video-3.mp4`}
           playing
           playbackRate={1.5}
           muted

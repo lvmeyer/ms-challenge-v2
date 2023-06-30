@@ -1,6 +1,6 @@
 import axios from "axios";
 
 export const getWishlistService = async (encodedToken) =>
-  await axios.get("/api/user/wishlist", {
+  await axios.get("/test/user/wishlist", {
     headers: { authorization: encodedToken },
   });

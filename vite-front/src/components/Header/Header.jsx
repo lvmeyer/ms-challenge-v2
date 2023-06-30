@@ -41,7 +41,7 @@ export const Header = () => {
       <div className="nav-logo-home-button">
         <NavLink style={getActiveStyle} to="/">
           <SiTaichilang />
-          <span className="brand-name">DadSneakers</span>
+          <span className="brand-name">Bando</span>
         </NavLink>
       </div>
 

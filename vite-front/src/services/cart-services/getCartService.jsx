@@ -1,6 +1,6 @@
 import axios from "axios";
 
 export const getCartService = async (encodedToken) =>
-  await axios.get("/api/user/cart", {
+  await axios.get("/test/user/cart", {
     headers: { authorization: encodedToken },
   });

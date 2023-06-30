@@ -5,7 +5,7 @@ import { Route, Routes } from "react-router-dom";
 import { Login } from "../pages/auth/Login/Login";
 import { ProductListing } from "../pages/ProductListing/ProductListing";
 import { ProductDetails } from "../pages/ProductDetails/ProductDetails";
-import { RequiresAuth } from "../components/requires-auth/RequiresAuth";
+// import { RequiresAuth } from "../components/requires-auth/RequiresAuth";
 import { Signup } from "../pages/auth/Signup/Signup";
 import { Logout } from "../pages/auth/Logout/Logout";
 import { Checkout } from "../pages/Checkout/Checkout";
@@ -25,17 +25,17 @@ export const NavRoutes = () => {
       <Route
         path="/cart"
         element={
-          <RequiresAuth>
+          // <RequiresAuth>
             <Cart />
-          </RequiresAuth>
+          // </RequiresAuth>
         }
       />
       <Route
         path="/wishlist"
         element={
-          <RequiresAuth>
+          // <RequiresAuth>
             <Wishlist />
-          </RequiresAuth>
+          // </RequiresAuth>
         }
       />
       <Route path="*" element={<PageNotFound />} />
@@ -47,18 +47,18 @@ export const NavRoutes = () => {
       <Route
         path="/checkout"
         element={
-          <RequiresAuth>
+          // <RequiresAuth>
             <Checkout />
-          </RequiresAuth>
+          // </RequiresAuth>
         }
       />
       <Route path="/profile" element={<UserProfile />}>
         <Route
           path="/profile/"
           element={
-            <RequiresAuth>
+            // <RequiresAuth>
               <Profile />
-            </RequiresAuth>
+            // </RequiresAuth>
           }
         />
         <Route path="/profile/orders" element={<Orders />} />
