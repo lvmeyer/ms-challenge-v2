@@ -1,7 +1,9 @@
 import { compare, hash } from 'bcryptjs';
-import { BadRequestException, Injectable } from '@nestjs/common';
+import { BadRequestException, Inject, Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
+import { ClientProxy } from '@nestjs/microservices';
 
+import { AUTH_SERVICE } from '@app/common';
 import { UsersService } from '../users/users.service';
 import {
   LoginRequest,
@@ -13,6 +15,7 @@ export class AuthService {
   public constructor(
     private readonly usersService: UsersService,
     private readonly jwtService: JwtService,
+    @Inject(AUTH_SERVICE) private authClient: ClientProxy,
   ) {}
 
   public async login(
@@ -58,6 +61,10 @@ export class AuthService {
       password: hashedPassword,
       firstname: registerRequest.firstname,
       lastname: registerRequest.lastname,
+    });
+
+    this.authClient.emit('register-user', {
+      data: 'User created - send user',
     });
 
     return newUser;

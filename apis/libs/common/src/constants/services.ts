@@ -1,2 +1,2 @@
-export const BILLING_SERVICE = 'BILLINGS';
-export const PRODUCT_SERVICE = 'PRODUCTS';
+export const PAYMENT_SERVICE = 'PAYMENT';
+export const AUTH_SERVICE = 'AUTH';

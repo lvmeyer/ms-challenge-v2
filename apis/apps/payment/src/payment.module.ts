@@ -3,14 +3,7 @@ import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
-import {
-  BILLING_SERVICE,
-  Basket,
-  Category,
-  Product,
-  RmqModule,
-  TypeOrmCustomModule,
-} from '@app/common';
+import { Basket, Category, Product, TypeOrmCustomModule } from '@app/common';
 import { PaymentController } from './payment.controller';
 import { PaymentService } from './payment.service';
 
@@ -24,11 +17,8 @@ import { PaymentService } from './payment.service';
         POSTGRES_DB: Joi.string().required(),
         POSTGRES_USER: Joi.string().required(),
         POSTGRES_PASSWORD: Joi.string().required(),
-        RABBITMQ_URI: Joi.string().required(),
-        RABBITMQ_BILLINGS_QUEUE: Joi.string().required(),
       }),
     }),
-    RmqModule.register({ name: BILLING_SERVICE }),
     TypeOrmCustomModule.register(),
     TypeOrmModule.forFeature([Basket, Product, Category]),
   ],

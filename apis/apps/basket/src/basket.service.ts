@@ -1,7 +1,5 @@
-import { ClientProxy } from '@nestjs/microservices';
 import {
   BadRequestException,
-  Inject,
   Injectable,
   InternalServerErrorException,
   NotFoundException,
@@ -10,7 +8,6 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 
 import {
-  BILLING_SERVICE,
   Product,
   Basket,
   CreateBasketRequest,
@@ -24,8 +21,7 @@ export class BasketService {
     private readonly basketRepository: Repository<Basket>,
     @InjectRepository(Product)
     private readonly productRepository: Repository<Product>,
-    @Inject(BILLING_SERVICE) private billingClient: ClientProxy,
-  ) {} // private readonly configService: ConfigService,
+  ) {}
 
   async addProduct(basketId: string, productId: string): Promise<any> {
     try {
@@ -118,9 +114,6 @@ export class BasketService {
   }
 
   async createBasket(createBasketRequest: CreateBasketRequest): Promise<any> {
-    this.billingClient.emit('create-billing', {
-      data: 'PC basket',
-    });
     try {
       return await this.basketRepository.save(createBasketRequest);
     } catch (err) {
