@@ -23,6 +23,27 @@ spec:
                 name: products
                 port:
                   number: 80
+          - path: /pv/basket*
+            pathType: ImplementationSpecific
+            backend:
+              service:
+                name: basket
+                port:
+                  number: 80
+          - path: /pv/payment*
+            pathType: ImplementationSpecific
+            backend:
+              service:
+                name: payment
+                port:
+                  number: 80
+          - path: /pv/billings*
+            pathType: ImplementationSpecific
+            backend:
+              service:
+                name: billings
+                port:
+                  number: 80
           - path: /*
             pathType: ImplementationSpecific
             backend:

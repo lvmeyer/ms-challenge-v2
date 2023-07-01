@@ -3,7 +3,6 @@ name: Publish Docker image
 on:
   push:
     branches: [main]
-  pull_request:
 
 jobs:
   build:
@@ -95,6 +94,7 @@ jobs:
         run: aws eks update-kubeconfig --name bando --region eu-west-3
 
       - name: Delete deployments
+        continue-on-error: true
         run: |
           kubectl delete deploy front
           kubectl delete deploy gw

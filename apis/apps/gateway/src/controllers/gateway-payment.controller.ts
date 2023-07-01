@@ -25,9 +25,9 @@ export class GatewayPaymentController {
       console.error(err);
       return gatewayResponse({
         res,
-        status: err.status,
+        status: err.status || HttpStatus.INTERNAL_SERVER_ERROR,
         success: false,
-        message: err.message,
+        message: err.message || err,
       });
     }
   }

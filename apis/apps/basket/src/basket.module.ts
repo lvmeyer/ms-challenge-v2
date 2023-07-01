@@ -12,7 +12,6 @@ import { BasketController } from './basket.controller';
     ConfigModule.forRoot({
       isGlobal: true,
       validationSchema: Joi.object({
-        PORT_BASKET: Joi.number().required(),
         POSTGRES_HOST: Joi.string().required(),
         POSTGRES_DB: Joi.string().required(),
         POSTGRES_USER: Joi.string().required(),
