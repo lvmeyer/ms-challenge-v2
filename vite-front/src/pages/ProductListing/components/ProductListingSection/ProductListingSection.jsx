@@ -26,8 +26,7 @@ export const ProductListingSection = () => {
     })
       .then(response => response.json())
       .then(data => {
-        console.log(data);
-        setProducts(data);
+        setProducts(data.data);
       });
   }, []);
 
