@@ -1,36 +1,66 @@
-import React from "react";
-import "./Login.css";
+import { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import { Link } from "react-router-dom";
 import { BsEyeSlash } from "react-icons/bs";
 import { BsEye } from "react-icons/bs";
-import { useState } from "react";
-import { useAuth } from "../../../contexts/AuthProvider";
+import { useLoginMutation } from '../../../slices/usersApiSlice';
+import { setCredentials } from '../../../slices/authSlice';
+import "./Login.css";
 
 export const Login = () => {
   const [hidePassword, setHidePassword] = useState(true);
-  const { error, loginCredential, setLoginCredential, loginHandler } =
-    useAuth();
+  
+	const [email, setEmail] = useState('');
+	const [password, setPassword] = useState('');
 
-  const { email, password } = loginCredential;
+	const navigate = useNavigate();
+	const dispatch = useDispatch();
+	const [login, { isLoading }] = useLoginMutation();
+
+  const { userInfo } = useSelector((state) => state.auth);
+	useEffect(() => {
+		if (userInfo) {
+			navigate('/');
+		}
+	}, [navigate, userInfo]);
+
+
+  const handleSubmitLogin = async (e) => {
+    e.preventDefault();
+  
+    try {
+      // const res = await fetch('/api/v1/auth/login', {
+      //   mode: 'cors',
+      //   method: 'POST',
+      //   headers: {
+      //     'Content-Type': 'application/json',
+      //   },
+      //   body: JSON.stringify({ email, password }),
+      // });
+      const res = await login({ email, password }).unwrap();
+  
+      dispatch(setCredentials({ ...res }));
+      navigate('/profile');
+    } catch (error) {
+      toast.error(error.data.message);
+      console.error(error);
+    }
+  };
+  
 
   return (
     <div className="login-container">
       <h2>Login</h2>
-      <form
-        onSubmit={(e) => loginHandler(e, email, password)}
-        className="login-body"
-      >
+      <form onSubmit={handleSubmitLogin}
+      className="login-body">
+        
         <div className="email-container">
           <label htmlFor="email">Email</label>
           <input
-            value={loginCredential.email}
+            value={email}
             required
-            onChange={(e) =>
-              setLoginCredential({
-                ...loginCredential,
-                email: e.target.value,
-              })
-            }
+            onChange={(e) => setEmail(e.target.value)}
             id="email"
             placeholder="Email Address"
             type="email"
@@ -41,14 +71,9 @@ export const Login = () => {
           <label htmlFor="password">Password</label>
           <div className="input-container">
             <input
-              value={loginCredential.password}
-              required
-              onChange={(e) =>
-                setLoginCredential({
-                  ...loginCredential,
-                  password: e.target.value,
-                })
-              }
+              value={password}
+              required					
+              onChange={(e) => setPassword(e.target.value)}
               id="password"
               placeholder="Password"
               type={hidePassword ? "password" : "text"}
@@ -72,20 +97,15 @@ export const Login = () => {
             <input name="remember-me" type="checkbox" />
             <label htmlFor="remember-me">Keep me signed in</label>
           </div>
+				{isLoading && <h2>Loading...</h2>}
 
           <p>Forgot your password?</p>
         </div>
-        {error && <span className="error">{error}</span>}
+
         <div className="login-btn-container">
           <input value="Login" type="submit" />
-          <button
-            onClick={(e) => {
-              loginHandler(e, "chiragtaluja@apple.com", "chiragtaluja");
-            }}
-          >
-            Login with Test Credentials
-          </button>
         </div>
+
         <Link className="new-account" to="/signup">
           Create a new account?
         </Link>

@@ -5,6 +5,7 @@ import { useData } from "./contexts/DataProvider";
 import { ScrollToTop } from "./components/ScrollToTop/ScrollToTop";
 import { Loader } from "./components/Loader/Loader";
 
+
 function App() {
   const { loading } = useData();
 

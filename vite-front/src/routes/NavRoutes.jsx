@@ -1,7 +1,12 @@
 import React from "react";
+import ReactDOM from 'react-dom/client';
 import { Home } from "../pages/Home/Home";
 import { Cart } from "../pages/Cart/Cart";
-import { Route, Routes } from "react-router-dom";
+import { BrowserRouter as Router } from "react-router-dom";
+import { 
+  Route, 
+  Routes,
+	RouterProvider, } from "react-router-dom";
 import { Login } from "../pages/auth/Login/Login";
 import { ProductListing } from "../pages/ProductListing/ProductListing";
 import { ProductDetails } from "../pages/ProductDetails/ProductDetails";
@@ -16,6 +21,8 @@ import { Addresses } from "../pages/UserProfile/Addresses/Addresses";
 import { Orders } from "../pages/UserProfile/Orders/Orders";
 import { PageNotFound } from "../pages/PageNotFound/PageNotFound";
 import Pingpage from "../pages/ping-page";
+import { Provider } from "react-redux";
+import store from '../store'
 
 export const NavRoutes = () => {
   return (
@@ -67,3 +74,11 @@ export const NavRoutes = () => {
     </Routes>
   );
 };
+
+ReactDOM.createRoot(document.getElementById("root")).render(
+  <Provider store={store}>
+    <Router>
+      <NavRoutes />
+    </Router>
+  </Provider>
+);
