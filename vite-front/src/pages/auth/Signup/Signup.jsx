@@ -5,15 +5,12 @@ import { BsEye } from "react-icons/bs";
 import { useState } from "react";
 
 import React from "react";
-import { useAuth } from "../../../contexts/AuthProvider";
-import { signupService } from "../../../services/auth-services/signupService";
 import { toast } from "react-hot-toast";
 
 export const Signup = () => {
   const [hidePassword, setHidePassword] = useState(true);
   const [hideConfirmPassword, setHideConfirmPassword] = useState(true);
   const [signUpLoading, setSignUpLoading] = useState(false);
-  const { setAuth, loginHandler, error, setError } = useAuth();
 
   const navigate = useNavigate();
 
@@ -25,51 +22,51 @@ export const Signup = () => {
     lastName: "",
   });
 
-  const signupHandler = async () => {
-    try {
-      setSignUpLoading(true);
-      setError("");
-      if (signupCredential.password === signupCredential.confirmPassword) {
-        const response = await signupService(
-          signupCredential.email,
-          signupCredential.password,
-          signupCredential.firstName,
-          signupCredential.lastName
-        );
-        if (response.status === 201) {
-          setSignUpLoading(false);
-          toast.success(
-            `You've successfully signed up, ${response.data.createdUser.firstName}`
-          );
-          const encodedToken = response.data.encodedToken;
-          const firstName = response.data.createdUser.firstName;
-          const lastName = response.data.createdUser.lastName;
-          const email = response.data.createdUser.email;
+  // const signupHandler = async () => {
+  //   try {
+  //     setSignUpLoading(true);
+  //     setError("");
+  //     if (signupCredential.password === signupCredential.confirmPassword) {
+  //       const response = await signupService(
+  //         signupCredential.email,
+  //         signupCredential.password,
+  //         signupCredential.firstName,
+  //         signupCredential.lastName
+  //       );
+  //       if (response.status === 201) {
+  //         setSignUpLoading(false);
+  //         toast.success(
+  //           `You've successfully signed up, ${response.data.createdUser.firstName}`
+  //         );
+  //         const encodedToken = response.data.encodedToken;
+  //         const firstName = response.data.createdUser.firstName;
+  //         const lastName = response.data.createdUser.lastName;
+  //         const email = response.data.createdUser.email;
 
-          setAuth({
-            token: encodedToken,
-            isAuth: true,
-            firstName,
-            lastName,
-            email,
-          });
+  //         setAuth({
+  //           token: encodedToken,
+  //           isAuth: true,
+  //           firstName,
+  //           lastName,
+  //           email,
+  //         });
 
-          localStorage.setItem("token", encodedToken);
-          localStorage.setItem("isAuth", true);
-          localStorage.setItem("firstName", firstName);
-          localStorage.setItem("lastName", lastName);
-          localStorage.setItem("email", email);
+  //         localStorage.setItem("token", encodedToken);
+  //         localStorage.setItem("isAuth", true);
+  //         localStorage.setItem("firstName", firstName);
+  //         localStorage.setItem("lastName", lastName);
+  //         localStorage.setItem("email", email);
 
-          navigate("/");
-        }
-      }
-    } catch (error) {
-      setSignUpLoading(false);
-      setError(error.response.data.errors);
-    } finally {
-      setSignUpLoading(false);
-    }
-  };
+  //         navigate("/");
+  //       }
+  //     }
+  //   } catch (error) {
+  //     setSignUpLoading(false);
+  //     setError(error.response.data.errors);
+  //   } finally {
+  //     setSignUpLoading(false);
+  //   }
+  // };
 
   return (
     <div className="signup-container">

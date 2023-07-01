@@ -4,11 +4,9 @@ import { toast } from "react-hot-toast";
 import { useState } from "react";
 import "./Coupons.css";
 
-import { useUserData } from "../../../../contexts/UserDataProvider";
 
 export const Coupons = ({ couponSelected, setCouponSelected }) => {
   const [isCouponClicked, setIsCouponClicked] = useState(false);
-  const { userDataState } = useUserData();
 
   const couponsData = [
     {
@@ -37,10 +35,6 @@ export const Coupons = ({ couponSelected, setCouponSelected }) => {
     }
   };
 
-  const totalDiscountedPriceBeforeCoupon = userDataState.cartProducts?.reduce(
-    (acc, curr) => acc + curr.discounted_price * curr.qty,
-    0
-  );
 
   return (
     <div className="coupons-section">

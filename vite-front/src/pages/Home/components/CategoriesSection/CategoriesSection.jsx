@@ -1,22 +1,34 @@
 import React from "react";
-import { useData } from "../../../../contexts/DataProvider";
 import { Link } from "react-router-dom";
 import "./CategoriesSection.css";
 
 export const CategoriesSection = () => {
-  const { state, dispatch } = useData();
+
+  const allCategories = [
+    {
+      _id: "60f2a1b3e6b6b3b2f0b9b0a1",  
+      categoryName: "Shoes",
+      img: "https://www.madmoizelle.com/wp-content/uploads/2012/01/chaussure-plus-moche-monde.jpg", 
+    },
+    {
+      _id: "60f2a1b3e6b6b3b2f0b9b0a2",
+      categoryName: "Shoes",
+      img: "https://www.madmoizelle.com/wp-content/uploads/2012/01/chaussure-plus-moche-monde.jpg",
+    },
+    {
+      _id: "60f2a1b3e6b6b3b2f0b9b0a3",
+      categoryName: "Shoes",
+      img: "https://www.madmoizelle.com/wp-content/uploads/2012/01/chaussure-plus-moche-monde.jpg",
+    },
+  ]
+  
   return (
     <div>
       <h1 className="categories-heading">Shop By Categories</h1>
       <div className="categories-container">
-        {state.allCategories.map(({ _id, categoryName, img }) => (
+        {allCategories.map(({ _id, categoryName, img }) => (
           <Link
-            onClick={() =>
-              dispatch({
-                type: "ADD_CATEGORIES_FROM_HOME",
-                payload: categoryName,
-              })
-            }
+            
             to="/product-listing"
             className="category-card"
             key={_id}
