@@ -8,15 +8,16 @@ import {
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
+import { PutObjectCommand, S3Client } from '@aws-sdk/client-s3';
 
+import { Basket } from '@app/common';
 import {
   CreateUserRequest,
   UpdateProfileRequest,
   UpdatePasswordRequest,
 } from '../../../../libs/common/src/dtos/users/users.request';
 import { User } from './User';
-import { PutObjectCommand, S3Client } from '@aws-sdk/client-s3';
-
+import { Role } from '../auth/auth.enum';
 
 @Injectable()
 export class UsersService {
@@ -25,6 +26,8 @@ export class UsersService {
   constructor(
     @InjectRepository(User)
     private readonly usersRepository: Repository<User>,
+    @InjectRepository(Basket)
+    private readonly basketRepository: Repository<Basket>,
     private readonly jwtService: JwtService,
   ) {}
 
@@ -38,6 +41,25 @@ export class UsersService {
       throw new BadRequestException('User not found');
     }
     return user;
+  }
+
+  async getUserBasketId(access_token: string): Promise<any> {
+    const user = await this.getMe(access_token);
+
+    const userData = await this.usersRepository.find({
+      where: {
+        id: user.id,
+      },
+      relations: {
+        basket: true,
+      },
+    });
+
+    if (!userData) {
+      throw new BadRequestException('Basket not found for this user');
+    }
+
+    return { userId: user.id, basketId: userData[0].basket.id };
   }
 
   async updateProfile(
@@ -70,7 +92,20 @@ export class UsersService {
 
   async createUser(createUserRequest: CreateUserRequest): Promise<any> {
     try {
-      return await this.usersRepository.save(createUserRequest);
+      const basket = new Basket();
+      basket.price = 0;
+      await this.basketRepository.save(basket);
+
+      const newUser = new User();
+      newUser.email = createUserRequest.email;
+      newUser.password = createUserRequest.password;
+      newUser.firstname = createUserRequest.firstname;
+      newUser.lastname = createUserRequest.lastname;
+      newUser.role = Role.USER;
+
+      newUser.basket = basket;
+
+      return await this.usersRepository.save(newUser);
     } catch (err) {
       throw new InternalServerErrorException(err.driverError.message);
     }
@@ -101,7 +136,7 @@ export class UsersService {
 
     await this.usersRepository.remove(user);
   }
-  
+
   async upload(fileName: string, file: Buffer) {
     await this.s3Client.send(
       new PutObjectCommand({

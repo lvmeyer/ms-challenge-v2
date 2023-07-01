@@ -1,17 +1,12 @@
-import { HttpStatus, Inject, Injectable } from '@nestjs/common';
-import { ClientProxy } from '@nestjs/microservices';
+import { HttpStatus, Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 
 import { ErrorResponse } from '@app/common';
-import { BILLING_SERVICE } from '@app/common';
 import { CreateBasketRequest, UpdateBasketRequest } from '@app/common';
 
 @Injectable()
 export class GatewayBasketService {
-  constructor(
-    @Inject(BILLING_SERVICE) private billingClient: ClientProxy,
-    private readonly configService: ConfigService,
-  ) {}
+  constructor(private readonly configService: ConfigService) {}
 
   PATH = this.configService.get<string>('HOSTNAME_BASKET') + '/pv/basket';
 
@@ -66,10 +61,7 @@ export class GatewayBasketService {
   }
 
   async createBasket(createBasketRequest: CreateBasketRequest) {
-    console.info('PROC', this.PATH);
-    this.billingClient.emit('create-billing', {
-      data: 'PC GW Basket',
-    });
+    console.info('POST', this.PATH);
     const response = await fetch(this.PATH, {
       method: 'POST',
       headers: {

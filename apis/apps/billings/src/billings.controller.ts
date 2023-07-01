@@ -8,8 +8,14 @@ export class BillingsController {
   constructor(private readonly billingsService: BillingsService) {}
 
   @EventPattern('create-billing')
-  getHello(data): string {
-    console.info('PROC', data);
-    return this.billingsService.getHello();
+  sendBillToUser(data): string {
+    console.info('PROC rmq: create-billing', data);
+    return this.billingsService.sendBillToUser();
+  }
+
+  @EventPattern('register-user')
+  registerUser(data): string {
+    console.info('PROC rmq: register-user', data);
+    return this.billingsService.sendWelcomeMail();
   }
 }

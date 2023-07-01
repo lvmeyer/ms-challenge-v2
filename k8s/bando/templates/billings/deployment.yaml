@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: billings
+  name: billings
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: billings
+  template:
+    metadata:
+      labels:
+        app: billings
+    spec:
+      containers:
+        - image: danlevypro/billings:latest
+          name: billings
+
+          resources:
+            limits:
+              cpu: '500m'
+              memory: '128Mi'
+            requests:
+              cpu: '250m'
+              memory: '64Mi'
+
+          envFrom:
+            - secretRef:
+                name: back-secrets

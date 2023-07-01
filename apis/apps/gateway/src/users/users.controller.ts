@@ -49,6 +49,18 @@ export class UsersController {
     }
   }
 
+  @Get('user-basket')
+  @AuthRequired()
+  getUserBasketId(@Headers() headers: any) {
+    const access_token = headers.authorization.split(' ')[1];
+
+    try {
+      return this.usersService.getUserBasketId(access_token);
+    } catch (err) {
+      throw new BadRequestException(err.message);
+    }
+  }
+
   @Patch('users/updateprofile')
   @AuthRequired()
   updateProfile(
@@ -117,7 +129,6 @@ export class UsersController {
   ) {
     await this.usersService.upload(file.originalname, file.buffer);
   }
-
 
   // @Post()
   // @HttpCode(HttpStatus.CREATED)

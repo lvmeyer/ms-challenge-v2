@@ -44,6 +44,30 @@ jobs:
           push: true
           tags: ${{ secrets.DOCKER_USERNAME }}/products:latest
 
+      - name: Basket Image
+        uses: docker/build-push-action@v4
+        with:
+          context: ./apis
+          file: ./apis/apps/basket/Dockerfile
+          push: true
+          tags: ${{ secrets.DOCKER_USERNAME }}/basket:latest
+
+      - name: Payment Image
+        uses: docker/build-push-action@v4
+        with:
+          context: ./apis
+          file: ./apis/apps/payment/Dockerfile
+          push: true
+          tags: ${{ secrets.DOCKER_USERNAME }}/payment:latest
+
+      - name: Billings Image
+        uses: docker/build-push-action@v4
+        with:
+          context: ./apis
+          file: ./apis/apps/billings/Dockerfile
+          push: true
+          tags: ${{ secrets.DOCKER_USERNAME }}/billings:latest
+
   deploy:
     name: Deploy services to Amazon EKS
     needs: build
@@ -70,13 +94,20 @@ jobs:
         run: aws eks update-kubeconfig --name bando --region eu-west-3
 
       - name: Delete deployments
+        continue-on-error: true
         run: |
           kubectl delete deploy front
           kubectl delete deploy gw
           kubectl delete deploy products
+          kubectl delete deploy basket
+          kubectl delete deploy payment
+          kubectl delete deploy billings
 
       - name: Apply deployments
         run: |
           kubectl apply -f ./k8s/bando/templates/front/deployment.yaml
           kubectl apply -f ./k8s/bando/templates/gw/deployment.yaml
           kubectl apply -f ./k8s/bando/templates/products/deployment.yaml
+          kubectl apply -f ./k8s/bando/templates/basket/deployment.yaml
+          kubectl apply -f ./k8s/bando/templates/payment/deployment.yaml
+          kubectl apply -f ./k8s/bando/templates/billings/deployment.yaml

@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: basket
+  name: basket
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: basket
+  template:
+    metadata:
+      labels:
+        app: basket
+    spec:
+      containers:
+        - image: danlevypro/basket:latest
+          name: basket
+
+          resources:
+            limits:
+              cpu: '500m'
+              memory: '128Mi'
+            requests:
+              cpu: '250m'
+              memory: '64Mi'
+
+          envFrom:
+            - secretRef:
+                name: back-secrets

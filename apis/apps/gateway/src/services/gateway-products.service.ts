@@ -18,7 +18,7 @@ export class GatewayProductService {
 
   // =============== CATEGORY ===============
   async createCategory(createCategoryRequest: CreateCategoryRequest) {
-    console.debug('POST /api/v1/categories', this.PATH_CATEGORY);
+    console.debug('POST', this.PATH_CATEGORY);
     const response = await fetch(this.PATH_CATEGORY, {
       method: 'POST',
       headers: {

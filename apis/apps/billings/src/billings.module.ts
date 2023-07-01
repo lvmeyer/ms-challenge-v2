@@ -10,10 +10,10 @@ import { BillingsService } from './billings.service';
   imports: [
     ConfigModule.forRoot({
       isGlobal: true,
-      // envFilePath: './apps/billings/.env',
       validationSchema: Joi.object({
         RABBITMQ_URI: Joi.string().required(),
-        RABBITMQ_BILLINGS_QUEUE: Joi.string().required(),
+        RABBITMQ_AUTH_QUEUE: Joi.string().required(),
+        RABBITMQ_PAYMENT_QUEUE: Joi.string().required(),
       }),
     }),
     RmqModule,

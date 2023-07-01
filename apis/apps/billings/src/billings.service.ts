@@ -2,7 +2,11 @@ import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class BillingsService {
-  getHello(): string {
-    return 'Hello World!';
+  sendBillToUser(): string {
+    return 'RMQ: Bill sent to user!';
+  }
+
+  sendWelcomeMail(): string {
+    return 'RMQ: Welcome to the app!';
   }
 }

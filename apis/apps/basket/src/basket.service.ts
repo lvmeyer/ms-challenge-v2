@@ -1,7 +1,5 @@
-import { ClientProxy } from '@nestjs/microservices';
 import {
   BadRequestException,
-  Inject,
   Injectable,
   InternalServerErrorException,
   NotFoundException,
@@ -10,7 +8,6 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 
 import {
-  BILLING_SERVICE,
   Product,
   Basket,
   CreateBasketRequest,
@@ -24,8 +21,7 @@ export class BasketService {
     private readonly basketRepository: Repository<Basket>,
     @InjectRepository(Product)
     private readonly productRepository: Repository<Product>,
-    @Inject(BILLING_SERVICE) private billingClient: ClientProxy,
-  ) {} // private readonly configService: ConfigService,
+  ) {}
 
   async addProduct(basketId: string, productId: string): Promise<any> {
     try {
@@ -55,6 +51,18 @@ export class BasketService {
         .relation(Basket, 'products')
         .of(basketId)
         .add(productId);
+
+      let productIsInBasket = false;
+      basket.products.map(async (productInBasket) => {
+        if (productInBasket.id === productId) {
+          productIsInBasket = true;
+        }
+      });
+      if (!productIsInBasket) {
+        await this.basketRepository.update(basketId, {
+          price: basket.price + product.price,
+        });
+      }
     } catch (err) {
       throw new BadRequestException(err.message);
     }
@@ -88,15 +96,24 @@ export class BasketService {
         .relation(Basket, 'products')
         .of(basketId)
         .remove(productId);
+
+      let productIsInBasket = false;
+      basket.products.map(async (productInBasket) => {
+        if (productInBasket.id === productId) {
+          productIsInBasket = true;
+        }
+      });
+      if (productIsInBasket) {
+        await this.basketRepository.update(basketId, {
+          price: basket.price - product.price,
+        });
+      }
     } catch (err) {
       throw new BadRequestException(err.message);
     }
   }
 
   async createBasket(createBasketRequest: CreateBasketRequest): Promise<any> {
-    this.billingClient.emit('create-billing', {
-      data: 'PC basket',
-    });
     try {
       return await this.basketRepository.save(createBasketRequest);
     } catch (err) {
