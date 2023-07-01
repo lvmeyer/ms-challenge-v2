@@ -27,7 +27,7 @@ import { BasketController } from './basket.controller';
         RABBITMQ_URI: Joi.string().required(),
         RABBITMQ_BILLINGS_QUEUE: Joi.string().required(),
       }),
-      envFilePath: './apps/products/.env',
+      // envFilePath: './apps/products/.env',
     }),
     RmqModule.register({ name: BILLING_SERVICE }),
     TypeOrmCustomModule.register(),

@@ -55,6 +55,18 @@ export class BasketService {
         .relation(Basket, 'products')
         .of(basketId)
         .add(productId);
+
+      let productIsInBasket = false;
+      basket.products.map(async (productInBasket) => {
+        if (productInBasket.id === productId) {
+          productIsInBasket = true;
+        }
+      });
+      if (!productIsInBasket) {
+        await this.basketRepository.update(basketId, {
+          price: basket.price + product.price,
+        });
+      }
     } catch (err) {
       throw new BadRequestException(err.message);
     }
@@ -88,6 +100,18 @@ export class BasketService {
         .relation(Basket, 'products')
         .of(basketId)
         .remove(productId);
+
+      let productIsInBasket = false;
+      basket.products.map(async (productInBasket) => {
+        if (productInBasket.id === productId) {
+          productIsInBasket = true;
+        }
+      });
+      if (productIsInBasket) {
+        await this.basketRepository.update(basketId, {
+          price: basket.price - product.price,
+        });
+      }
     } catch (err) {
       throw new BadRequestException(err.message);
     }

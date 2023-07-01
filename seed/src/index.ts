@@ -161,7 +161,7 @@ AppDataSource.initialize()
 		// ============== BASKET ==============
 		console.log('Loading basket from the database...');
 		const basket = new Basket();
-		basket.price = 0;
+		basket.price = product1.price + product6.price + product13.price;
 		basket.products = [product1, product6, product13];
 		await AppDataSource.manager.save(basket);
 
@@ -175,7 +175,7 @@ AppDataSource.initialize()
 		user.firstname = 'Pierre';
 		user.lastname = 'Boitelle';
 		user.password = password;
-		// user.basket = basket;
+		user.basket = basket;
 		await AppDataSource.manager.save(user);
 
 		const admin = new User();
