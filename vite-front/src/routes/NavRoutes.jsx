@@ -49,7 +49,7 @@ export const NavRoutes = () => {
       <Route path="/login" element={<Login />} />
       <Route path="/logout" element={<Logout />} />
       <Route path="/product-listing" element={<ProductListing />} />
-      <Route path="/signup" element={<Signup />} />
+      <Route path="/register" element={<Signup />} />
       <Route path="/product-details/:productId" element={<ProductDetails />} />
       <Route
         path="/checkout"

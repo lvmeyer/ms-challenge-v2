@@ -6,6 +6,7 @@ import { BsEyeSlash } from "react-icons/bs";
 import { BsEye } from "react-icons/bs";
 import { useLoginMutation } from '../../../slices/usersApiSlice';
 import { setCredentials } from '../../../slices/authSlice';
+import { toast } from 'react-toastify';
 import "./Login.css";
 
 export const Login = () => {
@@ -41,7 +42,7 @@ export const Login = () => {
       const res = await login({ email, password }).unwrap();
   
       dispatch(setCredentials({ ...res }));
-      navigate('/profile');
+      navigate('/');
     } catch (error) {
       toast.error(error.data.message);
       console.error(error);

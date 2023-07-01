@@ -2,43 +2,49 @@ import "./Header.css";
 import { CgHeart } from "react-icons/cg";
 import React from "react";
 import { NavLink, useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { RxHamburgerMenu } from "react-icons/rx";
 import { RxCross2 } from "react-icons/rx";
 import { GrSearch } from "react-icons/gr";
-// import { useAuth } from "../../contexts/AuthProvider";
 import { CgShoppingCart } from "react-icons/cg";
-// import { useUserData } from "../../contexts/UserDataProvider";
-import { SiTaichilang } from "react-icons/si";
+import { logout, setCredentials } from '../../slices/authSlice';
+import { useDispatch, useSelector } from 'react-redux';
 
 export const Header = () => {
-  // const { auth } = useAuth();
-  const navigate = useNavigate();
+	const { userInfo } = useSelector((state) => state.auth);
 
-  //get user connected data
-  // const { userDataState } = useUserData();
+	const dispatch = useDispatch();
+	const navigate = useNavigate();
+
+	useEffect(() => {
+		const storedUserInfo = localStorage.getItem('userInfo');
+		const userInfo = storedUserInfo ? JSON.parse(storedUserInfo) : null;
+		if (userInfo) {
+			dispatch(setCredentials(userInfo));
+		} else {
+			navigate('/login');
+			dispatch(logout());
+		}
+	}, [dispatch, navigate]);
+
+
   const [showHamburger, setShowHamburger] = useState(true);
   const getActiveStyle = ({ isActive }) => {
     return { color: isActive ? "white" : "" };
   };
+  
+	const logoutHandler = () => {
+		dispatch(logout());
+		navigate('/login');
+	};
 
-  // const totalProductsInCart = userDataState.cartProducts?.reduce(
-  //   (acc, curr) => {
-  //     return acc + curr.qty;
-  //   },
-  //   0
-  // );
-
-  // const isProductInCart = () => (Number(totalProductsInCart) ? true : false);
-
-  // const totalProductsInWishlist = userDataState.wishlistProducts.length;
+  const LogoBando = '../../../public/assets/icons/logo.png';
 
   return (
     <nav>
       <div className="nav-logo-home-button">
-        <NavLink style={getActiveStyle} to="/">
-          <SiTaichilang />
-          <span className="brand-name">Bando</span>
+        <NavLink  to="/">
+          <img src={LogoBando} alt="logo" className="brand-logo" />
         </NavLink>
       </div>
 
@@ -53,7 +59,7 @@ export const Header = () => {
           <GrSearch />
         </button>
       </div>
-
+      {userInfo && userInfo.role === 'ADMINISTRATOR' && 'USER' ? (
       <div
         className={
           !showHamburger
@@ -61,6 +67,22 @@ export const Header = () => {
             : "nav-link-container"
         }
       >
+      <div>
+        <span>{userInfo.email}</span>
+      </div>
+      <NavLink
+        onClick={() => setShowHamburger(true)}
+        style={getActiveStyle}
+        to="/profile"
+      >
+        Profile
+      </NavLink>
+      <NavLink
+        onClick={logoutHandler}
+        style={getActiveStyle}
+        >
+          Logout
+        </NavLink>
         <NavLink
           onClick={() => setShowHamburger(true)}
           style={getActiveStyle}
@@ -68,41 +90,25 @@ export const Header = () => {
         >
           Explore
         </NavLink>
-        {/* <NavLink
-          onClick={() => setShowHamburger(true)}
-          style={getActiveStyle}
-          to={auth.isAuth ? "/profile" : "/login"}
-        >
-          {!auth.isAuth ? "Login" : "Profile"}
-        </NavLink> */}
-        {/* <NavLink
-          onClick={() => setShowHamburger(true)}
-          style={getActiveStyle}
-          to="wishlist"
-        >
-          <span>{!showHamburger ? "Wishlist" : ""}</span>
-          <CgHeart size={25} className="wishlist" />{" "}
-          {isProductInWishlist() && (
-            <span className="cart-count cart-count-mobile">
-              {totalProductsInWishlist}
-            </span>
-          )}
-        </NavLink> */}
         <NavLink
           onClick={() => setShowHamburger(true)}
           style={getActiveStyle}
           to="/cart"
         >
-          {/* <span>{!showHamburger ? "Cart" : ""}</span>
+          <span>{!showHamburger ? "Cart" : ""}</span>
           <CgShoppingCart size={25} className="cart" />{" "}
-          {isProductInCart() && (
-            // <span className="cart-count cart-count-mobile">
-            //   {" "}
-            //   {totalProductsInCart}{" "}
-            // </span>
-          )} */}
         </NavLink>
       </div>
+				) : (
+          <NavLink
+            onClick={() => setShowHamburger(true)}
+            style={getActiveStyle}
+            to="/login"
+          >
+            Login 
+          </NavLink>
+        )}
+
       {showHamburger && (
         <div className="hamburger-icon" onClick={() => setShowHamburger(false)}>
           <RxHamburgerMenu size={20} />
