@@ -22,4 +22,10 @@ dist-ssr
 *.sln
 *.sw?
 
+.env
 k8s/bando/secrets.yaml
+
+
+# typescript
+*.tsbuildinfo
+next-env.d.ts

@@ -1,0 +1,27 @@
+{
+    "short_name": "Bando",
+    "name": "Bando",
+    "icons": [
+      {
+        "src": "/assets/icons/logo.png",
+        "sizes": "64x64",
+        "type": "image/x-icon"
+      },
+      {
+        "src": "/assets/icons/logo.png",
+        "type": "image/png",
+        "sizes": "192x192",
+        "purpose": "any maskable"
+      },
+      {
+        "src": "/assets/icons/logo.png",
+        "type": "image/png",
+        "sizes": "512x512"
+      }
+    ],
+    "start_url": "/",
+    "scope": ".",
+    "display": "standalone",
+    "theme_color": "#96b452",
+    "background_color": "#ffffff"
+  }
