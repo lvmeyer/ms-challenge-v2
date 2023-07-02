@@ -1,18 +1,27 @@
 import { Response } from 'express';
-import { Controller, HttpStatus, Post, Res } from '@nestjs/common';
+import { Controller, Headers, HttpStatus, Post, Res } from '@nestjs/common';
 
 import { gatewayResponse } from '../utils/gatewayResponse';
 
 import { GatewayPaymentService } from '../services/gateway-payment.service';
+import { AuthRequired } from '../auth/auth.decorator';
 
 @Controller('api/v1/payment')
 export class GatewayPaymentController {
   constructor(private readonly gatewayPaymentService: GatewayPaymentService) {}
 
   @Post('pay')
-  async pay(@Res() res: Response) {
+  @AuthRequired()
+  async pay(
+    @Headers() headers: any,
+    @Res() res: Response,
+  ): Promise<Response<any, Record<string, any>>> {
+    const access_token = headers.authorization.split(' ')[1];
+
     try {
-      const paymentResponse = await this.gatewayPaymentService.pay();
+      const paymentResponse = await this.gatewayPaymentService.pay(
+        access_token,
+      );
 
       return gatewayResponse({
         res,

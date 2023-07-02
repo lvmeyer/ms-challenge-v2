@@ -14,6 +14,8 @@ import { BillingsService } from './billings.service';
         RABBITMQ_URI: Joi.string().required(),
         RABBITMQ_AUTH_QUEUE: Joi.string().required(),
         RABBITMQ_PAYMENT_QUEUE: Joi.string().required(),
+        NODEMAILER_USER: Joi.string().required(),
+        NODEMAILER_PASS: Joi.string().required(),
       }),
     }),
     RmqModule,
