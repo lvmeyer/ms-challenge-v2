@@ -11,6 +11,7 @@ import {
   Post,
   ValidationPipe,
 } from '@nestjs/common';
+import { UpdateResult } from 'typeorm';
 
 import {
   CreateProductRequest,
@@ -25,19 +26,12 @@ import { ProductsService } from './products.service';
 export class ProductsController {
   constructor(private readonly productsService: ProductsService) {}
 
-  @Get('hello')
-  @HttpCode(HttpStatus.OK)
-  async sayHello(): Promise<string> {
-    return this.productsService.sayHello();
-  }
-
   // ================== CTGS =================
   @Post('categories')
   @HttpCode(HttpStatus.CREATED)
   async createCategory(
     @Body(ValidationPipe) createCategoryRequest: CreateCategoryRequest,
   ): Promise<Category> {
-    console.log('PDT CATEG CONTROLLER');
     return await this.productsService.createCategory(createCategoryRequest);
   }
 
@@ -81,13 +75,13 @@ export class ProductsController {
   async update(
     @Param('uuid', ParseUUIDPipe) uuid: string,
     @Body(ValidationPipe) updateProductRequest: UpdateProductRequest,
-  ): Promise<any> {
+  ): Promise<UpdateResult> {
     return await this.productsService.update(uuid, updateProductRequest);
   }
 
   @Delete('products/:uuid')
   @HttpCode(HttpStatus.NO_CONTENT)
   async delete(@Param('uuid', ParseUUIDPipe) uuid: string): Promise<void> {
-    return await this.productsService.delete(uuid);
+    await this.productsService.delete(uuid);
   }
 }

@@ -4,6 +4,7 @@ import {
   Controller,
   Delete,
   Get,
+  HttpCode,
   HttpStatus,
   Param,
   ParseUUIDPipe,
@@ -21,17 +22,19 @@ import {
 } from '@app/common';
 import { gatewayResponse } from '../utils/gatewayResponse';
 import { GatewayBasketService } from '../services/gateway-basket.service';
+import { AuthRequired } from '../auth/auth.decorator';
 
 @Controller('api/v1/basket')
 export class GatewayBasketController {
   constructor(private readonly gatewayBasketService: GatewayBasketService) {}
 
-  // FIXME: wrong basket response
   @Get(':uuid/products')
+  @AuthRequired()
+  @HttpCode(HttpStatus.OK)
   async findBasketWithProducts(
     @Param('uuid', ParseUUIDPipe) uuid: string,
     @Res() res: Response,
-  ): Promise<any> {
+  ): Promise<Response<any, Record<string, any>>> {
     try {
       const basket = await this.gatewayBasketService.findBasketWithProducts(
         uuid,
@@ -55,11 +58,12 @@ export class GatewayBasketController {
   }
 
   @Patch('add')
+  @AuthRequired()
+  @HttpCode(HttpStatus.OK)
   async addProductToBasket(
-    // @Param('uuid', ParseUUIDPipe) uuid: string,
     @Body(ValidationPipe) addProductToBasketRequest: AddProductToBasketRequest,
     @Res() res: Response,
-  ) {
+  ): Promise<Response<any, Record<string, any>>> {
     try {
       await this.gatewayBasketService.addProduct(
         addProductToBasketRequest.basketId,
@@ -83,12 +87,13 @@ export class GatewayBasketController {
   }
 
   @Patch('remove')
+  @AuthRequired()
+  @HttpCode(HttpStatus.NO_CONTENT)
   async removeProductFromBasket(
-    // @Param('uuid', ParseUUIDPipe) uuid: string,
     @Body(ValidationPipe)
     removeProductFromBasketRequest: RemoveProductFromBasketRequest,
     @Res() res: Response,
-  ) {
+  ): Promise<Response<any, Record<string, any>>> {
     try {
       await this.gatewayBasketService.removeProduct(
         removeProductFromBasketRequest.basketId,
@@ -115,10 +120,12 @@ export class GatewayBasketController {
   // ---------------- CRUD -----------------
   // ---------------------------------------
   @Post()
+  @AuthRequired()
+  @HttpCode(HttpStatus.CREATED)
   async createBasket(
     @Body(ValidationPipe) createBasketRequest: CreateBasketRequest,
     @Res() res: Response,
-  ): Promise<any> {
+  ): Promise<Response<any, Record<string, any>>> {
     try {
       const basket = await this.gatewayBasketService.createBasket(
         createBasketRequest,
@@ -142,7 +149,11 @@ export class GatewayBasketController {
   }
 
   @Get()
-  async findAllBaskets(@Res() res: Response) {
+  @AuthRequired()
+  @HttpCode(HttpStatus.OK)
+  async findAllBaskets(
+    @Res() res: Response,
+  ): Promise<Response<any, Record<string, any>>> {
     try {
       const basket = await this.gatewayBasketService.findAllBaskets();
 
@@ -164,10 +175,12 @@ export class GatewayBasketController {
   }
 
   @Get(':uuid')
+  @AuthRequired()
+  @HttpCode(HttpStatus.OK)
   async findBasket(
     @Param('uuid', ParseUUIDPipe) uuid: string,
     @Res() res: Response,
-  ): Promise<any> {
+  ): Promise<Response<any, Record<string, any>>> {
     try {
       const basket = await this.gatewayBasketService.findBasket(uuid);
 
@@ -189,11 +202,13 @@ export class GatewayBasketController {
   }
 
   @Patch(':uuid')
+  @AuthRequired()
+  @HttpCode(HttpStatus.OK)
   async updateBasket(
     @Param('uuid', ParseUUIDPipe) uuid: string,
     @Body(ValidationPipe) updateBasketRequest: UpdateBasketRequest,
     @Res() res: Response,
-  ) {
+  ): Promise<Response<any, Record<string, any>>> {
     try {
       await this.gatewayBasketService.updateBasket(uuid, updateBasketRequest);
 
@@ -215,10 +230,12 @@ export class GatewayBasketController {
   }
 
   @Delete(':uuid')
+  @AuthRequired()
+  @HttpCode(HttpStatus.NO_CONTENT)
   async deleteBasket(
     @Param('uuid', ParseUUIDPipe) uuid: string,
     @Res() res: Response,
-  ) {
+  ): Promise<Response<any, Record<string, any>>> {
     try {
       await this.gatewayBasketService.deleteBasket(uuid);
 

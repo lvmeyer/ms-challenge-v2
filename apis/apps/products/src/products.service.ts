@@ -6,7 +6,7 @@ import {
 } from '@nestjs/common';
 import { Category, CreateCategoryRequest, Product } from '@app/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { Repository, UpdateResult } from 'typeorm';
 
 import { CreateProductRequest, UpdateProductRequest } from '@app/common';
 
@@ -19,18 +19,13 @@ export class ProductsService {
     private readonly categoryRepository: Repository<Category>,
   ) {}
 
-  sayHello(): string {
-    return 'Hello World!';
-  }
-
   // ==========================================
   // ================== CATEGORIES ============
   // ==========================================
   async createCategory(
     createCategoryRequest: CreateCategoryRequest,
-  ): Promise<any> {
+  ): Promise<CreateCategoryRequest & Category> {
     try {
-      console.log('PDT CATEG SERVICE');
       return await this.categoryRepository.save(createCategoryRequest);
     } catch (err) {
       throw new InternalServerErrorException(err.driverError.message);
@@ -41,7 +36,7 @@ export class ProductsService {
     return this.categoryRepository.find();
   }
 
-  async deleteCategory(uuid: string): Promise<any> {
+  async deleteCategory(uuid: string): Promise<void> {
     const category = await this.categoryRepository.findOneBy({ id: uuid });
     if (!category) {
       throw new NotFoundException('Category not found for deletion');
@@ -55,7 +50,7 @@ export class ProductsService {
   // ==========================================
   async createProduct(
     createProductRequest: CreateProductRequest,
-  ): Promise<any> {
+  ): Promise<CreateProductRequest & Product> {
     try {
       return await this.productRepository.save(createProductRequest);
     } catch (err) {
@@ -79,7 +74,7 @@ export class ProductsService {
   async update(
     uuid: string,
     updateProductRequest: UpdateProductRequest,
-  ): Promise<any> {
+  ): Promise<UpdateResult> {
     try {
       const product = await this.productRepository.findOneBy({ id: uuid });
       if (!product) {
@@ -91,7 +86,7 @@ export class ProductsService {
     }
   }
 
-  async delete(uuid: string): Promise<any> {
+  async delete(uuid: string): Promise<void> {
     const product = await this.productRepository.findOneBy({ id: uuid });
     if (!product) {
       throw new NotFoundException('Product not found for deletion');

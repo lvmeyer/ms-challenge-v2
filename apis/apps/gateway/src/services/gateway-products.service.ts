@@ -17,8 +17,9 @@ export class GatewayProductService {
     this.configService.get<string>('HOSTNAME_PRODUCTS') + '/pv/categories';
 
   // =============== CATEGORY ===============
-  async createCategory(createCategoryRequest: CreateCategoryRequest) {
-    console.debug('POST', this.PATH_CATEGORY);
+  async createCategory(
+    createCategoryRequest: CreateCategoryRequest,
+  ): Promise<any> {
     const response = await fetch(this.PATH_CATEGORY, {
       method: 'POST',
       headers: {
@@ -34,8 +35,7 @@ export class GatewayProductService {
     return res;
   }
 
-  async findAllCategories() {
-    console.debug('GET /api/v1/categories', this.PATH_CATEGORY);
+  async findAllCategories(): Promise<any> {
     const response = await fetch(this.PATH_CATEGORY, {
       method: 'GET',
       headers: {
@@ -51,8 +51,6 @@ export class GatewayProductService {
   }
 
   async deleteCategory(id: string): Promise<void> {
-    console.debug('DEL /api/v1/categories/:uuid', this.PATH_CATEGORY);
-
     const response = await fetch(`${this.PATH_CATEGORY}/${id}`, {
       method: 'DELETE',
     });
@@ -64,8 +62,9 @@ export class GatewayProductService {
   }
 
   // ============ PRODUCTS ============
-  async createProduct(createProductRequest: CreateProductRequest) {
-    console.debug('POST /api/v1/products', this.PATH);
+  async createProduct(
+    createProductRequest: CreateProductRequest,
+  ): Promise<any> {
     const response = await fetch(this.PATH, {
       method: 'POST',
       headers: {
@@ -81,8 +80,7 @@ export class GatewayProductService {
     return res;
   }
 
-  async findAllProducts() {
-    console.debug('GET', this.PATH);
+  async findAllProducts(): Promise<any> {
     const response = await fetch(this.PATH, {
       method: 'GET',
       headers: {
@@ -97,7 +95,7 @@ export class GatewayProductService {
     return res;
   }
 
-  async findProduct(id: string) {
+  async findProduct(id: string): Promise<any> {
     const response = await fetch(`${this.PATH}/${id}`, {
       method: 'GET',
       headers: {

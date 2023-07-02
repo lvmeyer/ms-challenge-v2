@@ -64,7 +64,9 @@ export class AuthService {
     });
 
     this.authClient.emit('register-user', {
-      data: 'User created - send user',
+      email: registerRequest.email,
+      firstname: registerRequest.firstname,
+      lastname: registerRequest.lastname,
     });
 
     return newUser;

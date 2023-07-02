@@ -11,6 +11,7 @@ export class GatewayBasketService {
   PATH = this.configService.get<string>('HOSTNAME_BASKET') + '/pv/basket';
 
   async findBasketWithProducts(id: string) {
+    console.info('GET', this.PATH);
     try {
       const response = await fetch(`${this.PATH}/${id}/products`, {
         method: 'GET',
@@ -31,6 +32,7 @@ export class GatewayBasketService {
   }
 
   async addProduct(basketId: string, productId: string): Promise<void> {
+    console.info('POST', this.PATH);
     const response = await fetch(`${this.PATH}/add`, {
       method: 'PATCH',
       headers: {
@@ -41,11 +43,13 @@ export class GatewayBasketService {
 
     if (response.status !== HttpStatus.OK) {
       const res = await response.json();
+
       throw new ErrorResponse(res.message, response.status);
     }
   }
 
   async removeProduct(basketId: string, productId: string): Promise<void> {
+    console.info('DELETE', this.PATH);
     const response = await fetch(`${this.PATH}/remove`, {
       method: 'PATCH',
       headers: {
@@ -60,7 +64,7 @@ export class GatewayBasketService {
     }
   }
 
-  async createBasket(createBasketRequest: CreateBasketRequest) {
+  async createBasket(createBasketRequest: CreateBasketRequest): Promise<any> {
     console.info('POST', this.PATH);
     const response = await fetch(this.PATH, {
       method: 'POST',
@@ -77,7 +81,8 @@ export class GatewayBasketService {
     return res;
   }
 
-  async findAllBaskets() {
+  async findAllBaskets(): Promise<any> {
+    console.info('GET', this.PATH);
     const response = await fetch(this.PATH, {
       method: 'GET',
       headers: {
@@ -92,7 +97,8 @@ export class GatewayBasketService {
     return res;
   }
 
-  async findBasket(id: string) {
+  async findBasket(id: string): Promise<any> {
+    console.info('GET', this.PATH);
     try {
       const response = await fetch(`${this.PATH}/${id}`, {
         method: 'GET',
@@ -116,6 +122,7 @@ export class GatewayBasketService {
     id: string,
     updateBasketRequest: UpdateBasketRequest,
   ): Promise<void> {
+    console.info('PATCH', this.PATH);
     const response = await fetch(`${this.PATH}/${id}`, {
       method: 'PATCH',
       headers: {
@@ -131,6 +138,7 @@ export class GatewayBasketService {
   }
 
   async deleteBasket(id: string): Promise<void> {
+    console.info('DELETE', this.PATH);
     const response = await fetch(`${this.PATH}/${id}`, {
       method: 'DELETE',
     });
