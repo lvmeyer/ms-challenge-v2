@@ -30,35 +30,6 @@ export const ProductListingSection = () => {
       });
   }, []);
 
-  // const sortedProducts = [
-  //   {
-  //     _id: "60f2a1b3e6b6b3b2f0b9b0a1",
-  //     id: 1,
-  //     name: "Nike Air Max 270",
-  //     original_price: 150,
-  //     discounted_price: 120,
-  //     is_stock: true,
-  //     category_name: "ff",
-  //     rating: 4.5,
-  //     reviews: 10,
-  //     trending: true,
-  //     img: "https://static.nike.com/a/images/t_PDP_864_v1/f_auto,b_rgb:f5f5f5/1e1d1b1e-1b1e-4b1e-8b1e-1b1e1e1e1e1e/air-max-270-mens-shoe-2X0JcK.jpg",
-  //   },
-  //   {
-  //     _id: "60f2a1b3e6b6b3b2f0b9b0a2",
-  //     id: 2,
-  //     name: "Nike Air Max 270",
-  //     original_price: 150,
-  //     discounted_price: 120,
-  //     is_stock: true,
-  //     category_name: "ff",
-  //     rating: 4.5,
-  //     reviews: 10,
-  //     trending: true,
-  //     img: "https://static.nike.com/a/images/t_PDP_864_v1/f_auto,b_rgb:f5f5f5/1e1d1b1e-1b1e-4b1e-8b1e-1b1e1e1e1e1e/air-max-270-mens-shoe-2X0JcK.jpg",
-  //   }
-  // ]
-
   return (
     <div className="product-card-container">
       {Array.isArray(products) && products.map((product) => {

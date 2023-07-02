@@ -22,8 +22,8 @@ export const HeroVideo = () => {
       </div>
 
       <div className="hero-text">
-        <h1>Sneak into Extraordinary</h1>
-        <h2>Where Adventure Meets Style in Quirky Sneaker Bliss</h2>
+        <h1>Getting closer to perfection</h1>
+        <h2>Where adventure meets beauty in a blaze of cutting-edge technology</h2>
       </div>
 
       <button

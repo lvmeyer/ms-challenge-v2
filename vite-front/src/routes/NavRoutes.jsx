@@ -23,10 +23,11 @@ import { PageNotFound } from "../pages/PageNotFound/PageNotFound";
 import Pingpage from "../pages/ping-page";
 import { Provider } from "react-redux";
 import store from '../store'
+import App from '../App'
 
 export const NavRoutes = () => {
   return (
-    <Routes>
+    <Routes path="/" element={<App />}>
       <Route path="/" element={<Home />} />
       <Route path="/ping" element={<Pingpage />} />
       <Route

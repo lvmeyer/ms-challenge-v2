@@ -97,8 +97,8 @@
   margin-bottom: 8px;
   border-radius: 10px;
   font-size: 1em;
-  color: white;
-  background-color: var(--primary-color);
+  color: rgb(255, 255, 255);
+  background-color: black;
   padding: 15px 45px;
   text-transform: uppercase;
 }

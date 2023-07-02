@@ -2,6 +2,7 @@ import { Header } from "./components/Header/Header";
 import { Toaster } from "react-hot-toast";
 import { NavRoutes } from "./routes/NavRoutes";
 import { ScrollToTop } from "./components/ScrollToTop/ScrollToTop";
+import { Footer } from "./components/Footer/Footer";
 
 
 function App() {
@@ -22,6 +23,7 @@ function App() {
           top: "6rem",
         }}
       />
+      <Footer />
     </div>
   );
 }

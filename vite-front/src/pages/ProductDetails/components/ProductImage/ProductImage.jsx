@@ -1,6 +1,6 @@
 import "./ProductImage.css";
 import Tilt from "react-parallax-tilt";
-
+import imgproduct from '../../../../../public/assets/images/nvidia.jpeg';
 
 import React from "react";
 
@@ -13,7 +13,7 @@ export const ProductImage = ({ selectedProduct }) => {
       className="product-details-image"
     >
       {" "}
-      <img src={selectedProduct?.img} alt={selectedProduct.name}/>
+      <img src={imgproduct} alt=""/>
     </Tilt>
   );
 };

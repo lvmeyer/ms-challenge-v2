@@ -77,12 +77,6 @@ export const Header = () => {
       >
         Profile
       </NavLink>
-      <NavLink
-        onClick={logoutHandler}
-        style={getActiveStyle}
-        >
-          Logout
-        </NavLink>
         <NavLink
           onClick={() => setShowHamburger(true)}
           style={getActiveStyle}
@@ -97,6 +91,12 @@ export const Header = () => {
         >
           <span>{!showHamburger ? "Cart" : ""}</span>
           <CgShoppingCart size={25} className="cart" />{" "}
+        </NavLink>
+        <NavLink
+          onClick={logoutHandler}
+          style={getActiveStyle}
+          >
+            Logout
         </NavLink>
       </div>
 				) : (
