@@ -65,7 +65,7 @@ export class UsersService {
   async updateProfile(
     access_token: string,
     updateProfileRequest: UpdateProfileRequest,
-  ): Promise<any> {
+  ): Promise<{ message: string }> {
     const user = await this.getMe(access_token);
 
     await this.usersRepository.update(user.id, {
@@ -79,7 +79,7 @@ export class UsersService {
   async updatePassword(
     access_token: string,
     updatePasswordRequest: UpdatePasswordRequest,
-  ): Promise<any> {
+  ): Promise<{ message: string }> {
     const user = await this.getMe(access_token);
     const NewPassword = await hash(updatePasswordRequest.password, 10);
 
@@ -90,7 +90,7 @@ export class UsersService {
     return { message: 'Password updated successfully' };
   }
 
-  async createUser(createUserRequest: CreateUserRequest): Promise<any> {
+  async createUser(createUserRequest: CreateUserRequest): Promise<User> {
     try {
       const basket = new Basket();
       basket.price = 0;
@@ -128,7 +128,7 @@ export class UsersService {
     return user;
   }
 
-  async delete(uuid: string): Promise<any> {
+  async delete(uuid: string): Promise<void> {
     const user = await this.usersRepository.findOneBy({ id: uuid });
     if (!user) {
       throw new NotFoundException('User not found for deletion');

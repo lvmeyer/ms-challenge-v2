@@ -23,7 +23,7 @@ export class BasketService {
     private readonly productRepository: Repository<Product>,
   ) {}
 
-  async addProduct(basketId: string, productId: string): Promise<any> {
+  async addProduct(basketId: string, productId: string): Promise<void> {
     try {
       const basket = await this.basketRepository.findOne({
         where: {

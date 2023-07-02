@@ -28,10 +28,9 @@ export class BasketController {
   @Patch('add')
   @HttpCode(HttpStatus.OK)
   async addProductToBasket(
-    // @Param('uuid', ParseUUIDPipe) uuid: string,
     @Body(ValidationPipe) addProductToBasketRequest: AddProductToBasketRequest,
-  ): Promise<any> {
-    return await this.basketService.addProduct(
+  ): Promise<void> {
+    await this.basketService.addProduct(
       addProductToBasketRequest.basketId,
       addProductToBasketRequest.productId,
     );
@@ -40,7 +39,6 @@ export class BasketController {
   @Patch('remove')
   @HttpCode(HttpStatus.OK)
   async removeProductFromBasket(
-    // @Param('uuid', ParseUUIDPipe) uuid: string,
     @Body(ValidationPipe)
     removeProductFromBasketRequest: RemoveProductFromBasketRequest,
   ): Promise<any> {

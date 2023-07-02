@@ -4,6 +4,7 @@ import {
   Controller,
   Delete,
   Get,
+  HttpCode,
   HttpStatus,
   Param,
   ParseUUIDPipe,
@@ -20,6 +21,8 @@ import {
 } from '@app/common';
 import { gatewayResponse } from '../utils/gatewayResponse';
 import { GatewayProductService } from '../services/gateway-products.service';
+import { AuthRequired, HasRole } from '../auth/auth.decorator';
+import { Role } from '../auth/auth.enum';
 
 @Controller('api/v1')
 export class GatewayProductController {
@@ -27,10 +30,13 @@ export class GatewayProductController {
 
   // =============== CATEGORY ===============
   @Post('categories')
+  @AuthRequired()
+  @HasRole(Role.ADMINISTRATOR)
+  @HttpCode(HttpStatus.CREATED)
   async createCategory(
     @Body(ValidationPipe) createCategoryRequest: CreateCategoryRequest,
     @Res() res: Response,
-  ): Promise<any> {
+  ): Promise<Response<any, Record<string, any>>> {
     try {
       const category = await this.gatewayProductService.createCategory(
         createCategoryRequest,
@@ -55,7 +61,10 @@ export class GatewayProductController {
   }
 
   @Get('categories')
-  async findAllCategories(@Res() res: Response) {
+  @HttpCode(HttpStatus.OK)
+  async findAllCategories(
+    @Res() res: Response,
+  ): Promise<Response<any, Record<string, any>>> {
     try {
       const categories = await this.gatewayProductService.findAllCategories();
 
@@ -77,10 +86,13 @@ export class GatewayProductController {
   }
 
   @Delete('categories/:uuid')
+  @AuthRequired()
+  @HasRole(Role.ADMINISTRATOR)
+  @HttpCode(HttpStatus.NO_CONTENT)
   async deleteCategory(
     @Param('uuid', ParseUUIDPipe) uuid: string,
     @Res() res: Response,
-  ) {
+  ): Promise<Response<any, Record<string, any>>> {
     try {
       await this.gatewayProductService.deleteCategory(uuid);
 
@@ -103,10 +115,13 @@ export class GatewayProductController {
 
   // ============ PRODUCTS ============
   @Post('products')
+  @AuthRequired()
+  @HasRole(Role.ADMINISTRATOR)
+  @HttpCode(HttpStatus.CREATED)
   async createProduct(
     @Body(ValidationPipe) createProductRequest: CreateProductRequest,
     @Res() res: Response,
-  ): Promise<any> {
+  ): Promise<Response<any, Record<string, any>>> {
     try {
       const product = await this.gatewayProductService.createProduct(
         createProductRequest,
@@ -131,7 +146,10 @@ export class GatewayProductController {
   }
 
   @Get('products')
-  async findAllProducts(@Res() res: Response) {
+  @HttpCode(HttpStatus.OK)
+  async findAllProducts(
+    @Res() res: Response,
+  ): Promise<Response<any, Record<string, any>>> {
     try {
       const products = await this.gatewayProductService.findAllProducts();
 
@@ -153,10 +171,11 @@ export class GatewayProductController {
   }
 
   @Get('products/:uuid')
+  @HttpCode(HttpStatus.OK)
   async findProduct(
     @Param('uuid', ParseUUIDPipe) uuid: string,
     @Res() res: Response,
-  ): Promise<any> {
+  ): Promise<Response<any, Record<string, any>>> {
     try {
       const product = await this.gatewayProductService.findProduct(uuid);
 
@@ -178,11 +197,14 @@ export class GatewayProductController {
   }
 
   @Patch('products/:uuid')
+  @AuthRequired()
+  @HasRole(Role.ADMINISTRATOR)
+  @HttpCode(HttpStatus.OK)
   async updateProduct(
     @Param('uuid', ParseUUIDPipe) uuid: string,
     @Body(ValidationPipe) updateProductRequest: UpdateProductRequest,
     @Res() res: Response,
-  ) {
+  ): Promise<Response<any, Record<string, any>>> {
     try {
       await this.gatewayProductService.updateProduct(
         uuid,
@@ -196,7 +218,7 @@ export class GatewayProductController {
         message: 'Product updated',
       });
     } catch (err) {
-      console.error('POUET2==', err);
+      console.error(err);
       return gatewayResponse({
         res,
         status: err.status,
@@ -207,10 +229,13 @@ export class GatewayProductController {
   }
 
   @Delete('products/:uuid')
+  @AuthRequired()
+  @HasRole(Role.ADMINISTRATOR)
+  @HttpCode(HttpStatus.NO_CONTENT)
   async deleteProduct(
     @Param('uuid', ParseUUIDPipe) uuid: string,
     @Res() res: Response,
-  ) {
+  ): Promise<Response<any, Record<string, any>>> {
     try {
       await this.gatewayProductService.deleteProduct(uuid);
 

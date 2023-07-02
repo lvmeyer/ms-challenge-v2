@@ -1,5 +1,12 @@
 import { Response } from 'express';
-import { Controller, Headers, HttpStatus, Post, Res } from '@nestjs/common';
+import {
+  Controller,
+  Headers,
+  HttpCode,
+  HttpStatus,
+  Post,
+  Res,
+} from '@nestjs/common';
 
 import { gatewayResponse } from '../utils/gatewayResponse';
 
@@ -12,6 +19,7 @@ export class GatewayPaymentController {
 
   @Post('pay')
   @AuthRequired()
+  @HttpCode(HttpStatus.CREATED)
   async pay(
     @Headers() headers: any,
     @Res() res: Response,

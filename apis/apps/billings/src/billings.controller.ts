@@ -9,7 +9,6 @@ export class BillingsController {
 
   @EventPattern('create-billing')
   sendBillToUser(data: { email: string; price: number }): Promise<void> {
-    console.info('PROC rmq: create-billing', data);
     return this.billingsService.sendBillToUser(data.email, data.price);
   }
 
@@ -19,7 +18,6 @@ export class BillingsController {
     firstname: string;
     lastname: string;
   }): Promise<void> {
-    console.info('PROC rmq: register-user');
     return this.billingsService.sendWelcomeMail(
       data.email,
       data.firstname,
