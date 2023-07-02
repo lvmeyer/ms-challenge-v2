@@ -1,6 +1,6 @@
 FROM node:19-alpine
 
-WORKDIR /app/vite-front
+WORKDIR /app
 
 COPY package.json .
 
