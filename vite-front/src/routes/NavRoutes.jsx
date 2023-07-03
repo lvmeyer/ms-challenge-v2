@@ -51,8 +51,7 @@ export const NavRoutes = () => {
       <Route path="/login" element={<Login />} />
       <Route path="/logout" element={<Logout />} />
       <Route path="/product-listing" element={<ProductListing />} />
-      <Route path="/dashboard" element={<Dashboard />} />
-      <Route path="/register" element={<Signup />} />
+      <Route path="/signup" element={<Signup />} />
       <Route path="/product-details/:productId" element={<ProductDetails />} />
       <Route
         path="/checkout"
