@@ -18,6 +18,7 @@ import { Wishlist } from "../pages/Wishlist/Wishlist";
 import { UserProfile } from "../pages/UserProfile/UserProfile";
 import { Profile } from "../pages/UserProfile/Profile/Profile";
 import { Addresses } from "../pages/UserProfile/Addresses/Addresses";
+import { Dashboard } from "../pages/Dashboard/Dashboard";
 import { Orders } from "../pages/UserProfile/Orders/Orders";
 import { PageNotFound } from "../pages/PageNotFound/PageNotFound";
 import Pingpage from "../pages/ping-page";
@@ -63,6 +64,8 @@ export const NavRoutes = () => {
       <Route path="/logout" element={<Logout />} />
       <Route path="/product-listing" element={<ProductListing />} />
       <Route path="/signup" element={<Signup />} />
+      <Route path="/dashboard" element={<Dashboard />} />
+      <Route path="/register" element={<Signup />} />
       <Route path="/product-details/:productId" element={<ProductDetails />} />
       <Route
         path="/checkout"
