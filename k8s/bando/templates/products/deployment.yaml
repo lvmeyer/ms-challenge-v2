@@ -15,7 +15,7 @@ spec:
         app: products
     spec:
       containers:
-        - image: danlevypro/products:latest
+        - image: 872288361518.dkr.ecr.eu-west-3.amazonaws.com/products:latest
           name: products
 
           resources:

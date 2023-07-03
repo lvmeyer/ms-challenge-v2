@@ -15,7 +15,7 @@ spec:
         app: basket
     spec:
       containers:
-        - image: danlevypro/basket:latest
+        - image: 872288361518.dkr.ecr.eu-west-3.amazonaws.com/basket:latest
           name: basket
 
           resources:
