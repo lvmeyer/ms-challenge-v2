@@ -13,8 +13,8 @@ export const Home = () => {
           <HeroVideo />
           <HeroSection />
           <VideosSection />
-          {/* <CategoriesSection /> */}
-          <Footer />
+          {/* <CategoriesSection />
+          <Footer /> */}
         </div>
       </div>
     )

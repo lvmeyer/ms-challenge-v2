@@ -10,7 +10,7 @@
 .cart-price-container a {
   text-decoration: none;
   color: white;
-  background-color: var(--primary-color);
+  background-color: black;
   align-self: center;
   padding: 10px 30px;
   border-radius: 10px;

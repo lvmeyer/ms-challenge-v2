@@ -70,7 +70,7 @@ export const ProductListingSection = () => {
                   {rating} <BsFillStarFill color="orange" /> ({reviews} reviews)
                 </p> */}
                 <div className="price-container">
-                  <p className="original-price">${price}</p>
+                  <p className="discount-price">${price}</p>
                 </div>
   
                 {/* <p>Gender: {category_name}</p> */}
