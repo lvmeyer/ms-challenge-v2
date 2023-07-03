@@ -15,7 +15,7 @@ spec:
         app: payment
     spec:
       containers:
-        - image: danlevypro/payment:latest
+        - image: 872288361518.dkr.ecr.eu-west-3.amazonaws.com/payment:latest
           name: payment
 
           resources:

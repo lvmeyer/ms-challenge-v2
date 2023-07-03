@@ -15,7 +15,7 @@ spec:
         app: gw
     spec:
       containers:
-        - image: danlevypro/gw:latest
+        - image: 872288361518.dkr.ecr.eu-west-3.amazonaws.com/gw:latest
           name: gw
 
           resources:
