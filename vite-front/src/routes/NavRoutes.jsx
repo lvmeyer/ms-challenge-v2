@@ -18,7 +18,6 @@ import { Wishlist } from "../pages/Wishlist/Wishlist";
 import { UserProfile } from "../pages/UserProfile/UserProfile";
 import { Profile } from "../pages/UserProfile/Profile/Profile";
 import { Addresses } from "../pages/UserProfile/Addresses/Addresses";
-import { Dashboard } from "../pages/Dashboard/Dashboard";
 import { Orders } from "../pages/UserProfile/Orders/Orders";
 import { PageNotFound } from "../pages/PageNotFound/PageNotFound";
 import Pingpage from "../pages/ping-page";

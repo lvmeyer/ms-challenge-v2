@@ -87,13 +87,6 @@ export const Header = () => {
         <NavLink
           onClick={() => setShowHamburger(true)}
           style={getActiveStyle}
-          to="/dashboard"
-        >
-        Dashboard
-        </NavLink>
-        <NavLink
-          onClick={() => setShowHamburger(true)}
-          style={getActiveStyle}
           to="/cart"
         >
           <span>{!showHamburger ? "Cart" : ""}</span>
