@@ -60,22 +60,22 @@ services:
     ports:
       - '3003:3003'
 
-  payment:
-    build:
-      context: ./apis
-      dockerfile: ./apps/payment/Dockerfile
-    container_name: payment_c
-    hostname: payment
-    command: npm run start:dev payment
-    env_file:
-      - ./apis/.env
-    depends_on:
-      - rabbitmq
-    volumes:
-      - ./apis:/app
-      - /app/node_modules
-    ports:
-      - '3004:3004'
+  # payment:
+  #   build:
+  #     context: ./apis
+  #     dockerfile: ./apps/payment/Dockerfile
+  #   container_name: payment_c
+  #   hostname: payment
+  #   command: npm run start:dev payment
+  #   env_file:
+  #     - ./apis/.env
+  #   depends_on:
+  #     - rabbitmq
+  #   volumes:
+  #     - ./apis:/app
+  #     - /app/node_modules
+  #   ports:
+  #     - '3004:3004'
 
   billings:
     build:

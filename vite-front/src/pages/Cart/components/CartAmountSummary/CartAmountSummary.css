@@ -8,6 +8,7 @@
 }
 
 .cart-price-container a {
+<<<<<<< HEAD
 	text-decoration: none;
 	color: white;
 	background-color: var(--primary-color);
@@ -17,6 +18,17 @@
 	font-weight: 600;
 	font-size: 1rem;
 	margin-top: 40px;
+=======
+  text-decoration: none;
+  color: white;
+  background-color: black;
+  align-self: center;
+  padding: 10px 30px;
+  border-radius: 10px;
+  font-weight: 600;
+  font-size: 1rem;
+  margin-top: 40px;
+>>>>>>> ff0ceba (connect front back for basket)
 }
 
 .cart-price-container a:hover {

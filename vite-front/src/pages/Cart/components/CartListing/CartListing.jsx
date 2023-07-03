@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { MdDelete } from "react-icons/md";
 import { AiOutlineHeart } from "react-icons/ai";
 import { AiFillHeart } from "react-icons/ai";
@@ -7,6 +7,43 @@ import "./CartListing.css";
 
 export const CartListing = () => {
 
+  const [baskedId, setBaskedId] = useState(0);
+ 
+  useEffect(() => {
+    fetch('http://localhost:3000/api/v1/user-basket', {
+      mode: 'cors',
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + JSON.parse(localStorage.getItem('userInfo')).access_token
+      }
+    })
+    .then(response => response.json())
+    .then(data => {
+      console.log(data.basketId);
+      setBaskedId(data.basketId);
+    });
+  }, []);
+
+  const [userProducts, setUserProducts] = useState([]);
+
+  useEffect(() => {
+    fetch(`http://localhost:3000/api/v1/basket/${baskedId}/products`, {
+      mode: 'cors',
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + JSON.parse(localStorage.getItem('userInfo')).access_token
+      }
+    })
+    .then(response => response.json())
+    .then(data => {
+      console.log(data);
+      setUserProducts(data);
+    });
+  }, [baskedId]);
+
+  
 
   return (
     <div className="cart-products-container">
