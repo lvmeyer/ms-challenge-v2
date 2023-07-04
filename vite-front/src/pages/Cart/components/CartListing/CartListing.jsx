@@ -43,7 +43,6 @@ useEffect(() => {
   });
 }, []);
 
-
   const handlePayment = () => {
     fetch(import.meta.env.VITE_GW_HOSTNAME+"/api/v1/payment/pay", {
       mode: 'cors',
