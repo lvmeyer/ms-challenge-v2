@@ -19,7 +19,7 @@ export const ProductListingSection = () => {
   const [baskedId, setBaskedId] = useState(0);
 
   useEffect(() => {
-    fetch('http://localhost:3000/api/v1/user-basket', {
+    fetch(import.meta.env.VITE_GW_HOSTNAME+'/api/v1/user-basket', {
       mode: 'cors',
       method: 'GET',
       headers: {
@@ -31,7 +31,7 @@ export const ProductListingSection = () => {
     .then(data => {
       setBaskedId(data.basketId);
 
-    fetch('http://localhost:3000/api/v1/products?sort=desc&limit=17', {
+    fetch(import.meta.env.VITE_GW_HOSTNAME+'/api/v1/products?sort=desc&limit=17', {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -53,7 +53,7 @@ export const ProductListingSection = () => {
     if (existingItem) {
       toast.info('Product is already in the cart');
     } else {
-      fetch('http://localhost:3000/api/v1/basket/add', {
+      fetch(import.meta.env.VITE_GW_HOSTNAME+'/api/v1/basket/add', {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',

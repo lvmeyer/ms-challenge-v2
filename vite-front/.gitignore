@@ -28,5 +28,5 @@ k8s/bando/secrets.yaml
 
 
 # typescript
-*.tsbuildinfo
+*.tsbuildinfo   
 next-env.d.ts

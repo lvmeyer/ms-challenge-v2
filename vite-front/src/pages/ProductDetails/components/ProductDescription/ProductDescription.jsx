@@ -12,7 +12,7 @@ export const ProductDescription = ( ) => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetch(`http://localhost:3000/api/v1/products/${productId}`, {
+    fetch(import.meta.env.VITE_GW_HOSTNAME+`/api/v1/products/${productId}`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
