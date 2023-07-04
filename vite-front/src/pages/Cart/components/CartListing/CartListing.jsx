@@ -45,7 +45,21 @@ useEffect(() => {
 
 
   const handlePayment = () => {
-    //mets le payement ici chacal
+    fetch("http://localhost:3000/api/v1/payment/pay", {
+      mode: 'cors',
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + JSON.parse(localStorage.getItem('userInfo')).access_token
+      }
+    })
+    .then((res) => res.json())
+    .then((data) => {
+      console.log("data", data.data)
+    });
+
+
+
   };
 
   return (
