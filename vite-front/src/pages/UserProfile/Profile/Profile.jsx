@@ -2,7 +2,6 @@ import React from "react";
 import { Logout } from "../../auth/Logout/Logout";
 import "./Profile.css";
 import { useState, useEffect } from 'react';
-import { products } from '../../../backend/db/products';
 import axios from 'axios';
 
 
@@ -11,7 +10,7 @@ export const Profile = () => {
   // ------------GET USER INFO-------------------
   const [user, setUser] = useState({});
   useEffect(() => {
-      fetch('http://localhost:3000/api/v1/users/me', {
+      fetch(import.meta.env.VITE_GW_HOSTNAME+'/api/v1/users/me', {
           method: 'GET',
           headers: {
               'Content-Type': 'application/json',
@@ -54,7 +53,7 @@ export const Profile = () => {
     e.preventDefault();
 
     //Envoi des données au serveur
-    fetch('http://localhost:3000/api/v1/products', {
+    fetch(import.meta.env.VITE_GW_HOSTNAME+'/api/v1/products', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -79,7 +78,7 @@ export const Profile = () => {
     // const [listCategories, setListCategories] = useState([]);
 
     useEffect(() => {
-      fetch('http://localhost:3000/api/v1/categories', {
+      fetch(import.meta.env.VITE_GW_HOSTNAME+'/api/v1/categories', {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',

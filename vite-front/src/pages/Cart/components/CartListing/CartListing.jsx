@@ -13,7 +13,7 @@ const [userProducts, setUserProducts] = useState([]);
 const [totalAmount, setTotalAmount] = useState(0);
 
 useEffect(() => {
-  fetch('http://localhost:3000/api/v1/user-basket', {
+  fetch(import.meta.env.VITE_GW_HOSTNAME+'/api/v1/user-basket', {
     mode: 'cors',
     method: 'GET',
     headers: {
@@ -26,7 +26,7 @@ useEffect(() => {
     console.log("basket id", data);
     setBaskedId(data.basketId);
 
-    fetch(`http://localhost:3000/api/v1/basket/${data.basketId}/products`, {
+    fetch(import.meta.env.VITE_GW_HOSTNAME+`/api/v1/basket/${data.basketId}/products`, {
       mode: 'cors',
       method: 'GET',
       headers: {
@@ -45,7 +45,7 @@ useEffect(() => {
 
 
   const handlePayment = () => {
-    fetch("http://localhost:3000/api/v1/payment/pay", {
+    fetch(import.meta.env.VITE_GW_HOSTNAME+"/api/v1/payment/pay", {
       mode: 'cors',
       method: 'POST',
       headers: {
