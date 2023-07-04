@@ -39,7 +39,6 @@ export class AuthService {
       role: user.role,
       basket: user.basket,
     };
-    console.log('payload', payload);
 
     const access_token = this.jwtService.sign(payload, {
       secret: process.env.JWT_SECRET,

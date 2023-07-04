@@ -16,8 +16,21 @@ import imgproduct from '../../../../../public/assets/images/nvidia.jpeg';
 export const ProductListingSection = () => {
 
   const [products, setProducts] = useState([]);
+  const [baskedId, setBaskedId] = useState(0);
 
   useEffect(() => {
+    fetch('http://localhost:3000/api/v1/user-basket', {
+      mode: 'cors',
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + JSON.parse(localStorage.getItem('userInfo')).access_token
+      }
+    })
+    .then(response => response.json())
+    .then(data => {
+      setBaskedId(data.basketId);
+
     fetch('http://localhost:3000/api/v1/products?sort=desc&limit=17', {
       method: 'GET',
       headers: {
@@ -25,26 +38,44 @@ export const ProductListingSection = () => {
         'Authorization': 'Bearer ' + JSON.parse(localStorage.getItem('userInfo')).access_token
       }
     })
-      .then(response => response.json())
-      .then(data => {
-        setProducts(data.data);
-      });
+    .then(response => response.json())
+    .then(data => {
+      setProducts(data.data);
+    });
+  });
   }, []);
 
   const [cartItems, setCartItems] = useState([]);
 
-  
-
   const addToCart = (product) => {
-    // Vérifier si le produit est déjà dans le panier
     const existingItem = cartItems.find((item) => item.id === product.id);
-  
+
     if (existingItem) {
       toast.info('Product is already in the cart');
     } else {
-      // Ajouter le produit au panier
-      setCartItems([...cartItems, product]);
-      toast.success('Product added to cart successfully');
+      fetch('http://localhost:3000/api/v1/basket/add', {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer ' + JSON.parse(localStorage.getItem('userInfo')).access_token
+        },
+        body: JSON.stringify({
+          basketId: baskedId,
+          productId: product.id
+        })
+      })
+        .then(response => {
+          if (response.ok) {
+            setCartItems([...cartItems, product]);
+            toast.success('Product added to cart successfully');
+          } else {
+            throw new Error('Failed to add product to cart');
+          }
+        })
+        .catch(error => {
+          console.error(error);
+          toast.error('Failed to add product to cart');
+        });
     }
   };
 
