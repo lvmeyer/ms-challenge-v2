@@ -2,9 +2,7 @@ import "./Signup.css";
 import { Link, useNavigate } from "react-router-dom";
 import { BsEyeSlash } from "react-icons/bs";
 import { BsEye } from "react-icons/bs";
-import { useState } from "react";
-
-import React from "react";
+import { useState, useEffect } from "react";
 import { toast } from "react-hot-toast";
 
 export const Signup = () => {
@@ -18,55 +16,45 @@ export const Signup = () => {
     email: "",
     password: "",
     confirmPassword: "",
-    firstName: "",
-    lastName: "",
+    firstname: "",
+    lastname: "",
   });
 
-  // const signupHandler = async () => {
-  //   try {
-  //     setSignUpLoading(true);
-  //     setError("");
-  //     if (signupCredential.password === signupCredential.confirmPassword) {
-  //       const response = await signupService(
-  //         signupCredential.email,
-  //         signupCredential.password,
-  //         signupCredential.firstName,
-  //         signupCredential.lastName
-  //       );
-  //       if (response.status === 201) {
-  //         setSignUpLoading(false);
-  //         toast.success(
-  //           `You've successfully signed up, ${response.data.createdUser.firstName}`
-  //         );
-  //         const encodedToken = response.data.encodedToken;
-  //         const firstName = response.data.createdUser.firstName;
-  //         const lastName = response.data.createdUser.lastName;
-  //         const email = response.data.createdUser.email;
+  const registerUser = async () => {
+    try {
+      const response = await fetch(import.meta.env.VITE_GW_HOSTNAME+"/api/v1/auth/register", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(signupCredential),
+      });
 
-  //         setAuth({
-  //           token: encodedToken,
-  //           isAuth: true,
-  //           firstName,
-  //           lastName,
-  //           email,
-  //         });
+      if (response.ok) {
+        const data = await response.json();
+        console.log(data); // Traitez la réponse du serveur ici
+      } else {
 
-  //         localStorage.setItem("token", encodedToken);
-  //         localStorage.setItem("isAuth", true);
-  //         localStorage.setItem("firstName", firstName);
-  //         localStorage.setItem("lastName", lastName);
-  //         localStorage.setItem("email", email);
+        console.error("Échec de la demande de registre");
+      }
+    } catch (error) {
+      console.error("Erreur lors de la demande de registre:", error);
+    }
+  };
 
-  //         navigate("/");
-  //       }
-  //     }
-  //   } catch (error) {
-  //     setSignUpLoading(false);
-  //     setError(error.response.data.errors);
-  //   } finally {
-  //     setSignUpLoading(false);
-  //   }
-  // };
+  const signupHandler = async () => {
+    setSignUpLoading(true);
+    try {
+      // Effectuer la demande de registre
+      await registerUser();
+      toast.success("Registered successfully");
+      navigate("/login");
+    } catch (error) {
+      toast.error("Error occurred while registering");
+    } finally {
+      setSignUpLoading(false);
+    }
+  };
 
   return (
     <div className="signup-container">
@@ -192,20 +180,13 @@ export const Signup = () => {
             </label>
           </div>
         </div>
-        {error && <p className="error">{error[0]}</p>}
 
         <div className="signup-btn-container">
           <input value="Sign Up" type="submit" />
-          <button
-            onClick={(e) => {
-              loginHandler(e, "chiragtaluja@apple.com", "chiragtaluja");
-            }}
-          >
-            Login with Test Credentials
-          </button>
         </div>
         <Link to="/login">Already have an account?</Link>
       </form>
     </div>
   );
 };
+

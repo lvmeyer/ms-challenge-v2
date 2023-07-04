@@ -23,7 +23,7 @@ export class GatewayPaymentController {
   async pay(
     @Headers() headers: any,
     @Res() res: Response,
-  ): Promise<Response<any, Record<string, any>>> {
+  ): Promise<Response<any>> {
     const access_token = headers.authorization.split(' ')[1];
 
     try {

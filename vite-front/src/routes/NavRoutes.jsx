@@ -24,8 +24,20 @@ import Pingpage from "../pages/ping-page";
 import { Provider } from "react-redux";
 import store from '../store'
 import App from '../App'
+import {useEffect, useState} from 'react';
+import Payment from '../components/Stripe/Payment'
+import Completion from '../components/Stripe/Completion'
+import {loadStripe} from '@stripe/stripe-js';
 
 export const NavRoutes = () => {
+
+  const [ stripePromise, setStripePromise ] = useState(null);
+
+  useEffect(() => {
+    const stripePublicKey = "pk_test_51IviNhJqYqfbWn1gui3IgmAr493J9bTJcQtzWniQug84wjy4KLchXOyb0HLwPPNng5pkRXYA875XhnEffSUQ2n9Z00OeG28FbA"
+    setStripePromise(loadStripe(stripePublicKey));
+  }, []);
+
   return (
     <Routes path="/" element={<App />}>
       <Route path="/" element={<Home />} />
@@ -50,7 +62,7 @@ export const NavRoutes = () => {
       <Route path="/login" element={<Login />} />
       <Route path="/logout" element={<Logout />} />
       <Route path="/product-listing" element={<ProductListing />} />
-      <Route path="/register" element={<Signup />} />
+      <Route path="/signup" element={<Signup />} />
       <Route path="/product-details/:productId" element={<ProductDetails />} />
       <Route
         path="/checkout"
@@ -72,6 +84,9 @@ export const NavRoutes = () => {
         <Route path="/profile/orders" element={<Orders />} />
         <Route path="/profile/addresses" element={<Addresses />} />
       </Route>
+
+      <Route path="/payment" element={<Payment stripePromise={stripePromise} />} />
+      <Route path="/completion" element={<Completion stripePromise={stripePromise} />} />
     </Routes>
   );
 };

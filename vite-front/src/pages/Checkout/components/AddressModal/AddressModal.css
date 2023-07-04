@@ -34,7 +34,7 @@
 
 .address-modal-container .submit {
   color: white;
-  background-color: var(--primary-color);
+  background-color: black;
   font-weight: 600;
   display: inline;
 }

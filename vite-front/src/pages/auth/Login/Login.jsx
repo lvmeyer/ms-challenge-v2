@@ -40,8 +40,9 @@ export const Login = () => {
       //   body: JSON.stringify({ email, password }),
       // });
       const res = await login({ email, password }).unwrap();
-  
+      
       dispatch(setCredentials({ ...res }));
+      toast.success('Logged in successfully');
       navigate('/');
     } catch (error) {
       toast.error(error.data.message);
