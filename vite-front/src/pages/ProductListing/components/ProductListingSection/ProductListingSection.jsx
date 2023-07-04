@@ -3,6 +3,7 @@ import Tilt from "react-parallax-tilt";
 import React from "react";
 import { useState, useEffect } from "react";
 import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 import { Link } from "react-router-dom";
 import { AiOutlineHeart } from "react-icons/ai";
@@ -29,6 +30,23 @@ export const ProductListingSection = () => {
         setProducts(data.data);
       });
   }, []);
+
+  const [cartItems, setCartItems] = useState([]);
+
+  
+
+  const addToCart = (product) => {
+    // Vérifier si le produit est déjà dans le panier
+    const existingItem = cartItems.find((item) => item.id === product.id);
+  
+    if (existingItem) {
+      toast.info('Product is already in the cart');
+    } else {
+      // Ajouter le produit au panier
+      setCartItems([...cartItems, product]);
+      toast.success('Product added to cart successfully');
+    }
+  };
 
   return (
     <div className="product-card-container">
@@ -66,14 +84,11 @@ export const ProductListingSection = () => {
   
               <div className="product-card-details">
                 <h3>{name}</h3>
-                {/* <p className="ratings">
-                  {rating} <BsFillStarFill color="orange" /> ({reviews} reviews)
-                </p> */}
                 <div className="price-container">
                   <p className="discount-price">${price}</p>
                 </div>
   
-                {/* <p>Gender: {category_name}</p> */}
+                {/* <p>Catégorie: {category_name}</p> */}
                 <div className="info">
                   {/* {!is_stock && <p className="out-of-stock">Out of stock</p>}
                   {trending && <p className="trending">Trending</p>} */}
@@ -81,18 +96,15 @@ export const ProductListingSection = () => {
               </div>
   
               <div className="product-card-buttons">
-                <button className="cart-btn">Go to Cart</button>
-                {/* <button
-                  onClick={() => wishlistHandler(product)}
-                  className="wishlist-btn"
-                >
-                  <AiTwotoneHeart size={30} />
-                </button> */}
+              <button className="cart-btn" onClick={() => addToCart(product)}>
+                Add to Cart
+              </button>                
               </div>
             </div>
           </Tilt>
         );
       })}
+      <ToastContainer position="bottom-right" />
     </div>
   );
 };
