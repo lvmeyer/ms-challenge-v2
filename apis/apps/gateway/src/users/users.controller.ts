@@ -39,11 +39,11 @@ export class UsersController {
 
   @Get('users/me')
   @AuthRequired()
-  getMe(@Headers() headers: any) {
+  async getMe(@Headers() headers: any) {
     const access_token = headers.authorization.split(' ')[1];
 
     try {
-      return this.usersService.getMe(access_token);
+      return await this.usersService.getMe(access_token);
     } catch (err) {
       throw new BadRequestException(err.message);
     }
@@ -51,11 +51,11 @@ export class UsersController {
 
   @Get('user-basket')
   @AuthRequired()
-  getUserBasketId(@Headers() headers: any) {
+  async getUserBasketId(@Headers() headers: any) {
     const access_token = headers.authorization.split(' ')[1];
 
     try {
-      return this.usersService.getUserBasketId(access_token);
+      return await this.usersService.getUserBasketId(access_token);
     } catch (err) {
       throw new BadRequestException(err.message);
     }
