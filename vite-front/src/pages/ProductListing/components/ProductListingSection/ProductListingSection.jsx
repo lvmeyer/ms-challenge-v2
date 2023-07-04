@@ -102,14 +102,15 @@ export const ProductListingSection = () => {
             <div className="product-card">
               <Link to={`/product-details/${id}`}>
                 <div className="product-card-image">
-                  <Tilt
+                  {/* <Tilt
                     transitionSpeed={2000}
                     tiltMaxAngleX={15}
                     tiltMaxAngleY={15}
                     scale={1.18}
                   >
                     <img src={imgproduct} alt={name} />
-                  </Tilt>
+                  </Tilt> */}
+                  <img src={image} alt="IMAGE D'UN MATERIEL INFORMATIQUE" />
                 </div>
               </Link>
   

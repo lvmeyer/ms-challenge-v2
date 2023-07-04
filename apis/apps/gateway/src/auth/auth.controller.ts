@@ -24,6 +24,7 @@ export class AuthController {
       id: response.payload.id,
       email: response.payload.email,
       role: response.payload.role,
+      basket: response.payload.basket,
       access_token: response.access_token,
     };
   }

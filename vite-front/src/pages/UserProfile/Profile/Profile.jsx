@@ -26,13 +26,13 @@ export const Profile = () => {
 
   
 
-  // ----------------FORM POST-----------------
+  // ----------------PRODUCT FORM-----------------
 
   const [formData, setFormData] = useState({
     name: '',
     price: 0,
     description: '',
-    // image: '',
+    image: '',
     category: '',
   });
 
@@ -135,13 +135,13 @@ export const Profile = () => {
             value={formData.description}
             onChange={handleChange}
             />
-          {/* <input
+          <input
             type="text"
             name="image"
-            placeholder="Image"
+            placeholder="URL Image"
             value={formData.image}
             onChange={handleChange}
-          /> */}
+          />
           <select
             name="category"
             value={formData.category}
