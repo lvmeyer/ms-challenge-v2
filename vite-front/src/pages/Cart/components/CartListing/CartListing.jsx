@@ -61,10 +61,6 @@ useEffect(() => {
 
   };
 
-  const handlePayment = () => {
-    //mets le payement ici chacal
-  };
-
   return (
     <div className="cart-products-container">
       {userProducts.map((userProduct) => (
