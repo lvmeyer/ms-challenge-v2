@@ -107,7 +107,7 @@
   border: none;
   color: white;
 
-  background-color: var(--primary-color);
+  background-color: black;
 }
 
 .signup-container .signup-btn-container input:hover {

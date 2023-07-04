@@ -3,6 +3,7 @@ import Tilt from "react-parallax-tilt";
 import React from "react";
 import { useState, useEffect } from "react";
 import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 import { Link } from "react-router-dom";
 import { AiOutlineHeart } from "react-icons/ai";
@@ -15,8 +16,21 @@ import imgproduct from '../../../../../public/assets/images/nvidia.jpeg';
 export const ProductListingSection = () => {
 
   const [products, setProducts] = useState([]);
+  const [baskedId, setBaskedId] = useState(0);
 
   useEffect(() => {
+    fetch('http://localhost:3000/api/v1/user-basket', {
+      mode: 'cors',
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + JSON.parse(localStorage.getItem('userInfo')).access_token
+      }
+    })
+    .then(response => response.json())
+    .then(data => {
+      setBaskedId(data.basketId);
+
     fetch('http://localhost:3000/api/v1/products?sort=desc&limit=17', {
       method: 'GET',
       headers: {
@@ -24,11 +38,46 @@ export const ProductListingSection = () => {
         'Authorization': 'Bearer ' + JSON.parse(localStorage.getItem('userInfo')).access_token
       }
     })
-      .then(response => response.json())
-      .then(data => {
-        setProducts(data.data);
-      });
+    .then(response => response.json())
+    .then(data => {
+      setProducts(data.data);
+    });
+  });
   }, []);
+
+  const [cartItems, setCartItems] = useState([]);
+
+  const addToCart = (product) => {
+    const existingItem = cartItems.find((item) => item.id === product.id);
+
+    if (existingItem) {
+      toast.info('Product is already in the cart');
+    } else {
+      fetch('http://localhost:3000/api/v1/basket/add', {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer ' + JSON.parse(localStorage.getItem('userInfo')).access_token
+        },
+        body: JSON.stringify({
+          basketId: baskedId,
+          productId: product.id
+        })
+      })
+        .then(response => {
+          if (response.ok) {
+            setCartItems([...cartItems, product]);
+            toast.success('Product added to cart successfully');
+          } else {
+            throw new Error('Failed to add product to cart');
+          }
+        })
+        .catch(error => {
+          console.error(error);
+          toast.error('Failed to add product to cart');
+        });
+    }
+  };
 
   return (
     <div className="product-card-container">
@@ -66,14 +115,11 @@ export const ProductListingSection = () => {
   
               <div className="product-card-details">
                 <h3>{name}</h3>
-                {/* <p className="ratings">
-                  {rating} <BsFillStarFill color="orange" /> ({reviews} reviews)
-                </p> */}
                 <div className="price-container">
-                  <p className="original-price">${price}</p>
+                  <p className="discount-price">${price}</p>
                 </div>
   
-                {/* <p>Gender: {category_name}</p> */}
+                {/* <p>Catégorie: {category_name}</p> */}
                 <div className="info">
                   {/* {!is_stock && <p className="out-of-stock">Out of stock</p>}
                   {trending && <p className="trending">Trending</p>} */}
@@ -81,18 +127,15 @@ export const ProductListingSection = () => {
               </div>
   
               <div className="product-card-buttons">
-                <button className="cart-btn">Go to Cart</button>
-                {/* <button
-                  onClick={() => wishlistHandler(product)}
-                  className="wishlist-btn"
-                >
-                  <AiTwotoneHeart size={30} />
-                </button> */}
+              <button className="cart-btn" onClick={() => addToCart(product)}>
+                Add to Cart
+              </button>                
               </div>
             </div>
           </Tilt>
         );
       })}
+      <ToastContainer position="bottom-right" />
     </div>
   );
 };
