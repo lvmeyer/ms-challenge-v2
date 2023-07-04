@@ -16,6 +16,7 @@ import { PaymentService } from './payment.service';
         POSTGRES_DB: Joi.string().required(),
         POSTGRES_USER: Joi.string().required(),
         POSTGRES_PASSWORD: Joi.string().required(),
+        STRIPE_SECRET_KEY: Joi.string().required(),
       }),
     }),
     TypeOrmCustomModule.register(),

@@ -1,14 +1,18 @@
 import { Injectable } from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
 import { Stripe } from 'stripe';
 
 @Injectable()
 export class PaymentService {
   private stripe: Stripe;
 
-  constructor() {
-    this.stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
-      apiVersion: '2022-11-15',
-    });
+  constructor(private readonly configService: ConfigService) {
+    this.stripe = new Stripe(
+      this.configService.get<string>('STRIPE_SECRET_KEY'),
+      {
+        apiVersion: '2022-11-15',
+      },
+    );
   }
 
   async handleValidPayment(): Promise<any> {
@@ -16,7 +20,7 @@ export class PaymentService {
       const paymentIntent = await this.stripe.paymentIntents.create({
         amount: 100,
         currency: 'eur',
-        payment_method: "pm_card_visa",
+        payment_method: 'pm_card_visa',
         confirm: true,
       });
 
@@ -24,7 +28,7 @@ export class PaymentService {
         success: true,
         paymentIntentId: paymentIntent.id,
         message: 'LEEEEEETS GOOOO !',
-        clientSecret: paymentIntent.client_secret
+        clientSecret: paymentIntent.client_secret,
       };
     } catch (error) {
       return {

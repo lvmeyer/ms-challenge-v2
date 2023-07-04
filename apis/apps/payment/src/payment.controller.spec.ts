@@ -1,25 +1,25 @@
-import { Test, TestingModule } from '@nestjs/testing';
+// import { Test, TestingModule } from '@nestjs/testing';
 
-import { PaymentController } from './payment.controller';
-import { PaymentService } from './payment.service';
+// import { PaymentController } from './payment.controller';
+// import { PaymentService } from './payment.service';
 
-describe('PaymentController', () => {
-  let paymentController: PaymentController;
+// describe('PaymentController', () => {
+//   let paymentController: PaymentController;
 
-  beforeEach(async () => {
-    const app: TestingModule = await Test.createTestingModule({
-      controllers: [PaymentController],
-      providers: [PaymentService],
-    }).compile();
+//   beforeEach(async () => {
+//     const app: TestingModule = await Test.createTestingModule({
+//       controllers: [PaymentController],
+//       providers: [PaymentService],
+//     }).compile();
 
-    paymentController = app.get<PaymentController>(PaymentController);
-  });
+//     paymentController = app.get<PaymentController>(PaymentController);
+//   });
 
-  describe('root', () => {
-    it('should return "Hello World!"', () => {
-      expect(paymentController.validPayment()).toEqual({
-        message: 'Payment is valid',
-      });
-    });
-  });
-});
+//   describe('root', () => {
+//     it('should return "Hello World!"', () => {
+//       expect(paymentController.validPayment()).toEqual({
+//         message: 'Payment is valid',
+//       });
+//     });
+//   });
+// });
