@@ -39,6 +39,7 @@ AppDataSource.initialize()
 		const product1 = new Product();
 		product1.name = 'ASRock AMD Radeon RX 6600';
 		product1.description = 'ASRock AMD Radeon RX 6600';
+		product1.image = "https://media.materiel.net/r550/products/MN0005897216_1.jpg";
 		product1.price = 229;
 		product1.category = cat1;
 		await AppDataSource.manager.save(product1);
@@ -46,6 +47,7 @@ AppDataSource.initialize()
 		const product2 = new Product();
 		product2.name = 'ASRock AMD Radeon RX 6700';
 		product2.description = 'ASRock AMD Radeon RX 6700';
+		product2.image = "https://media.ldlc.com/r1600/ld/products/00/05/81/47/LD0005814778_1.jpg";
 		product2.price = 399;
 		product2.category = cat1;
 		await AppDataSource.manager.save(product2);
@@ -53,6 +55,7 @@ AppDataSource.initialize()
 		const product3 = new Product();
 		product3.name = 'ASRock AMD Radeon RX 7600';
 		product3.description = 'ASRock AMD Radeon RX 7600';
+		product3.image = "https://www.asrock.com/Graphics-Card/photo/Radeon%20RX%207600%20Steel%20Legend%208GB%20OC(M1).png";
 		product3.price = 350;
 		product3.category = cat1;
 		await AppDataSource.manager.save(product3);
@@ -60,6 +63,7 @@ AppDataSource.initialize()
 		const product4 = new Product();
 		product4.name = 'ASUS DUAL GeForce RTX 3060';
 		product4.description = 'ASUS DUAL GeForce RTX 3060';
+		product4.image = "https://www.asrock.com/Graphics-Card/photo/Radeon%20RX%207600%20Steel%20Legend%208GB%20OC(M1).png";
 		product4.price = 499;
 		product4.category = cat1;
 		await AppDataSource.manager.save(product4);
@@ -67,13 +71,15 @@ AppDataSource.initialize()
 		const product5 = new Product();
 		product5.name = 'ASUS ROG Strix GeForce RTX 3060';
 		product5.description = 'ASUS ROG Strix GeForce RTX 3060';
+		product5.image = "https://m.media-amazon.com/images/I/81gBKaOGz9L._AC_UF1000,1000_QL80_.jpg";
 		product5.price = 599;
 		product5.category = cat1;
 		await AppDataSource.manager.save(product5);
 
 		const product6 = new Product();
 		(product6.name = 'ASUS TUF GAMING B550-PLUS'),
-			(product6.description = 'ASUS TUF GAMING B550-PLUS');
+		(product6.description = 'ASUS TUF GAMING B550-PLUS');
+		product6.image = "https://media.ldlc.com/r1600/ld/products/00/05/68/67/LD0005686754_1.jpg";
 		product6.price = 149;
 		product6.category = cat2;
 		await AppDataSource.manager.save(product6);
@@ -81,6 +87,7 @@ AppDataSource.initialize()
 		const product7 = new Product();
 		product7.name = 'ASUS ROG Strix B550-F Gaming';
 		product7.description = 'ASUS ROG Strix B550-F Gaming';
+		product7.image = "https://media.ldlc.com/r1600/ld/products/00/05/91/26/LD0005912641_1.jpg";
 		product7.price = 199;
 		product7.category = cat2;
 		await AppDataSource.manager.save(product7);
@@ -88,6 +95,7 @@ AppDataSource.initialize()
 		const product8 = new Product();
 		product8.name = 'ASUS ROG Strix B550-E Gaming';
 		product8.description = 'ASUS ROG Strix B550-E Gaming';
+		product8.image = "https://rog.asus.com/websites/global/products/fkufhp8oogo9exki/img/kv/pd.png";
 		product8.price = 249;
 		product8.category = cat2;
 		await AppDataSource.manager.save(product8);
@@ -95,6 +103,7 @@ AppDataSource.initialize()
 		const product9 = new Product();
 		product9.name = 'ASUS ROG Strix B550-XE Gaming';
 		product9.description = 'ASUS ROG Strix B550-XE Gaming';
+		product9.image = "https://media.ldlc.com/r1600/ld/products/00/05/75/20/LD0005752029_1.jpg";
 		product9.price = 299;
 		product9.category = cat2;
 		await AppDataSource.manager.save(product9);
@@ -102,6 +111,7 @@ AppDataSource.initialize()
 		const product10 = new Product();
 		product10.name = 'AMD Ryzen 5 5600X';
 		product10.description = 'AMD Ryzen 5 5600X';
+		product10.image = "https://m.media-amazon.com/images/I/51GUexhiieL.jpg";
 		product10.price = 299;
 		product10.category = cat3;
 		await AppDataSource.manager.save(product10);
@@ -109,6 +119,7 @@ AppDataSource.initialize()
 		const product11 = new Product();
 		product11.name = 'AMD Ryzen 7 5800X';
 		product11.description = 'AMD Ryzen 7 5800X';
+		product11.image = "https://m.media-amazon.com/images/I/51GUexhiieL.jpg";
 		product11.price = 449;
 		product11.category = cat3;
 		await AppDataSource.manager.save(product11);
@@ -116,6 +127,7 @@ AppDataSource.initialize()
 		const product12 = new Product();
 		product12.name = 'AMD Ryzen 9 5900X';
 		product12.description = 'AMD Ryzen 9 5900X';
+		product12.image = "https://m.media-amazon.com/images/I/51GUexhiieL.jpg";
 		product12.price = 549;
 		product12.category = cat3;
 		await AppDataSource.manager.save(product12);
@@ -123,6 +135,7 @@ AppDataSource.initialize()
 		const product13 = new Product();
 		product13.name = 'AMD Ryzen 9 5950X';
 		product13.description = 'AMD Ryzen 9 5950X';
+		product13.image = "https://m.media-amazon.com/images/I/51GUexhiieL.jpg";
 		product13.price = 799;
 		product13.category = cat3;
 
@@ -131,6 +144,7 @@ AppDataSource.initialize()
 		const product14 = new Product();
 		product14.name = 'G.Skill Trident Z Neo 32GB';
 		product14.description = 'G.Skill Trident Z Neo 32GB';
+		product14.image = "https://m.media-amazon.com/images/I/71w2mY6QwSL.jpg";
 		product14.price = 199;
 		product14.category = cat4;
 		await AppDataSource.manager.save(product14);
@@ -138,6 +152,7 @@ AppDataSource.initialize()
 		const product15 = new Product();
 		product15.name = 'G.Skill Trident Z Neo 64GB';
 		product15.description = 'G.Skill Trident Z Neo 64GB';
+		product15.image = "https://m.media-amazon.com/images/I/71w2mY6QwSL.jpg";
 		product15.price = 399;
 		product15.category = cat4;
 		await AppDataSource.manager.save(product15);
@@ -145,6 +160,7 @@ AppDataSource.initialize()
 		const product16 = new Product();
 		product16.name = 'Corsair Vengeance LPX 32GB';
 		product16.description = 'Corsair Vengeance LPX 32GB';
+		product16.image = "https://www.1fodiscount.com/ressources/site/img/product/kit-barrettes-memoire-32go-2x16go-dimm-ddr4-corsair-vengeance-lpx-pc4-25600-3200-mhz-noir_141304__480.webp";
 		product16.price = 199;
 		product16.category = cat4;
 		await AppDataSource.manager.save(product16);
@@ -152,6 +168,7 @@ AppDataSource.initialize()
 		const product17 = new Product();
 		product17.name = 'Corsair Vengeance LPX 64GB';
 		product17.description = 'Corsair Vengeance LPX 64GB';
+		product17.image = "https://m.media-amazon.com/images/I/71w2mY6QwSL.jpg";
 		product17.price = 399;
 		product17.category = cat4;
 		await AppDataSource.manager.save(product17);
