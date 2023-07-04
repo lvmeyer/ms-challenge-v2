@@ -59,7 +59,7 @@ export const Header = () => {
           <GrSearch />
         </button>
       </div>
-      {userInfo && userInfo.role === 'ADMINISTRATOR' || userInfo.role === 'USER' ? (
+      {userInfo && (userInfo.role === 'ADMINISTRATOR' || userInfo.role === 'USER') ? (
       <div
         className={
           !showHamburger

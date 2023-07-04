@@ -2,8 +2,8 @@ import { useState } from "react";
 import "./Cart.css";
 
 import { CartListing } from "./components/CartListing/CartListing";
-import { Coupons } from "./components/Coupons/Coupons";
-import { CartAmountSummary } from "./components/CartAmountSummary/CartAmountSummary";
+// import { Coupons } from "./components/Coupons/Coupons";
+// import { CartAmountSummary } from "./components/CartAmountSummary/CartAmountSummary";
 // import { useUserData } from "../../contexts/UserDataProvider";
 import { useNavigate } from "react-router-dom";
 
@@ -18,13 +18,13 @@ export const Cart = () => {
         <h1 className="page-heading">Cart</h1>
         <div className="cart-container">
           <CartListing />
-          <div>
+          {/* <div>
             <Coupons
               couponSelected={couponSelected}
               setCouponSelected={setCouponSelected}
             />
             <CartAmountSummary couponSelected={couponSelected} />
-          </div>
+          </div> */}
         </div>
       </div>
     ))

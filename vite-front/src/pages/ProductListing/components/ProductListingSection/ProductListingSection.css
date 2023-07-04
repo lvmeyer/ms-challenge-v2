@@ -35,9 +35,8 @@
 .product-card-image img {
   height: 230px;
   bottom: -2em;
-  width: 140%;
+  width: 100%;
   object-fit: cover;
-  margin-left: -3em;
 }
 
 .product-card-details {
@@ -88,7 +87,7 @@
   border-radius: 10px;
   font-size: 1.05em;
   color: white;
-  background-color: var(--primary-color);
+  background-color: black;
 }
 
 .cart-btn:hover {
