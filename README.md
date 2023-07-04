@@ -87,4 +87,6 @@ Tests
 ## Authors
 
 [@lvmeyer](https://www.github.com/lvmeyer)
-[@OdessaCh](https://github.com/OdessaCh)
+[@pboitelle](https://github.com/pboitelle)
+[@Ulyssee](https://github.com/Ulyssee)
+[@VictorValee](https://github.com/VictorValee)
