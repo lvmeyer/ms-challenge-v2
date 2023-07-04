@@ -24,6 +24,7 @@ export class PaymentService {
         success: true,
         paymentIntentId: paymentIntent.id,
         message: 'LEEEEEETS GOOOO !',
+        clientSecret: paymentIntent.client_secret
       };
     } catch (error) {
       return {
