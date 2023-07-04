@@ -33,18 +33,10 @@
 }
 
 .product-card-image img {
-<<<<<<< HEAD
-	height: 230px;
-	bottom: -2em;
-	width: 140%;
-	object-fit: cover;
-	margin-left: -3em;
-=======
   height: 230px;
   bottom: -2em;
   width: 100%;
   object-fit: cover;
->>>>>>> ff0ceba (connect front back for basket)
 }
 
 .product-card-details {
@@ -87,17 +79,6 @@
 	z-index: 5;
 }
 .cart-btn {
-<<<<<<< HEAD
-	font-weight: 800;
-	margin: 0px auto;
-	border: none;
-	flex-grow: 1;
-	justify-self: stretch;
-	border-radius: 10px;
-	font-size: 1.05em;
-	color: white;
-	background-color: var(--primary-color);
-=======
   font-weight: 800;
   margin: 0px auto;
   border: none;
@@ -107,7 +88,6 @@
   font-size: 1.05em;
   color: white;
   background-color: black;
->>>>>>> ff0ceba (connect front back for basket)
 }
 
 .cart-btn:hover {
