@@ -1,35 +1,31 @@
-import React from "react";
+import React from 'react';
 import ReactDOM from 'react-dom/client';
-import { Home } from "../pages/Home/Home";
-import { Cart } from "../pages/Cart/Cart";
-import { BrowserRouter as Router } from "react-router-dom";
-import { 
-  Route, 
-  Routes,
-	RouterProvider, } from "react-router-dom";
-import { Login } from "../pages/auth/Login/Login";
-import { ProductListing } from "../pages/ProductListing/ProductListing";
-import { ProductDetails } from "../pages/ProductDetails/ProductDetails";
+import { Home } from '../pages/Home/Home';
+import { Cart } from '../pages/Cart/Cart';
+import { BrowserRouter as Router } from 'react-router-dom';
+import { Route, Routes, RouterProvider } from 'react-router-dom';
+import { Login } from '../pages/auth/Login/Login';
+import { ProductListing } from '../pages/ProductListing/ProductListing';
+import { ProductDetails } from '../pages/ProductDetails/ProductDetails';
 // import { RequiresAuth } from "../components/requires-auth/RequiresAuth";
-import { Signup } from "../pages/auth/Signup/Signup";
-import { Logout } from "../pages/auth/Logout/Logout";
-import { Checkout } from "../pages/Checkout/Checkout";
-import { UserProfile } from "../pages/UserProfile/UserProfile";
-import { Profile } from "../pages/UserProfile/Profile/Profile";
-import { Addresses } from "../pages/UserProfile/Addresses/Addresses";
-import { Orders } from "../pages/UserProfile/Orders/Orders";
-import { PageNotFound } from "../pages/PageNotFound/PageNotFound";
-import App from '../App'
-import {useEffect, useState} from 'react';
-import Payment from '../components/Stripe/Payment'
-import Completion from '../components/Stripe/Completion'
-import {loadStripe} from '@stripe/stripe-js';
+import { Signup } from '../pages/auth/Signup/Signup';
+import { Logout } from '../pages/auth/Logout/Logout';
+import { Checkout } from '../pages/Checkout/Checkout';
+import { UserProfile } from '../pages/UserProfile/UserProfile';
+import { Profile } from '../pages/UserProfile/Profile/Profile';
+import { Addresses } from '../pages/UserProfile/Addresses/Addresses';
+import { Orders } from '../pages/UserProfile/Orders/Orders';
+import { PageNotFound } from '../pages/PageNotFound/PageNotFound';
+import App from '../App';
+import { useEffect, useState } from 'react';
+import Payment from '../components/Stripe/Payment';
+import Completion from '../components/Stripe/Completion';
+import { loadStripe } from '@stripe/stripe-js';
 import RequireAuth from '../components/requires-auth/RequiresAuth';
 import { useSelector } from 'react-redux';
 
 export const NavRoutes = () => {
-
-  const [ stripePromise, setStripePromise ] = useState(null);
+	const [stripePromise, setStripePromise] = useState(null);
 
 	const { userInfo } = useSelector((state) => state.auth);
 
