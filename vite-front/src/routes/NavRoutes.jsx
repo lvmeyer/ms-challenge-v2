@@ -34,6 +34,7 @@ export const NavRoutes = () => {
   const [ stripePromise, setStripePromise ] = useState(null);
 
   useEffect(() => {
+    //import.meta.env.STRIPE_PUBLIC_KEY to string
     const stripePublicKey = "pk_test_51IviNhJqYqfbWn1gui3IgmAr493J9bTJcQtzWniQug84wjy4KLchXOyb0HLwPPNng5pkRXYA875XhnEffSUQ2n9Z00OeG28FbA"
     setStripePromise(loadStripe(stripePublicKey));
   }, []);
@@ -85,7 +86,7 @@ export const NavRoutes = () => {
         <Route path="/profile/addresses" element={<Addresses />} />
       </Route>
 
-      <Route path="/payment" element={<Payment stripePromise={stripePromise} />} />
+      <Route path="/payment/:basketId" element={<Payment stripePromise={stripePromise} />} />
       <Route path="/completion" element={<Completion stripePromise={stripePromise} />} />
     </Routes>
   );

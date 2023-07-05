@@ -1,7 +1,10 @@
 import {useEffect, useState} from 'react';
+import { Link } from 'react-router-dom';
+
 
 function Completion(props) {
   const [ messageBody, setMessageBody ] = useState('');
+  const [ alert, setAlert ] = useState('');
   const { stripePromise } = props;
 
   useEffect(() => {
@@ -12,17 +15,24 @@ function Completion(props) {
       const clientSecret = url.searchParams.get('payment_intent_client_secret');
       const { error, paymentIntent } = await stripe.retrievePaymentIntent(clientSecret);
 
+      if (paymentIntent.status === 'succeeded') {
+        setAlert('alert alert-success');
+      } else {
+        setAlert('alert alert-danger');
+      }
+
       setMessageBody(error ? `> ${error.message}` : (
-        <>&gt; Payment {paymentIntent.status}: <a href={`https://dashboard.stripe.com/test/payments/${paymentIntent.id}`} target="_blank" rel="noreferrer">{paymentIntent.id}</a></>
+        <> Payment {paymentIntent.status}, Thank you !</>
       ));
     });
   }, [stripePromise]);
 
   return (
     <>
-      <h1>Thank you!</h1>
-      <a href="/">home</a>
-      <div id="messages" role="alert" style={messageBody ? {display: 'block'} : {}}>{messageBody}</div>
+      <div className="container" style={{height: '80vh'}}>
+        <h1 id="confirm-paiment" className={alert} >{messageBody}</h1>
+        <Link to="/"><button className="btn btn-outline-dark">Back to Home</button></Link>
+      </div>
     </>
   );
 }

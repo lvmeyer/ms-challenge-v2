@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Body, Injectable } from '@nestjs/common';
 import { Stripe } from 'stripe';
 
 @Injectable()
@@ -11,13 +11,15 @@ export class PaymentService {
     });
   }
 
-  async handleValidPayment(): Promise<any> {
+  async handleValidPayment(
+    @Body('price') price: number,
+  ): Promise<any> {
     try {
       const paymentIntent = await this.stripe.paymentIntents.create({
-        amount: 100,
-        currency: 'eur',
+        amount: price*100,
+        currency: 'usd',
         payment_method: "pm_card_visa",
-        confirm: true,
+        confirm: false,
       });
 
       return {
