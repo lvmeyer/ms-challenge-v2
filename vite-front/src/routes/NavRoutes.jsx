@@ -29,94 +29,50 @@ export const NavRoutes = () => {
 
 	const { userInfo } = useSelector((state) => state.auth);
 
-	useEffect(() => {
-		//import.meta.env.STRIPE_PUBLIC_KEY to string
-		const stripePublicKey =
-			'pk_test_51IviNhJqYqfbWn1gui3IgmAr493J9bTJcQtzWniQug84wjy4KLchXOyb0HLwPPNng5pkRXYA875XhnEffSUQ2n9Z00OeG28FbA';
-		setStripePromise(loadStripe(stripePublicKey));
-	}, []);
-	return (
-		<Routes path="/" element={<App />}>
-			<Route path="/" element={<Home />} />
-			<Route
-				path="/cart"
-				element={
-					<RequireAuth>
-						<Cart />
-					</RequireAuth>
-				}
-			/>
+  useEffect(() => {
+    const stripePublicKey = "pk_test_51IviNhJqYqfbWn1gui3IgmAr493J9bTJcQtzWniQug84wjy4KLchXOyb0HLwPPNng5pkRXYA875XhnEffSUQ2n9Z00OeG28FbA"
+    setStripePromise(loadStripe(stripePublicKey));
+  }, []);
+  return (
+    <Routes path="/" element={<App />}>
+      <Route path="/" element={<Home />} />
+      <Route path="/cart" element={<RequireAuth><Cart /></RequireAuth>} />
 
-			<Route
-				path="/product-listing"
-				element={
-					<RequireAuth>
-						<ProductListing />
-					</RequireAuth>
-				}
-			/>
-			<Route
-				path="/product-details/:productId"
-				element={
-					<RequireAuth>
-						<ProductDetails />
-					</RequireAuth>
-				}
-			/>
-			<Route path="/signup" element={<Signup />} />
-			<Route path="/checkout" element={<Checkout />} />
-			<Route
-				path="/profile"
-				element={
-					<RequireAuth>
-						<UserProfile />
-					</RequireAuth>
-				}
-			>
-				<Route path="/profile/" element={<Profile />} />
-				<Route
-					path="/profile/orders"
-					element={
-						<RequireAuth>
-							<Orders />
-						</RequireAuth>
-					}
-				/>
-				<Route
-					path="/profile/addresses"
-					element={
-						<RequireAuth>
-							<Addresses />
-						</RequireAuth>
-					}
-				/>
-			</Route>
-			<Route
-				path="/payment"
-				element={
-					<RequireAuth>
-						<Payment stripePromise={stripePromise} />
-					</RequireAuth>
-				}
-			/>
-			<Route
-				path="/completion"
-				element={
-					<RequireAuth>
-						<Completion stripePromise={stripePromise} />
-					</RequireAuth>
-				}
-			/>
-			<Route path="/login" element={<Login />} />
-			<Route
-				path="/logout"
-				element={
-					<RequireAuth>
-						<Logout />
-					</RequireAuth>
-				}
-			/>
-			<Route path="*" element={<PageNotFound />} />
-		</Routes>
-	);
+      <Route path="/product-listing" element={<RequireAuth><ProductListing /></RequireAuth>} />
+      <Route path="/product-details/:productId" element={<RequireAuth><ProductDetails /></RequireAuth>} />
+      <Route
+        path="/signup"
+        element={
+            <Signup />
+        }
+      />
+      <Route
+        path="/checkout"
+        element={
+            <Checkout />
+        }
+      />
+      <Route path="/profile" element={<RequireAuth><UserProfile /></RequireAuth>}>
+        <Route
+          path="/profile/"
+          element={
+              <UserProfile />
+          }
+        />
+        <Route path="/profile/orders" element={<RequireAuth><Orders /></RequireAuth>} />
+        <Route path="/profile/addresses" element={<RequireAuth><Addresses /></RequireAuth>} />
+      </Route>
+      <Route
+        path="/payment"
+        element={<RequireAuth><Payment stripePromise={stripePromise} /></RequireAuth>}
+      />
+      <Route
+        path="/completion"
+        element={<RequireAuth><Completion stripePromise={stripePromise} /></RequireAuth>}
+      />
+      <Route path="/login" element={<Login />} />
+      <Route path="/logout" element={<RequireAuth><Logout /></RequireAuth>} />
+      <Route path="*" element={<PageNotFound />} />
+    </Routes>
+  );
 };

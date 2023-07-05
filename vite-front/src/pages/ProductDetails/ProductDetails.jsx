@@ -3,6 +3,7 @@ import React from "react";
 
 import { ProductImage } from "./components/ProductImage/ProductImage";
 import { ProductDescription } from "./components/ProductDescription/ProductDescription";
+import { ProductComments } from "./components/ProductComment/ProductComments";
 
 export const ProductDetails = () => {
 
@@ -11,8 +12,13 @@ export const ProductDetails = () => {
     (
       <>
         <div className="products-page-container">
-          <ProductImage  />
-          <ProductDescription />
+          <div className="product-details-header">
+            <ProductImage  />
+            <ProductDescription />
+          </div>
+          <div className="product-details-comment">
+            <ProductComments />
+          </div>
         </div>
       </>
     )
