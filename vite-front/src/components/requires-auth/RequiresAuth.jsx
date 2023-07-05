@@ -1,14 +1,20 @@
-import React from "react";
-import { Navigate, useLocation } from "react-router-dom";
-// import { useAuth } from "../../contexts/AuthProvider";
+import React, { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { setCredentials, logout } from '../../slices/authSlice';
 
-export const RequiresAuth = ({ children }) => {
-  // const { auth } = useAuth();
+const RequireAuth = ({ children }) => {
+  const { userInfo } = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
-  // const location = useLocation();
-  // return auth.isAuth ? (
-  //   children
-  // ) : (
-  //   <Navigate to="/login" state={{ from: location }} />
-  // );
+  if (!userInfo || !userInfo.access_token) {
+    // Rediriger vers la page de connexion
+    navigate('/login');
+    return null;
+  } else {
+    return children;
+  }
 };
+
+export default RequireAuth;

@@ -32,11 +32,6 @@ import { FileInterceptor } from '@nestjs/platform-express';
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
-  @Get('users/ping')
-  ping() {
-    return { message: 'pong' };
-  }
-
   @Get('users/me')
   @AuthRequired()
   async getMe(@Headers() headers: any) {
