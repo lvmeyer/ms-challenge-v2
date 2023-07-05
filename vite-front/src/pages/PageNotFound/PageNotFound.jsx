@@ -9,7 +9,7 @@ export const PageNotFound = () => {
       <h2 className="page-heading">Error 404</h2>
       <p className="page-heading">Page not found</p>
       <button
-        onClick={() => navigate("/product-listing")}
+        onClick={() => navigate("/")}
         className="explore-btn"
       >
         Back to Home
