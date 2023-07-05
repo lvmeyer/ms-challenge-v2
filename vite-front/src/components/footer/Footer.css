@@ -32,6 +32,9 @@
 @media (min-width: 768px) {
 	.footer {
 		padding: 1.2rem;
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
 	}
 	.footer small {
 		font-size: 1rem;
