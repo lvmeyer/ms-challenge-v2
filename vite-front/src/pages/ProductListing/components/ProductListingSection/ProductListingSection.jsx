@@ -14,12 +14,14 @@ export const ProductListingSection = (props) => {
 
   const [priceFilter, setPriceFilter] = useState(null);
   const [sortingFilter, setSortingFilter] = useState(null);
+  const [categoryFilter, setCategoryFilter] = useState(null);
 
   useEffect(() => {
     if (props.filters) {
       setPriceFilter(props.filters.priceFilter);
       setSortingFilter(props.filters.sortingFilter);
-      console.log(priceFilter);
+      setCategoryFilter(props.filters.categoryFilter);
+      console.log(props.filters);
     }
   }, [props.filters]);
 
@@ -67,12 +69,20 @@ export const ProductListingSection = (props) => {
             }
           });
           setProducts(sortedProducts);
+
+          if (categoryFilter && Object.values(categoryFilter).includes(true)) {
+            console.log(sortedProducts)
+            const filteredProducts = sortedProducts.filter(product =>
+              categoryFilter[product.category.name]
+            );
+            setProducts(filteredProducts);
+          }
         }
       }
       
     });
   });
-  }, [priceFilter, sortingFilter]);
+  }, [priceFilter, sortingFilter, categoryFilter]);
 
   const [cartItems, setCartItems] = useState([]);
 
@@ -151,7 +161,7 @@ export const ProductListingSection = (props) => {
                     <strong>Category :</strong> {category.name}
                   </p>
                   <p className="discount-price">
-                    <strong>Price :</strong> ${price}
+                    <strong>Price :</strong> <span id="price">${price}</span>
                   </p>
                 </div>
   
