@@ -1,15 +1,12 @@
-import React from "react";
+import React from 'react';
 import ReactDOM from 'react-dom/client';
-import { Home } from "../pages/Home/Home";
-import { Cart } from "../pages/Cart/Cart";
-import { BrowserRouter as Router } from "react-router-dom";
-import { 
-  Route, 
-  Routes,
-	RouterProvider, } from "react-router-dom";
-import { Login } from "../pages/auth/Login/Login";
-import { ProductListing } from "../pages/ProductListing/ProductListing";
-import { ProductDetails } from "../pages/ProductDetails/ProductDetails";
+import { Home } from '../pages/Home/Home';
+import { Cart } from '../pages/Cart/Cart';
+import { BrowserRouter as Router } from 'react-router-dom';
+import { Route, Routes, RouterProvider } from 'react-router-dom';
+import { Login } from '../pages/auth/Login/Login';
+import { ProductListing } from '../pages/ProductListing/ProductListing';
+import { ProductDetails } from '../pages/ProductDetails/ProductDetails';
 // import { RequiresAuth } from "../components/requires-auth/RequiresAuth";
 import { Signup } from "../pages/auth/Signup/Signup";
 import { Logout } from "../pages/auth/Logout/Logout";
@@ -28,8 +25,7 @@ import RequireAuth from '../components/requires-auth/RequiresAuth';
 import { useSelector } from 'react-redux';
 
 export const NavRoutes = () => {
-
-  const [ stripePromise, setStripePromise ] = useState(null);
+	const [stripePromise, setStripePromise] = useState(null);
 
 	const { userInfo } = useSelector((state) => state.auth);
 

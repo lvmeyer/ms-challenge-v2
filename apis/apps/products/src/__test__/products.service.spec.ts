@@ -1,6 +1,10 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { ProductsService } from '../products.service';
+<<<<<<< HEAD
 import { Category, Product } from '@app/common';
+=======
+import { Category, Product, Review } from '@app/common';
+>>>>>>> 0164910996a5c928bd32567a63cd3e6f40bc81dc
 import { getRepositoryToken } from '@nestjs/typeorm';
 import { randomUUID } from 'crypto';
 import { createProductMock } from './fixtures/products';
@@ -15,6 +19,11 @@ describe('ProductsService', () => {
   };
   const mockCategoryRepository = {};
 
+<<<<<<< HEAD
+=======
+  const mockReviewRepository = {};
+
+>>>>>>> 0164910996a5c928bd32567a63cd3e6f40bc81dc
   const id = randomUUID();
 
   beforeEach(async () => {
@@ -29,6 +38,13 @@ describe('ProductsService', () => {
           provide: getRepositoryToken(Category),
           useValue: mockCategoryRepository,
         },
+<<<<<<< HEAD
+=======
+        {
+          provide: getRepositoryToken(Review),
+          useValue: mockReviewRepository,
+        },
+>>>>>>> 0164910996a5c928bd32567a63cd3e6f40bc81dc
       ],
     }).compile();
 
