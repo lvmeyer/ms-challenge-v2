@@ -9,6 +9,7 @@ import {
   ParseUUIDPipe,
   Patch,
   Post,
+  Query,
   ValidationPipe,
 } from '@nestjs/common';
 import { UpdateResult } from 'typeorm';
@@ -19,6 +20,8 @@ import {
   CreateCategoryRequest,
   Product,
   Category,
+  Review,
+  CreateReviewRequest,
 } from '@app/common';
 import { ProductsService } from './products.service';
 
@@ -83,5 +86,53 @@ export class ProductsController {
   @HttpCode(HttpStatus.NO_CONTENT)
   async delete(@Param('uuid', ParseUUIDPipe) uuid: string): Promise<void> {
     await this.productsService.delete(uuid);
+  }
+
+  // ================== REVIEWS ==================
+  @Post('reviews')
+  @HttpCode(HttpStatus.CREATED)
+  async createReview(
+    @Body(ValidationPipe) createReviewRequest: CreateReviewRequest,
+  ): Promise<Review> {
+    return await this.productsService.createReview(createReviewRequest);
+  }
+
+  @Patch('reviews/report/:uuid')
+  @HttpCode(HttpStatus.OK)
+  async reportReview(
+    @Param('uuid', ParseUUIDPipe) uuid: string,
+  ): Promise<void> {
+    await this.productsService.reportReview(uuid);
+  }
+
+  @Delete('reviews/report/approve/:uuid')
+  @HttpCode(HttpStatus.NO_CONTENT)
+  async approveReportedReview(
+    @Param('uuid', ParseUUIDPipe) uuid: string,
+  ): Promise<void> {
+    await this.productsService.deleteReview(uuid);
+  }
+
+  @Patch('reviews/report/decline/:uuid')
+  @HttpCode(HttpStatus.NO_CONTENT)
+  async declineReportedReview(
+    @Param('uuid', ParseUUIDPipe) uuid: string,
+  ): Promise<void> {
+    await this.productsService.declineReportReview(uuid);
+  }
+
+  @Delete('reviews/:uuid')
+  @HttpCode(HttpStatus.NO_CONTENT)
+  async deleteReview(
+    @Param('uuid', ParseUUIDPipe) uuid: string,
+  ): Promise<void> {
+    await this.productsService.deleteReview(uuid);
+  }
+
+  @Get('reviews')
+  @HttpCode(HttpStatus.OK)
+  async findAllReviews(@Query('reportNb') reportNb: number): Promise<Review[]> {
+    console.log(reportNb, 'HERE');
+    return this.productsService.findAllReviews(reportNb);
   }
 }

@@ -3,7 +3,13 @@ import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
-import { Basket, Product, TypeOrmCustomModule, Category } from '@app/common';
+import {
+  Basket,
+  Product,
+  TypeOrmCustomModule,
+  Category,
+  Review,
+} from '@app/common';
 import { BasketService } from './basket.service';
 import { BasketController } from './basket.controller';
 
@@ -19,7 +25,7 @@ import { BasketController } from './basket.controller';
       }),
     }),
     TypeOrmCustomModule.register(),
-    TypeOrmModule.forFeature([Basket, Product, Category]),
+    TypeOrmModule.forFeature([Basket, Product, Category, Review]),
   ],
   controllers: [BasketController],
   providers: [BasketService],
