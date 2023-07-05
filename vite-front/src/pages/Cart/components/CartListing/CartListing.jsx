@@ -70,7 +70,11 @@ export const CartListing = () => {
 				userProducts.map((userProduct) => (
 					<div className="cart-product-card" key={userProduct.id}>
 						<div>
-							<img className="cart-img" alt={imgproduct} src={imgproduct} />
+							<img
+								className="cart-img"
+								alt={imgproduct}
+								src={userProduct.image}
+							/>
 						</div>
 						<div className="product-description">
 							<h3>{userProduct.name}</h3>
@@ -101,9 +105,7 @@ export const CartListing = () => {
 			<div className="total-amount">
 				<strong>Total to pay : </strong>${totalAmount}
 			</div>
-			{/* <button className="pay-button" onClick={handlePayment}>
-      Pay
-    </button> */}
+
 			{userProducts.length > 0 ? (
 				<Link to={`/payment/${baskedId}`}>
 					<button className="pay-button">Pay</button>
