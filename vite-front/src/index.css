@@ -67,6 +67,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  min-height: 100vh;
 }
 
 code {
@@ -78,6 +79,13 @@ code {
   border: #F6F9FC solid 1px;
   border-radius: var(--radius);
   padding: 20px;
-  margin: 20px 0;
+  margin: 50px 0;
   box-shadow: 0 30px 50px -20px rgb(50 50 93 / 25%), 0 30px 60px -30px rgb(0 0 0 / 30%);
+}
+
+#confirm-paiment{
+  border: #F6F9FC solid 1px;
+  border-radius: var(--radius);
+  padding: 20px;
+  margin: 50px 0;
 }

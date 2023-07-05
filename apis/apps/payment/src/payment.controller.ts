@@ -1,13 +1,16 @@
-import { Controller, Post } from '@nestjs/common';
+import { Controller, Post, Body } from '@nestjs/common';
 
 import { PaymentService } from './payment.service';
+
 
 @Controller('pv')
 export class PaymentController {
   constructor(private readonly paymentService: PaymentService) {}
 
   @Post('payment')
-  validPayment() {
-    return this.paymentService.handleValidPayment();
+  async validPayment(
+    @Body('price') price: number,
+  ) {
+    return this.paymentService.handleValidPayment(price);
   }
 }
