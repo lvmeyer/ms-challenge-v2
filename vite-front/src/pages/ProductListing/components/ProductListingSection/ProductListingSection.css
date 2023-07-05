@@ -132,6 +132,11 @@
 	color: black;
 	font-weight: 600;
 }
+.discount-price #price{
+	font-size: 1.2em;
+  	font-weight: 600;
+	margin-left: 5px;
+}
 
 .product-card-details .price-container {
 	font-size: 1em;
