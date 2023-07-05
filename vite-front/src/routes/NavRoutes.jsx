@@ -60,7 +60,7 @@ export const NavRoutes = () => {
         <Route
           path="/profile/"
           element={
-              <Profile />
+              <UserProfile />
           }
         />
         <Route path="/profile/orders" element={<RequireAuth><Orders /></RequireAuth>} />
