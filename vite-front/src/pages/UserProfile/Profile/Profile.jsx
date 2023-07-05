@@ -45,12 +45,13 @@ export const Profile = () => {
 
 
   const [product, setProduct] = useState({});
-  // useEffect(() => {
-    
-  // }, []);
+  const [successMessage, setSuccessMessage] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
+
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    console.log(formData);
 
     //Envoi des données au serveur
     fetch(import.meta.env.VITE_GW_HOSTNAME+'/api/v1/products', {
@@ -59,23 +60,29 @@ export const Profile = () => {
         'Content-Type': 'application/json',
         'Authorization': 'Bearer ' + JSON.parse(localStorage.getItem('userInfo')).access_token
       },
-      body: JSON.stringify(formData) // Utilisez JSON.stringify pour convertir l'objet formData en JSON
+      body: JSON.stringify(formData)
     })
       .then(response => response.json())
       .then(data => {
         console.log(data);
         setProduct(data);
+        setFormStatus({ success: true, error: '' });
+
       })
       .catch(error => {
         console.log(error);
-        // Gérez les erreurs
-      });
+        if (error.response && error.response.data && error.response.data.message) {
+          const errorMessage = error.response.data.message[0];
+          setFormStatus({ success: false, error: errorMessage });
+        } else {
+          setFormStatus({ success: false, error: 'An error occurred while submitting the form. Please try again.' });
+        }
+        });
   };
 
     // ----------------GET CATEGORY---------------
 
     const [categories, setCategories] = useState([]);
-    // const [listCategories, setListCategories] = useState([]);
 
     useEffect(() => {
       fetch(import.meta.env.VITE_GW_HOSTNAME+'/api/v1/categories', {
@@ -87,7 +94,7 @@ export const Profile = () => {
       })
         .then(response => response.json())
         .then(data => {
-          console.log(data.data); // Affiche les données renvoyées par l'API
+          console.log(data.data);
     
           setCategories(data.data);
         });
@@ -156,6 +163,13 @@ export const Profile = () => {
               </option>
             ))}
           </select>
+
+          {successMessage && (
+            <div className="success-message">{successMessage}</div>
+          )}
+          {errorMessage && (
+            <div className="error-message">{errorMessage}</div>
+          )}
 
 
           <button type="submit">Submit</button>
