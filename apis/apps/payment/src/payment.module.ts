@@ -3,7 +3,13 @@ import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
-import { Basket, Category, Product, TypeOrmCustomModule } from '@app/common';
+import {
+  Basket,
+  Category,
+  Product,
+  Review,
+  TypeOrmCustomModule,
+} from '@app/common';
 import { PaymentController } from './payment.controller';
 import { PaymentService } from './payment.service';
 
@@ -20,7 +26,7 @@ import { PaymentService } from './payment.service';
       }),
     }),
     TypeOrmCustomModule.register(),
-    TypeOrmModule.forFeature([Basket, Product, Category]),
+    TypeOrmModule.forFeature([Basket, Product, Category, Review]),
   ],
   controllers: [PaymentController],
   providers: [PaymentService],
