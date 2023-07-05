@@ -138,6 +138,14 @@ export const NavRoutes = () => {
 				}
 			/>
 			<Route path="*" element={<PageNotFound />} />
+			<Route
+				path="/payment/:basketId"
+				element={<Payment stripePromise={stripePromise} />}
+			/>
+			<Route
+				path="/completion"
+				element={<Completion stripePromise={stripePromise} />}
+			/>
 		</Routes>
 	);
 };
