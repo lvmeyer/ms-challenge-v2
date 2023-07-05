@@ -18,13 +18,6 @@ export const Cart = () => {
         <h1 className="page-heading">Cart</h1>
         <div className="cart-container">
           <CartListing />
-          {/* <div>
-            <Coupons
-              couponSelected={couponSelected}
-              setCouponSelected={setCouponSelected}
-            />
-            <CartAmountSummary couponSelected={couponSelected} />
-          </div> */}
         </div>
       </div>
     ))

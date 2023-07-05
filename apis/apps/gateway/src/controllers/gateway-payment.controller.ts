@@ -6,6 +6,7 @@ import {
   HttpStatus,
   Post,
   Res,
+  Body
 } from '@nestjs/common';
 
 import { gatewayResponse } from '../utils/gatewayResponse';
@@ -23,12 +24,14 @@ export class GatewayPaymentController {
   async pay(
     @Headers() headers: any,
     @Res() res: Response,
+    @Body('price') price: number
   ): Promise<Response<any>> {
     const access_token = headers.authorization.split(' ')[1];
 
     try {
       const paymentResponse = await this.gatewayPaymentService.pay(
         access_token,
+        price
       );
 
       return gatewayResponse({
