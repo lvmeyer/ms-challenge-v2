@@ -4,9 +4,15 @@ import {
   InternalServerErrorException,
   NotFoundException,
 } from '@nestjs/common';
-import { Category, CreateCategoryRequest, Product } from '@app/common';
+import {
+  Category,
+  CreateCategoryRequest,
+  CreateReviewRequest,
+  Product,
+  Review,
+} from '@app/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository, UpdateResult } from 'typeorm';
+import { MoreThanOrEqual, Repository, UpdateResult } from 'typeorm';
 
 import { CreateProductRequest, UpdateProductRequest } from '@app/common';
 
@@ -17,6 +23,8 @@ export class ProductsService {
     private readonly productRepository: Repository<Product>,
     @InjectRepository(Category)
     private readonly categoryRepository: Repository<Category>,
+    @InjectRepository(Review)
+    private readonly reviewRepository: Repository<Review>,
   ) {}
 
   // ==========================================
@@ -63,7 +71,16 @@ export class ProductsService {
   }
 
   async find(uuid: string): Promise<Product> {
-    const product = await this.productRepository.findOneBy({ id: uuid });
+    const product = await this.productRepository.findOne({
+      where: {
+        id: uuid,
+      },
+      relations: {
+        category: true,
+        reviews: true,
+      },
+    });
+    // const product = await this.productRepository.findOneBy({ id: uuid });
     if (!product) {
       throw new NotFoundException('Product not found');
     }
@@ -93,5 +110,65 @@ export class ProductsService {
     }
 
     await this.productRepository.remove(product);
+  }
+
+  // =============== REVIEWS ===================
+  async createReview(
+    createReviewRequest: CreateReviewRequest,
+  ): Promise<CreateReviewRequest & Review> {
+    try {
+      const product = await this.productRepository.findOneBy({
+        id: createReviewRequest.productId,
+      });
+      if (!product) {
+        throw new NotFoundException('Product not found for review');
+      }
+
+      return await this.reviewRepository.save({
+        ...createReviewRequest,
+        product,
+      });
+    } catch (err) {
+      throw new InternalServerErrorException(err.driverError.message);
+    }
+  }
+
+  async deleteReview(uuid: string): Promise<void> {
+    const review = await this.reviewRepository.findOneBy({ id: uuid });
+    if (!review) {
+      throw new NotFoundException('Review not found for deletion');
+    }
+
+    await this.reviewRepository.remove(review);
+  }
+
+  async declineReportReview(uuid: string): Promise<void> {
+    const review = await this.reviewRepository.findOneBy({ id: uuid });
+    if (!review) {
+      throw new NotFoundException('Review not found for deletion');
+    }
+
+    await this.reviewRepository.update(review.id, { ...review, reports: 0 });
+  }
+
+  async findAllReviews(nbOfReports: number): Promise<Review[]> {
+    return this.reviewRepository.find({
+      relations: {
+        product: true,
+      },
+      where: {
+        reports: MoreThanOrEqual(nbOfReports),
+      },
+    });
+  }
+
+  async reportReview(id: string): Promise<void> {
+    const review = await this.reviewRepository.findOneBy({ id });
+    if (!review) {
+      throw new NotFoundException('Review not found for report');
+    }
+    await this.reviewRepository.update(id, {
+      reports: review.reports + 1,
+    });
   }
 }

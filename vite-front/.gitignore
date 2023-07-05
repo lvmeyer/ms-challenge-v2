@@ -26,7 +26,6 @@ package-lock.json
 .env
 k8s/bando/secrets.yaml
 
-
 # typescript
 *.tsbuildinfo   
 next-env.d.ts

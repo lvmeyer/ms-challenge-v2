@@ -10,6 +10,7 @@ import {
   ParseUUIDPipe,
   Patch,
   Post,
+  Query,
   Res,
   ValidationPipe,
 } from '@nestjs/common';
@@ -17,6 +18,7 @@ import {
 import {
   CreateCategoryRequest,
   CreateProductRequest,
+  CreateReviewRequest,
   UpdateProductRequest,
 } from '@app/common';
 import { gatewayResponse } from '../utils/gatewayResponse';
@@ -244,6 +246,179 @@ export class GatewayProductController {
         status: HttpStatus.NO_CONTENT,
         success: true,
         message: 'Product deleted',
+      });
+    } catch (err) {
+      console.error(err);
+      return gatewayResponse({
+        res,
+        status: err.status,
+        success: false,
+        message: err.message,
+      });
+    }
+  }
+
+  // ============ PRODUCT REVIEWS ============
+  @Post('reviews')
+  @AuthRequired()
+  @HasRole(Role.USER)
+  @HttpCode(HttpStatus.CREATED)
+  async createReview(
+    @Body(ValidationPipe) createReviewRequest: CreateReviewRequest,
+    @Res() res: Response,
+  ): Promise<Response<any, Record<string, any>>> {
+    try {
+      const review = await this.gatewayProductService.createReview(
+        createReviewRequest,
+      );
+
+      return gatewayResponse({
+        res,
+        status: HttpStatus.CREATED,
+        success: true,
+        data: review,
+      });
+    } catch (err) {
+      console.error(err);
+
+      return gatewayResponse({
+        res,
+        status: err.status,
+        success: false,
+        message: err.message,
+      });
+    }
+  }
+
+  @Delete('reviews/:uuid')
+  @AuthRequired()
+  @HasRole(Role.ADMINISTRATOR)
+  @HttpCode(HttpStatus.NO_CONTENT)
+  async deleteReview(
+    @Param('uuid', ParseUUIDPipe) uuid: string,
+    @Res() res: Response,
+  ): Promise<Response<any, Record<string, any>>> {
+    try {
+      await this.gatewayProductService.deleteReview(uuid);
+
+      return gatewayResponse({
+        res,
+        status: HttpStatus.NO_CONTENT,
+        success: true,
+        message: 'Review deleted',
+      });
+    } catch (err) {
+      console.error(err);
+      return gatewayResponse({
+        res,
+        status: err.status,
+        success: false,
+        message: err.message,
+      });
+    }
+  }
+
+  @Get('reviews')
+  @HttpCode(HttpStatus.OK)
+  async findAllReviews(
+    @Query('reportNb') reportNb: number,
+    @Res() res: Response,
+  ): Promise<Response<any, Record<string, any>>> {
+    try {
+      if (!reportNb || reportNb < 0) {
+        reportNb = 0;
+      }
+      const reviews = await this.gatewayProductService.findAllReviews(reportNb);
+
+      return gatewayResponse({
+        res,
+        status: HttpStatus.OK,
+        success: true,
+        data: reviews,
+      });
+    } catch (err) {
+      console.error(err);
+      return gatewayResponse({
+        res,
+        status: err.status,
+        success: false,
+        message: err.message,
+      });
+    }
+  }
+
+  @Patch('reviews/report/:uuid')
+  @AuthRequired()
+  @HasRole(Role.USER)
+  @HttpCode(HttpStatus.OK)
+  async reportReview(
+    @Param('uuid', ParseUUIDPipe) uuid: string,
+    @Res() res: Response,
+  ): Promise<Response<any, Record<string, any>>> {
+    try {
+      await this.gatewayProductService.updateReview(uuid);
+
+      return gatewayResponse({
+        res,
+        status: HttpStatus.OK,
+        success: true,
+        message: 'Review updated',
+      });
+    } catch (err) {
+      console.error(err);
+      return gatewayResponse({
+        res,
+        status: err.status,
+        success: false,
+        message: err.message,
+      });
+    }
+  }
+
+  @Delete('reviews/report/approve/:uuid')
+  @AuthRequired()
+  @HasRole(Role.ADMINISTRATOR)
+  @HttpCode(HttpStatus.NO_CONTENT)
+  async approveReportReview(
+    @Param('uuid', ParseUUIDPipe) uuid: string,
+    @Res() res: Response,
+  ): Promise<Response<any, Record<string, any>>> {
+    try {
+      await this.gatewayProductService.approveReportedReview(uuid);
+
+      return gatewayResponse({
+        res,
+        status: HttpStatus.NO_CONTENT,
+        success: true,
+        message: 'Review deleted',
+      });
+    } catch (err) {
+      console.error(err);
+      return gatewayResponse({
+        res,
+        status: err.status,
+        success: false,
+        message: err.message,
+      });
+    }
+  }
+
+  @Patch('reviews/report/decline/:uuid')
+  @AuthRequired()
+  @HasRole(Role.ADMINISTRATOR)
+  @HttpCode(HttpStatus.NO_CONTENT)
+  async declineReportReview(
+    @Param('uuid', ParseUUIDPipe) uuid: string,
+    @Res() res: Response,
+  ): Promise<Response<any, Record<string, any>>> {
+    try {
+      await this.gatewayProductService.declineReportedReview(uuid);
+
+      return gatewayResponse({
+        res,
+        status: HttpStatus.NO_CONTENT,
+        success: true,
+        message: 'Review unbaned',
       });
     } catch (err) {
       console.error(err);

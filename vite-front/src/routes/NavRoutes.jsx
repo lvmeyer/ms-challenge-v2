@@ -14,88 +14,71 @@ import { ProductDetails } from "../pages/ProductDetails/ProductDetails";
 import { Signup } from "../pages/auth/Signup/Signup";
 import { Logout } from "../pages/auth/Logout/Logout";
 import { Checkout } from "../pages/Checkout/Checkout";
-import { Wishlist } from "../pages/Wishlist/Wishlist";
 import { UserProfile } from "../pages/UserProfile/UserProfile";
 import { Profile } from "../pages/UserProfile/Profile/Profile";
 import { Addresses } from "../pages/UserProfile/Addresses/Addresses";
 import { Orders } from "../pages/UserProfile/Orders/Orders";
 import { PageNotFound } from "../pages/PageNotFound/PageNotFound";
-import Pingpage from "../pages/ping-page";
-import { Provider } from "react-redux";
-import store from '../store'
 import App from '../App'
 import {useEffect, useState} from 'react';
 import Payment from '../components/Stripe/Payment'
 import Completion from '../components/Stripe/Completion'
 import {loadStripe} from '@stripe/stripe-js';
+import RequireAuth from '../components/requires-auth/RequiresAuth';
+import { useSelector } from 'react-redux';
 
 export const NavRoutes = () => {
 
   const [ stripePromise, setStripePromise ] = useState(null);
+
+	const { userInfo } = useSelector((state) => state.auth);
 
   useEffect(() => {
     //import.meta.env.STRIPE_PUBLIC_KEY to string
     const stripePublicKey = "pk_test_51IviNhJqYqfbWn1gui3IgmAr493J9bTJcQtzWniQug84wjy4KLchXOyb0HLwPPNng5pkRXYA875XhnEffSUQ2n9Z00OeG28FbA"
     setStripePromise(loadStripe(stripePublicKey));
   }, []);
-
   return (
     <Routes path="/" element={<App />}>
       <Route path="/" element={<Home />} />
-      <Route path="/ping" element={<Pingpage />} />
+      <Route path="/cart" element={<RequireAuth><Cart /></RequireAuth>} />
+
+      <Route path="/product-listing" element={<RequireAuth><ProductListing /></RequireAuth>} />
+      <Route path="/product-details/:productId" element={<RequireAuth><ProductDetails /></RequireAuth>} />
       <Route
-        path="/cart"
+        path="/signup"
         element={
-          // <RequiresAuth>
-            <Cart />
-          // </RequiresAuth>
+            <Signup />
         }
       />
-      <Route
-        path="/wishlist"
-        element={
-          // <RequiresAuth>
-            <Wishlist />
-          // </RequiresAuth>
-        }
-      />
-      <Route path="*" element={<PageNotFound />} />
-      <Route path="/login" element={<Login />} />
-      <Route path="/logout" element={<Logout />} />
-      <Route path="/product-listing" element={<ProductListing />} />
-      <Route path="/signup" element={<Signup />} />
-      <Route path="/product-details/:productId" element={<ProductDetails />} />
       <Route
         path="/checkout"
         element={
-          // <RequiresAuth>
             <Checkout />
-          // </RequiresAuth>
         }
       />
-      <Route path="/profile" element={<UserProfile />}>
+      <Route path="/profile" element={<RequireAuth><UserProfile /></RequireAuth>}>
         <Route
           path="/profile/"
           element={
-            // <RequiresAuth>
               <Profile />
-            // </RequiresAuth>
           }
         />
-        <Route path="/profile/orders" element={<Orders />} />
-        <Route path="/profile/addresses" element={<Addresses />} />
+        <Route path="/profile/orders" element={<RequireAuth><Orders /></RequireAuth>} />
+        <Route path="/profile/addresses" element={<RequireAuth><Addresses /></RequireAuth>} />
       </Route>
 
-      <Route path="/payment/:basketId" element={<Payment stripePromise={stripePromise} />} />
-      <Route path="/completion" element={<Completion stripePromise={stripePromise} />} />
+      <Route
+        path="/payment/:basketId"
+        element={<RequireAuth><Payment stripePromise={stripePromise} /></RequireAuth>}
+      />
+      <Route
+        path="/completion"
+        element={<RequireAuth><Completion stripePromise={stripePromise} /></RequireAuth>}
+      />
+      <Route path="/login" element={<Login />} />
+      <Route path="/logout" element={<RequireAuth><Logout /></RequireAuth>} />
+      <Route path="*" element={<PageNotFound />} />
     </Routes>
   );
 };
-
-ReactDOM.createRoot(document.getElementById("root")).render(
-  <Provider store={store}>
-    <Router>
-      <NavRoutes />
-    </Router>
-  </Provider>
-);

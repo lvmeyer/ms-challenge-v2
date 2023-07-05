@@ -1,7 +1,6 @@
 import {
   Body,
   Controller,
-  Get,
   HttpCode,
   HttpStatus,
   Post,
@@ -24,6 +23,7 @@ export class AuthController {
       id: response.payload.id,
       email: response.payload.email,
       role: response.payload.role,
+      basket: response.payload.basket,
       access_token: response.access_token,
     };
   }
@@ -32,10 +32,5 @@ export class AuthController {
   @HttpCode(HttpStatus.CREATED)
   public register(@Body(ValidationPipe) registerRequest: RegisterRequest) {
     return this.authService.register(registerRequest);
-  }
-
-  @Get('ping')
-  ping() {
-    return { message: 'pong' };
   }
 }
