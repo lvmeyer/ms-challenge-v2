@@ -7,7 +7,7 @@ export const AdminCommentPanel = () => {
     const [isLoading, setIsLoading] = useState(true);
    
     useEffect(() => {
-      fetch(import.meta.env.VITE_GW_HOSTNAME+'/api/v1/reviews?reportNb=0', {
+      fetch(import.meta.env.VITE_GW_HOSTNAME+'/api/v1/reviews?reportNb=3', {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -34,7 +34,9 @@ export const AdminCommentPanel = () => {
             }
         })
         .then(data => {
-            console.log("data", data)
+            console.log("data", data);
+            // Mise à jour de l'état après la suppression
+            setReportedComments(prevComments => prevComments.filter(comment => comment.id !== reportedComment.id));
         });
     }; 
  
@@ -47,7 +49,9 @@ export const AdminCommentPanel = () => {
             }
         })
         .then(data => {
-            console.log("data", data.data)
+            console.log("data", data.data);
+            // Mise à jour de l'état après la suppression
+            setReportedComments(prevComments => prevComments.filter(comment => comment.id !== reportedComment.id));
         });
     };
   
@@ -74,7 +78,7 @@ export const AdminCommentPanel = () => {
                 {reportedComment.reportNb} times
               </p>
               <div className="action-button">
-              <button 
+                <button 
                     className="update-comment-btn" 
                     onClick={() => handleResetReportNb(reportedComment)}
                 >
@@ -92,5 +96,4 @@ export const AdminCommentPanel = () => {
         )}
       </div>
     );
-  };
-  
+};
