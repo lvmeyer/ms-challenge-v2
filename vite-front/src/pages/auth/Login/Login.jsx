@@ -100,8 +100,6 @@ export const Login = () => {
             <label htmlFor="remember-me">Keep me signed in</label>
           </div>
 				{isLoading && <h2>Loading...</h2>}
-
-          <p>Forgot your password?</p>
         </div>
 
         <div className="login-btn-container">
