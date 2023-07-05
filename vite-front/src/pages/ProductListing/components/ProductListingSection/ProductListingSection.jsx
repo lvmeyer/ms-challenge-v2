@@ -21,7 +21,6 @@ export const ProductListingSection = (props) => {
       setPriceFilter(props.filters.priceFilter);
       setSortingFilter(props.filters.sortingFilter);
       setCategoryFilter(props.filters.categoryFilter);
-      console.log(props.filters);
     }
   }, [props.filters]);
 
@@ -120,7 +119,7 @@ export const ProductListingSection = (props) => {
 
   return (
     <div className="product-card-container">
-      {Array.isArray(products) && products.map((product) => {
+      {products.length > 0 ? Array.isArray(products) && products.map((product) => {
         const {
           id,
           name,
@@ -180,7 +179,11 @@ export const ProductListingSection = (props) => {
             </div>
           </Tilt>
         );
-      })}
+      }) : 
+        <div className="no-products">
+          <h2>No products found</h2>
+        </div>
+      }
       <ToastContainer position="bottom-right" />
     </div>
   );

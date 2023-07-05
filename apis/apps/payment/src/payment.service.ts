@@ -18,14 +18,12 @@ export class PaymentService {
     );
   }
 
-  async handleValidPayment(
-    @Body('price') price: number,
-  ): Promise<any> {
+  async handleValidPayment(@Body('price') price: number): Promise<any> {
     try {
       const paymentIntent = await this.stripe.paymentIntents.create({
-        amount: price*100,
+        amount: price * 100,
         currency: 'usd',
-        payment_method: "pm_card_visa",
+        payment_method: 'pm_card_visa',
         confirm: false,
       });
 
