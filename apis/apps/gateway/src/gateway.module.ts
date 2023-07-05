@@ -10,8 +10,6 @@ import { GatewayProductController } from './controllers/gateway-products.control
 import { GatewayProductService } from './services/gateway-products.service';
 import { GatewayBasketController } from './controllers/gateway-basket.controller';
 import { GatewayBasketService } from './services/gateway-basket.service';
-import { GatewayPingController } from './controllers/gateway-ping.controller';
-import { GatewayPingService } from './services/gateway-ping.service';
 import { UsersModule } from './users/users.module';
 import { AuthModule } from './auth/auth.module';
 import { GatewayPaymentController } from './controllers/gateway-payment.controller';
@@ -41,13 +39,11 @@ import { User } from './users/User';
   controllers: [
     GatewayProductController,
     GatewayBasketController,
-    GatewayPingController,
     GatewayPaymentController,
   ],
   providers: [
     GatewayProductService,
     GatewayBasketService,
-    GatewayPingService,
     GatewayPaymentService,
   ],
   exports: [],
