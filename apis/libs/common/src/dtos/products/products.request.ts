@@ -14,7 +14,7 @@ export class CreateProductRequest {
 
   @IsString()
   @IsOptional()
-  @Length(10, 150)
+  @Length(0, 500)
   image: string;
 }
 
