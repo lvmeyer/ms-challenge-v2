@@ -148,7 +148,7 @@ export const Signup = () => {
             onChange={(e) =>
               setSignupCredential({
                 ...signupCredential,
-                firstName: e.target.value,
+                firstname: e.target.value,
               })
             }
             id="first-name"
@@ -163,7 +163,7 @@ export const Signup = () => {
             onChange={(e) =>
               setSignupCredential({
                 ...signupCredential,
-                lastName: e.target.value,
+                lastname: e.target.value,
               })
             }
             id="last-name"
