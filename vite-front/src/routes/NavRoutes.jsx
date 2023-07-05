@@ -5,8 +5,7 @@ import { Route, Routes } from 'react-router-dom';
 import { Login } from '../pages/auth/Login/Login';
 import { ProductListing } from '../pages/ProductListing/ProductListing';
 import { ProductDetails } from '../pages/ProductDetails/ProductDetails';
-import RequireAuth from '../components/requires-auth/RequiresAuth';
-import { useSelector } from 'react-redux';
+// import { RequiresAuth } from "../components/requires-auth/RequiresAuth";
 import { Signup } from '../pages/auth/Signup/Signup';
 import { Logout } from '../pages/auth/Logout/Logout';
 import { Checkout } from '../pages/Checkout/Checkout';
@@ -19,8 +18,8 @@ import { useEffect, useState } from 'react';
 import Payment from '../components/Stripe/Payment';
 import Completion from '../components/Stripe/Completion';
 import { loadStripe } from '@stripe/stripe-js';
-import { ProfileProduct } from '../pages/UserProfile/Profile/Product/Product';
-import { EditProduct } from '../pages/UserProfile/Profile/Product/EditProduct';
+import RequireAuth from '../components/requires-auth/RequiresAuth';
+import { useSelector } from 'react-redux';
 
 export const NavRoutes = () => {
 	const [stripePromise, setStripePromise] = useState(null);
@@ -61,15 +60,6 @@ export const NavRoutes = () => {
 				}
 			/>
 			<Route path="/signup" element={<Signup />} />
-			<Route
-				path="/edit-product/:productId"
-				element={
-					<RequireAuth>
-						<EditProduct />
-					</RequireAuth>
-				}
-			/>
-
 			<Route path="/checkout" element={<Checkout />} />
 			<Route
 				path="/profile"
@@ -79,14 +69,7 @@ export const NavRoutes = () => {
 					</RequireAuth>
 				}
 			>
-				<Route
-					path="/profile/"
-					element={
-						// <RequiresAuth>
-						<UserProfile />
-						// </RequiresAuth>
-					}
-				/>
+				<Route path="/profile/" element={<UserProfile />} />
 				<Route
 					path="/profile/orders"
 					element={
@@ -103,17 +86,10 @@ export const NavRoutes = () => {
 						</RequireAuth>
 					}
 				/>
-				<Route
-					path="/profile/product/product"
-					element={
-						<RequireAuth>
-							<ProfileProduct />
-						</RequireAuth>
-					}
-				/>
 			</Route>
+
 			<Route
-				path="/payment"
+				path="/payment/:basketId"
 				element={
 					<RequireAuth>
 						<Payment stripePromise={stripePromise} />
@@ -138,14 +114,6 @@ export const NavRoutes = () => {
 				}
 			/>
 			<Route path="*" element={<PageNotFound />} />
-			<Route
-				path="/payment/:basketId"
-				element={<Payment stripePromise={stripePromise} />}
-			/>
-			<Route
-				path="/completion"
-				element={<Completion stripePromise={stripePromise} />}
-			/>
 		</Routes>
 	);
 };
