@@ -1,17 +1,17 @@
 version: '3.8'
 
 services:
-  front:
-    image: node:19-alpine
-    container_name: front_c
-    ports:
-      - '80:80'
-    volumes:
-      - ./vite-front:/app
-    working_dir: /app
-    command: sh -c "npm install && npm run dev"
-    env_file:
-      - ./vite-front/.env
+  # front:
+  #   image: node:19-alpine
+  #   container_name: front_c
+  #   ports:
+  #     - '80:80'
+  #   volumes:
+  #     - ./vite-front:/app
+  #   working_dir: /app
+  #   command: sh -c "npm install && npm run dev"
+  #   env_file:
+  #     - ./vite-front/.env
 
   gateway:
     build:
@@ -20,8 +20,8 @@ services:
     container_name: gateway_c
     hostname: gateway
     command: npm run start:dev gateway
-    depends_on:
-      - rabbitmq
+    # depends_on:
+    #   - rabbitmq
     env_file:
       - ./apis/.env
     volumes:
@@ -60,49 +60,49 @@ services:
     ports:
       - '3003:3003'
 
-  payment:
-    build:
-      context: ./apis
-      dockerfile: ./apps/payment/Dockerfile
-    container_name: payment_c
-    hostname: payment
-    command: npm run start:dev payment
-    env_file:
-      - ./apis/.env
-    depends_on:
-      - rabbitmq
-    volumes:
-      - ./apis:/app
-      - /app/node_modules
-    ports:
-      - '3004:3004'
+  # payment:
+  #   build:
+  #     context: ./apis
+  #     dockerfile: ./apps/payment/Dockerfile
+  #   container_name: payment_c
+  #   hostname: payment
+  #   command: npm run start:dev payment
+  #   env_file:
+  #     - ./apis/.env
+  #   depends_on:
+  #     - rabbitmq
+  #   volumes:
+  #     - ./apis:/app
+  #     - /app/node_modules
+  #   ports:
+  #     - '3004:3004'
 
-  billings:
-    build:
-      context: ./apis
-      dockerfile: ./apps/billings/Dockerfile
-    container_name: billings_c
-    hostname: billings
-    command: npm run start:dev billings
-    env_file:
-      - ./apis/.env
-    depends_on:
-      - rabbitmq
-    volumes:
-      - ./apis:/app
-      - /app/node_modules
+  # billings:
+  #   build:
+  #     context: ./apis
+  #     dockerfile: ./apps/billings/Dockerfile
+  #   container_name: billings_c
+  #   hostname: billings
+  #   command: npm run start:dev billings
+  #   env_file:
+  #     - ./apis/.env
+  #   depends_on:
+  #     - rabbitmq
+  #   volumes:
+  #     - ./apis:/app
+  #     - /app/node_modules
 
-  rabbitmq:
-    image: rabbitmq:3-management
-    container_name: rabbitmq_c
-    hostname: rabbitmq
-    volumes:
-      - /var/lib/rabbitmq
-    ports:
-      - '5672:5672'
-      - '15672:15672'
-    env_file:
-      - ./apis/.env
+  # rabbitmq:
+  #   image: rabbitmq:3-management
+  #   container_name: rabbitmq_c
+  #   hostname: rabbitmq
+  #   volumes:
+  #     - /var/lib/rabbitmq
+  #   ports:
+  #     - '5672:5672'
+  #     - '15672:15672'
+  #   env_file:
+  #     - ./apis/.env
 
   database:
     image: postgres:14-alpine
