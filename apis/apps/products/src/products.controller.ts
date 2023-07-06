@@ -149,7 +149,6 @@ export class ProductsController {
   @Get('reviews')
   @HttpCode(HttpStatus.OK)
   async findAllReviews(@Query('reportNb') reportNb: number): Promise<Review[]> {
-    console.log(reportNb, 'HERE');
     return this.productsService.findAllReviews(reportNb);
   }
 }

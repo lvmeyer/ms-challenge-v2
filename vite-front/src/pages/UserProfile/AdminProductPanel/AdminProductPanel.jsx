@@ -1,12 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { Logout } from '../../auth/Logout/Logout';
 import './AdminProductPanel.css';
 import { ToastContainer } from 'react-toastify';
-import { NavLink, useNavigate } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 export const AdminProductPanel = () => {
-	// ----------------PRODUCT FORM-----------------
-
 	const [formData, setFormData] = useState({
 		name: '',
 		price: 0,
@@ -20,8 +17,6 @@ export const AdminProductPanel = () => {
 	const [product, setProduct] = useState({});
 	const [successMessage, setSuccessMessage] = useState('');
 	const [errorMessage, setErrorMessage] = useState('');
-
-	const navigate = useNavigate();
 
 	const handleChange = (e) => {
 		const { name, value } = e.target;
@@ -48,18 +43,13 @@ export const AdminProductPanel = () => {
 			)
 				.then((response) => {
 					if (response.ok) {
-						// La suppression a réussi, vous pouvez effectuer les actions nécessaires
-						console.log('Product deleted successfully');
-						// Par exemple, vous pouvez mettre à jour la liste des produits après la suppression
 						fetchProducts();
 					} else {
-						// La suppression a échoué, vous pouvez afficher un message d'erreur ou effectuer d'autres actions
-						console.log('Product deletion failed');
+						console.error('Product deletion failed');
 					}
 				})
 				.catch((error) => {
-					// Une erreur s'est produite lors de la requête, vous pouvez afficher un message d'erreur ou effectuer d'autres actions
-					console.log(error);
+					console.error(error);
 				});
 		}
 	};
@@ -78,7 +68,7 @@ export const AdminProductPanel = () => {
 				setProducts(data.data);
 			})
 			.catch((error) => {
-				console.log(error);
+				console.error(error);
 			});
 	};
 
@@ -86,7 +76,6 @@ export const AdminProductPanel = () => {
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
-		console.log(editProductData);
 		fetch(import.meta.env.VITE_GW_HOSTNAME + '/api/v1/products', {
 			method: 'POST',
 			headers: {
@@ -98,18 +87,10 @@ export const AdminProductPanel = () => {
 		})
 			.then((response) => response.json())
 			.then((data) => {
-				console.log(data);
 				setProduct(data);
-				// setFormStatus({ success: true, error: '' });
 			})
 			.catch((error) => {
-				console.log(error);
-				// if (error.response && error.response.data && error.response.data.message) {
-				//   const errorMessage = error.response.data.message[0];
-				//   setFormStatus({ success: false, error: errorMessage });
-				// } else {
-				//   setFormStatus({ success: false, error: 'An error occurred while submitting the form. Please try again.' });
-				// }
+				console.error(error);
 			});
 	};
 
@@ -129,8 +110,6 @@ export const AdminProductPanel = () => {
 		})
 			.then((response) => response.json())
 			.then((data) => {
-				console.log(data.data);
-
 				setCategories(data.data);
 			});
 
@@ -151,7 +130,6 @@ export const AdminProductPanel = () => {
 	}, []);
 
 	return (
-		// <div>zdzed</div>
 		<div className="container my-5 width-100">
 			<div className="mt-4">
 				<h2>Product List</h2>
@@ -164,7 +142,9 @@ export const AdminProductPanel = () => {
 										<th scope="col">Name</th>
 										<th scope="col">Price</th>
 										<th scope="col">Description</th>
-										<th className='w-50' scope="col">Image</th>
+										<th className="w-50" scope="col">
+											Image
+										</th>
 										<th scope="col">Category</th>
 										<th></th>
 										<th></th>
@@ -178,10 +158,19 @@ export const AdminProductPanel = () => {
 
 											return (
 												<tr key={id}>
-													<th scope="row" className='text-truncate max-width-150'>{name}</th>
+													<th
+														scope="row"
+														className="text-truncate max-width-150"
+													>
+														{name}
+													</th>
 													<td>{price}</td>
-													<td className='text-truncate max-width-150'>{description}</td>
-													<td className='text-truncate max-width-150'>{image}</td>
+													<td className="text-truncate max-width-150">
+														{description}
+													</td>
+													<td className="text-truncate max-width-150">
+														{image}
+													</td>
 													<td>{category.name}</td>
 													<td>
 														<NavLink to={`/edit-product/${id}`}>
