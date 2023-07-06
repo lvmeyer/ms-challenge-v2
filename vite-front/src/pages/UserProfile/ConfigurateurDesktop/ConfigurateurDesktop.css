@@ -1,0 +1,64 @@
+.configurateur {
+    display: flex;
+    flex-direction: row;
+    width: 70%;
+    height: 100vh;
+}
+
+
+.configurateur-desktop-container{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    width: 100%;
+    height: 100vh;
+}
+
+.configurateur-desktop-select {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 20px;
+    width: 100%;
+    padding: 20px;
+}
+
+.configurateur-desktop-select label {
+    color: #333;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.configurateur-desktop-select .form-check label {
+    color: #333;
+    font-size: 14px;
+    font-weight: 400;
+}
+
+.configurateur-desktop-container select {
+    width: 100%;
+    height: 40px;
+    margin: 10px 0;
+    padding: 0 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #fff;
+    font-size: 16px;
+    font-weight: 400;
+    color: #333;
+    outline: none;
+    cursor: pointer;
+}
+
+
+@media  screen and (max-width: 1024px) {
+    .configurateur {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: auto;
+
+    }
+}

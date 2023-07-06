@@ -10,6 +10,9 @@ export class SubCategory {
   @Column()
   name: string;
 
+  @Column()
+  type: string;
+
   @ManyToOne(() => Category, (category) => category.subCategories)
   category: Category;
 }
