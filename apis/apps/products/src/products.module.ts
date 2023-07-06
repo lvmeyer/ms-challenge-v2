@@ -7,6 +7,8 @@ import { Product, Basket, TypeOrmCustomModule, Review } from '@app/common';
 import { ProductsController } from './products.controller';
 import { ProductsService } from './products.service';
 import { Category } from '@app/common/entity/Category';
+import { SubCategory } from '@app/common/entity/SubCategory';
+import { ProductSubCategory } from '@app/common/entity/ProductSubCategory';
 
 @Module({
   imports: [
@@ -20,7 +22,7 @@ import { Category } from '@app/common/entity/Category';
       }),
     }),
     TypeOrmCustomModule.register(),
-    TypeOrmModule.forFeature([Product, Basket, Category, Review]),
+    TypeOrmModule.forFeature([Product, Basket, Category, SubCategory, Review, ProductSubCategory]),
   ],
   controllers: [ProductsController],
   providers: [ProductsService],

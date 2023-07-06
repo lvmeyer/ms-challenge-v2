@@ -13,11 +13,13 @@ import { UsersController } from './users.controller';
 import { UsersService } from './users.service';
 import { ThrottlerGuard, ThrottlerModule } from '@nestjs/throttler';
 import { APP_GUARD } from '@nestjs/core';
+import { SubCategory } from '@app/common/entity/SubCategory';
+import { ProductSubCategory } from '@app/common/entity/ProductSubCategory';
 
 @Module({
   imports: [
     TypeOrmCustomModule.register(),
-    TypeOrmModule.forFeature([User, Basket, Product, Category, Review]),
+    TypeOrmModule.forFeature([User, Basket, Product, Category, SubCategory, Review, ProductSubCategory]),
     ThrottlerModule.forRoot({
       ttl: 60,
       limit: 30,

@@ -12,6 +12,8 @@ import {
 } from '@app/common';
 import { PaymentController } from './payment.controller';
 import { PaymentService } from './payment.service';
+import { SubCategory } from '@app/common/entity/SubCategory';
+import { ProductSubCategory } from '@app/common/entity/ProductSubCategory';
 
 @Module({
   imports: [
@@ -26,7 +28,7 @@ import { PaymentService } from './payment.service';
       }),
     }),
     TypeOrmCustomModule.register(),
-    TypeOrmModule.forFeature([Basket, Product, Category, Review]),
+    TypeOrmModule.forFeature([Basket, Product, Category, SubCategory, Review, ProductSubCategory]),
   ],
   controllers: [PaymentController],
   providers: [PaymentService],

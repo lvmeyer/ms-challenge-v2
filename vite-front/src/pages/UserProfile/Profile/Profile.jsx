@@ -20,9 +20,10 @@ export const Profile = () => {
               'Authorization': 'Bearer ' + JSON.parse(localStorage.getItem('userInfo')).access_token}
       })
           .then(response => response.json())
-          .then(
-              console.log(user),
-              data => (setUser(data)));
+          .then(data => {
+            setUser(data);
+          })
+
   }, []);
 
   return (
