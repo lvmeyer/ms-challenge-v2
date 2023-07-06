@@ -17,7 +17,6 @@
 	flex-flow: row nowrap;
 	justify-content: space-around;
 	padding: 15px;
-	background-color: rgb(236, 236, 236);
 }
 
 .link-container > a {
@@ -44,4 +43,4 @@
     display: flex;
     flex-direction: column;
   }
-} */
+}

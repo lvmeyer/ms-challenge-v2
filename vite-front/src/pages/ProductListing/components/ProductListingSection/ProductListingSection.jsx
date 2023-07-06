@@ -135,7 +135,7 @@ export const ProductListingSection = (props) => {
 	};
 
 	return (
-		<div className="product-card-container">
+		<div className="product-card-container ">
 			{products.length > 0 ? (
 				Array.isArray(products) &&
 				products.map((product) => {
@@ -153,20 +153,12 @@ export const ProductListingSection = (props) => {
 							<div className="product-card">
 								<Link to={`/product-details/${id}`}>
 									<div className="product-card-image">
-										{/* <Tilt
-                    transitionSpeed={2000}
-                    tiltMaxAngleX={15}
-                    tiltMaxAngleY={15}
-                    scale={1.18}
-                  >
-                    <img src={imgproduct} alt={name} />
-                  </Tilt> */}
 										<img src={image} alt="IMAGE D'UN MATERIEL INFORMATIQUE" />
 									</div>
 								</Link>
 
 								<div className="product-card-details">
-									<h3>{name}</h3>
+									<h3 className='name' >{name}</h3>
 									<div className="price-container">
 										<p className="category-name">
 											<strong>Category :</strong> {category.name}
@@ -176,10 +168,7 @@ export const ProductListingSection = (props) => {
 										</p>
 									</div>
 
-									{/* <p>Catégorie: {category_name}</p> */}
 									<div className="info">
-										{/* {!is_stock && <p className="out-of-stock">Out of stock</p>}
-                  {trending && <p className="trending">Trending</p>} */}
 									</div>
 								</div>
 
