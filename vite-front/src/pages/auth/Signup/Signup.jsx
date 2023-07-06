@@ -57,6 +57,7 @@ export const Signup = () => {
   };
 
   return (
+    <div className="vh-100">
     <div className="signup-container">
       <h2>Sign Up</h2>
       <form
@@ -186,6 +187,7 @@ export const Signup = () => {
         </div>
         <Link to="/login">Already have an account?</Link>
       </form>
+    </div>
     </div>
   );
 };

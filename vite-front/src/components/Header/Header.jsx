@@ -58,18 +58,6 @@ export const Header = () => {
             : "nav-link-container"
         }
       >
-        
-      <div className="nav-input-search">
-        <input
-          onKeyDown={(e) => {
-            e.key === "Enter" && navigate("/product-listing");
-          }}
-          placeholder="Search"
-        />
-        <button>
-          <GrSearch />
-        </button>
-      </div>
       <div>
         <span>{userInfo.email}</span>
       </div>
