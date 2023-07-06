@@ -4,9 +4,6 @@ import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
 import { CartListing } from "./components/CartListing/CartListing";
-// import { Coupons } from "./components/Coupons/Coupons";
-// import { CartAmountSummary } from "./components/CartAmountSummary/CartAmountSummary";
-// import { useUserData } from "../../contexts/UserDataProvider";
 
 export const Cart = () => {
   const { userInfo } = useSelector((state) => state.auth);
@@ -19,6 +16,8 @@ export const Cart = () => {
     navigate('/login');
     return null;
   }
+
+  // emailjs.init("mig4vOijtEYmzZkvj")
 
   return (
     ((
