@@ -28,6 +28,8 @@ import {useEffect, useState} from 'react';
 import Payment from '../components/Stripe/Payment'
 import Completion from '../components/Stripe/Completion'
 import {loadStripe} from '@stripe/stripe-js';
+import {ProfileProduct} from '../pages/UserProfile/Profile/Product/Product'
+import { EditProduct } from '../pages/UserProfile/Profile/Product/EditProduct';
 
 export const NavRoutes = () => {
 
@@ -64,6 +66,8 @@ export const NavRoutes = () => {
       <Route path="/product-listing" element={<ProductListing />} />
       <Route path="/signup" element={<Signup />} />
       <Route path="/product-details/:productId" element={<ProductDetails />} />
+      <Route path="/edit-product/:productId" element={<EditProduct />} />
+
       <Route
         path="/checkout"
         element={
@@ -77,12 +81,14 @@ export const NavRoutes = () => {
           path="/profile/"
           element={
             // <RequiresAuth>
-              <Profile />
+              <UserProfile />
             // </RequiresAuth>
           }
         />
         <Route path="/profile/orders" element={<Orders />} />
         <Route path="/profile/addresses" element={<Addresses />} />
+        <Route path="/profile/product/product" element={<ProfileProduct />} />
+
       </Route>
 
       <Route path="/payment" element={<Payment stripePromise={stripePromise} />} />
