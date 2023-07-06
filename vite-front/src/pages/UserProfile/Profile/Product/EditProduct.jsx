@@ -113,7 +113,9 @@ export const EditProduct = () => {
   
 
   return (
-    <div className="container m-5">
+    <div className="container">
+      <div className="m-5">
+        
       <form onSubmit={handleUpdate} className="d-flex flex-column">
       <input
         className="form-control"
@@ -156,6 +158,8 @@ export const EditProduct = () => {
           Save
         </button>
       </form>
+
+      </div>
     </div>
   );
 };

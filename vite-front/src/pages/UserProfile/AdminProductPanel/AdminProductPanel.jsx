@@ -152,7 +152,7 @@ export const AdminProductPanel = () => {
 
 	return (
 		// <div>zdzed</div>
-		<div className="container m-5">
+		<div className="container my-5 width-100">
 			<div className="mt-4">
 				<h2>Product List</h2>
 				<div className="container">
@@ -164,7 +164,8 @@ export const AdminProductPanel = () => {
 										<th scope="col">Name</th>
 										<th scope="col">Price</th>
 										<th scope="col">Description</th>
-										<th scope="col">Image</th>
+										<th className='w-50' scope="col">Image</th>
+										<th scope="col">Category</th>
 										<th></th>
 										<th></th>
 									</tr>
@@ -177,10 +178,10 @@ export const AdminProductPanel = () => {
 
 											return (
 												<tr key={id}>
-													<th scope="row">{name}</th>
+													<th scope="row" className='text-truncate max-width-150'>{name}</th>
 													<td>{price}</td>
-													<td>{description}</td>
-													<td>{image}</td>
+													<td className='text-truncate max-width-150'>{description}</td>
+													<td className='text-truncate max-width-150'>{image}</td>
 													<td>{category.name}</td>
 													<td>
 														<NavLink to={`/edit-product/${id}`}>
