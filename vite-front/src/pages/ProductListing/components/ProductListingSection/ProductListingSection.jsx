@@ -4,10 +4,14 @@ import React from 'react';
 import { useState, useEffect } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { useSelector } from 'react-redux';
 
 import { Link } from 'react-router-dom';
 
 export const ProductListingSection = (props) => {
+	
+	const { userInfo } = useSelector((state) => state.auth);
+
 	const [products, setProducts] = useState([]);
 	const [baskedId, setBaskedId] = useState(0);
 
@@ -179,6 +183,7 @@ export const ProductListingSection = (props) => {
 									</div>
 								</div>
 
+							{userInfo && (userInfo.role === 'USER') ? (
 								<div className="product-card-buttons">
 									<button
 										className="cart-btn"
@@ -187,6 +192,13 @@ export const ProductListingSection = (props) => {
 										Add to Cart
 									</button>
 								</div>
+							) : userInfo && (userInfo.role === 'ADMINISTRATEUR') ? (
+								<>
+								</>
+							) : (
+								<>
+								</>
+							)}
 							</div>
 						</Tilt>
 					);

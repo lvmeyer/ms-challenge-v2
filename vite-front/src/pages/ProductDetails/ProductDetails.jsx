@@ -4,10 +4,9 @@ import React from "react";
 import { ProductImage } from "./components/ProductImage/ProductImage";
 import { ProductDescription } from "./components/ProductDescription/ProductDescription";
 import { ProductComments } from "./components/ProductComment/ProductComments";
+import { useSelector } from "react-redux";
 
 export const ProductDetails = () => {
-
-
   return (
     (
       <>
@@ -16,6 +15,7 @@ export const ProductDetails = () => {
             <ProductImage  />
             <ProductDescription />
           </div>
+          
           <div className="product-details-comment">
             <ProductComments />
           </div>
