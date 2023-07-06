@@ -52,6 +52,23 @@ export class ProductsController {
     return await this.productsService.deleteCategory(uuid);
   }
 
+  // ================== SUB_CTGS =================
+  @Post('categories')
+  @HttpCode(HttpStatus.CREATED)
+  async createSubCategory(
+    @Body(ValidationPipe) createCategoryRequest: CreateCategoryRequest,
+  ): Promise<Category> {
+    return await this.productsService.createCategory(createCategoryRequest);
+  }
+
+  @Delete('categories/:uuid')
+  @HttpCode(HttpStatus.NO_CONTENT)
+  async deleteSubCategory(
+    @Param('uuid', ParseUUIDPipe) uuid: string,
+  ): Promise<void> {
+    return await this.productsService.deleteCategory(uuid);
+  }
+
   // ================== PDTS ==================
   @Post('products')
   @HttpCode(HttpStatus.CREATED)

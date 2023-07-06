@@ -12,6 +12,8 @@ import {
 } from '@app/common';
 import { BasketService } from './basket.service';
 import { BasketController } from './basket.controller';
+import { SubCategory } from '@app/common/entity/SubCategory';
+import { ProductSubCategory } from '@app/common/entity/ProductSubCategory';
 
 @Module({
   imports: [
@@ -25,7 +27,7 @@ import { BasketController } from './basket.controller';
       }),
     }),
     TypeOrmCustomModule.register(),
-    TypeOrmModule.forFeature([Basket, Product, Category, Review]),
+    TypeOrmModule.forFeature([Basket, Product, Category, SubCategory, Review, ProductSubCategory]),
   ],
   controllers: [BasketController],
   providers: [BasketService],
