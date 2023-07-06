@@ -6,6 +6,8 @@ import { Profile } from './Profile/Profile';
 import { AdminCommentPanel } from './PanelAdmin/AdminCommentPanel';
 import { AdminProductPanel } from './AdminProductPanel/AdminProductPanel';
 
+import { ConfigurateurDesktop } from './ConfigurateurDesktop/ConfigurateurDesktop';
+
 export const UserProfile = () => {
 	const { userInfo } = useSelector((state) => state.auth);
 
@@ -22,6 +24,7 @@ export const UserProfile = () => {
 					) : (
 						<>
 							<Profile />
+							<ConfigurateurDesktop />
 						</>
 					)}
 				</div>
