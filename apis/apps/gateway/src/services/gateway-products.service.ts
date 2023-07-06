@@ -4,6 +4,7 @@ import { ConfigService } from '@nestjs/config';
 import {
   CreateCategoryRequest,
   CreateProductRequest,
+  CreateReviewRequest,
   UpdateProductRequest,
 } from '@app/common';
 import { ErrorResponse } from '@app/common';
@@ -15,6 +16,8 @@ export class GatewayProductService {
   PATH = this.configService.get<string>('HOSTNAME_PRODUCTS') + '/pv/products';
   PATH_CATEGORY =
     this.configService.get<string>('HOSTNAME_PRODUCTS') + '/pv/categories';
+  PATH_REVIEW =
+    this.configService.get<string>('HOSTNAME_PRODUCTS') + '/pv/reviews';
 
   // =============== CATEGORY ===============
   async createCategory(
@@ -132,6 +135,82 @@ export class GatewayProductService {
   async deleteProduct(id: string): Promise<void> {
     const response = await fetch(`${this.PATH}/${id}`, {
       method: 'DELETE',
+    });
+
+    if (response.status !== HttpStatus.NO_CONTENT) {
+      const res = await response.json();
+      throw new ErrorResponse(res.message, response.status);
+    }
+  }
+
+  // ============ REVIEWS ============
+  async createReview(createReviewRequest: CreateReviewRequest): Promise<any> {
+    const response = await fetch(this.PATH_REVIEW, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(createReviewRequest),
+    });
+    const res = await response.json();
+
+    if (response.status !== HttpStatus.CREATED) {
+      throw new ErrorResponse(res.message, response.status);
+    }
+    return res;
+  }
+
+  async deleteReview(id: string): Promise<void> {
+    const response = await fetch(`${this.PATH_REVIEW}/${id}`, {
+      method: 'DELETE',
+    });
+
+    if (response.status !== HttpStatus.NO_CONTENT) {
+      const res = await response.json();
+      throw new ErrorResponse(res.message, response.status);
+    }
+  }
+
+  async findAllReviews(reportNb: number): Promise<any> {
+    const response = await fetch(`${this.PATH_REVIEW}?reportNb=${reportNb}`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+    const res = await response.json();
+
+    if (response.status !== HttpStatus.OK) {
+      throw new ErrorResponse(res.message, response.status);
+    }
+    return res;
+  }
+
+  async updateReview(id: string): Promise<void> {
+    const response = await fetch(`${this.PATH_REVIEW}/report/${id}`, {
+      method: 'PATCH',
+    });
+
+    if (response.status !== HttpStatus.OK) {
+      const res = await response.json();
+      throw new ErrorResponse(res.message, response.status);
+    }
+  }
+
+  async approveReportedReview(id: string): Promise<void> {
+    const response = await fetch(`${this.PATH_REVIEW}/report/approve/${id}`, {
+      method: 'DELETE',
+    });
+
+    if (response.status !== HttpStatus.NO_CONTENT) {
+      const res = await response.json();
+      throw new ErrorResponse(res.message, response.status);
+    }
+  }
+
+  async declineReportedReview(id: string): Promise<void> {
+    const response = await fetch(`${this.PATH_REVIEW}/report/decline/${id}`, {
+      method: 'PATCH',
     });
 
     if (response.status !== HttpStatus.NO_CONTENT) {

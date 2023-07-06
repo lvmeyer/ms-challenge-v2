@@ -1,0 +1,85 @@
+.admin-comment-panel {
+    margin-top: 30px;
+    padding: 0 10%;
+  }
+  
+  .admin-comment-panel h3 {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  
+  .reported-comment {
+    margin-bottom: 10px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+  }
+  
+  .reported-comment p {
+    margin-bottom: 5px;
+  }
+  
+  .reported-comment strong {
+    font-weight: bold;
+  }
+  
+  .delete-comment-btn {
+    padding: 20px;
+    border-radius: 5px;
+    background-color: #dc3545;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    width: 20%;
+    font-size: 15px;
+
+  }
+  .update-comment-btn {
+    padding: 20px;
+    border-radius: 5px;
+    background-color: #000000;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    width: 20%;
+    font-size: 15px;
+  }
+  
+  .action-button{
+    display: flex;
+    justify-content: space-around;
+    padding-top: 20px;
+  }
+  .delete-comment-btn:hover {
+    background-color: #c82333;
+  }  
+  
+  .update-comment-btn:hover {
+    background-color: #807a7b;
+  }
+  
+  .reported-comment-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .reported-comment-table th,
+  .reported-comment-table td {
+    padding: 8px;
+    border: 1px solid #ddd;
+  }
+  
+  .reported-comment-table th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+  }
+  
+  .reported-comment-table td {
+    text-align: center;
+  }
+  
+  .reported-comment-table tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+  }
+  

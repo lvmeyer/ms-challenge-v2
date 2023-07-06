@@ -42,7 +42,6 @@ export const Login = () => {
       const res = await login({ email, password }).unwrap();
       
       dispatch(setCredentials({ ...res }));
-      toast.success('Logged in successfully');
       navigate('/');
     } catch (error) {
       toast.error(error.data.message);
@@ -52,6 +51,7 @@ export const Login = () => {
   
 
   return (
+    <div className='vh-100'>
     <div className="login-container">
       <h2>Login</h2>
       <form onSubmit={handleSubmitLogin}
@@ -100,8 +100,6 @@ export const Login = () => {
             <label htmlFor="remember-me">Keep me signed in</label>
           </div>
 				{isLoading && <h2>Loading...</h2>}
-
-          <p>Forgot your password?</p>
         </div>
 
         <div className="login-btn-container">
@@ -112,6 +110,8 @@ export const Login = () => {
           Create a new account?
         </Link>
       </form>
+    </div>
+      
     </div>
   );
 };

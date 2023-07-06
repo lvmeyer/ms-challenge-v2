@@ -21,7 +21,7 @@ export class GatewayPaymentService {
   PATH = this.configService.get<string>('HOSTNAME_PAYMENT') + '/pv/payment';
   PATH_BASKET = this.configService.get<string>('HOSTNAME_BASKET') + '/pv/basket';
 
-  async pay(access_token: string): Promise<any> {
+  async pay(access_token: string, price: number): Promise<any> {
     console.debug('POST', this.PATH);
     try {
       const response = await fetch(this.PATH, {
@@ -29,6 +29,9 @@ export class GatewayPaymentService {
         headers: {
           'Content-Type': 'application/json',
         },
+        body: JSON.stringify({
+          price: price
+        }),
       });
       const res = await response.json();
 
@@ -53,6 +56,16 @@ export class GatewayPaymentService {
 
       fetch(`${this.PATH_BASKET}/`+basketID, {
         method: 'DELETE',
+      });
+
+      fetch(`${this.PATH_BASKET}/`+basketID, {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          price: 0
+        }),
       });
 
       this.paymentClient.emit('create-billing', {

@@ -3,6 +3,7 @@
 	display: flex;
 	flex-flow: row wrap;
 	justify-content: space-evenly;
+	width: 100%;
 }
 
 .product-card {
@@ -62,6 +63,10 @@
 }
 .product-card-details > p > * {
 	margin-right: 5px;
+}
+
+.product-card-details h3 {
+	font-size: 24px;
 }
 
 .product-card-details > h3 {
@@ -128,10 +133,14 @@
 	color: black;
 	font-weight: 600;
 }
+.discount-price #price{
+	font-size: 1.2em;
+  	font-weight: 600;
+	margin-left: 5px;
+}
 
 .product-card-details .price-container {
 	font-size: 1em;
-	display: flex;
 	margin-bottom: 0.35em;
 }
 
@@ -157,6 +166,19 @@
 	background-color: rgb(249, 213, 203);
 	color: rgb(108, 108, 108);
 	font-size: 0.8em;
+}
+
+.no-products{
+	width: 100%;
+	margin-top: 30px;
+	margin-left: 30px;
+	font-size: 1.5em;
+	font-weight: 600;
+	color: rgb(108, 108, 108);
+	display: flex;
+	align-items: flex-end;
+    flex-direction: row;
+    justify-content: center;
 }
 
 @media (min-width: 768px) {

@@ -29,6 +29,11 @@
 
 /* @media (min-width: 768px) {
   .user-profile-container {
-    width: 400px;
+  }
+
+  .link-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
 } */

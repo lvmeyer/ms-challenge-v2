@@ -9,6 +9,7 @@ import { GrSearch } from "react-icons/gr";
 import { CgShoppingCart } from "react-icons/cg";
 import { logout, setCredentials } from '../../slices/authSlice';
 import { useDispatch, useSelector } from 'react-redux';
+// import requireAuth from '../requires-auth/RequiresAuth';
 
 export const Header = () => {
 	const { userInfo } = useSelector((state) => state.auth);
@@ -16,23 +17,23 @@ export const Header = () => {
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
 
-	useEffect(() => {
-		const storedUserInfo = localStorage.getItem('userInfo');
-		const userInfo = storedUserInfo ? JSON.parse(storedUserInfo) : null;
-		if (userInfo) {
-			dispatch(setCredentials(userInfo));
-		} else {
-			navigate('/login');
-			dispatch(logout());
-		}
-	}, [dispatch, navigate]);
+	// useEffect(() => {
+	// 	const storedUserInfo = localStorage.getItem('userInfo');
+	// 	const userInfo = storedUserInfo ? JSON.parse(storedUserInfo) : null;
+	// 	if (userInfo) {
+	// 		dispatch(setCredentials(userInfo));
+	// 	} else {
+	// 		navigate('/login');
+	// 		dispatch(logout());
+	// 	}
+	// }, [dispatch, navigate]);
 
 
   const [showHamburger, setShowHamburger] = useState(true);
   const getActiveStyle = ({ isActive }) => {
     return { color: isActive ? "white" : "" };
   };
-  
+
 	const logoutHandler = () => {
 		dispatch(logout());
 		navigate('/login');
@@ -48,18 +49,8 @@ export const Header = () => {
         </NavLink>
       </div>
 
-      <div className="nav-input-search">
-        <input
-          onKeyDown={(e) => {
-            e.key === "Enter" && navigate("/product-listing");
-          }}
-          placeholder="Search"
-        />
-        <button>
-          <GrSearch />
-        </button>
-      </div>
       {userInfo && (userInfo.role === 'ADMINISTRATOR' || userInfo.role === 'USER') ? (
+      
       <div
         className={
           !showHamburger
@@ -77,13 +68,14 @@ export const Header = () => {
       >
         Profile
       </NavLink>
-        <NavLink
-          onClick={() => setShowHamburger(true)}
-          style={getActiveStyle}
-          to="/product-listing"
-        >
-          Explore
-        </NavLink>
+          <NavLink
+            onClick={() => setShowHamburger(true)}
+            style={getActiveStyle}
+            to="/product-listing"
+          >
+            Explore
+          </NavLink>
+
         <NavLink
           onClick={() => setShowHamburger(true)}
           style={getActiveStyle}
@@ -100,13 +92,25 @@ export const Header = () => {
         </NavLink>
       </div>
 				) : (
-          <NavLink
-            onClick={() => setShowHamburger(true)}
-            style={getActiveStyle}
-            to="/login"
-          >
-            Login 
-          </NavLink>
+          <div>
+            <div
+              className={
+                !showHamburger
+                  ? "nav-link-container-mobile nav-link-container"
+                  : "nav-link-container"
+              }>
+            <div>
+              <NavLink
+                onClick={() => setShowHamburger(true)}
+                style={getActiveStyle}
+                to="/login"
+              >
+                Login 
+              </NavLink>
+
+            </div>
+          </div>
+        </div>
         )}
 
       {showHamburger && (
