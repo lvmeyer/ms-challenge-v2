@@ -8,7 +8,6 @@ import { ProductDetails } from '../pages/ProductDetails/ProductDetails';
 import { Signup } from '../pages/auth/Signup/Signup';
 import { Logout } from '../pages/auth/Logout/Logout';
 import { UserProfile } from '../pages/UserProfile/UserProfile';
-import { Addresses } from '../pages/UserProfile/Addresses/Addresses';
 import { Orders } from '../pages/UserProfile/Orders/Orders';
 import { PageNotFound } from '../pages/PageNotFound/PageNotFound';
 import App from '../App';
@@ -78,14 +77,6 @@ export const NavRoutes = () => {
 					element={
 						<RequireAuth>
 							<Orders />
-						</RequireAuth>
-					}
-				/>
-				<Route
-					path="/profile/addresses"
-					element={
-						<RequireAuth>
-							<Addresses />
 						</RequireAuth>
 					}
 				/>
