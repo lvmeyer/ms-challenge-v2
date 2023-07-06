@@ -9,6 +9,8 @@ export const Filter = (props) => {
   const [isFilterApplied, setIsFilterApplied] = useState(false);
   const [categories, setCategories] = useState([]);
 
+  const [categoryFilter, setCategorFilter] = useState({});
+
   const [priceFilter, setPriceFilter] = useState({
     below200: false,
     between201and999: false,
@@ -32,12 +34,17 @@ export const Filter = (props) => {
     .then(response => response.json())
     .then(data => {
       setCategories(data.data);
+
+      setCategorFilter(data.data.reduce((acc, category) => {
+        acc[category.name] = false;
+        return acc;
+        }, {}));
     });
   }, []);
 
   const applyFilters = () => {
     setIsFilterApplied(true);
-    props.sendData(priceFilter, sortingFilter);
+    props.sendData(priceFilter, sortingFilter, categoryFilter);
   };
      
   return (
@@ -80,7 +87,13 @@ export const Filter = (props) => {
               {categories ? categories.map((category) => (
                 <label htmlFor={category.name} key={category.id}>
                   {category.name}
-                  <input type="checkbox" name={category.name} id={category.name} />
+                  <input type="checkbox" name={category.name} id={category.name}
+                  checked={categoryFilter[category.name]}
+                  onChange={() => setCategorFilter(prevFilter => ({
+                    ...prevFilter,
+                    [category.name]: !categoryFilter[category.name],
+                  }))}
+                  />
                 </label>
               )) : null}
 

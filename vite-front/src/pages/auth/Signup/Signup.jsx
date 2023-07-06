@@ -4,6 +4,7 @@ import { BsEyeSlash } from "react-icons/bs";
 import { BsEye } from "react-icons/bs";
 import { useState, useEffect } from "react";
 import { toast } from "react-hot-toast";
+import emailjs from '@emailjs/browser'
 
 export const Signup = () => {
   const [hidePassword, setHidePassword] = useState(true);
@@ -33,6 +34,7 @@ export const Signup = () => {
       if (response.ok) {
         const data = await response.json();
         console.log(data); // Traitez la réponse du serveur ici
+        handleSubmitMail(data.email);
       } else {
 
         console.error("Échec de la demande de registre");
@@ -56,7 +58,26 @@ export const Signup = () => {
     }
   };
 
+  const handleSubmitMail = (email) => {
+
+    const content = "Hello, thank you for your registration ! You can now log in to your account.";
+
+    const templateParams = {
+      to_email: email,
+      message: content,
+      to_name: "Pierre"
+    };
+
+    emailjs.send("service_yt1fbg8", "template_lrt115o", templateParams, "mig4vOijtEYmzZkvj")
+      .then(function(response) {
+        console.log('SUCCESS!', response.status, response.text);
+    }, function(error) {
+        console.log('FAILED...', error);
+    });
+  }
+
   return (
+    <div className="vh-100">
     <div className="signup-container">
       <h2>Sign Up</h2>
       <form
@@ -186,6 +207,7 @@ export const Signup = () => {
         </div>
         <Link to="/login">Already have an account?</Link>
       </form>
+    </div>
     </div>
   );
 };
