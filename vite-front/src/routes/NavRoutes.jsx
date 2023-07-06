@@ -19,7 +19,8 @@ import Payment from '../components/Stripe/Payment';
 import Completion from '../components/Stripe/Completion';
 import { loadStripe } from '@stripe/stripe-js';
 import RequireAuth from '../components/requires-auth/RequiresAuth';
-import { useSelector } from 'react-redux';
+import { useSelector } from 'react-redux'; 
+import { EditProduct } from '../pages/UserProfile/Profile/Product/EditProduct';
 
 export const NavRoutes = () => {
 	const [stripePromise, setStripePromise] = useState(null);
@@ -43,6 +44,14 @@ export const NavRoutes = () => {
 				}
 			/>
 
+			<Route
+				path="/edit-product/:productId"
+				element={
+					<RequireAuth>
+						<EditProduct />
+					</RequireAuth>
+				}
+			/>
 			<Route
 				path="/product-listing"
 				element={
