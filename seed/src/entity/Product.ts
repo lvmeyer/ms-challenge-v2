@@ -3,12 +3,14 @@ import {
 	CreateDateColumn,
 	Entity,
 	ManyToOne,
+	OneToMany,
 	PrimaryGeneratedColumn,
 	UpdateDateColumn,
 } from 'typeorm';
 
 import { Basket } from './Basket';
 import { Category } from './Category';
+import { Review } from './Review';
 
 @Entity()
 export class Product {
@@ -38,4 +40,7 @@ export class Product {
 
 	@ManyToOne(() => Basket, (basket) => basket.products)
 	basket: Basket;
+
+	@OneToMany(() => Review, (review) => review.product)
+	reviews: Review[];
 }
