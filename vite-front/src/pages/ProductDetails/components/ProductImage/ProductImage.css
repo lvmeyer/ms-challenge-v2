@@ -1,5 +1,5 @@
 .product-details-image img {
-  width: 90vw;
+  width: 100%;
   object-fit: cover;
   height: 65vw;
   margin-bottom: 50px;
@@ -12,7 +12,7 @@
   }
 
   .product-details-image img {
-    width: 50vw;
+    width: 100%;
     object-fit: cover;
     height: 500px;
     margin-top: -70px;

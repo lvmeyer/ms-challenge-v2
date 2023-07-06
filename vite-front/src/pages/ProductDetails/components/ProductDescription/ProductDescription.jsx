@@ -5,9 +5,11 @@ import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
+import { useSelector } from "react-redux";
 
 
 export const ProductDescription = ( ) => {
+  const { userInfo } = useSelector((state) => state.auth);
   const { productId } = useParams();
   const [selectedProduct, setSelectedProduct] = useState(null);
   const navigate = useNavigate();
