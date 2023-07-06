@@ -9,6 +9,7 @@ import { GrSearch } from "react-icons/gr";
 import { CgShoppingCart } from "react-icons/cg";
 import { logout, setCredentials } from '../../slices/authSlice';
 import { useDispatch, useSelector } from 'react-redux';
+import LogoBando from '/public/assets/icons/logo.png';
 // import requireAuth from '../requires-auth/RequiresAuth';
 
 export const Header = () => {
@@ -39,7 +40,6 @@ export const Header = () => {
 		navigate('/login');
 	};
 
-  const LogoBando = '../../../public/assets/icons/logo.png';
 
   return (
     <nav>
@@ -49,7 +49,7 @@ export const Header = () => {
         </NavLink>
       </div>
 
-      {userInfo && (userInfo.role === 'ADMINISTRATOR' || userInfo.role === 'USER') ? (
+      {userInfo && (userInfo.role === 'ADMINISTRATOR') ? (
       
       <div
         className={
@@ -77,20 +77,54 @@ export const Header = () => {
           </NavLink>
 
         <NavLink
-          onClick={() => setShowHamburger(true)}
-          style={getActiveStyle}
-          to="/cart"
-        >
-          <span>{!showHamburger ? "Cart" : ""}</span>
-          <CgShoppingCart size={25} className="cart" />{" "}
-        </NavLink>
-        <NavLink
           onClick={logoutHandler}
           style={getActiveStyle}
           >
             Logout
         </NavLink>
       </div>
+            ) : userInfo && (userInfo.role === 'USER') ? (
+      
+              <div
+                className={
+                  !showHamburger
+                    ? "nav-link-container-mobile nav-link-container"
+                    : "nav-link-container"
+                }
+              >
+              <div>
+                <span>{userInfo.email}</span>
+              </div>
+              <NavLink
+                onClick={() => setShowHamburger(true)}
+                style={getActiveStyle}
+                to="/profile"
+              >
+                Profile
+              </NavLink>
+                  <NavLink
+                    onClick={() => setShowHamburger(true)}
+                    style={getActiveStyle}
+                    to="/product-listing"
+                  >
+                    Explore
+                  </NavLink>
+        
+                <NavLink
+                  onClick={() => setShowHamburger(true)}
+                  style={getActiveStyle}
+                  to="/cart"
+                >
+                  <span>{!showHamburger ? "Cart" : ""}</span>
+                  <CgShoppingCart size={25} className="cart" />{" "}
+                </NavLink>
+                <NavLink
+                  onClick={logoutHandler}
+                  style={getActiveStyle}
+                  >
+                    Logout
+                </NavLink>
+              </div>
 				) : (
           <div>
             <div
