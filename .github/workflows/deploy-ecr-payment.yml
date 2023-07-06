@@ -5,8 +5,8 @@ on:
     branches:
       - main
     paths:
-      - apis/apps/payment/*
-      - apis/libs/*
+      - ./apis/apps/payment/*
+      - ./apis/libs/*
 
 jobs:
   build-and-push:

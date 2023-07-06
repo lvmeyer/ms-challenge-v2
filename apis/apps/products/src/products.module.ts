@@ -26,4 +26,3 @@ import { Category } from '@app/common/entity/Category';
   providers: [ProductsService],
 })
 export class ProductsModule {}
-// check cd
