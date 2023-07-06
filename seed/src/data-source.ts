@@ -10,10 +10,10 @@ import { ProductSubCategory } from './entity/ProductSubCategory';
 
 export const AppDataSource = new DataSource({
 	type: 'postgres',
-	host: '0.0.0.0',
+	host: 'bando.ck0wxkraoavc.eu-west-3.rds.amazonaws.com',
 	port: 5432,
-	username: 'postgres',
-	password: 'postgres',
+	username: 'bando',
+	password: 'bando1234',
 	database: 'bando',
 	synchronize: true,
 	logging: false,
