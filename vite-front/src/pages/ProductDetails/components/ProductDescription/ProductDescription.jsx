@@ -4,9 +4,11 @@ import { BsFillStarFill } from "react-icons/bs";
 import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 
 export const ProductDescription = ( ) => {
+  const { userInfo } = useSelector((state) => state.auth);
   const { productId } = useParams();
   const [selectedProduct, setSelectedProduct] = useState(null);
   const navigate = useNavigate();
@@ -62,11 +64,17 @@ export const ProductDescription = ( ) => {
               </span>
           </div>
           <div className="product-card-buttons-container">
-            <button
-              className="add-to-cart-btn"
-            >
-            Add to cart 
-            </button>
+            {userInfo && (userInfo.role === "ADMINISTRATOR") ? (
+              <></>
+            ) : userInfo && (userInfo.role === "USER") ? ( 
+              <button
+                className="add-to-cart-btn"
+              >
+                Add to cart 
+              </button>
+            ) : (
+              <></>
+            )}
             <button
               className="add-to-wishlist-btn"
               onClick={() => navigate("/product-listing")}
