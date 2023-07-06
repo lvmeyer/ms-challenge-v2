@@ -22,7 +22,7 @@ function Completion(props) {
       }
 
       setMessageBody(error ? `> ${error.message}` : (
-        <> Payment {paymentIntent.status}, Thank you !</>
+        <> Payment {paymentIntent.status}, an email has been sent to you. </>
       ));
     });
   }, [stripePromise]);
