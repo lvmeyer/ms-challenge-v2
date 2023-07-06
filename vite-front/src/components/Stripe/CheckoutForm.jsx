@@ -4,12 +4,15 @@ import {
 } from '@stripe/react-stripe-js'
 import {useState} from 'react'
 import {useStripe, useElements} from '@stripe/react-stripe-js';
+import { useSelector } from "react-redux";
+import emailjs from '@emailjs/browser'
 
 export default function CheckoutForm() {
   const stripe = useStripe();
   const elements = useElements();
   const [message, setMessage] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
+  const { userInfo } = useSelector((state) => state.auth);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -21,6 +24,7 @@ export default function CheckoutForm() {
     }
 
     setIsLoading(true);
+    handleSubmitMail();
 
     const { error } = await stripe.confirmPayment({
       elements,
@@ -42,6 +46,24 @@ export default function CheckoutForm() {
     }
 
     setIsLoading(false);
+  }
+
+  const handleSubmitMail = () => {
+
+    const content = "Hello, thank you for your payment !";
+
+    const templateParams = {
+      to_email: userInfo.email,
+      message: content,
+      to_name: "Pierre"
+    };
+
+    emailjs.send("service_yt1fbg8", "template_lh4fqne", templateParams, "mig4vOijtEYmzZkvj")
+      .then(function(response) {
+        console.log('SUCCESS!', response.status, response.text);
+    }, function(error) {
+        console.log('FAILED...', error);
+    });
   }
 
   return (
