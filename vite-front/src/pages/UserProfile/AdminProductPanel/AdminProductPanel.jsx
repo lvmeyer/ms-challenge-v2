@@ -22,12 +22,6 @@ export const AdminProductPanel = () => {
 	const [errorMessage, setErrorMessage] = useState('');
 
 	const navigate = useNavigate();
-	// const idProduct = `/edit-product/${productId}`;
-
-	// const handleCancelClick = () => {
-	//   setEditMode(false);
-	//   setEditProductId(null);
-	// };
 
 	const handleChange = (e) => {
 		const { name, value } = e.target;
@@ -152,12 +146,12 @@ export const AdminProductPanel = () => {
 		})
 			.then((response) => response.json())
 			.then((data) => {
-				console.log('productid', data);
 				setProducts(data.data);
 			});
 	}, []);
 
 	return (
+		// <div>zdzed</div>
 		<div className="container m-5">
 			<div className="mt-4">
 				<h2>Product List</h2>
@@ -187,7 +181,7 @@ export const AdminProductPanel = () => {
 													<td>{price}</td>
 													<td>{description}</td>
 													<td>{image}</td>
-													<td>{category}</td>
+													<td>{category.name}</td>
 													<td>
 														<NavLink to={`/edit-product/${id}`}>
 															<button
@@ -222,7 +216,7 @@ export const AdminProductPanel = () => {
 				<form onSubmit={handleSubmit} className="d-flex flex-column">
 					<h2>Add a Product</h2>
 					<div className="mb-3">
-						<label Htmlfor="name" className="form-label">
+						<label htmlfor="name" className="form-label">
 							Name
 						</label>
 						<input
@@ -233,7 +227,7 @@ export const AdminProductPanel = () => {
 							onChange={handleChange}
 							id="name"
 						/>
-						<label Htmlfor="price" className="form-label">
+						<label htmlfor="price" className="form-label">
 							Price
 						</label>
 						<input
@@ -244,7 +238,7 @@ export const AdminProductPanel = () => {
 							onChange={handleChange}
 							id="price"
 						/>
-						<label Htmlfor="description" className="form-label">
+						<label htmlfor="description" className="form-label">
 							Description
 						</label>
 						<input
@@ -255,7 +249,7 @@ export const AdminProductPanel = () => {
 							onChange={handleChange}
 							id="description"
 						/>
-						<label Htmlfor="image" className="form-label">
+						<label htmlfor="image" className="form-label">
 							Image
 						</label>
 						<input
@@ -267,7 +261,7 @@ export const AdminProductPanel = () => {
 							id="image"
 						/>
 
-						<label Htmlfor="image" className="form-label">
+						<label htmlfor="image" className="form-label">
 							Category
 						</label>
 						<select
