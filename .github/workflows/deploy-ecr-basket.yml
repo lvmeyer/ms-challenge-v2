@@ -5,8 +5,8 @@ on:
     branches:
       - main
     paths:
-      - apis/apps/basket/*
-      - apis/libs/*
+      - 'apis/apps/basket/**'
+      - 'apis/libs/**'
 
 jobs:
   build-and-push:
