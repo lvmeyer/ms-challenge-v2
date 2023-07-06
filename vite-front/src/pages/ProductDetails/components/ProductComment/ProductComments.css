@@ -1,160 +1,156 @@
 .product-comments-container {
-  margin-top: 10%;
-  width: 60%;
+	margin-top: 10%;
+	width: 60%;
 }
 
 .section-title {
-  font-size: 32px;
-  margin-bottom: 20px;
-  text-align: center;
+	font-size: 32px;
+	margin-bottom: 20px;
+	text-align: center;
 }
 
 .comments-list {
-  margin-bottom: 30px;
+	margin-bottom: 30px;
 }
 
 .comment {
-  padding: 20px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  border-radius: 5px;
+	padding: 20px;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+	border-radius: 5px;
 }
 
 .comment-author {
-  font-weight: bold;
-  margin-bottom: 5px;
+	font-weight: bold;
+	margin-bottom: 5px;
 }
 
 .comment-text {
-  margin-bottom: 5px;
+	margin-bottom: 5px;
 }
 
 .comment-date {
-  color: #888;
-  font-size: 12px;
+	color: #888;
+	font-size: 12px;
 }
 
 .comment-form {
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 20px;
+	display: flex;
+	flex-direction: column;
+	margin-bottom: 20px;
 }
 
 .comment-input {
-  height: 150px;
-  resize: vertical;
-  padding: 10px;
-  margin-bottom: 10px;
+	height: 150px;
+	resize: vertical;
+	padding: 10px;
+	margin-bottom: 10px;
 }
 
 .submit-comment-btn {
-  align-self: flex-start;
-  padding: 10px 20px;
-  border-radius: 5px;
-  background-color: #007bff;
-  color: #fff;
-  border: none;
-  cursor: pointer;
-  transition: background-color 0.3s;
+	align-self: flex-start;
+	padding: 10px 20px;
+	border-radius: 5px;
+	background-color: #007bff;
+	color: #fff;
+	border: none;
+	cursor: pointer;
+	transition: background-color 0.3s;
 }
 
 .submit-comment-btn:hover {
-  background-color: #0056b3;
+	background-color: #0056b3;
 }
 
-/* Hide the default radio buttons */
-.rating input[type="radio"] {
-  position: absolute;
-  opacity: 0;
-  width: 0;
-  height: 0;
+.rating input[type='radio'] {
+	position: absolute;
+	opacity: 0;
+	width: 0;
+	height: 0;
 }
 
-/* Show the stars when the radio button is checked */
-.rating input[type="radio"]:checked + label .star {
-  color: #ffd700; /* Set the color of the filled stars */
+.rating input[type='radio']:checked + label .star {
+	color: #ffd700;
 }
-
 
 .rating label:hover,
 .rating input:checked ~ label {
-  color: orange;
+	color: orange;
 }
 
 .rating {
-  display: inline-block;
+	display: inline-block;
 }
 
 .star {
-  color: #000000; /* Set the color of the stars */
-  font-size: 1.5rem; /* Adjust the size of the stars */
-  cursor: pointer;
-  transition: color 0.3s;
+	color: #000000;
+	font-size: 1.5rem;
+	cursor: pointer;
+	transition: color 0.3s;
 }
 
 .star.filled {
-  color: orange; /* Set the color of the filled stars */
+	color: orange;
 }
 
 .comment-date {
-  margin-bottom: 5px;
-  display: flex;
-  align-items: center;
+	margin-bottom: 5px;
+	display: flex;
+	align-items: center;
 }
 
 .comment-date .star {
-  margin-right: 2px;
+	margin-right: 2px;
 }
 
 .report-comment-btn {
-  padding: 5px 10px;
-  border-radius: 5px;
-  background-color: #ff4f4f;
-  color: #fff;
-  border: none;
-  cursor: pointer;
-  transition: background-color 0.3s;
+	padding: 5px 10px;
+	border-radius: 5px;
+	background-color: #ff4f4f;
+	color: #fff;
+	border: none;
+	cursor: pointer;
+	transition: background-color 0.3s;
 }
 
 .report-comment-btn:hover {
-  background-color: #e62929;
+	background-color: #e62929;
 }
 
 @media (max-width: 767px) {
-  .product-comments-container {
-    margin-top: 20px;
-    width: 100%;
-  }
+	.product-comments-container {
+		margin-top: 20px;
+		width: 100%;
+	}
 
-  .section-title {
-    font-size: 24px;
-  }
+	.section-title {
+		font-size: 24px;
+	}
 
-  .comment {
-    padding: 10px;
-  }
+	.comment {
+		padding: 10px;
+	}
 
-  .comment-input {
-    height: 100px;
-    padding: 5px;
-  }
+	.comment-input {
+		height: 100px;
+		padding: 5px;
+	}
 
-  .submit-comment-btn {
-    padding: 5px 10px;
-  }
+	.submit-comment-btn {
+		padding: 5px 10px;
+	}
 
-  .one-comment {
-    display: flex;
-    flex-direction: column;
-  }
+	.one-comment {
+		display: flex;
+		flex-direction: column;
+	}
 
-  .author-date {
-    flex-direction: column;
-    align-items: flex-start;
-    margin-bottom: 10px;
-  }
+	.author-date {
+		flex-direction: column;
+		align-items: flex-start;
+		margin-bottom: 10px;
+	}
 
-  .comment-date {
-    margin-left: 0;
-  }
-  
+	.comment-date {
+		margin-left: 0;
+	}
 }

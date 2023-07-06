@@ -1,7 +1,6 @@
 .footer {
 	color: white;
 	text-align: center;
-	/* display: block; */
 	background-color: black;
 	display: flex;
 	flex-flow: column nowrap;

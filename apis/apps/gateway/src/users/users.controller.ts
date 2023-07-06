@@ -124,12 +124,4 @@ export class UsersController {
   ) {
     await this.usersService.upload(file.originalname, file.buffer);
   }
-
-  // @Post()
-  // @HttpCode(HttpStatus.CREATED)
-  // async createUser(
-  //   @Body(ValidationPipe) createUserRequest: CreateUserRequest,
-  // ): Promise<User> {
-  //   return await this.usersService.createUser(createUserRequest);
-  // }
 }

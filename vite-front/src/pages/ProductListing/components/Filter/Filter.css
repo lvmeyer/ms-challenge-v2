@@ -30,7 +30,6 @@
 }
 
 .filter-header-mobile-open .reset-btn {
-	/* padding: 0.35rem 1.2rem; */
 	background-color: white;
 	color: rgb(0, 0, 0);
 	border: 1px solid rgb(196, 196, 196);
@@ -251,8 +250,6 @@
 
 	.reset-btn-hide {
 		display: inline;
-		/* color: black; */
-		/* padding: 0.35rem 1.2rem; */
 		background-color: white;
 		color: rgb(0, 0, 0);
 		border: 1px solid rgb(196, 196, 196);
@@ -391,7 +388,6 @@
 	}
 
 	.sorting-input-container > * {
-		/* border: 1px solid yellow; */
 		margin-bottom: 0.6rem;
 	}
 
