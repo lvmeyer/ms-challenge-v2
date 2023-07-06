@@ -100,15 +100,12 @@ input:focus {
 	top: 8px;
 	left: 2px;
 	cursor: pointer;
+	z-index: 1;
+	color: red;
 }
 
 ::placeholder {
 	letter-spacing: 0.4px;
-}
-
-.cross-tab-icon {
-	z-index: 1;
-	color: red;
 }
 
 .nav-input-search {
@@ -222,5 +219,4 @@ input:focus {
 	.wishlist {
 		margin-top: 0.2em;
 	}
-	
 }

@@ -216,9 +216,6 @@
 @media (min-width: 768px) {
 	.filter-container-mobile-closed {
 		padding: 0;
-	}
-
-	.filter-container-mobile-closed {
 		padding: 1.5em;
 		height: 80vh;
 		border-radius: 15px;

@@ -77,9 +77,9 @@
 }
 
 .signup-btn-container {
-  display: flex;
-  flex-flow: column nowrap;
-  background-color: black;
+	display: flex;
+	flex-flow: column nowrap;
+	background-color: black;
 }
 
 .signup-container .signup-btn-container button {
@@ -103,10 +103,8 @@
 	font-weight: 600;
 	border: none;
 	margin-bottom: 10px;
-  border: none;
-  color: white;
-
-  background-color: black;
+	color: white;
+	background-color: black;
 }
 
 .signup-container .signup-btn-container input:hover {

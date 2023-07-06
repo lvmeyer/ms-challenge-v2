@@ -5,7 +5,6 @@ import { Route, Routes } from 'react-router-dom';
 import { Login } from '../pages/auth/Login/Login';
 import { ProductListing } from '../pages/ProductListing/ProductListing';
 import { ProductDetails } from '../pages/ProductDetails/ProductDetails';
-// import { RequiresAuth } from "../components/requires-auth/RequiresAuth";
 import { Signup } from '../pages/auth/Signup/Signup';
 import { Logout } from '../pages/auth/Logout/Logout';
 import { Checkout } from '../pages/Checkout/Checkout';
@@ -19,13 +18,10 @@ import Payment from '../components/Stripe/Payment';
 import Completion from '../components/Stripe/Completion';
 import { loadStripe } from '@stripe/stripe-js';
 import RequireAuth from '../components/requires-auth/RequiresAuth';
-import { useSelector } from 'react-redux'; 
 import { EditProduct } from '../pages/UserProfile/Profile/Product/EditProduct';
 
 export const NavRoutes = () => {
 	const [stripePromise, setStripePromise] = useState(null);
-
-	const { userInfo } = useSelector((state) => state.auth);
 
 	useEffect(() => {
 		const stripePublicKey =

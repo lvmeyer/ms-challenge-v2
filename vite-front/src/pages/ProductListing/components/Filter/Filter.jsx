@@ -6,7 +6,6 @@ import './Filter.css';
 
 export const Filter = (props) => {
 	const [isFilterMenuOn, setIsFilterMenuOn] = useState(false);
-	const [isFilterApplied, setIsFilterApplied] = useState(false);
 	const [categories, setCategories] = useState([]);
 
 	const [categoryFilter, setCategorFilter] = useState({});
@@ -46,7 +45,6 @@ export const Filter = (props) => {
 	}, []);
 
 	const applyFilters = () => {
-		setIsFilterApplied(true);
 		props.sendData(priceFilter, sortingFilter, categoryFilter);
 	};
 

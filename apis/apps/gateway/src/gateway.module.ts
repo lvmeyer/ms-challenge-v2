@@ -4,8 +4,7 @@ import { ConfigModule } from '@nestjs/config';
 import { JwtModule } from '@nestjs/jwt';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
-import { RmqModule, TypeOrmCustomModule } from '@app/common';
-import { PAYMENT_SERVICE } from '@app/common';
+import { RmqModule, TypeOrmCustomModule, PAYMENT_SERVICE } from '@app/common';
 import { GatewayProductController } from './controllers/gateway-products.controller';
 import { GatewayProductService } from './services/gateway-products.service';
 import { GatewayBasketController } from './controllers/gateway-basket.controller';

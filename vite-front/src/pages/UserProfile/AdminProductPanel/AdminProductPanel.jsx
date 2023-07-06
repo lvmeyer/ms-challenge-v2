@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { Logout } from '../../auth/Logout/Logout';
 import './AdminProductPanel.css';
 import { ToastContainer } from 'react-toastify';
-import { NavLink, useNavigate } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 export const AdminProductPanel = () => {
 	// ----------------PRODUCT FORM-----------------
@@ -15,13 +14,7 @@ export const AdminProductPanel = () => {
 		category: '',
 	});
 
-	const [editProductId, setEditProductId] = useState(null);
 	const [editProductData, setEditProductData] = useState({});
-	const [product, setProduct] = useState({});
-	const [successMessage, setSuccessMessage] = useState('');
-	const [errorMessage, setErrorMessage] = useState('');
-
-	const navigate = useNavigate();
 
 	const handleChange = (e) => {
 		const { name, value } = e.target;
@@ -99,17 +92,9 @@ export const AdminProductPanel = () => {
 			.then((response) => response.json())
 			.then((data) => {
 				console.log(data);
-				setProduct(data);
-				// setFormStatus({ success: true, error: '' });
 			})
 			.catch((error) => {
 				console.log(error);
-				// if (error.response && error.response.data && error.response.data.message) {
-				//   const errorMessage = error.response.data.message[0];
-				//   setFormStatus({ success: false, error: errorMessage });
-				// } else {
-				//   setFormStatus({ success: false, error: 'An error occurred while submitting the form. Please try again.' });
-				// }
 			});
 	};
 

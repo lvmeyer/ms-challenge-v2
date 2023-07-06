@@ -1,5 +1,4 @@
-import React from 'react';
-import { useState } from 'react';
+import React, { useState } from 'react';
 import './ProductListing.css';
 import { Filter } from './components/Filter/Filter';
 import { ProductListingSection } from './components/ProductListingSection/ProductListingSection';

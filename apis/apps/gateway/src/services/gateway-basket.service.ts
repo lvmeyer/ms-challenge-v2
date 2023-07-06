@@ -1,8 +1,11 @@
 import { HttpStatus, Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 
-import { ErrorResponse } from '@app/common';
-import { CreateBasketRequest, UpdateBasketRequest } from '@app/common';
+import {
+  CreateBasketRequest,
+  UpdateBasketRequest,
+  ErrorResponse,
+} from '@app/common';
 
 @Injectable()
 export class GatewayBasketService {
@@ -27,6 +30,7 @@ export class GatewayBasketService {
 
       return res;
     } catch (err) {
+      console.error(err);
       throw err;
     }
   }
@@ -114,6 +118,7 @@ export class GatewayBasketService {
 
       return res;
     } catch (err) {
+      console.error(err);
       throw err;
     }
   }
