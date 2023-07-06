@@ -8,10 +8,11 @@ export const ProductListing = () => {
 
   const [filtersData, setFiltersData] = useState(null);
 
-  const handleData = (priceFilter, sortingFilter) => {
+  const handleData = (priceFilter, sortingFilter, categoryFilter) => {
     setFiltersData({
       priceFilter,
-      sortingFilter
+      sortingFilter,
+      categoryFilter
     });
   };
 

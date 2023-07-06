@@ -14,12 +14,13 @@ export const ProductListingSection = (props) => {
 
   const [priceFilter, setPriceFilter] = useState(null);
   const [sortingFilter, setSortingFilter] = useState(null);
+  const [categoryFilter, setCategoryFilter] = useState(null);
 
   useEffect(() => {
     if (props.filters) {
       setPriceFilter(props.filters.priceFilter);
       setSortingFilter(props.filters.sortingFilter);
-      console.log(priceFilter);
+      setCategoryFilter(props.filters.categoryFilter);
     }
   }, [props.filters]);
 
@@ -67,12 +68,20 @@ export const ProductListingSection = (props) => {
             }
           });
           setProducts(sortedProducts);
+
+          if (categoryFilter && Object.values(categoryFilter).includes(true)) {
+            console.log(sortedProducts)
+            const filteredProducts = sortedProducts.filter(product =>
+              categoryFilter[product.category.name]
+            );
+            setProducts(filteredProducts);
+          }
         }
       }
       
     });
   });
-  }, [priceFilter, sortingFilter]);
+  }, [priceFilter, sortingFilter, categoryFilter]);
 
   const [cartItems, setCartItems] = useState([]);
 
@@ -110,7 +119,7 @@ export const ProductListingSection = (props) => {
 
   return (
     <div className="product-card-container">
-      {Array.isArray(products) && products.map((product) => {
+      {products.length > 0 ? Array.isArray(products) && products.map((product) => {
         const {
           id,
           name,
@@ -151,7 +160,7 @@ export const ProductListingSection = (props) => {
                     <strong>Category :</strong> {category.name}
                   </p>
                   <p className="discount-price">
-                    <strong>Price :</strong> ${price}
+                    <strong>Price :</strong> <span id="price">${price}</span>
                   </p>
                 </div>
   
@@ -170,7 +179,11 @@ export const ProductListingSection = (props) => {
             </div>
           </Tilt>
         );
-      })}
+      }) : 
+        <div className="no-products">
+          <h2>No products found</h2>
+        </div>
+      }
       <ToastContainer position="bottom-right" />
     </div>
   );
