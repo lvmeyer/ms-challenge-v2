@@ -56,7 +56,9 @@ export const AdminCommentPanel = () => {
     };
   
     return (
-      <div className="admin-comment-panel">
+      <div className="container mt-5">
+
+      <div className="">
         <h3>Reported Comments</h3>
         {isLoading ? (
           <p>Loading...</p>
@@ -64,7 +66,7 @@ export const AdminCommentPanel = () => {
           <p>No reported comments</p>
         ) : (
           reportedComments.map((reportedComment) => (
-            <div className="reported-comment" key={reportedComment.id}>
+            <div className="border border 2border-dark p-4 rounded-4 width-50pc width-100 mt-4" key={reportedComment.id}>
               <p>
                 <strong>Product: </strong>
                 {reportedComment.product.name}
@@ -79,13 +81,13 @@ export const AdminCommentPanel = () => {
               </p>
               <div className="action-button">
                 <button 
-                    className="update-comment-btn" 
+                    className="btn btn-success mx-5" 
                     onClick={() => handleResetReportNb(reportedComment)}
                 >
                     Reset Report Number
                 </button>
                 <button 
-                    className="delete-comment-btn"  
+                    className="btn btn-danger"  
                     onClick={() => handleDeleteComment(reportedComment)}
                 >
                     Delete Comment
@@ -94,6 +96,8 @@ export const AdminCommentPanel = () => {
             </div>
           ))
         )}
+      </div>
+
       </div>
     );
 };

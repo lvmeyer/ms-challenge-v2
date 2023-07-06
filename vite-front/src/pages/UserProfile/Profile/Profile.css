@@ -73,3 +73,8 @@ td {
   overflow: hidden;
   text-overflow: ellipsis;
 }
+
+.width-50pc{
+  width: 50%;
+}
+

@@ -27,7 +27,7 @@ export const Profile = () => {
   }, []);
 
   return (
-    <div className="container m-5">
+    <div className="container">
       <div className="list-group w-50">
         <h2>Account</h2>
         <div className="list-group-item">
