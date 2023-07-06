@@ -1,8 +1,5 @@
 import { Body, Injectable } from '@nestjs/common';
-<<<<<<< HEAD
 import { ConfigService } from '@nestjs/config';
-=======
->>>>>>> 4764724 (finish stripe payement)
 import { Stripe } from 'stripe';
 
 @Injectable()
