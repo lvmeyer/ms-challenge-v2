@@ -91,32 +91,38 @@ AppDataSource.initialize()
 		// ============== SUB_CATEGORIES ==============
 		console.log('Loading sub-categories from the database...');
 		const sub_cat1 = new SubCategory();
-		sub_cat1.name = 'AMD';
+		sub_cat1.name = 'ASUS';
+		sub_cat1.type = 'Marque';
 		sub_cat1.category = cat1;
 		await AppDataSource.manager.save(sub_cat1);
 
 		const sub_cat2 = new SubCategory();
 		sub_cat2.name = 'NVIDIA';
+		sub_cat2.type = 'Marque';
 		sub_cat2.category = cat1;
 		await AppDataSource.manager.save(sub_cat2);
 
 		const sub_cat3 = new SubCategory();
 		sub_cat3.name = 'Intel';
+		sub_cat3.type = 'Marque';
 		sub_cat3.category = cat3;
 		await AppDataSource.manager.save(sub_cat3);
 
 		const sub_cat4 = new SubCategory();
 		sub_cat4.name = 'AMD';
+		sub_cat4.type = 'Marque';
 		sub_cat4.category = cat3;
 		await AppDataSource.manager.save(sub_cat4);
 
 		const sub_cat5 = new SubCategory();
 		sub_cat5.name = 'DDR4';
+		sub_cat5.type = 'RAM';
 		sub_cat5.category = cat4;
 		await AppDataSource.manager.save(sub_cat5);
 
 		const sub_cat6 = new SubCategory();
 		sub_cat6.name = 'DDR5';
+		sub_cat6.type = 'RAM';
 		sub_cat6.category = cat4;
 		await AppDataSource.manager.save(sub_cat6);
 

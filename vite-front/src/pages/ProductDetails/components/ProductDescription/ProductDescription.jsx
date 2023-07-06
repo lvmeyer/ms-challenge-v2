@@ -22,6 +22,7 @@ export const ProductDescription = ( ) => {
       .then(response => response.json())
       .then(data => {
         setSelectedProduct(data.data);
+        console.log(data.data);
       });
   }, []);
 
@@ -52,8 +53,16 @@ export const ProductDescription = ( ) => {
           </p>
 
           <span className="gender-container">
-            <span>Catégorie</span>: 
+            <span>Catégorie</span>: {selectedProduct.category.name}
           </span>
+
+          {selectedProduct.productSubCategory.map((subCategory) => (
+            <span className="gender-container">
+
+              <span>{subCategory.subCategory.type}</span> : {subCategory.subCategory.name}
+            </span>
+          ))}
+
 
           <div className="tags">
               <span className="out-of-stock">
