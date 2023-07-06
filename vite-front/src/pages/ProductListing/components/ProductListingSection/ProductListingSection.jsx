@@ -9,7 +9,6 @@ import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 export const ProductListingSection = (props) => {
-	
 	const { userInfo } = useSelector((state) => state.auth);
 
 	const [products, setProducts] = useState([]);
@@ -86,7 +85,6 @@ export const ProductListingSection = (props) => {
 									categoryFilter &&
 									Object.values(categoryFilter).includes(true)
 								) {
-									console.log(sortedProducts);
 									const filteredProducts = sortedProducts.filter(
 										(product) => categoryFilter[product.category.name]
 									);
@@ -158,7 +156,7 @@ export const ProductListingSection = (props) => {
 								</Link>
 
 								<div className="product-card-details">
-									<h3 className='name' >{name}</h3>
+									<h3 className="name">{name}</h3>
 									<div className="price-container">
 										<p className="category-name">
 											<strong>Category :</strong> {category.name}
@@ -168,26 +166,23 @@ export const ProductListingSection = (props) => {
 										</p>
 									</div>
 
-									<div className="info">
-									</div>
+									<div className="info"></div>
 								</div>
 
-							{userInfo && (userInfo.role === 'USER') ? (
-								<div className="product-card-buttons">
-									<button
-										className="cart-btn"
-										onClick={() => addToCart(product)}
-									>
-										Add to Cart
-									</button>
-								</div>
-							) : userInfo && (userInfo.role === 'ADMINISTRATEUR') ? (
-								<>
-								</>
-							) : (
-								<>
-								</>
-							)}
+								{userInfo && userInfo.role === 'USER' ? (
+									<div className="product-card-buttons">
+										<button
+											className="cart-btn"
+											onClick={() => addToCart(product)}
+										>
+											Add to Cart
+										</button>
+									</div>
+								) : userInfo && userInfo.role === 'ADMINISTRATEUR' ? (
+									<></>
+								) : (
+									<></>
+								)}
 							</div>
 						</Tilt>
 					);

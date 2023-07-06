@@ -8,15 +8,15 @@
 }
 
 .cart-price-container a {
-  text-decoration: none;
-  color: white;
-  background-color: black;
-  align-self: center;
-  padding: 10px 30px;
-  border-radius: 10px;
-  font-weight: 600;
-  font-size: 1rem;
-  margin-top: 40px;
+	text-decoration: none;
+	color: white;
+	background-color: black;
+	align-self: center;
+	padding: 10px 30px;
+	border-radius: 10px;
+	font-weight: 600;
+	font-size: 1rem;
+	margin-top: 40px;
 }
 
 .cart-price-container a:hover {
@@ -53,6 +53,5 @@
 		border-radius: 10px;
 		padding: 25px;
 		display: flex;
-		/* flex-flow: column nowrap; */
 	}
 }
