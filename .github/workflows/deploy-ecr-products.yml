@@ -5,8 +5,8 @@ on:
     branches:
       - main
     paths:
-      - 'apis/apps/products/*'
-      - 'apis/libs/*'
+      - 'apis/apps/products/**'
+      - 'apis/libs/**'
 
 jobs:
   build-and-push:
