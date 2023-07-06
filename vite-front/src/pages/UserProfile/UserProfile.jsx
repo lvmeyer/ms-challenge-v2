@@ -6,6 +6,7 @@ import { useSelector } from "react-redux";
 import "./UserProfile.css";
 import { Profile } from "./Profile/Profile";
 import { AdminCommentPanel } from "./PanelAdmin/AdminCommentPanel";
+import { FollowCommend } from "./FollowCommend/FollowCommend";
 
 export const UserProfile = () => {
   const { userInfo } = useSelector((state) => state.auth);
@@ -25,6 +26,7 @@ export const UserProfile = () => {
             ) : (
               <>
               <Profile />
+              <FollowCommend />
               
               </>
             )}

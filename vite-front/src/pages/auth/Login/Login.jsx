@@ -51,6 +51,7 @@ export const Login = () => {
   
 
   return (
+    <div className='vh-100'>
     <div className="login-container">
       <h2>Login</h2>
       <form onSubmit={handleSubmitLogin}
@@ -109,6 +110,8 @@ export const Login = () => {
           Create a new account?
         </Link>
       </form>
+    </div>
+      
     </div>
   );
 };

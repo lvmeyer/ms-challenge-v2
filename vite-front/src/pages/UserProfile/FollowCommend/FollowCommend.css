@@ -1,0 +1,48 @@
+@media (min-width: 768px) {
+    .follow-command {
+    margin-top: 20px;
+    background-color: #f5f5f5;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+  }
+  
+  .follow-command h2 {
+    font-size: 24px;
+    margin-bottom: 10px;
+  }
+  
+  .follow-command table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .follow-command th,
+  .follow-command td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ccc;
+  }
+  
+  .follow-command th {
+    font-weight: bold;
+  }
+  
+  .follow-command tr:last-child td {
+    border-bottom: none;
+  }
+  
+  .follow-command td:last-child {
+    text-align: center;
+  }
+  
+  .follow-command .delivered {
+    color: green;
+    font-weight: bold;
+  }
+  
+  .follow-command .not-delivered {
+    color: red;
+    font-weight: bold;
+  }
+}  
