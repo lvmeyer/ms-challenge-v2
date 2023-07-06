@@ -7,7 +7,6 @@ import { ProductListing } from '../pages/ProductListing/ProductListing';
 import { ProductDetails } from '../pages/ProductDetails/ProductDetails';
 import { Signup } from '../pages/auth/Signup/Signup';
 import { Logout } from '../pages/auth/Logout/Logout';
-import { Checkout } from '../pages/Checkout/Checkout';
 import { UserProfile } from '../pages/UserProfile/UserProfile';
 import { Addresses } from '../pages/UserProfile/Addresses/Addresses';
 import { Orders } from '../pages/UserProfile/Orders/Orders';
@@ -65,7 +64,6 @@ export const NavRoutes = () => {
 				}
 			/>
 			<Route path="/signup" element={<Signup />} />
-			<Route path="/checkout" element={<Checkout />} />
 			<Route
 				path="/profile"
 				element={
