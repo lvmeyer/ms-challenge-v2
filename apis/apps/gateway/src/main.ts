@@ -10,10 +10,9 @@ async function bootstrap() {
   const PORT = configService.get('PORT_GW') || 80;
 
   const corsOptions: CorsOptions = {
-    origin: ['https://bando-chall.vercel.app/', 'http://localhost'],
-    methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH']
+    origin: '*',
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH'],
   };
-
 
   console.info(`Service GW on port: ${PORT}`);
   app.enableCors(corsOptions);
