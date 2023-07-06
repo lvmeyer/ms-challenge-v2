@@ -135,7 +135,7 @@ export const ProductListingSection = (props) => {
 			{products.length > 0 ? (
 				Array.isArray(products) &&
 				products.map((product) => {
-					const { id, name, price, description, image, category } = product;
+					const { id, name, price, image, category } = product;
 
 					return (
 						<Tilt

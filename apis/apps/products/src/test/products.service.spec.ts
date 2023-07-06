@@ -52,37 +52,3 @@ describe('ProductsService', () => {
     });
   });
 });
-
-// import { Test, TestingModule } from '@nestjs/testing';
-// import { ProductsService } from '../products.service';
-// import { Category, Product } from '@app/common';
-// import { getRepositoryToken } from '@nestjs/typeorm';
-
-// describe('ProductsService', () => {
-//   let service: ProductsService;
-
-//   const mockProductRepository = {};
-//   const mockCategoryRepository = {};
-
-//   beforeEach(async () => {
-//     const app: TestingModule = await Test.createTestingModule({
-//       providers: [
-//         ProductsService,
-//         {
-//           provide: getRepositoryToken(Product),
-//           useValue: mockProductRepository,
-//         },
-//         {
-//           provide: getRepositoryToken(Category),
-//           useValue: mockCategoryRepository,
-//         },
-//       ],
-//     }).compile();
-
-//     service = app.get<ProductsService>(ProductsService);
-//   });
-
-//   it('should be defined"', () => {
-//     expect(service).toBeDefined();
-//   });
-// });

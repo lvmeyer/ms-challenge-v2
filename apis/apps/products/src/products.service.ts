@@ -10,11 +10,11 @@ import {
   CreateReviewRequest,
   Product,
   Review,
+  CreateProductRequest,
+  UpdateProductRequest,
 } from '@app/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { MoreThanOrEqual, Repository, UpdateResult } from 'typeorm';
-
-import { CreateProductRequest, UpdateProductRequest } from '@app/common';
 
 @Injectable()
 export class ProductsService {
@@ -70,7 +70,6 @@ export class ProductsService {
     const products = await this.productRepository.find({
       relations: {
         category: true,
-
       },
     });
     return products;
@@ -81,9 +80,13 @@ export class ProductsService {
       where: {
         id: uuid,
       },
-      relations: ['productSubCategory', 'productSubCategory.subCategory', 'category', 'reviews']
+      relations: [
+        'productSubCategory',
+        'productSubCategory.subCategory',
+        'category',
+        'reviews',
+      ],
     });
-    // const product = await this.productRepository.findOneBy({ id: uuid });
     if (!product) {
       throw new NotFoundException('Product not found');
     }

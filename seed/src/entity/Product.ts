@@ -2,7 +2,6 @@ import {
 	Column,
 	CreateDateColumn,
 	Entity,
-	ManyToMany,
 	ManyToOne,
 	OneToMany,
 	PrimaryGeneratedColumn,
@@ -12,7 +11,6 @@ import {
 import { Basket } from './Basket';
 import { Category } from './Category';
 import { Review } from './Review';
-import { SubCategory } from './SubCategory';
 
 @Entity()
 export class Product {
