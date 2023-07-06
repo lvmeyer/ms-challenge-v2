@@ -203,6 +203,16 @@
 	margin-right: 6px;
 }
 
+.apply-filters-btn {
+	background-color: #1a1a1a;
+	color: white;
+}
+.apply-filters-btn:hover {
+	background-color: #f5f5f5f5;
+	color: black;
+	border: #1a1a1a solid 1px;
+}
+
 @media (min-width: 768px) {
 	.filter-container-mobile-closed {
 		padding: 0;
