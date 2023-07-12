@@ -12,7 +12,7 @@ export const ConfigurateurDesktop = () => {
     }, []);
 
     return (
-        <div className="configurateur">
+        <div className="container d-flex flex-column mt-5">
 
             <div className="configurateur-desktop-container">
                 <h1>Desktop configuration</h1>

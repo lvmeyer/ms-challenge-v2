@@ -90,7 +90,7 @@ export const AdminCommentPanel = () => {
 							</p>
 							<p>
 								<strong>Reported: </strong>
-								{reportedComment.reportNb} times
+								{reportedComment.reports} times
 							</p>
 							<div className="action-button">
 								<button

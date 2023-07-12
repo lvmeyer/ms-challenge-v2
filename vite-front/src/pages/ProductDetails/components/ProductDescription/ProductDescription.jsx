@@ -121,12 +121,17 @@ export const ProductDescription = () => {
 						<span className="trending"></span>
 					</div>
 					<div className="product-card-buttons-container">
+					{userInfo && (userInfo.role === "ADMINISTRATOR") ? (
+						<></>
+						) : userInfo && (userInfo.role === "USER") ? ( 
 						<button
 							className="add-to-cart-btn"
-							onClick={() => addToCart(selectedProduct)}
 						>
-							Add to cart
+							Add to cart 
 						</button>
+						) : (
+						<></>
+						)}
 						<button
 							className="add-to-wishlist-btn"
 							onClick={() => navigate('/product-listing')}
