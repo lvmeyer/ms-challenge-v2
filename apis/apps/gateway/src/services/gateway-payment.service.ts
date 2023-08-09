@@ -52,6 +52,42 @@ export class GatewayPaymentService {
         },
       });
 
+      this.paymentClient.emit('create-billing', {
+        email: userInfos.email,
+        price: user.basket.price,
+      });
+
+      return res;
+    } catch (err) {
+      console.error(err);
+      throw new ErrorResponse(
+        err.message,
+        err.status || HttpStatus.INTERNAL_SERVER_ERROR,
+      );
+    }
+  }
+
+  async removeBasketAfterPayment(access_token: string): Promise<any> {
+    console.debug('POST', this.PATH_BASKET);
+    try {
+
+      const userInfos = this.jwtService.verify(access_token, {
+        secret: process.env.JWT_SECRET,
+      });
+
+      if (!userInfos) {
+        throw new ErrorResponse('User not found', HttpStatus.NOT_FOUND);
+      }
+
+      const user = await this.usersRepository.findOne({
+        where: {
+          id: userInfos.id,
+        },
+        relations: {
+          basket: true,
+        },
+      });
+
       const basketID = user.basket.id;
 
       fetch(`${this.PATH_BASKET}/`+basketID, {
@@ -68,12 +104,8 @@ export class GatewayPaymentService {
         }),
       });
 
-      this.paymentClient.emit('create-billing', {
-        email: userInfos.email,
-        price: user.basket.price,
-      });
+      return { message: 'Basket removed', status: HttpStatus.OK };
 
-      return res;
     } catch (err) {
       console.error(err);
       throw new ErrorResponse(
@@ -82,4 +114,5 @@ export class GatewayPaymentService {
       );
     }
   }
+
 }

@@ -22,6 +22,10 @@ function Payment(props) {
     .then(response => response.json())
     .then(data => {
 
+      if (data.data === undefined || data.data.price === 0) {
+        window.location.href = "/cart";
+      }
+
       // Create PaymentIntent as soon as the page loads
       fetch(import.meta.env.VITE_GW_HOSTNAME+"/api/v1/payment/pay", {
         mode: 'cors',
