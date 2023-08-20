@@ -164,6 +164,9 @@ export const ProductListingSection = (props) => {
 										<p className="discount-price">
 											<strong>Price :</strong> <span id="price">${price}</span>
 										</p>
+										<p className="discount-price">
+											<strong>Stock :</strong> <span id="price">X</span>
+										</p>
 									</div>
 
 									<div className="info"></div>

@@ -9,6 +9,7 @@ export const EditProduct = () => {
 			name: '',
 			price: 0,
 			description: '',
+			stock: '',
 			image: '',
 			category: {
 				id: '',
@@ -89,6 +90,9 @@ export const EditProduct = () => {
 		if (editProductData.data.description !== '') {
 			updatedFields.description = editProductData.data.description;
 		}
+		// if (editProductData.data.stock !== '') {
+		// 	updatedFields.stock = editProductData.data.stock;
+		// }
 		if (editProductData.data.image !== '') {
 			updatedFields.image = editProductData.data.image;
 		}
@@ -112,6 +116,8 @@ export const EditProduct = () => {
 		<div className="container">
 			<div className="m-5">
 				<form onSubmit={handleUpdate} className="d-flex flex-column">
+					<h1 className="text-center">Edit Product</h1>
+					<p>Name</p>
 					<input
 						className="form-control"
 						name="name"
@@ -121,6 +127,7 @@ export const EditProduct = () => {
 						id="name"
 					/>
 
+					<p>Price</p>
 					<input
 						className="form-control"
 						name="price"
@@ -130,6 +137,7 @@ export const EditProduct = () => {
 						id="price"
 					/>
 
+					<p>Description</p>
 					<input
 						className="form-control col"
 						name="description"
@@ -138,7 +146,18 @@ export const EditProduct = () => {
 						onChange={handleChange}
 						id="description"
 					/>
+					
+					{/* <p>Name</p>
+					<input
+						className="form-control col"
+						name="Stock"
+						placeholder="Stock"
+						value={editProductData.data.stock}
+						onChange={handleChange}
+						id="Stock"
+					/> */}
 
+					<p>Image</p>
 					<input
 						className="form-control"
 						name="image"

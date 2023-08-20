@@ -142,6 +142,7 @@ export const AdminProductPanel = () => {
 										<th scope="col">Name</th>
 										<th scope="col">Price</th>
 										<th scope="col">Description</th>
+										<th scope="col">Stock</th>
 										<th className="w-50" scope="col">
 											Image
 										</th>
@@ -153,7 +154,7 @@ export const AdminProductPanel = () => {
 								<tbody>
 									{Array.isArray(products) &&
 										products.map((product) => {
-											const { id, name, price, description, image, category } =
+											const { id, name, price, stock, description, image, category } =
 												product;
 
 											return (
@@ -168,6 +169,7 @@ export const AdminProductPanel = () => {
 													<td className="text-truncate max-width-150">
 														{description}
 													</td>
+													{/* <td>{stock} X</td> */}
 													<td className="text-truncate max-width-150">
 														{image}
 													</td>
@@ -239,6 +241,17 @@ export const AdminProductPanel = () => {
 							onChange={handleChange}
 							id="description"
 						/>
+						{/* <label htmlfor="description" className="form-label">
+							Stock
+						</label>
+						<input
+							className="form-control"
+							name="Stock"
+							placeholder="Stock"
+							value={formData.stock}
+							onChange={handleChange}
+							id="Stock"
+						/> */}
 						<label htmlfor="image" className="form-label">
 							Image
 						</label>

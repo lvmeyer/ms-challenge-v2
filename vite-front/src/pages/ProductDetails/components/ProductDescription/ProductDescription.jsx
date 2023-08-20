@@ -104,6 +104,9 @@ export const ProductDescription = () => {
 					<p className="description-container">
 						<span>Description</span>: {selectedProduct.description}
 					</p>
+					<p className="description-container">
+						<span>Stock</span>: X
+					</p>
 
 					<span className="gender-container">
 						<span>Catégorie</span>: {selectedProduct.category.name}
