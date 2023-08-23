@@ -1,11 +1,11 @@
 import {
-	PaymentElement,
-	LinkAuthenticationElement,
-} from '@stripe/react-stripe-js';
-import { useState } from 'react';
-import { useStripe, useElements } from '@stripe/react-stripe-js';
-import { useSelector } from 'react-redux';
-import emailjs from '@emailjs/browser';
+  PaymentElement,
+  LinkAuthenticationElement
+} from '@stripe/react-stripe-js'
+import {useEffect, useState} from 'react'
+import {useStripe, useElements} from '@stripe/react-stripe-js';
+import { useSelector } from "react-redux";
+import emailjs from '@emailjs/browser'
 
 export default function CheckoutForm() {
 	const stripe = useStripe();
@@ -14,8 +14,46 @@ export default function CheckoutForm() {
 	const [isLoading, setIsLoading] = useState(false);
 	const { userInfo } = useSelector((state) => state.auth);
 
-	const handleSubmit = async (e) => {
-		e.preventDefault();
+	const [userProducts, setUserProducts] = useState([]);
+	const [totalAmount, setTotalAmount] = useState(0);
+
+  useEffect(() => {
+		fetch(import.meta.env.VITE_GW_HOSTNAME + '/api/v1/user-basket', {
+			mode: 'cors',
+			method: 'GET',
+			headers: {
+				'Content-Type': 'application/json',
+				Authorization:
+					'Bearer ' + JSON.parse(localStorage.getItem('userInfo')).access_token,
+			},
+		})
+			.then((response) => response.json())
+			.then((data) => {
+
+				fetch(
+					import.meta.env.VITE_GW_HOSTNAME +
+						`/api/v1/basket/${data.basketId}/products`,
+					{
+						mode: 'cors',
+						method: 'GET',
+						headers: {
+							'Content-Type': 'application/json',
+							Authorization:
+								'Bearer ' +
+								JSON.parse(localStorage.getItem('userInfo')).access_token,
+						},
+					}
+				)
+					.then((response) => response.json())
+					.then((data) => {
+						setUserProducts(data.data.products);
+						setTotalAmount(data.data.price);
+					});
+			});
+	}, []);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
 		if (!stripe || !elements) {
 			return;
@@ -24,9 +62,22 @@ export default function CheckoutForm() {
 		setIsLoading(true);
 		handleSubmitMail();
 
+		fetch(import.meta.env.VITE_GW_HOSTNAME+"/api/v1/payment/removeBasketAfterPayment", {
+		mode: 'cors',
+		method: 'POST',
+		headers: {
+			'Content-Type': 'application/json',
+			'Authorization': 'Bearer ' + JSON.parse(localStorage.getItem('userInfo')).access_token
+		}
+		})
+		.then((res) => res.json())
+		.then((data) => console.log(data));
+
+
 		const { error } = await stripe.confirmPayment({
 			elements,
 			confirmParams: {
+				// Make sure to change this to your payment completion page
 				return_url: `${window.location.origin}/completion`,
 			},
 		});
@@ -43,10 +94,20 @@ export default function CheckoutForm() {
 	const handleSubmitMail = () => {
 		const content = 'Hello, thank you for your payment !';
 
+
+		const cartItems = () => {
+			let str = "";
+			userProducts.map((item) => {
+				str += `${item.name} x 1 = ${item.price}$ \n`;
+			});
+			return str;
+		};
+
 		const templateParams = {
 			to_email: userInfo.email,
 			message: content,
-			to_name: 'Pierre',
+			products: cartItems(),
+			totalAmount: totalAmount
 		};
 
 		emailjs.send(

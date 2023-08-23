@@ -126,6 +126,42 @@ AppDataSource.initialize()
 		sub_cat6.category = cat4;
 		await AppDataSource.manager.save(sub_cat6);
 
+		const sub_cat7 = new SubCategory();
+		sub_cat7.name = '64GO';
+		sub_cat7.type = 'GO';
+		sub_cat7.category = cat4;
+		await AppDataSource.manager.save(sub_cat7);
+
+		const sub_cat8 = new SubCategory();
+		sub_cat8.name = '32GO';
+		sub_cat8.type = 'GO';
+		sub_cat8.category = cat4;
+		await AppDataSource.manager.save(sub_cat8);
+
+		const sub_cat9 = new SubCategory();
+		sub_cat9.name = 'Socket LGA1200';
+		sub_cat9.type = 'SOCKET';
+		sub_cat9.category = cat2;
+		await AppDataSource.manager.save(sub_cat9);
+
+		const sub_cat10 = new SubCategory();
+		sub_cat10.name = 'Socket AM4';
+		sub_cat10.type = 'SOCKET';
+		sub_cat10.category = cat2;
+		await AppDataSource.manager.save(sub_cat10);
+
+		const sub_cat11 = new SubCategory();
+		sub_cat11.name = 'Socket LGA1200';
+		sub_cat11.type = 'SOCKET';
+		sub_cat11.category = cat3;
+		await AppDataSource.manager.save(sub_cat11);
+
+		const sub_cat12 = new SubCategory();
+		sub_cat12.name = 'Socket AM4';
+		sub_cat12.type = 'SOCKET';
+		sub_cat12.category = cat3;
+		await AppDataSource.manager.save(sub_cat12);
+
 		const sub_categories = await AppDataSource.manager.find(SubCategory);
 		console.log('Loaded sub-categories: ', sub_categories);
 
@@ -287,17 +323,17 @@ AppDataSource.initialize()
 		console.log('Loading products sub categories from the database...');
 		const productSubCategory1 = new ProductSubCategory();
 		productSubCategory1.product = product1;
-		productSubCategory1.subCategory = sub_cat1;
+		productSubCategory1.subCategory = sub_cat4;
 		await AppDataSource.manager.save(productSubCategory1);
 
 		const productSubCategory2 = new ProductSubCategory();
 		productSubCategory2.product = product2;
-		productSubCategory2.subCategory = sub_cat1;
+		productSubCategory2.subCategory = sub_cat4;
 		await AppDataSource.manager.save(productSubCategory2);
 
 		const productSubCategory3 = new ProductSubCategory();
 		productSubCategory3.product = product3;
-		productSubCategory3.subCategory = sub_cat1;
+		productSubCategory3.subCategory = sub_cat4;
 		await AppDataSource.manager.save(productSubCategory3);
 
 		const productSubCategory4 = new ProductSubCategory();
@@ -310,15 +346,25 @@ AppDataSource.initialize()
 		productSubCategory5.subCategory = sub_cat1;
 		await AppDataSource.manager.save(productSubCategory5);
 
-		const productSubCategory6 = new ProductSubCategory();
-		productSubCategory6.product = product6;
-		productSubCategory6.subCategory = sub_cat1;
-		await AppDataSource.manager.save(productSubCategory6);
+		const productSubCategoryCM1 = new ProductSubCategory();
+		productSubCategoryCM1.product = product6;
+		productSubCategoryCM1.subCategory = sub_cat1;
+		await AppDataSource.manager.save(productSubCategoryCM1);
 
-		const productSubCategory7 = new ProductSubCategory();
-		productSubCategory7.product = product7;
-		productSubCategory7.subCategory = sub_cat1;
-		await AppDataSource.manager.save(productSubCategory7);
+		const productSubCategoryCM2 = new ProductSubCategory();
+		productSubCategoryCM2.product = product6;
+		productSubCategoryCM2.subCategory = sub_cat11;
+		await AppDataSource.manager.save(productSubCategoryCM2);
+
+		const productSubCategoryCM3 = new ProductSubCategory();
+		productSubCategoryCM3.product = product7;
+		productSubCategoryCM3.subCategory = sub_cat1;
+		await AppDataSource.manager.save(productSubCategoryCM3);
+
+		const productSubCategoryCM4 = new ProductSubCategory();
+		productSubCategoryCM4.product = product7;
+		productSubCategoryCM4.subCategory = sub_cat12;
+		await AppDataSource.manager.save(productSubCategoryCM4);
 
 		const productSubCategory8 = new ProductSubCategory();
 		productSubCategory8.product = product8;
@@ -330,44 +376,64 @@ AppDataSource.initialize()
 		productSubCategory9.subCategory = sub_cat1;
 		await AppDataSource.manager.save(productSubCategory9);
 
-		const productSubCategory10 = new ProductSubCategory();
-		productSubCategory10.product = product10;
-		productSubCategory10.subCategory = sub_cat1;
-		await AppDataSource.manager.save(productSubCategory10);
+		const productSubCategoryPROC1 = new ProductSubCategory();
+		productSubCategoryPROC1.product = product10;
+		productSubCategoryPROC1.subCategory = sub_cat4;
+		await AppDataSource.manager.save(productSubCategoryPROC1);
 
-		const productSubCategory11 = new ProductSubCategory();
-		productSubCategory11.product = product11;
-		productSubCategory11.subCategory = sub_cat1;
-		await AppDataSource.manager.save(productSubCategory11);
+		const productSubCategoryPROC2 = new ProductSubCategory();
+		productSubCategoryPROC2.product = product10;
+		productSubCategoryPROC2.subCategory = sub_cat12;
+		await AppDataSource.manager.save(productSubCategoryPROC2);
+
+		const productSubCategoryPROC3 = new ProductSubCategory();
+		productSubCategoryPROC3.product = product11;
+		productSubCategoryPROC3.subCategory = sub_cat4;
+		await AppDataSource.manager.save(productSubCategoryPROC3);
+
+		const productSubCategoryPROC4 = new ProductSubCategory();
+		productSubCategoryPROC4.product = product11;
+		productSubCategoryPROC4.subCategory = sub_cat11;
+		await AppDataSource.manager.save(productSubCategoryPROC4);
 
 		const productSubCategory12 = new ProductSubCategory();
 		productSubCategory12.product = product12;
-		productSubCategory12.subCategory = sub_cat1;
+		productSubCategory12.subCategory = sub_cat4;
 		await AppDataSource.manager.save(productSubCategory12);
 
 		const productSubCategory13 = new ProductSubCategory();
 		productSubCategory13.product = product13;
-		productSubCategory13.subCategory = sub_cat1;
+		productSubCategory13.subCategory = sub_cat4;
 		await AppDataSource.manager.save(productSubCategory13);
 
-		const productSubCategory14 = new ProductSubCategory();
-		productSubCategory14.product = product14;
-		productSubCategory14.subCategory = sub_cat1;
-		await AppDataSource.manager.save(productSubCategory14);
+		const productSubCategoryRAM1 = new ProductSubCategory();
+		productSubCategoryRAM1.product = product14;
+		productSubCategoryRAM1.subCategory = sub_cat5;
+		await AppDataSource.manager.save(productSubCategoryRAM1);
 
-		const productSubCategory15 = new ProductSubCategory();
-		productSubCategory15.product = product15;
-		productSubCategory15.subCategory = sub_cat1;
-		await AppDataSource.manager.save(productSubCategory15);
+		const productSubCategoryRAM2 = new ProductSubCategory();
+		productSubCategoryRAM2.product = product14;
+		productSubCategoryRAM2.subCategory = sub_cat8;
+		await AppDataSource.manager.save(productSubCategoryRAM2);
+
+		const productSubCategoryRAM3 = new ProductSubCategory();
+		productSubCategoryRAM3.product = product15;
+		productSubCategoryRAM3.subCategory = sub_cat5;
+		await AppDataSource.manager.save(productSubCategoryRAM3);
+
+		const productSubCategoryRAM4 = new ProductSubCategory();
+		productSubCategoryRAM4.product = product15;
+		productSubCategoryRAM4.subCategory = sub_cat7;
+		await AppDataSource.manager.save(productSubCategoryRAM4);
 
 		const productSubCategory16 = new ProductSubCategory();
 		productSubCategory16.product = product16;
-		productSubCategory16.subCategory = sub_cat1;
+		productSubCategory16.subCategory = sub_cat5;
 		await AppDataSource.manager.save(productSubCategory16);
 
 		const productSubCategory17 = new ProductSubCategory();
 		productSubCategory17.product = product17;
-		productSubCategory17.subCategory = sub_cat1;
+		productSubCategory17.subCategory = sub_cat6;
 		await AppDataSource.manager.save(productSubCategory17);
 
 		const productSubCategories = await AppDataSource.manager.find(
