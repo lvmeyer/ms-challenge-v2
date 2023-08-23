@@ -105,7 +105,7 @@ export const ProductDescription = () => {
 						<span>Description</span>: {selectedProduct.description}
 					</p>
 					<p className="description-container">
-						<span>Stock</span>: X
+						<span>Stock</span>: {selectedProduct.quantity}
 					</p>
 
 					<span className="gender-container">
@@ -127,6 +127,7 @@ export const ProductDescription = () => {
 						<button
 							className="add-to-cart-btn"
 							onClick={() => addToCart(selectedProduct)}
+							disabled={selectedProduct.quantity === 0}
 						>
 							Add to cart
 						</button>

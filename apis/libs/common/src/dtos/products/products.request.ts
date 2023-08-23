@@ -16,6 +16,9 @@ export class CreateProductRequest {
   @IsOptional()
   @Length(0, 500)
   image: string;
+
+  @IsNumber()
+  quantity: number;
 }
 
 export class UpdateProductRequest {
@@ -37,4 +40,7 @@ export class UpdateProductRequest {
   @IsOptional()
   @Length(10, 150)
   image: string;
+
+  @IsNumber()
+  quantity: number;
 }

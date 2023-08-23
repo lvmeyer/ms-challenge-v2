@@ -51,7 +51,9 @@ export const ProductListingSection = (props) => {
 				})
 					.then((response) => response.json())
 					.then((data) => {
-						setProducts(data.data);
+						// Filtrer les produits ayant une quantité supérieure à 0
+						const filteredProducts = data.data.filter(product => product.quantity > 0);
+						setProducts(filteredProducts);
 
 						if (priceFilter) {
 							const filteredProducts = data.data.filter(
@@ -137,7 +139,7 @@ export const ProductListingSection = (props) => {
 			{products.length > 0 ? (
 				Array.isArray(products) &&
 				products.map((product) => {
-					const { id, name, price, description, image, category } = product;
+					const { id, name, price, description, image, category, quantity } = product;
 
 					return (
 						<Tilt
@@ -165,7 +167,7 @@ export const ProductListingSection = (props) => {
 											<strong>Price :</strong> <span id="price">${price}</span>
 										</p>
 										<p className="discount-price">
-											<strong>Stock :</strong> <span id="price">X</span>
+											<strong>Stock :</strong> <span id="price">{quantity}</span>
 										</p>
 									</div>
 
