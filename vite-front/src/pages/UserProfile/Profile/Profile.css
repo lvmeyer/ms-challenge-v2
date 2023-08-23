@@ -1,75 +1,76 @@
 .profile-container {
-  padding: 25px;
+	padding: 25px;
 }
 
 .profile-container > h3 {
-  margin-bottom: 20px;
-  text-align: center;
+	margin-bottom: 20px;
+	text-align: center;
 }
 
 .profile-details {
-  margin-bottom: 20px;
+	margin-bottom: 20px;
 }
 
 .profile-details > * {
-  margin-bottom: 10px;
+	margin-bottom: 10px;
 }
 
 .profile-details > * > :first-child {
-  font-weight: 600;
+	font-weight: 600;
 }
 .profile-details .name {
-  display: flex;
-  flex-flow: row nowrap;
-  justify-content: space-between;
+	display: flex;
+	flex-flow: row nowrap;
+	justify-content: space-between;
 }
 .profile-details .email {
-  display: flex;
-  flex-flow: row nowrap;
-  justify-content: space-between;
+	display: flex;
+	flex-flow: row nowrap;
+	justify-content: space-between;
 }
 
-.width-100px{
-  width: 100px;
+.width-100px {
+	width: 100px;
 }
 
-/* HORIZONTAL SCROLL */
-
-.scroll{
-  overflow-x: scroll;
-  scrollbar-color: blue orange;
+.scroll {
+	overflow-x: scroll;
+	scrollbar-color: blue orange;
 }
 
 div.col.scroll::-webkit-scrollbar-thumb {
-  background-color: #ff0000; /* Couleur de la poignée */
-  border-radius: 4px; /* Bordure arrondie de la poignée */
+	background-color: #ff0000;
+	border-radius: 4px;
 }
 
-/* Styles pour la piste (track) de la scrollbar */
 div.col.scroll::-webkit-scrollbar-track {
-  background-color: #f1f1f1; /* Couleur de la piste */
+	background-color: #f1f1f1;
 }
 
-.mh-100px{
-  max-height: 100px;
+.mh-100px {
+	max-height: 100px;
 }
 
-.width55px{
-  width: 55px;
+.width55px {
+	width: 55px;
 }
 
 th {
-  background-color: #f0f0f0;
-  font-weight: bold;
-  padding: 8px;
-  white-space: nowrap; /* Empêche le texte de se casser en plusieurs lignes */
-  overflow: hidden; /* Masque le contenu qui dépasse */
-  text-overflow: ellipsis; /* Ajoute des points de suspension (...) si le contenu est masqué */
+	background-color: #f0f0f0;
+	font-weight: bold;
+	padding: 8px;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
 }
 
 td {
-  padding: 8px;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+	padding: 8px;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.width-50pc {
+	width: 50%;
 }

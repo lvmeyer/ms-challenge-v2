@@ -1,11 +1,3 @@
-/* .user-profile-container {
-  width: 90vw;
-  margin: auto;
-  margin-top: 100px;
-  box-shadow: 0px 0px 23px 0px rgb(222, 222, 222);
-  border-radius: 10px;
-} */
-
 .user-profile-heading {
 	text-align: center;
 	margin-bottom: 15px;
@@ -17,7 +9,6 @@
 	flex-flow: row nowrap;
 	justify-content: space-around;
 	padding: 15px;
-	background-color: rgb(236, 236, 236);
 }
 
 .link-container > a {
@@ -28,20 +19,18 @@
 }
 
 @media (min-width: 768px) {
-  body{
-    background-color: white;
-  }
-  .user-profile-container {
-  }
+	body {
+		background-color: white;
+	}
 
-  .link-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
+	.link-container {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+	}
 
-  .link-container {
-    display: flex;
-    flex-direction: column;
-  }
-} */
+	.link-container {
+		display: flex;
+		flex-direction: column;
+	}
+}

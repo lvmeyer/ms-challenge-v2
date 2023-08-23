@@ -1,6 +1,6 @@
-import {useEffect, useState} from 'react';
-import { useParams } from "react-router-dom";
-import {Elements} from '@stripe/react-stripe-js';
+import { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
+import { Elements } from '@stripe/react-stripe-js';
 import CheckoutForm from './CheckoutForm';
 
 function Payment(props) {

@@ -5,12 +5,9 @@ import { Route, Routes } from 'react-router-dom';
 import { Login } from '../pages/auth/Login/Login';
 import { ProductListing } from '../pages/ProductListing/ProductListing';
 import { ProductDetails } from '../pages/ProductDetails/ProductDetails';
-// import { RequiresAuth } from "../components/requires-auth/RequiresAuth";
 import { Signup } from '../pages/auth/Signup/Signup';
 import { Logout } from '../pages/auth/Logout/Logout';
-import { Checkout } from '../pages/Checkout/Checkout';
 import { UserProfile } from '../pages/UserProfile/UserProfile';
-import { Addresses } from '../pages/UserProfile/Addresses/Addresses';
 import { Orders } from '../pages/UserProfile/Orders/Orders';
 import { PageNotFound } from '../pages/PageNotFound/PageNotFound';
 import App from '../App';
@@ -19,13 +16,10 @@ import Payment from '../components/Stripe/Payment';
 import Completion from '../components/Stripe/Completion';
 import { loadStripe } from '@stripe/stripe-js';
 import RequireAuth from '../components/requires-auth/RequiresAuth';
-import { useSelector } from 'react-redux'; 
 import { EditProduct } from '../pages/UserProfile/Profile/Product/EditProduct';
 
 export const NavRoutes = () => {
 	const [stripePromise, setStripePromise] = useState(null);
-
-	const { userInfo } = useSelector((state) => state.auth);
 
 	useEffect(() => {
 		const stripePublicKey =
@@ -69,7 +63,6 @@ export const NavRoutes = () => {
 				}
 			/>
 			<Route path="/signup" element={<Signup />} />
-			<Route path="/checkout" element={<Checkout />} />
 			<Route
 				path="/profile"
 				element={
@@ -84,14 +77,6 @@ export const NavRoutes = () => {
 					element={
 						<RequireAuth>
 							<Orders />
-						</RequireAuth>
-					}
-				/>
-				<Route
-					path="/profile/addresses"
-					element={
-						<RequireAuth>
-							<Addresses />
 						</RequireAuth>
 					}
 				/>

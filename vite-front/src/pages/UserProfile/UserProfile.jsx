@@ -13,8 +13,8 @@ export const UserProfile = () => {
 
 	return (
 		<div>
-			<div className="user-profile-container">
-				<div className="link-container">
+			<div className="user-profile-container d-flex justify-content-evenly">
+				<div className="container m-5">
 					{userInfo && userInfo.role === 'ADMINISTRATOR' ? (
 						<>
 							<Profile />

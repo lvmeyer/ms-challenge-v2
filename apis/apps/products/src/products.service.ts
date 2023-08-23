@@ -78,9 +78,13 @@ export class ProductsService {
       where: {
         id: uuid,
       },
-      relations: ['productSubCategory', 'productSubCategory.subCategory', 'category', 'reviews']
+      relations: [
+        'productSubCategory',
+        'productSubCategory.subCategory',
+        'category',
+        'reviews',
+      ],
     });
-    // const product = await this.productRepository.findOneBy({ id: uuid });
     if (!product) {
       throw new NotFoundException('Product not found');
     }
