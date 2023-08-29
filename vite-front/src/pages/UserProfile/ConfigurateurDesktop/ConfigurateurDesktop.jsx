@@ -12,7 +12,7 @@ export const ConfigurateurDesktop = () => {
     }, []);
 
     return (
-        <div className="configurateur">
+        <div className="configurateur mt-5">
 
             <div className="configurateur-desktop-container">
                 <h1>Desktop configuration</h1>
@@ -29,10 +29,11 @@ export const ConfigurateurDesktop = () => {
                             <option value="i5">i5</option>
                         </select>
 
-                        <div class="form-check form-switch">
-                            <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault" checked />
-                            <label class="form-check-label" for="flexSwitchCheckDefault">Own ?</label>
+                        <div className="form-check form-switch">
+                            <input className="form-check-input" type="checkbox" id="flexSwitchCheckDefault" defaultChecked />
+                            <label className="form-check-label" htmlFor="flexSwitchCheckDefault">Own ?</label>
                         </div>
+
                     </label>
 
                     <label>
@@ -42,9 +43,9 @@ export const ConfigurateurDesktop = () => {
                             <option value="gtx1060">GTX 1060</option>
                         </select>
 
-                        <div class="form-check form-switch">
-                            <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault" checked />
-                            <label class="form-check-label" for="flexSwitchCheckDefault">Own ?</label>
+                        <div className="form-check form-switch">
+                            <input className="form-check-input" type="checkbox" id="flexSwitchCheckDefault" checked />
+                            <label className="form-check-label" htmlFor="flexSwitchCheckDefault">Own ?</label>
                         </div>
                     </label>
 
@@ -55,9 +56,9 @@ export const ConfigurateurDesktop = () => {
                             <option value="8go">8Go</option>
                         </select>
 
-                        <div class="form-check form-switch">
-                            <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault" />
-                            <label class="form-check-label" for="flexSwitchCheckDefault">Own ?</label>
+                        <div className="form-check form-switch">
+                            <input className="form-check-input" type="checkbox" id="flexSwitchCheckDefault" />
+                            <label className="form-check-label" htmlFor="flexSwitchCheckDefault">Own ?</label>
                         </div>
                     </label>
 
@@ -69,9 +70,9 @@ export const ConfigurateurDesktop = () => {
                             <option value="256go">256Go</option>
                         </select> 
 
-                        <div class="form-check form-switch">
-                            <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault" />
-                            <label class="form-check-label" for="flexSwitchCheckDefault">Own ?</label>
+                        <div className="form-check form-switch">
+                            <input className="form-check-input" type="checkbox" id="flexSwitchCheckDefault" />
+                            <label className="form-check-label" htmlFor="flexSwitchCheckDefault">Own ?</label>
                         </div>
                     </label>
 
@@ -82,9 +83,9 @@ export const ConfigurateurDesktop = () => {
                             <option value="cm2">motherboard</option>
                         </select>
 
-                        <div class="form-check form-switch">
-                            <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault" checked />
-                            <label class="form-check-label" for="flexSwitchCheckDefault">Own ?</label>
+                        <div className="form-check form-switch">
+                            <input className="form-check-input" type="checkbox" id="flexSwitchCheckDefault" checked />
+                            <label className="form-check-label" htmlFor="flexSwitchCheckDefault">Own ?</label>
                         </div>
                     </label>
                 </div>

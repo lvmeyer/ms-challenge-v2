@@ -15,6 +15,7 @@ import {
   CreateUserRequest,
   UpdateProfileRequest,
   UpdatePasswordRequest,
+  UpdateEmailRequest,
 } from '../../../../libs/common/src/dtos/users/users.request';
 import { User } from './User';
 import { Role } from '../auth/auth.enum';
@@ -71,9 +72,24 @@ export class UsersService {
     await this.usersRepository.update(user.id, {
       firstname: updateProfileRequest.firstname || user.firstname,
       lastname: updateProfileRequest.lastname || user.lastname,
-    });
+  });
+  console.log('SUCCESS profile: SERVICE');
 
     return { message: 'Profile updated successfully' };
+  }
+
+  async updateEmail(
+    access_token: string,
+    updateEmailRequest: UpdateEmailRequest,
+  ): Promise<{ message: string }> {
+    const user = await this.getMe(access_token);
+
+    await this.usersRepository.update(user.id, {
+      email: updateEmailRequest.email || user.email,
+    });
+
+    console.log('SUCCESS email: SERVICE');
+    return { message: 'Email updated successfully' };
   }
 
   async updatePassword(

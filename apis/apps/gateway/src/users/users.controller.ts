@@ -21,7 +21,7 @@ import {
   UseInterceptors,
 } from '@nestjs/common';
 
-import { UpdateProfileRequest, UpdatePasswordRequest } from '@app/common';
+import { UpdateProfileRequest, UpdatePasswordRequest, UpdateEmailRequest } from '@app/common';
 import { User } from './User';
 import { Role } from '../auth/auth.enum';
 import { AuthRequired, HasRole } from '../auth/auth.decorator';
@@ -64,8 +64,22 @@ export class UsersController {
     @Headers() headers: any,
   ) {
     const access_token = headers.authorization.split(' ')[1];
-
+    console.log('SUCCESS profile: SERVICE');
     return this.usersService.updateProfile(access_token, updateProfileRequest);
+  }
+
+  @Patch('users/update-email')
+  @AuthRequired()
+  updateEmail(
+    @Req() req: Request,
+    @Body(ValidationPipe) updateEmailRequest: UpdateEmailRequest,
+    @Headers() headers: any,
+  ) {
+    const access_token = headers.authorization.split(' ')[1];
+    console.log('SUCCESS email: CONTROLLER');
+
+
+    return this.usersService.updateEmail(access_token, updateEmailRequest);
   }
 
   @Patch('users/updatepassword')
