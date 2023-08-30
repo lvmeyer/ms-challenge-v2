@@ -3,23 +3,21 @@ import { useSelector } from 'react-redux';
 
 import './UserProfile.css';
 import { Profile } from './Profile/Profile';
-import { AdminCommentPanel } from './PanelAdmin/AdminCommentPanel';
-import { AdminProductPanel } from './AdminProductPanel/AdminProductPanel';
 
 import { ConfigurateurDesktop } from './ConfigurateurDesktop/ConfigurateurDesktop';
+import { AdminGestion } from './AdminGestion/AdminGestion';
 
 export const UserProfile = () => {
 	const { userInfo } = useSelector((state) => state.auth);
 
 	return (
 		<div>
-			<div className="user-profile-container d-flex justify-content-evenly">
+			<div className="user-profile-container d-flex justify-content-evenly h-auto">
 				<div className="container m-5">
 					{userInfo && userInfo.role === 'ADMINISTRATOR' ? (
 						<>
 							<Profile />
-							<AdminCommentPanel />
-							<AdminProductPanel />
+							<AdminGestion />
 						</>
 					) : (
 						<>

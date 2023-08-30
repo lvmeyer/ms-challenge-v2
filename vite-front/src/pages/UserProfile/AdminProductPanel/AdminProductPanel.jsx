@@ -206,7 +206,7 @@ export const AdminProductPanel = () => {
 				<form onSubmit={handleSubmit} className="d-flex flex-column">
 					<h2>Add a Product</h2>
 					<div className="mb-3">
-						<label htmlfor="name" className="form-label">
+						<label htmlFor="name" className="form-label">
 							Name
 						</label>
 						<input
@@ -217,7 +217,7 @@ export const AdminProductPanel = () => {
 							onChange={handleChange}
 							id="name"
 						/>
-						<label htmlfor="price" className="form-label">
+						<label htmlFor="price" className="form-label">
 							Price
 						</label>
 						<input
@@ -228,7 +228,7 @@ export const AdminProductPanel = () => {
 							onChange={handleChange}
 							id="price"
 						/>
-						<label htmlfor="description" className="form-label">
+						<label htmlFor="description" className="form-label">
 							Description
 						</label>
 						<input
@@ -239,7 +239,7 @@ export const AdminProductPanel = () => {
 							onChange={handleChange}
 							id="description"
 						/>
-						<label htmlfor="image" className="form-label">
+						<label htmlFor="image" className="form-label">
 							Image
 						</label>
 						<input
@@ -251,7 +251,7 @@ export const AdminProductPanel = () => {
 							id="image"
 						/>
 
-						<label htmlfor="image" className="form-label">
+						<label htmlFor="image" className="form-label">
 							Category
 						</label>
 						<select
