@@ -17,6 +17,8 @@ import Completion from '../components/Stripe/Completion';
 import { loadStripe } from '@stripe/stripe-js';
 import RequireAuth from '../components/requires-auth/RequiresAuth';
 import { EditProduct } from '../pages/UserProfile/Profile/Product/EditProduct';
+import { ResetPassword } from '../pages/auth/ResetPassword/ResetPassword';
+
 
 export const NavRoutes = () => {
 	const [stripePromise, setStripePromise] = useState(null);
@@ -107,6 +109,8 @@ export const NavRoutes = () => {
 					</RequireAuth>
 				}
 			/>
+			<Route path="/resetPassword" element={<ResetPassword />} />
+			
 			<Route path="*" element={<PageNotFound />} />
 		</Routes>
 	);

@@ -106,6 +106,23 @@ export class UsersService {
     return { message: 'Password updated successfully' };
   }
 
+
+  async updateResetToken(uuid: string, resetToken: string): Promise<void> {
+    // Implémentez la logique pour mettre à jour le jeton de réinitialisation dans la base de données
+    // en utilisant l'ID de l'utilisateur et le jeton de réinitialisation fourni.
+    // Vous devrez peut-être accéder à votre base de données ou à votre ORM pour effectuer cette opération.
+    // Exemple (avec TypeORM) :
+    const user = await this.usersRepository.findOneBy({ id: uuid });
+    if (user) {
+      user.resetToken = resetToken;
+      await this.usersRepository.save(user);
+    } else {
+      throw new NotFoundException('User not found');
+    }
+  }
+
+
+
   async createUser(createUserRequest: CreateUserRequest): Promise<User> {
     try {
       const basket = new Basket();

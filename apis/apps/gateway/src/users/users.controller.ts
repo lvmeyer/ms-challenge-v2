@@ -19,6 +19,7 @@ import {
   MaxFileSizeValidator,
   FileTypeValidator,
   UseInterceptors,
+  NotFoundException,
 } from '@nestjs/common';
 
 import { UpdateProfileRequest, UpdatePasswordRequest, UpdateEmailRequest } from '@app/common';
@@ -96,6 +97,22 @@ export class UsersController {
       updatePasswordRequest,
     );
   }
+
+  @Post('users/reset-password')
+  async resetPassword(@Body() { email }: { email: string }) {
+    const user = await this.usersService.getUserByEmail(email);
+    if (!user) {
+      throw new NotFoundException('User not found');
+    }
+
+    const resetToken = generateResetToken(); // Générez le jeton de réinitialisation ici
+    await this.usersService.updateResetToken(user.id, resetToken);
+
+    // Envoyez l'e-mail de réinitialisation ici (utilisation de nodemailer, par exemple)
+
+    return { message: 'Password reset email sent' };
+  }
+
 
   @Get('users')
   @HasRole(Role.ADMINISTRATOR)
