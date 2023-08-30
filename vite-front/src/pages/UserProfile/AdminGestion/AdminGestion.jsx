@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 
 import { AdminCommentPanel } from '../PanelAdmin/AdminCommentPanel';
 import { AdminProductPanel } from '../AdminProductPanel/AdminProductPanel';
+import { AddProduct } from '../AdminProductPanel/AddProduct';
 
 import '../Profile/Profile.css';
 
@@ -11,6 +12,7 @@ export const AdminGestion = () => {
   const tabs = {
     ReportedComments: <AdminCommentPanel />,
     ProductList: <AdminProductPanel />,
+	AddProduct : <AddProduct />
   };
 
   const handleTabClick = (tab) => {
