@@ -25,22 +25,28 @@ export class UpdateProductRequest {
   @IsString()
   @Length(3, 50)
   @IsOptional()
-  name: string;
+  name?: string;
 
   @IsString()
   @Length(3, 150)
   @IsOptional()
-  description: string;
+  description?: string;
 
   @IsNumber()
   @IsOptional()
-  price: number;
+  price?: number;
 
   @IsString()
   @IsOptional()
   @Length(10, 150)
-  image: string;
+  image?: string;
 
+  @IsNumber()
+  @IsOptional()
+  quantity?: number;
+}
+
+export class UpdateQuantityRequest {
   @IsNumber()
   quantity: number;
 }
