@@ -126,6 +126,18 @@ AppDataSource.initialize()
 		sub_cat6.category = cat4;
 		await AppDataSource.manager.save(sub_cat6);
 
+		const sub_cat55 = new SubCategory();
+		sub_cat55.name = 'DDR4';
+		sub_cat55.type = 'RAM';
+		sub_cat55.category = cat2;
+		await AppDataSource.manager.save(sub_cat55);
+
+		const sub_cat66 = new SubCategory();
+		sub_cat66.name = 'DDR5';
+		sub_cat66.type = 'RAM';
+		sub_cat66.category = cat2;
+		await AppDataSource.manager.save(sub_cat66);
+
 		const sub_cat7 = new SubCategory();
 		sub_cat7.name = '64GO';
 		sub_cat7.type = 'GO';
@@ -161,6 +173,33 @@ AppDataSource.initialize()
 		sub_cat12.type = 'SOCKET';
 		sub_cat12.category = cat3;
 		await AppDataSource.manager.save(sub_cat12);
+
+
+		const sub_cat13 = new SubCategory();
+		sub_cat13.name = 'PCI Express 2.0';
+		sub_cat13.type = 'SLOT';
+		sub_cat13.category = cat1;
+		await AppDataSource.manager.save(sub_cat13);
+
+
+		const sub_cat14 = new SubCategory();
+		sub_cat14.name = 'PCI Express 3.0';
+		sub_cat14.type = 'SLOT';
+		sub_cat14.category = cat1;
+		await AppDataSource.manager.save(sub_cat14);
+
+		const sub_cat15 = new SubCategory();
+		sub_cat15.name = 'PCI Express 2.0';
+		sub_cat15.type = 'SLOT';
+		sub_cat15.category = cat2;
+		await AppDataSource.manager.save(sub_cat15);
+
+
+		const sub_cat16 = new SubCategory();
+		sub_cat16.name = 'PCI Express 3.0';
+		sub_cat16.type = 'SLOT';
+		sub_cat16.category = cat2;
+		await AppDataSource.manager.save(sub_cat16);
 
 		const sub_categories = await AppDataSource.manager.find(SubCategory);
 		console.log('Loaded sub-categories: ', sub_categories);
@@ -435,6 +474,53 @@ AppDataSource.initialize()
 		productSubCategory17.product = product17;
 		productSubCategory17.subCategory = sub_cat6;
 		await AppDataSource.manager.save(productSubCategory17);
+
+
+		const productSubCategory19 = new ProductSubCategory();
+		productSubCategory19.product = product2;
+		productSubCategory19.subCategory = sub_cat13;
+		await AppDataSource.manager.save(productSubCategory19);
+
+		const productSubCategory20 = new ProductSubCategory();
+		productSubCategory20.product = product1;
+		productSubCategory20.subCategory = sub_cat13;
+		await AppDataSource.manager.save(productSubCategory20);
+
+		const productSubCategory21 = new ProductSubCategory();
+		productSubCategory21.product = product4;
+		productSubCategory21.subCategory = sub_cat14;
+		await AppDataSource.manager.save(productSubCategory21);
+
+		const productSubCategory22 = new ProductSubCategory();
+		productSubCategory22.product = product7;
+		productSubCategory22.subCategory = sub_cat15;
+		await AppDataSource.manager.save(productSubCategory22);
+
+		const productSubCategory23 = new ProductSubCategory();
+		productSubCategory23.product = product8;
+		productSubCategory23.subCategory = sub_cat16;
+		await AppDataSource.manager.save(productSubCategory23);
+
+		const productSubCategory24 = new ProductSubCategory();
+		productSubCategory24.product = product9;
+		productSubCategory24.subCategory = sub_cat16;
+		await AppDataSource.manager.save(productSubCategory24);
+
+		const productSubCategory25 = new ProductSubCategory();
+		productSubCategory25.product = product9;
+		productSubCategory25.subCategory = sub_cat55;
+		await AppDataSource.manager.save(productSubCategory25);
+
+		const productSubCategory26 = new ProductSubCategory();
+		productSubCategory26.product = product6;
+		productSubCategory26.subCategory = sub_cat55;
+		await AppDataSource.manager.save(productSubCategory26);
+
+		const productSubCategory27 = new ProductSubCategory();
+		productSubCategory27.product = product7;
+		productSubCategory27.subCategory = sub_cat66;
+		await AppDataSource.manager.save(productSubCategory27);
+
 
 		const productSubCategories = await AppDataSource.manager.find(
 			ProductSubCategory

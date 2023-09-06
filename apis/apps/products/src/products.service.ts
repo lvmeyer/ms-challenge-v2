@@ -8,8 +8,10 @@ import {
   Category,
   CreateCategoryRequest,
   CreateReviewRequest,
+  CreateConfigRequest,
   Product,
   Review,
+  Config
 } from '@app/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { MoreThanOrEqual, Repository, UpdateResult } from 'typeorm';
@@ -25,6 +27,8 @@ export class ProductsService {
     private readonly categoryRepository: Repository<Category>,
     @InjectRepository(Review)
     private readonly reviewRepository: Repository<Review>,
+    @InjectRepository(Config)
+    private readonly configRepository: Repository<Config>,
   ) {}
 
   // ==========================================
@@ -39,6 +43,21 @@ export class ProductsService {
       throw new InternalServerErrorException(err.driverError.message);
     }
   }
+
+
+  // ==========================================
+  // ================== CONFIGS ============
+  // ==========================================
+  async createConfig(
+    createConfigRequest: CreateConfigRequest,
+  ): Promise<CreateConfigRequest & Config> {
+    try {
+      return await this.configRepository.save(createConfigRequest);
+    } catch (err) {
+      throw new InternalServerErrorException(err.driverError.message);
+    }
+  }
+
 
   async findAllCategories(): Promise<Category[]> {
     return this.categoryRepository.find();

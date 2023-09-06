@@ -15,7 +15,7 @@ export const Cart = () => {
 
 	return (
 		<div>
-			<h1 className="page-heading">Cart</h1>
+			<h1 className="text-center page-heading">Cart</h1>
 			<div className="cart-container">
 				<CartListing />
 			</div>
