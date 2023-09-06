@@ -19,8 +19,7 @@ import {
   CreateCategoryRequest,
   CreateProductRequest,
   CreateReviewRequest,
-  UpdateProductRequest,
-  CreateConfigRequest
+  UpdateProductRequest
 } from '@app/common';
 import { gatewayResponse } from '../utils/gatewayResponse';
 import { GatewayProductService } from '../services/gateway-products.service';
@@ -50,38 +49,6 @@ export class GatewayProductController {
         status: HttpStatus.CREATED,
         success: true,
         data: category,
-      });
-    } catch (err) {
-      console.error(err);
-
-      return gatewayResponse({
-        res,
-        status: err.status,
-        success: false,
-        message: err.message,
-      });
-    }
-  }
-
-  // =============== CATEGORY ===============
-  @Post('configs')
-  @AuthRequired()
-  @HasRole(Role.USER)
-  @HttpCode(HttpStatus.CREATED)
-  async createConfig(
-    @Body(ValidationPipe) CreateConfigRequest: CreateConfigRequest,
-    @Res() res: Response,
-  ): Promise<Response<any, Record<string, any>>> {
-    try {
-      const config = await this.gatewayProductService.createConfig(
-        CreateConfigRequest,
-      );
-
-      return gatewayResponse({
-        res,
-        status: HttpStatus.CREATED,
-        success: true,
-        data: config,
       });
     } catch (err) {
       console.error(err);

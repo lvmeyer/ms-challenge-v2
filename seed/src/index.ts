@@ -212,7 +212,7 @@ AppDataSource.initialize()
 		product1.image =
 			'https://media.materiel.net/r550/products/MN0005897216_1.jpg';
 		product1.price = 229;
-		product1.quantity = 50;
+		product1.quantity = 1;
 		product1.category = cat1;
 		product1.reviews = [review1, review2, review3];
 		await AppDataSource.manager.save(product1);
@@ -274,7 +274,7 @@ AppDataSource.initialize()
 		product7.image =
 			'https://media.ldlc.com/r1600/ld/products/00/05/91/26/LD0005912641_1.jpg';
 		product7.price = 199;
-		product7.quantity = 50;
+		product7.quantity = 0;
 		product7.category = cat2;
 		await AppDataSource.manager.save(product7);
 
@@ -340,7 +340,7 @@ AppDataSource.initialize()
 		product14.description = 'G.Skill Trident Z Neo 32GB';
 		product14.image = 'https://m.media-amazon.com/images/I/71w2mY6QwSL.jpg';
 		product14.price = 199;
-		product14.quantity = 50;
+		product14.quantity = 0;
 		product14.category = cat4;
 		await AppDataSource.manager.save(product14);
 

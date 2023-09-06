@@ -21,13 +21,9 @@ import {
   Product,
   Category,
   Review,
-  Config,
   CreateReviewRequest,
-  CreateConfigRequest,
 } from '@app/common';
 import { ProductsService } from './products.service';
-import { HasRole } from '../../gateway/src/auth/auth.decorator';
-import { Role } from 'apps/gateway/src/auth/auth.enum';
 
 @Controller('pv')
 export class ProductsController {
@@ -54,15 +50,6 @@ export class ProductsController {
     @Param('uuid', ParseUUIDPipe) uuid: string,
   ): Promise<void> {
     return await this.productsService.deleteCategory(uuid);
-  }
-
-  // ================== CONFIG =================
-  @Post('configs')
-  @HttpCode(HttpStatus.CREATED)
-  async createConfig(
-    @Body(ValidationPipe) createConfigRequest: CreateConfigRequest,
-  ): Promise<Config> {
-    return await this.productsService.createConfig(createConfigRequest);
   }
 
   // ================== SUB_CTGS =================

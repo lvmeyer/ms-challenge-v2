@@ -75,7 +75,7 @@ export const ConfigurateurDesktop = () => {
             );
             setMemory(memory);
 
-            console.log(motherboards);
+            console.log(proc);
         });
     }, []);
 
@@ -345,28 +345,51 @@ export const ConfigurateurDesktop = () => {
                     <select className="select-cpu" onChange={(e) => handleChangeProcessor(e.target.value)}>
                         <option value="null">CHOOSE A PROCESSOR</option>
                         {processors.map((processor) => (
-                            <option value={processor.id} key={processor.id}>{processor.name} - {processor.price}$ - 🟢</option>
+                            <option 
+                            disabled={processor.quantity == 0 ? true : false}
+                            value={processor.id} 
+                            key={processor.id}>
+                                {processor.name} - {processor.price}$ - {processor.quantity == 0 ? "🔴 (HS)" : "🟢"}
+                            </option>
                         ))}
                     </select>
 
                     <select className="select-cm" onChange={(e) => handleChangeMotherboard(e.target.value)}>
                         <option value="null">CHOOSE A MOTHERBOARD</option>
                         {motherboards.map((motherboard) => (
-                            <option value={motherboard.id} key={motherboard.id}>{motherboard.name} - {motherboard.price}$ - 🟢</option>
+                            <option 
+                            disabled={motherboard.quantity == 0 ? true : false}
+                            value={motherboard.id} 
+                            key={motherboard.id}>
+                                {motherboard.name} - {motherboard.price}$ - 
+                                {motherboard.quantity == 0 ? "🔴 (HS)" : "🟢"}
+                            </option>
                         ))}
                     </select>
 
                     <select className="select-cg" onChange={(e) => handleChangeGraphicCard(e.target.value)}>
                         <option value="null">CHOOSE A GRAPHIC CARD</option>
                         {graphicscards.map((graphicscard) => (
-                            <option value={graphicscard.id} key={graphicscard.id}>{graphicscard.name} - {graphicscard.price}$ - 🟢</option>
+                            <option 
+                            disabled={graphicscard.quantity == 0 ? true : false}
+                            value={graphicscard.id} 
+                            key={graphicscard.id}>
+                                {graphicscard.name} - {graphicscard.price}$ - 
+                                {graphicscard.quantity == 0 ? "🔴 (HS)" : "🟢"}
+                            </option>
                         ))}
                     </select>
 
                     <select className="select-ram" onChange={(e) => handleChangeMemory(e.target.value)}>
                         <option value="null">CHOOSE A MEMORY</option>
                         {memory.map((memory) => (
-                            <option value={memory.id} key={memory.id}>{memory.name} - {memory.price}$ - 🟢</option>
+                            <option 
+                            disabled={memory.quantity == 0 ? true : false}
+                            value={memory.id} 
+                            key={memory.id}>
+                                {memory.name} - {memory.price}$ - 
+                                {memory.quantity == 0 ? "🔴 (HS)" : "🟢"}
+                            </option>
                         ))}
                     </select>
 

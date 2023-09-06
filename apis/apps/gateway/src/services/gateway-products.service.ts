@@ -5,8 +5,7 @@ import {
   CreateCategoryRequest,
   CreateProductRequest,
   CreateReviewRequest,
-  UpdateProductRequest,
-  CreateConfigRequest
+  UpdateProductRequest
 } from '@app/common';
 import { ErrorResponse } from '@app/common';
 
@@ -19,8 +18,6 @@ export class GatewayProductService {
     this.configService.get<string>('HOSTNAME_PRODUCTS') + '/pv/categories';
   PATH_REVIEW =
     this.configService.get<string>('HOSTNAME_PRODUCTS') + '/pv/reviews';
-  PATH_CONFIG =
-    this.configService.get<string>('HOSTNAME_PRODUCTS') + '/pv/configs';
 
   // =============== CATEGORY ===============
   async createCategory(
@@ -32,25 +29,6 @@ export class GatewayProductService {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify(createCategoryRequest),
-    });
-    const res = await response.json();
-
-    if (response.status !== HttpStatus.CREATED) {
-      throw new ErrorResponse(res.message, response.status);
-    }
-    return res;
-  }
-
-  // =============== CATEGORY ===============
-  async createConfig(
-    createConfigRequest: CreateConfigRequest,
-  ): Promise<any> {
-    const response = await fetch(this.PATH_CONFIG, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(createConfigRequest),
     });
     const res = await response.json();
 
