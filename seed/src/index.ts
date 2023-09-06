@@ -212,6 +212,7 @@ AppDataSource.initialize()
 		product1.image =
 			'https://media.materiel.net/r550/products/MN0005897216_1.jpg';
 		product1.price = 229;
+		product1.quantity = 50;
 		product1.category = cat1;
 		product1.reviews = [review1, review2, review3];
 		await AppDataSource.manager.save(product1);
@@ -222,6 +223,7 @@ AppDataSource.initialize()
 		product2.image =
 			'https://media.ldlc.com/r1600/ld/products/00/05/81/47/LD0005814778_1.jpg';
 		product2.price = 399;
+		product2.quantity = 50;
 		product2.category = cat1;
 		product2.reviews = [review4, review5, review6, review7];
 		await AppDataSource.manager.save(product2);
@@ -232,6 +234,7 @@ AppDataSource.initialize()
 		product3.image =
 			'https://www.asrock.com/Graphics-Card/photo/Radeon%20RX%207600%20Steel%20Legend%208GB%20OC(M1).png';
 		product3.price = 350;
+		product3.quantity = 50;
 		product3.category = cat1;
 		await AppDataSource.manager.save(product3);
 
@@ -241,6 +244,7 @@ AppDataSource.initialize()
 		product4.image =
 			'https://www.asrock.com/Graphics-Card/photo/Radeon%20RX%207600%20Steel%20Legend%208GB%20OC(M1).png';
 		product4.price = 499;
+		product4.quantity = 50;
 		product4.category = cat1;
 		await AppDataSource.manager.save(product4);
 
@@ -250,6 +254,7 @@ AppDataSource.initialize()
 		product5.image =
 			'https://m.media-amazon.com/images/I/81gBKaOGz9L._AC_UF1000,1000_QL80_.jpg';
 		product5.price = 599;
+		product5.quantity = 50;
 		product5.category = cat1;
 		await AppDataSource.manager.save(product5);
 
@@ -259,6 +264,7 @@ AppDataSource.initialize()
 		product6.image =
 			'https://media.ldlc.com/r1600/ld/products/00/05/68/67/LD0005686754_1.jpg';
 		product6.price = 149;
+		product6.quantity = 50;
 		product6.category = cat2;
 		await AppDataSource.manager.save(product6);
 
@@ -268,6 +274,7 @@ AppDataSource.initialize()
 		product7.image =
 			'https://media.ldlc.com/r1600/ld/products/00/05/91/26/LD0005912641_1.jpg';
 		product7.price = 199;
+		product7.quantity = 50;
 		product7.category = cat2;
 		await AppDataSource.manager.save(product7);
 
@@ -277,6 +284,7 @@ AppDataSource.initialize()
 		product8.image =
 			'https://rog.asus.com/websites/global/products/fkufhp8oogo9exki/img/kv/pd.png';
 		product8.price = 249;
+		product8.quantity = 50;
 		product8.category = cat2;
 		await AppDataSource.manager.save(product8);
 
@@ -286,6 +294,7 @@ AppDataSource.initialize()
 		product9.image =
 			'https://media.ldlc.com/r1600/ld/products/00/05/75/20/LD0005752029_1.jpg';
 		product9.price = 299;
+		product9.quantity = 50;
 		product9.category = cat2;
 		await AppDataSource.manager.save(product9);
 
@@ -294,6 +303,7 @@ AppDataSource.initialize()
 		product10.description = 'AMD Ryzen 5 5600X';
 		product10.image = 'https://m.media-amazon.com/images/I/51GUexhiieL.jpg';
 		product10.price = 299;
+		product10.quantity = 50;
 		product10.category = cat3;
 		await AppDataSource.manager.save(product10);
 
@@ -302,6 +312,7 @@ AppDataSource.initialize()
 		product11.description = 'AMD Ryzen 7 5800X';
 		product11.image = 'https://m.media-amazon.com/images/I/51GUexhiieL.jpg';
 		product11.price = 449;
+		product11.quantity = 50;
 		product11.category = cat3;
 		await AppDataSource.manager.save(product11);
 
@@ -310,6 +321,7 @@ AppDataSource.initialize()
 		product12.description = 'AMD Ryzen 9 5900X';
 		product12.image = 'https://m.media-amazon.com/images/I/51GUexhiieL.jpg';
 		product12.price = 549;
+		product12.quantity = 50;
 		product12.category = cat3;
 		await AppDataSource.manager.save(product12);
 
@@ -318,6 +330,7 @@ AppDataSource.initialize()
 		product13.description = 'AMD Ryzen 9 5950X';
 		product13.image = 'https://m.media-amazon.com/images/I/51GUexhiieL.jpg';
 		product13.price = 799;
+		product13.quantity = 50;
 		product13.category = cat3;
 
 		await AppDataSource.manager.save(product13);
@@ -327,6 +340,7 @@ AppDataSource.initialize()
 		product14.description = 'G.Skill Trident Z Neo 32GB';
 		product14.image = 'https://m.media-amazon.com/images/I/71w2mY6QwSL.jpg';
 		product14.price = 199;
+		product14.quantity = 50;
 		product14.category = cat4;
 		await AppDataSource.manager.save(product14);
 
@@ -335,6 +349,7 @@ AppDataSource.initialize()
 		product15.description = 'G.Skill Trident Z Neo 64GB';
 		product15.image = 'https://m.media-amazon.com/images/I/71w2mY6QwSL.jpg';
 		product15.price = 399;
+		product15.quantity = 50;
 		product15.category = cat4;
 		await AppDataSource.manager.save(product15);
 
@@ -344,6 +359,7 @@ AppDataSource.initialize()
 		product16.image =
 			'https://www.1fodiscount.com/ressources/site/img/product/kit-barrettes-memoire-32go-2x16go-dimm-ddr4-corsair-vengeance-lpx-pc4-25600-3200-mhz-noir_141304__480.webp';
 		product16.price = 199;
+		product16.quantity = 50;
 		product16.category = cat4;
 		await AppDataSource.manager.save(product16);
 
@@ -352,6 +368,7 @@ AppDataSource.initialize()
 		product17.description = 'Corsair Vengeance LPX 64GB';
 		product17.image = 'https://m.media-amazon.com/images/I/71w2mY6QwSL.jpg';
 		product17.price = 399;
+		product17.quantity = 50;
 		product17.category = cat4;
 		await AppDataSource.manager.save(product17);
 

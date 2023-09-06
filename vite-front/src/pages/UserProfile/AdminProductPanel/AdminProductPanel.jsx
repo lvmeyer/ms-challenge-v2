@@ -10,6 +10,7 @@ export const AdminProductPanel = () => {
 		description: '',
 		image: '',
 		category: '',
+		quantity: 0,
 	});
 
 	const [editProductId, setEditProductId] = useState(null);
@@ -20,7 +21,7 @@ export const AdminProductPanel = () => {
 
 	const handleChange = (e) => {
 		const { name, value } = e.target;
-		const updatedValue = name === 'price' ? parseFloat(value) : value;
+		const updatedValue = (name === 'price' || name === 'quantity') ? parseFloat(value) : value;
 		setFormData({ ...formData, [name]: updatedValue });
 		setEditProductData({ ...editProductData, [name]: updatedValue });
 	};
@@ -142,6 +143,7 @@ export const AdminProductPanel = () => {
 										<th scope="col">Name</th>
 										<th scope="col">Price</th>
 										<th scope="col">Description</th>
+										<th scope="col">Quantity</th>
 										<th className="w-50" scope="col">
 											Image
 										</th>
@@ -153,7 +155,7 @@ export const AdminProductPanel = () => {
 								<tbody>
 									{Array.isArray(products) &&
 										products.map((product) => {
-											const { id, name, price, description, image, category } =
+											const { id, name, price,  description, image, quantity, category } =
 												product;
 
 											return (
@@ -168,6 +170,7 @@ export const AdminProductPanel = () => {
 													<td className="text-truncate max-width-150">
 														{description}
 													</td>
+													<td>{quantity}</td>
 													<td className="text-truncate max-width-150">
 														{image}
 													</td>
@@ -239,6 +242,18 @@ export const AdminProductPanel = () => {
 							onChange={handleChange}
 							id="description"
 						/>
+						<label htmlfor="quantity" className="form-label">
+							Quantity
+						</label>
+						<input
+							className="form-control"
+							name="quantity"
+							placeholder="Quantity"
+							value={formData.quantity}
+							onChange={handleChange}
+							id="quantity"
+						/>
+
 						<label htmlfor="image" className="form-label">
 							Image
 						</label>
