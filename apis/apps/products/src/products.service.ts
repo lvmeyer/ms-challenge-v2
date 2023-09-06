@@ -65,6 +65,7 @@ export class ProductsService {
       throw new InternalServerErrorException(err.driverError.message);
     }
   }
+  
 
   async findAll(): Promise<Product[]> {
     const products = await this.productRepository.find({

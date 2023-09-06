@@ -31,6 +31,9 @@ export class Product {
 	@Column({ nullable: true })
 	image?: string;
 
+	@Column({ type: 'int', default: 0 })
+	quantity: number;
+
 	@CreateDateColumn()
 	createdDate: Date;
 
