@@ -10,12 +10,17 @@ export const YourConfig = () => {
     }, []);
 
     return (
-        <div className="your-configuration">
-            <h1>Your configuration</h1>
-            <p>
-                Here you can see your current configuration.<br/>
-                An algorithm will suggest components based on your current configuration.
-            </p>
+        <div className='container'>
+
+            <div className='mb-5'>
+                <h1>Your configuration</h1>
+                <p>
+                    Here you can see your current configuration.<br/>
+                    An algorithm will suggest components based on your current configuration.
+                </p>
+            </div>
+
+        <div className="your-configuration border border-dark border-3 rounded-4 p-5">
 
             <div className="your-configuration-container">
                 <div className="your-configuration-container-description">
@@ -59,6 +64,8 @@ export const YourConfig = () => {
                 </div>
                 
             </div>
+        </div>
+
         </div>
 	);
 };
