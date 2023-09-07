@@ -7,10 +7,12 @@ import {
 	OneToOne,
 	PrimaryGeneratedColumn,
 	UpdateDateColumn,
+	OneToMany
 } from 'typeorm';
 
 import { Role } from './auth.enum';
 import { Basket } from './Basket';
+import { Config } from './Config';
 
 @Entity()
 export class User {
@@ -49,4 +51,7 @@ export class User {
 
 	@UpdateDateColumn()
 	updatedDate: Date;
+
+	@OneToMany(() => Config, (config) => config.user)
+  	configs: Config[];
 }

@@ -24,8 +24,6 @@ import {
   CreateReviewRequest,
 } from '@app/common';
 import { ProductsService } from './products.service';
-import { HasRole } from '../../gateway/src/auth/auth.decorator';
-import { Role } from 'apps/gateway/src/auth/auth.enum';
 
 @Controller('pv')
 export class ProductsController {

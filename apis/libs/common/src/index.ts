@@ -23,3 +23,4 @@ export { Basket } from './entity/Basket';
 export { Product } from './entity/Product';
 export { Category } from './entity/Category';
 export { Review } from './entity/Review';
+export { SubCategory } from './entity/SubCategory';

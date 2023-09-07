@@ -19,7 +19,7 @@ import {
   CreateCategoryRequest,
   CreateProductRequest,
   CreateReviewRequest,
-  UpdateProductRequest,
+  UpdateProductRequest
 } from '@app/common';
 import { gatewayResponse } from '../utils/gatewayResponse';
 import { GatewayProductService } from '../services/gateway-products.service';

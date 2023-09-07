@@ -17,6 +17,7 @@ import Completion from '../components/Stripe/Completion';
 import { loadStripe } from '@stripe/stripe-js';
 import RequireAuth from '../components/requires-auth/RequiresAuth';
 import { EditProduct } from '../pages/UserProfile/Profile/Product/EditProduct';
+import {Configurateur} from '../pages/Configurateur/Configurateur';
 import AdminRoutes from '../components/AdminRoutes/AdminRoutes';
 
 export const NavRoutes = () => {
@@ -102,6 +103,7 @@ export const NavRoutes = () => {
 				}
 			/>
 			<Route path="*" element={<PageNotFound />} />
+			<Route path="/configurateur" element={<Configurateur />} />
 		</Routes>
 	);
 };

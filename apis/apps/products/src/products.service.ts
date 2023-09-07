@@ -9,7 +9,7 @@ import {
   CreateCategoryRequest,
   CreateReviewRequest,
   Product,
-  Review,
+  Review
 } from '@app/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { MoreThanOrEqual, Repository, UpdateResult } from 'typeorm';
@@ -24,7 +24,7 @@ export class ProductsService {
     @InjectRepository(Category)
     private readonly categoryRepository: Repository<Category>,
     @InjectRepository(Review)
-    private readonly reviewRepository: Repository<Review>,
+    private readonly reviewRepository: Repository<Review>
   ) {}
 
   // ==========================================
@@ -39,6 +39,7 @@ export class ProductsService {
       throw new InternalServerErrorException(err.driverError.message);
     }
   }
+
 
   async findAllCategories(): Promise<Category[]> {
     return this.categoryRepository.find();

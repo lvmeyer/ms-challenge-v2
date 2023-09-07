@@ -5,7 +5,7 @@ import {
   CreateCategoryRequest,
   CreateProductRequest,
   CreateReviewRequest,
-  UpdateProductRequest,
+  UpdateProductRequest
 } from '@app/common';
 import { ErrorResponse } from '@app/common';
 
