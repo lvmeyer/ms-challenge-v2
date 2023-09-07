@@ -49,4 +49,7 @@ export class User {
 
   @UpdateDateColumn()
   updatedDate: Date;
+
+  @Column({ nullable: true })
+  resetToken: string;
 }

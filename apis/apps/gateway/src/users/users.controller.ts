@@ -98,20 +98,45 @@ export class UsersController {
     );
   }
 
-  @Post('users/reset-password')
+  @Patch('reset-password')
   async resetPassword(@Body() { email }: { email: string }) {
     const user = await this.usersService.getUserByEmail(email);
     if (!user) {
       throw new NotFoundException('User not found');
     }
+    console.log(email);
 
-    const resetToken = generateResetToken(); // Générez le jeton de réinitialisation ici
+    const resetToken = this.usersService.generateRandomToken(32);
+
     await this.usersService.updateResetToken(user.id, resetToken);
 
-    // Envoyez l'e-mail de réinitialisation ici (utilisation de nodemailer, par exemple)
-
-    return { message: 'Password reset email sent' };
+    try {
+      // await this.sendResetEmail(email, resetToken);
+      return { resetToken: resetToken };
+    } catch (error) {
+      console.error('Error sending reset email:', error);
+      throw new Error('Failed to send reset email.');
+    }
   }
+  
+  @Patch('reset-password-form/:resetToken')
+  async resetPasswordForm(
+    @Param('resetToken') resetToken: string,
+    @Body() { password }: { password: string }
+  ) {
+    const user = await this.usersService.getUserByResetToken(resetToken);
+
+    // throw new NotFoundException(user);
+    if (!user) {
+
+      throw new NotFoundException('Invalid reset token');
+    }
+
+    await this.usersService.resetPassword(user.resetToken, password);
+
+    return { message: 'Password reset successfully' };
+  }
+
 
 
   @Get('users')

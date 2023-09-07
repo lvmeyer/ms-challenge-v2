@@ -18,6 +18,7 @@ import { loadStripe } from '@stripe/stripe-js';
 import RequireAuth from '../components/requires-auth/RequiresAuth';
 import { EditProduct } from '../pages/UserProfile/Profile/Product/EditProduct';
 import { ResetPassword } from '../pages/auth/ResetPassword/ResetPassword';
+import { ResetPasswordForm } from '../pages/auth/ResetPassword/ResetPasswordForm';
 
 
 export const NavRoutes = () => {
@@ -110,6 +111,7 @@ export const NavRoutes = () => {
 				}
 			/>
 			<Route path="/resetPassword" element={<ResetPassword />} />
+			<Route path="/resetPasswordForm/:resetToken" element={<ResetPasswordForm />} />
 			
 			<Route path="*" element={<PageNotFound />} />
 		</Routes>

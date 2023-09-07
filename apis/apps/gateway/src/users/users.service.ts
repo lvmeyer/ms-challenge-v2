@@ -6,6 +6,7 @@ import {
   InternalServerErrorException,
   NotFoundException,
 } from '@nestjs/common';
+
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { PutObjectCommand, S3Client } from '@aws-sdk/client-s3';
@@ -19,6 +20,8 @@ import {
 } from '../../../../libs/common/src/dtos/users/users.request';
 import { User } from './User';
 import { Role } from '../auth/auth.enum';
+import * as crypto from 'crypto';
+import * as bcrypt from 'bcryptjs';
 
 @Injectable()
 export class UsersService {
@@ -95,9 +98,9 @@ export class UsersService {
   async updatePassword(
     access_token: string,
     updatePasswordRequest: UpdatePasswordRequest,
-  ): Promise<{ message: string }> {
-    const user = await this.getMe(access_token);
-    const NewPassword = await hash(updatePasswordRequest.password, 10);
+    ): Promise<{ message: string }> {
+      const user = await this.getMe(access_token);
+      const NewPassword = await hash(updatePasswordRequest.password, 10);
 
     await this.usersRepository.update(user.id, {
       password: NewPassword,
@@ -107,11 +110,38 @@ export class UsersService {
   }
 
 
+  // RESET PASSWORD
+
+  async resetPassword(resetToken: string, newPassword: string) {
+    const user = await this.getUserByResetToken(resetToken);
+    if (!user) {
+      throw new NotFoundException('reset password broken');
+    }
+
+    user.password = await this.hashPassword(newPassword);
+
+    user.resetToken = null;
+    await this.usersRepository.save(user);
+  }
+
+
+
+
+  async hashPassword(password: string): Promise<string> {
+    const hashedPassword = await hash(password, 10);
+
+    return hashedPassword;
+  }
+
+
+
+  async emailExists(email: string): Promise<boolean> {
+    const user = await this.usersRepository.findOne({ where: { email } });
+    return !!user;
+  }
+
+
   async updateResetToken(uuid: string, resetToken: string): Promise<void> {
-    // Implémentez la logique pour mettre à jour le jeton de réinitialisation dans la base de données
-    // en utilisant l'ID de l'utilisateur et le jeton de réinitialisation fourni.
-    // Vous devrez peut-être accéder à votre base de données ou à votre ORM pour effectuer cette opération.
-    // Exemple (avec TypeORM) :
     const user = await this.usersRepository.findOneBy({ id: uuid });
     if (user) {
       user.resetToken = resetToken;
@@ -121,6 +151,33 @@ export class UsersService {
     }
   }
 
+
+  generateRandomToken(length: number): string {
+    const token = crypto.randomBytes(Math.ceil(length / 2)).toString('hex');
+    return token.substr(0, length);
+  }
+
+  
+  async sendPasswordResetEmail(email: string): Promise<boolean> {
+    const user = await this.usersRepository.findOne({ where: { email } });
+    return !!user;
+  }
+
+  async getUserByResetToken(resetToken: string): Promise<User | null> {
+    const user = await this.usersRepository.findOne({ where: { resetToken } });
+  
+    if (!user) {
+      return null;
+    }
+  
+    return user;
+  }
+
+
+
+  // -----------------------------
+
+  
 
 
   async createUser(createUserRequest: CreateUserRequest): Promise<User> {

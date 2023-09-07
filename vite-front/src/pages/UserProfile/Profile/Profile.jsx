@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { Logout } from "../../auth/Logout/Logout";
+import { logout } from '../../../slices/authSlice';
 import "./Profile.css";
-import { ToastContainer } from 'react-toastify';
-import { NavLink, useNavigate } from "react-router-dom";
-import { EditProduct } from "./Product/EditProduct";
+import { Link, useNavigate } from "react-router-dom";
+import { useDispatch } from 'react-redux';
+
 
 export const Profile = () => {
   const [user, setUser] = useState({});
@@ -12,6 +12,8 @@ export const Profile = () => {
   const [newFirstName, setNewFirstName] = useState('');
   const [newLastName, setNewLastName] = useState('');
   const [newEmail, setNewEmail] = useState('');
+  const dispatch = useDispatch();
+	const navigate = useNavigate();
 
   useEffect(() => {
     fetch(import.meta.env.VITE_GW_HOSTNAME + '/api/v1/users/me', {
@@ -35,6 +37,13 @@ export const Profile = () => {
   const handleEditName = () => {
     setEditingName(true);
   };
+
+
+  const logoutHandler = () => {
+		dispatch(logout());
+		navigate('/login');
+	};
+
 
   const handleEditEmail = () => {
     setEditingEmail(true);
@@ -82,14 +91,12 @@ const handleSaveEmail = () => {
   })
     .then(response => response.json())
     .then(updatedUser => {
-      console.log('updateUser', updatedUser);
       console.log('SUCCESS:');
       
       setUser(updatedUser);
       setEditingEmail(false);
 
-      // window.location.reload();
-
+      logoutHandler(true);
     })
     .catch(error => {
       console.error('Error updating email:', error);
@@ -142,6 +149,15 @@ const handleSaveEmail = () => {
             <button type="button" className="btn btn-success" onClick={handleEditEmail}>Edit</button>
           )}
         </div>
+
+        <div className="list-group-item d-flex align-items-center">
+          <div className="col">
+          <Link className="new-account" to="/resetPassword">
+						Reset your passWord
+					</Link>
+          </div>
+        </div>
+
       </div>
     </div>
   );
