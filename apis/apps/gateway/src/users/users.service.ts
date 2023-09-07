@@ -6,6 +6,7 @@ import {
   InternalServerErrorException,
   NotFoundException,
 } from '@nestjs/common';
+
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { PutObjectCommand, S3Client } from '@aws-sdk/client-s3';
@@ -15,9 +16,12 @@ import {
   CreateUserRequest,
   UpdateProfileRequest,
   UpdatePasswordRequest,
+  UpdateEmailRequest,
 } from '../../../../libs/common/src/dtos/users/users.request';
 import { User } from './User';
 import { Role } from '../auth/auth.enum';
+import * as crypto from 'crypto';
+import * as bcrypt from 'bcryptjs';
 
 @Injectable()
 export class UsersService {
@@ -71,17 +75,32 @@ export class UsersService {
     await this.usersRepository.update(user.id, {
       firstname: updateProfileRequest.firstname || user.firstname,
       lastname: updateProfileRequest.lastname || user.lastname,
-    });
+  });
+  console.log('SUCCESS profile: SERVICE');
 
     return { message: 'Profile updated successfully' };
+  }
+
+  async updateEmail(
+    access_token: string,
+    updateEmailRequest: UpdateEmailRequest,
+  ): Promise<{ message: string }> {
+    const user = await this.getMe(access_token);
+
+    await this.usersRepository.update(user.id, {
+      email: updateEmailRequest.email || user.email,
+    });
+
+    console.log('SUCCESS email: SERVICE');
+    return { message: 'Email updated successfully' };
   }
 
   async updatePassword(
     access_token: string,
     updatePasswordRequest: UpdatePasswordRequest,
-  ): Promise<{ message: string }> {
-    const user = await this.getMe(access_token);
-    const NewPassword = await hash(updatePasswordRequest.password, 10);
+    ): Promise<{ message: string }> {
+      const user = await this.getMe(access_token);
+      const NewPassword = await hash(updatePasswordRequest.password, 10);
 
     await this.usersRepository.update(user.id, {
       password: NewPassword,
@@ -89,6 +108,77 @@ export class UsersService {
 
     return { message: 'Password updated successfully' };
   }
+
+
+  // RESET PASSWORD
+
+  async resetPassword(resetToken: string, newPassword: string) {
+    const user = await this.getUserByResetToken(resetToken);
+    if (!user) {
+      throw new NotFoundException('reset password broken');
+    }
+
+    user.password = await this.hashPassword(newPassword);
+
+    user.resetToken = null;
+    await this.usersRepository.save(user);
+  }
+
+
+
+
+  async hashPassword(password: string): Promise<string> {
+    const hashedPassword = await hash(password, 10);
+
+    return hashedPassword;
+  }
+
+
+
+  async emailExists(email: string): Promise<boolean> {
+    const user = await this.usersRepository.findOne({ where: { email } });
+    return !!user;
+  }
+
+
+  async updateResetToken(uuid: string, resetToken: string): Promise<void> {
+    const user = await this.usersRepository.findOneBy({ id: uuid });
+    if (user) {
+      user.resetToken = resetToken;
+      await this.usersRepository.save(user);
+    } else {
+      throw new NotFoundException('User not found');
+    }
+  }
+
+
+  generateRandomToken(length: number): string {
+    const token = crypto.randomBytes(Math.ceil(length / 2)).toString('hex');
+    return token.substr(0, length);
+  }
+
+  
+  async sendPasswordResetEmail(email: string): Promise<boolean> {
+    const user = await this.usersRepository.findOne({ where: { email } });
+    return !!user;
+  }
+
+  async getUserByResetToken(resetToken: string): Promise<User | null> {
+    const user = await this.usersRepository.findOne({ where: { resetToken } });
+  
+    if (!user) {
+      return null;
+    }
+  
+    return user;
+  }
+
+
+
+  // -----------------------------
+
+  
+
 
   async createUser(createUserRequest: CreateUserRequest): Promise<User> {
     try {

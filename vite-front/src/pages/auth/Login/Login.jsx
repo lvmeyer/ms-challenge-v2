@@ -95,7 +95,10 @@ export const Login = () => {
 					</div>
 
 					<Link className="new-account" to="/signup">
-						Create a new account?
+						Create a new account ?
+					</Link>
+					<Link className="new-account" to="/resetPassword">
+						Forgot your password ?
 					</Link>
 				</form>
 			</div>
