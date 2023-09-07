@@ -27,6 +27,11 @@ export class UpdateProfileRequest {
   lastname?: string;
 }
 
+export class UpdateEmailRequest {
+  @IsEmail()
+	email: string;
+}
+
 export class UpdatePasswordRequest {
   @IsDefined()
   @IsString()

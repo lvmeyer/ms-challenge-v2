@@ -264,7 +264,7 @@ AppDataSource.initialize()
 		product6.image =
 			'https://media.ldlc.com/r1600/ld/products/00/05/68/67/LD0005686754_1.jpg';
 		product6.price = 149;
-		product6.quantity = 50;
+		product6.quantity = 1;
 		product6.category = cat2;
 		await AppDataSource.manager.save(product6);
 

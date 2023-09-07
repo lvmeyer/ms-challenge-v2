@@ -52,6 +52,9 @@ export class User {
 	@UpdateDateColumn()
 	updatedDate: Date;
 
+	@Column({ nullable: true })
+  	resetToken: string;
+	
 	@OneToMany(() => Config, (config) => config.user)
   	configs: Config[];
 }

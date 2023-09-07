@@ -73,27 +73,6 @@ export const AdminProductPanel = () => {
 			});
 	};
 
-	// ----------------EDIT Product---------------
-
-	const handleSubmit = (e) => {
-		e.preventDefault();
-		fetch(import.meta.env.VITE_GW_HOSTNAME + '/api/v1/products', {
-			method: 'POST',
-			headers: {
-				'Content-Type': 'application/json',
-				Authorization:
-					'Bearer ' + JSON.parse(localStorage.getItem('userInfo')).access_token,
-			},
-			body: JSON.stringify(formData),
-		})
-			.then((response) => response.json())
-			.then((data) => {
-				setProduct(data);
-			})
-			.catch((error) => {
-				console.error(error);
-			});
-	};
 
 	const [categories, setCategories] = useState([]);
 	const [products, setProducts] = useState([]);
@@ -203,91 +182,6 @@ export const AdminProductPanel = () => {
 					</div>
 				</div>
 				<ToastContainer position="bottom-right" />
-			</div>
-
-			<div className="mt-5">
-				<form onSubmit={handleSubmit} className="d-flex flex-column">
-					<h2>Add a Product</h2>
-					<div className="mb-3">
-						<label htmlfor="name" className="form-label">
-							Name
-						</label>
-						<input
-							className="form-control"
-							name="name"
-							placeholder="Name"
-							value={formData.name}
-							onChange={handleChange}
-							id="name"
-						/>
-						<label htmlfor="price" className="form-label">
-							Price
-						</label>
-						<input
-							className="form-control"
-							name="price"
-							placeholder="Price"
-							value={formData.price}
-							onChange={handleChange}
-							id="price"
-						/>
-						<label htmlfor="description" className="form-label">
-							Description
-						</label>
-						<input
-							className="form-control"
-							name="description"
-							placeholder="Description"
-							value={formData.description}
-							onChange={handleChange}
-							id="description"
-						/>
-						<label htmlfor="quantity" className="form-label">
-							Quantity
-						</label>
-						<input
-							className="form-control"
-							name="quantity"
-							placeholder="Quantity"
-							value={formData.quantity}
-							onChange={handleChange}
-							id="quantity"
-						/>
-
-						<label htmlfor="image" className="form-label">
-							Image
-						</label>
-						<input
-							className="form-control"
-							name="image"
-							placeholder="Image"
-							value={formData.image}
-							onChange={handleChange}
-							id="image"
-						/>
-
-						<label htmlfor="image" className="form-label">
-							Category
-						</label>
-						<select
-							name="category"
-							value={formData.category}
-							onChange={handleChange}
-							className="form-select form-select-sm"
-							aria-label=".form-select-sm example"
-						>
-							<option value="">Select a category</option>
-							{categories.map((category) => (
-								<option key={category.id} value={category.id}>
-									{category.name}
-								</option>
-							))}
-						</select>
-					</div>
-					<button type="submit" className="btn btn-primary">
-						Submit
-					</button>
-				</form>
 			</div>
 		</div>
 	);

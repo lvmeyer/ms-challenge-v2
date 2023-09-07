@@ -19,9 +19,10 @@ import {
   MaxFileSizeValidator,
   FileTypeValidator,
   UseInterceptors,
+  NotFoundException,
 } from '@nestjs/common';
 
-import { UpdateProfileRequest, UpdatePasswordRequest } from '@app/common';
+import { UpdateProfileRequest, UpdatePasswordRequest, UpdateEmailRequest } from '@app/common';
 import { User } from './User';
 import { Role } from '../auth/auth.enum';
 import { AuthRequired, HasRole } from '../auth/auth.decorator';
@@ -64,8 +65,22 @@ export class UsersController {
     @Headers() headers: any,
   ) {
     const access_token = headers.authorization.split(' ')[1];
-
+    console.log('SUCCESS profile: SERVICE');
     return this.usersService.updateProfile(access_token, updateProfileRequest);
+  }
+
+  @Patch('users/update-email')
+  @AuthRequired()
+  updateEmail(
+    @Req() req: Request,
+    @Body(ValidationPipe) updateEmailRequest: UpdateEmailRequest,
+    @Headers() headers: any,
+  ) {
+    const access_token = headers.authorization.split(' ')[1];
+    console.log('SUCCESS email: CONTROLLER');
+
+
+    return this.usersService.updateEmail(access_token, updateEmailRequest);
   }
 
   @Patch('users/updatepassword')
@@ -82,6 +97,47 @@ export class UsersController {
       updatePasswordRequest,
     );
   }
+
+  @Patch('reset-password')
+  async resetPassword(@Body() { email }: { email: string }) {
+    const user = await this.usersService.getUserByEmail(email);
+    if (!user) {
+      throw new NotFoundException('User not found');
+    }
+    console.log(email);
+
+    const resetToken = this.usersService.generateRandomToken(32);
+
+    await this.usersService.updateResetToken(user.id, resetToken);
+
+    try {
+      // await this.sendResetEmail(email, resetToken);
+      return { resetToken: resetToken };
+    } catch (error) {
+      console.error('Error sending reset email:', error);
+      throw new Error('Failed to send reset email.');
+    }
+  }
+  
+  @Patch('reset-password-form/:resetToken')
+  async resetPasswordForm(
+    @Param('resetToken') resetToken: string,
+    @Body() { password }: { password: string }
+  ) {
+    const user = await this.usersService.getUserByResetToken(resetToken);
+
+    // throw new NotFoundException(user);
+    if (!user) {
+
+      throw new NotFoundException('Invalid reset token');
+    }
+
+    await this.usersService.resetPassword(user.resetToken, password);
+
+    return { message: 'Password reset successfully' };
+  }
+
+
 
   @Get('users')
   @HasRole(Role.ADMINISTRATOR)
