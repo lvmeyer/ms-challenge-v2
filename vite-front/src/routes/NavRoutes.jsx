@@ -18,6 +18,7 @@ import { loadStripe } from '@stripe/stripe-js';
 import RequireAuth from '../components/requires-auth/RequiresAuth';
 import { EditProduct } from '../pages/UserProfile/Profile/Product/EditProduct';
 import {Configurateur} from '../pages/Configurateur/Configurateur';
+import AdminRoutes from '../components/AdminRoutes/AdminRoutes';
 
 export const NavRoutes = () => {
 	const [stripePromise, setStripePromise] = useState(null);
@@ -43,7 +44,9 @@ export const NavRoutes = () => {
 				path="/edit-product/:productId"
 				element={
 					<RequireAuth>
-						<EditProduct />
+						<AdminRoutes>
+							<EditProduct />
+						</AdminRoutes>
 					</RequireAuth>
 				}
 			/>
@@ -72,15 +75,6 @@ export const NavRoutes = () => {
 					</RequireAuth>
 				}
 			>
-				<Route path="/profile/" element={<UserProfile />} />
-				<Route
-					path="/profile/orders"
-					element={
-						<RequireAuth>
-							<Orders />
-						</RequireAuth>
-					}
-				/>
 			</Route>
 
 			<Route
