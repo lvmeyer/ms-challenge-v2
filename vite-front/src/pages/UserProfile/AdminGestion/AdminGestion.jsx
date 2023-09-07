@@ -16,7 +16,6 @@ export const AdminGestion = () => {
   };
 
   const handleTabClick = (tab) => {
-    // Si le même onglet est cliqué à nouveau, désactivez l'affichage
     if (currentTab === tab) {
       setCurrentTab(null);
     } else {

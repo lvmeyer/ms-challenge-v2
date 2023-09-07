@@ -4,7 +4,6 @@ import { useSelector } from 'react-redux';
 import './UserProfile.css';
 import { Profile } from './Profile/Profile';
 
-import { ConfigurateurDesktop } from './ConfigurateurDesktop/ConfigurateurDesktop';
 import { AdminGestion } from './AdminGestion/AdminGestion';
 
 export const UserProfile = () => {
