@@ -14,16 +14,24 @@ export const ConfigurateurDesktop = () => {
     const [totalConfig, setTotalConfig] = useState(0);
 
     const [processors, setProcessors] = useState([]);
-    const [processorSelected, setProcessorSelected] = useState();
+    const [processorSelected, setProcessorSelected] = useState(
+        localStorage.getItem('config') && JSON.parse(localStorage.getItem('config')).processor ? JSON.parse(localStorage.getItem('config')).processor : null
+    );
 
     const [motherboards, setMotherboards] = useState([]);
-    const [motherboardSelected, setMotherboardSelected] = useState();
+    const [motherboardSelected, setMotherboardSelected] = useState(
+        localStorage.getItem('config') && JSON.parse(localStorage.getItem('config')).motherboard ? JSON.parse(localStorage.getItem('config')).motherboard : null
+    );
 
     const [memory, setMemory] = useState([]);
-    const [memorySelected, setMemorySelected] = useState();
+    const [memorySelected, setMemorySelected] = useState(
+        localStorage.getItem('config') && JSON.parse(localStorage.getItem('config')).memory ? JSON.parse(localStorage.getItem('config')).memory : null
+    );
 
     const [graphicscards, setGraphicsCards] = useState([]);
-    const [graphicscardSelected, setGraphicsCardSelected] = useState();
+    const [graphicscardSelected, setGraphicsCardSelected] = useState(
+        localStorage.getItem('config') && JSON.parse(localStorage.getItem('config')).graphicscard ? JSON.parse(localStorage.getItem('config')).graphicscard : null
+    );
 
 
     useEffect(() => {
@@ -346,6 +354,7 @@ export const ConfigurateurDesktop = () => {
                         <option value="null">CHOOSE A PROCESSOR</option>
                         {processors.map((processor) => (
                             <option 
+                            selected={localStorage.getItem('config') && JSON.parse(localStorage.getItem('config')).processor && JSON.parse(localStorage.getItem('config')).processor.id == processor.id ? true : false}
                             disabled={processor.quantity == 0 ? true : false}
                             value={processor.id} 
                             key={processor.id}>
@@ -358,6 +367,7 @@ export const ConfigurateurDesktop = () => {
                         <option value="null">CHOOSE A MOTHERBOARD</option>
                         {motherboards.map((motherboard) => (
                             <option 
+                            selected={localStorage.getItem('config') && JSON.parse(localStorage.getItem('config')).motherboard && JSON.parse(localStorage.getItem('config')).motherboard.id == motherboard.id ? true : false}
                             disabled={motherboard.quantity == 0 ? true : false}
                             value={motherboard.id} 
                             key={motherboard.id}>
@@ -371,6 +381,7 @@ export const ConfigurateurDesktop = () => {
                         <option value="null">CHOOSE A GRAPHIC CARD</option>
                         {graphicscards.map((graphicscard) => (
                             <option 
+                            selected={localStorage.getItem('config') && JSON.parse(localStorage.getItem('config')).graphicscard && JSON.parse(localStorage.getItem('config')).graphicscard.id == graphicscard.id ? true : false}
                             disabled={graphicscard.quantity == 0 ? true : false}
                             value={graphicscard.id} 
                             key={graphicscard.id}>
@@ -384,6 +395,7 @@ export const ConfigurateurDesktop = () => {
                         <option value="null">CHOOSE A MEMORY</option>
                         {memory.map((memory) => (
                             <option 
+                            selected={localStorage.getItem('config') && JSON.parse(localStorage.getItem('config')).memory && JSON.parse(localStorage.getItem('config')).memory.id == memory.id ? true : false}
                             disabled={memory.quantity == 0 ? true : false}
                             value={memory.id} 
                             key={memory.id}>
