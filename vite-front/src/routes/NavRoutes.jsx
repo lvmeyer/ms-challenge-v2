@@ -20,6 +20,8 @@ import { EditProduct } from '../pages/UserProfile/Profile/Product/EditProduct';
 import { ResetPassword } from '../pages/auth/ResetPassword/ResetPassword';
 import { ResetPasswordForm } from '../pages/auth/ResetPassword/ResetPasswordForm';
 
+import {Configurateur} from '../pages/Configurateur/Configurateur';
+import AdminRoutes from '../components/AdminRoutes/AdminRoutes';
 
 export const NavRoutes = () => {
 	const [stripePromise, setStripePromise] = useState(null);
@@ -45,7 +47,9 @@ export const NavRoutes = () => {
 				path="/edit-product/:productId"
 				element={
 					<RequireAuth>
-						<EditProduct />
+						<AdminRoutes>
+							<EditProduct />
+						</AdminRoutes>
 					</RequireAuth>
 				}
 			/>
@@ -74,15 +78,6 @@ export const NavRoutes = () => {
 					</RequireAuth>
 				}
 			>
-				<Route path="/profile/" element={<UserProfile />} />
-				<Route
-					path="/profile/orders"
-					element={
-						<RequireAuth>
-							<Orders />
-						</RequireAuth>
-					}
-				/>
 			</Route>
 
 			<Route
@@ -114,6 +109,7 @@ export const NavRoutes = () => {
 			<Route path="/resetPasswordForm/:resetToken" element={<ResetPasswordForm />} />
 			
 			<Route path="*" element={<PageNotFound />} />
+			<Route path="/configurateur" element={<Configurateur />} />
 		</Routes>
 	);
 };

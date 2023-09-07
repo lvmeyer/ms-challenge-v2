@@ -10,6 +10,7 @@ export const AdminProductPanel = () => {
 		description: '',
 		image: '',
 		category: '',
+		quantity: 0,
 	});
 
 	const [editProductId, setEditProductId] = useState(null);
@@ -20,7 +21,7 @@ export const AdminProductPanel = () => {
 
 	const handleChange = (e) => {
 		const { name, value } = e.target;
-		const updatedValue = name === 'price' ? parseFloat(value) : value;
+		const updatedValue = (name === 'price' || name === 'quantity') ? parseFloat(value) : value;
 		setFormData({ ...formData, [name]: updatedValue });
 		setEditProductData({ ...editProductData, [name]: updatedValue });
 	};
@@ -121,6 +122,7 @@ export const AdminProductPanel = () => {
 										<th scope="col">Name</th>
 										<th scope="col">Price</th>
 										<th scope="col">Description</th>
+										<th scope="col">Quantity</th>
 										<th className="w-50" scope="col">
 											Image
 										</th>
@@ -132,7 +134,7 @@ export const AdminProductPanel = () => {
 								<tbody>
 									{Array.isArray(products) &&
 										products.map((product) => {
-											const { id, name, price, description, image, category } =
+											const { id, name, price,  description, image, quantity, category } =
 												product;
 
 											return (
@@ -147,6 +149,7 @@ export const AdminProductPanel = () => {
 													<td className="text-truncate max-width-150">
 														{description}
 													</td>
+													<td>{quantity}</td>
 													<td className="text-truncate max-width-150">
 														{image}
 													</td>
@@ -181,6 +184,90 @@ export const AdminProductPanel = () => {
 				<ToastContainer position="bottom-right" />
 			</div>
 
+			<div className="mt-5">
+				<form onSubmit={handleSubmit} className="d-flex flex-column">
+					<h2>Add a Product</h2>
+					<div className="mb-3">
+						<label htmlfor="name" className="form-label">
+							Name
+						</label>
+						<input
+							className="form-control"
+							name="name"
+							placeholder="Name"
+							value={formData.name}
+							onChange={handleChange}
+							id="name"
+						/>
+						<label htmlfor="price" className="form-label">
+							Price
+						</label>
+						<input
+							className="form-control"
+							name="price"
+							placeholder="Price"
+							value={formData.price}
+							onChange={handleChange}
+							id="price"
+						/>
+						<label htmlfor="description" className="form-label">
+							Description
+						</label>
+						<input
+							className="form-control"
+							name="description"
+							placeholder="Description"
+							value={formData.description}
+							onChange={handleChange}
+							id="description"
+						/>
+						<label htmlfor="quantity" className="form-label">
+							Quantity
+						</label>
+						<input
+							className="form-control"
+							name="quantity"
+							placeholder="Quantity"
+							value={formData.quantity}
+							onChange={handleChange}
+							id="quantity"
+						/>
+
+						<label htmlfor="image" className="form-label">
+							Image
+						</label>
+						<input
+							className="form-control"
+							name="image"
+							placeholder="Image"
+							value={formData.image}
+							onChange={handleChange}
+							id="image"
+						/>
+
+						<label htmlfor="image" className="form-label">
+							Category
+						</label>
+						<select
+							name="category"
+							value={formData.category}
+							onChange={handleChange}
+							className="form-select form-select-sm"
+							aria-label=".form-select-sm example"
+						>
+							<option value="">Select a category</option>
+							{categories.map((category) => (
+								<option key={category.id} value={category.id}>
+									{category.name}
+								</option>
+							))}
+						</select>
+					</div>
+					<button type="submit" className="btn btn-primary">
+						Submit
+					</button>
+				</form>
+			</div>
 		</div>
 	);
 };

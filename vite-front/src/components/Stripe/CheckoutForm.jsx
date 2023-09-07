@@ -13,9 +13,10 @@ export default function CheckoutForm() {
 	const [message, setMessage] = useState(null);
 	const [isLoading, setIsLoading] = useState(false);
 	const { userInfo } = useSelector((state) => state.auth);
-
+	const [itemIds, setItemIds] = useState([]);
 	const [userProducts, setUserProducts] = useState([]);
 	const [totalAmount, setTotalAmount] = useState(0);
+	const [quantity, setQuantity] = useState(0);
 
   useEffect(() => {
 		fetch(import.meta.env.VITE_GW_HOSTNAME + '/api/v1/user-basket', {
@@ -48,6 +49,11 @@ export default function CheckoutForm() {
 					.then((data) => {
 						setUserProducts(data.data.products);
 						setTotalAmount(data.data.price);
+						const productIds = data.data.products.map((product) => ({
+							id: product.id,
+							quantity: product.quantity,
+						}));
+						setItemIds(productIds);
 					});
 			});
 	}, []);
@@ -73,7 +79,23 @@ export default function CheckoutForm() {
 		.then((res) => res.json())
 		.then((data) => console.log(data));
 
+		itemIds.forEach(itemId => {
+			const uuid = itemId.id;
+			const quantity = itemId.quantity-1;
 
+			fetch(import.meta.env.VITE_GW_HOSTNAME+`/api/v1/products/quantity/${uuid}`, {	
+				method: 'PATCH',
+				headers: {
+					'Content-Type': 'application/json',
+					'Authorization': 'Bearer ' + JSON.parse(localStorage.getItem('userInfo')).access_token
+				},
+				body: JSON.stringify({quantity: quantity})
+			})
+			.then((res) => res.json())
+			.then((data) => console.log(data));
+
+		});
+		
 		const { error } = await stripe.confirmPayment({
 			elements,
 			confirmParams: {

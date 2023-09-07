@@ -7,6 +7,8 @@ import { Basket } from './entity/Basket';
 import { SubCategory } from './entity/SubCategory';
 import { Review } from './entity/Review';
 import { ProductSubCategory } from './entity/ProductSubCategory';
+import { Config } from './entity/Config';
+import { ConfigProducts } from './entity/ConfigProducts';
 
 export const AppDataSource = new DataSource({
 	type: 'postgres',
@@ -25,6 +27,8 @@ export const AppDataSource = new DataSource({
 		SubCategory,
 		Review,
 		ProductSubCategory,
+		Config,
+		ConfigProducts
 	],
 	migrations: [],
 	subscribers: [],

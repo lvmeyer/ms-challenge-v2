@@ -19,7 +19,7 @@ import {
   CreateCategoryRequest,
   CreateProductRequest,
   CreateReviewRequest,
-  UpdateProductRequest,
+  UpdateProductRequest
 } from '@app/common';
 import { gatewayResponse } from '../utils/gatewayResponse';
 import { GatewayProductService } from '../services/gateway-products.service';
@@ -229,6 +229,38 @@ export class GatewayProductController {
       });
     }
   }
+
+  @Patch('products/quantity/:uuid')
+  @AuthRequired()
+  @HasRole(Role.USER)
+  @HttpCode(HttpStatus.OK)
+  async updateProductStock(
+      @Param('uuid', ParseUUIDPipe) uuid: string,
+      @Body(ValidationPipe) updateQuantityRequest: UpdateProductRequest,
+      @Res() res: Response,
+    ): Promise<Response<any, Record<string, any>>> {
+      try {
+        await this.gatewayProductService.updateProduct(
+          uuid,
+          updateQuantityRequest,
+        );
+  
+        return gatewayResponse({
+          res,
+          status: HttpStatus.OK,
+          success: true,
+          message: 'Product updated',
+        });
+      } catch (err) {
+        console.error(err);
+        return gatewayResponse({
+          res,
+          status: err.status,
+          success: false,
+          message: err.message,
+        });
+      }
+    }
 
   @Delete('products/:uuid')
   @AuthRequired()

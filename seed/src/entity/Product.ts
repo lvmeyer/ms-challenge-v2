@@ -13,6 +13,7 @@ import { Basket } from './Basket';
 import { Category } from './Category';
 import { Review } from './Review';
 import { SubCategory } from './SubCategory';
+import { Config } from './Config';
 
 @Entity()
 export class Product {
@@ -30,6 +31,9 @@ export class Product {
 
 	@Column({ nullable: true })
 	image?: string;
+
+	@Column({ type: 'int', default: 0 })
+	quantity: number;
 
 	@CreateDateColumn()
 	createdDate: Date;

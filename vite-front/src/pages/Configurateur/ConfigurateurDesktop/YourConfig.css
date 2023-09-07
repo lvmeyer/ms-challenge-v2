@@ -1,20 +1,23 @@
 .your-configuration {
     display: flex;
     flex-direction: column;
-    width: 100%;
+    width: 40%;
     height: 100vh;
-    align-items: center;
-    overflow: scroll;
+    align-items: flex-start;
     background-color: white;
 }
 
 .your-configuration-container {
     display: flex;
     flex-direction: column;
-    align-items: flex-end;
+    align-items: flex-start;
     justify-content: flex-start;
     width: 100%;
     height: 100vh;
+}
+
+.your-configuration-container h2 {
+    font-size: 24px;
 }
 
 .your-configuration-container .your-configuration-container-description {
@@ -23,18 +26,24 @@
     align-items: center;
     justify-content: space-between;
     width: 100%;
-    height: 100vh;
 }
 
 .your-configuration-container .your-configuration-container-description img {
-    width: 200px;
-    height: 200px;
+    width: 100px;
+    height: 100px;
     object-fit: cover;
 }
 
 .your-configuration-container .your-configuration-container-description span {
     font-size: 20px;
     font-weight: 600;
-    color: rgb(230, 156, 156);
+    color: rgb(20, 16, 16);
 }
 
+.your-configuration-container-footer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}

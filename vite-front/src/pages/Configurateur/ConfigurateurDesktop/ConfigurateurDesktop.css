@@ -1,8 +1,9 @@
 .configurateur {
     display: flex;
     flex-direction: row;
-    width: 70%;
-    height: 100vh;
+    width: 100%;
+    padding: 100px;
+    box-shadow: 0px 0px 46px -4px rgb(238, 238, 238);
 }
 
 
@@ -11,36 +12,29 @@
     flex-direction: column;
     align-items: flex-start;
     justify-content: flex-start;
-    width: 100%;
+    width: 60%;
     height: 100vh;
 }
 
 .configurateur-desktop-select {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-gap: 20px;
-    width: 100%;
-    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    width: 80%;
 }
 
 .configurateur-desktop-select label {
     color: #333;
     font-size: 18px;
     font-weight: 600;
-}
-
-.configurateur-desktop-select .form-check label {
-    color: #333;
-    font-size: 14px;
-    font-weight: 400;
+    margin-top: 15px;
 }
 
 .configurateur-desktop-container select {
-    width: 100%;
+    width: 80%;
     height: 40px;
-    margin: 10px 0;
+    margin: 10px 0 15px 0;
     padding: 0 10px;
-    border: 1px solid #ccc;
+    border: 1px solid #100d0d;
     border-radius: 5px;
     background-color: #fff;
     font-size: 16px;
@@ -48,6 +42,13 @@
     color: #333;
     outline: none;
     cursor: pointer;
+}
+
+.configurateur-desktop-container select option {
+    cursor: pointer;
+    font-size: 30px;
+    font-weight: 400;
+    color: #333;
 }
 
 
@@ -59,6 +60,5 @@
         align-items: center;
         justify-content: center;
         height: auto;
-
     }
 }

@@ -13,6 +13,7 @@ export const EditProduct = () => {
 			category: {
 				id: '',
 			},
+			quantity: 0,
 		},
 	});
 	const [categories, setCategories] = useState([]);
@@ -51,7 +52,7 @@ export const EditProduct = () => {
 
 	const handleChange = (e) => {
 		const { name, value } = e.target;
-		const updatedValue = name === 'price' ? parseFloat(value) : value;
+		const updatedValue = (name === 'price' || name === 'quantity') ? parseFloat(value) : value;
 
 		if (name === 'category') {
 			const selectedCategoryId = value;
@@ -89,6 +90,9 @@ export const EditProduct = () => {
 		if (editProductData.data.description !== '') {
 			updatedFields.description = editProductData.data.description;
 		}
+		if (editProductData.data.quantity !== '') {
+			updatedFields.quantity = editProductData.data.quantity;
+		}
 		if (editProductData.data.image !== '') {
 			updatedFields.image = editProductData.data.image;
 		}
@@ -112,6 +116,8 @@ export const EditProduct = () => {
 		<div className="container">
 			<div className="m-5">
 				<form onSubmit={handleUpdate} className="d-flex flex-column">
+					<h1 className="text-center">Edit Product</h1>
+					<p>Name</p>
 					<input
 						className="form-control"
 						name="name"
@@ -121,6 +127,7 @@ export const EditProduct = () => {
 						id="name"
 					/>
 
+					<p>Price</p>
 					<input
 						className="form-control"
 						name="price"
@@ -130,6 +137,7 @@ export const EditProduct = () => {
 						id="price"
 					/>
 
+					<p>Description</p>
 					<input
 						className="form-control col"
 						name="description"
@@ -138,7 +146,18 @@ export const EditProduct = () => {
 						onChange={handleChange}
 						id="description"
 					/>
+					
+					<p>Quantity</p>
+					<input
+						className="form-control col"
+						name="quantity"
+						placeholder="Quantity"
+						value={editProductData.data.quantity}
+						onChange={handleChange}
+						id="quantity"
+					/>
 
+					<p>Image</p>
 					<input
 						className="form-control"
 						name="image"
@@ -147,7 +166,23 @@ export const EditProduct = () => {
 						onChange={handleChange}
 						id="image"
 					/>
-
+					<p>
+						Category
+					</p>
+					<select
+						name="category"
+						onChange={handleChange}
+						value={editProductData.data.category}
+						className="form-select form-select-sm"
+						aria-label=".form-select-sm example"
+					>
+						<option value="">Select a category</option>
+						{categories.map((category) => (
+							<option key={category.id} value={category.id}>
+								{category.name}
+							</option>
+						))}
+						</select>
 					<button type="submit" className="btn btn-primary w-25">
 						Save
 					</button>

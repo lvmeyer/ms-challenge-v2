@@ -22,7 +22,6 @@ export const UserProfile = () => {
 					) : (
 						<>
 							<Profile />
-							<ConfigurateurDesktop />
 						</>
 					)}
 				</div>

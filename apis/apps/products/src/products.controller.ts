@@ -11,9 +11,9 @@ import {
   Post,
   Query,
   ValidationPipe,
+  BadRequestException
 } from '@nestjs/common';
 import { UpdateResult } from 'typeorm';
-
 import {
   CreateProductRequest,
   UpdateProductRequest,
@@ -97,6 +97,15 @@ export class ProductsController {
     @Body(ValidationPipe) updateProductRequest: UpdateProductRequest,
   ): Promise<UpdateResult> {
     return await this.productsService.update(uuid, updateProductRequest);
+  }
+
+  @Patch('products/quantity/:uuid')
+  @HttpCode(HttpStatus.OK)
+  async updateQuantity(
+    @Param('uuid', ParseUUIDPipe) uuid: string,
+    @Body(ValidationPipe) updateQuantityRequest: UpdateProductRequest,
+  ): Promise<UpdateResult> {
+    return await this.productsService.update(uuid, updateQuantityRequest);
   }
 
   @Delete('products/:uuid')
