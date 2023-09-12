@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { ToastContainer, toast } from 'react-toastify';
 import '../Profile.css';
-import { NavLink } from 'react-router-dom';
 
 export const EditProduct = () => {
 	const { productId } = useParams();
@@ -111,11 +109,7 @@ export const EditProduct = () => {
 					'Bearer ' + JSON.parse(localStorage.getItem('userInfo')).access_token,
 			},
 			body: JSON.stringify(updatedFields),
-		})
-		.then((response) => 
-			response.json(),
-			toast.success('Product update successfully')	
-		);
+		}).then((response) => response.json());
 	};
 
 	return (
@@ -189,22 +183,11 @@ export const EditProduct = () => {
 							</option>
 						))}
 						</select>
-					<div>
-						<button type="submit" className="btn btn-primary w-25">
-							Save
-						</button>
-						<NavLink to={`/profile`}>
-							<button
-								type="button"
-								className="btn btn-success w-25"
-							>
-								Back to Admin Panel
-							</button>
-						</NavLink>
-					</div>
+					<button type="submit" className="btn btn-primary w-25">
+						Save
+					</button>
 				</form>
 			</div>
-            <ToastContainer position="bottom-center" />
 		</div>
 	);
 };

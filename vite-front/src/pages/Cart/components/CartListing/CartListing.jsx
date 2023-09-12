@@ -44,8 +44,10 @@ export const CartListing = () => {
 						setTotalAmount(data.data.price);
 						const productIds = data.data.products.map((product) => product.id);
 						setItemIds(productIds);
+						console.log(productIds);
 						const quantitiesTest = data.data.products.map((product) => product.quantity);
 						setQuantity(quantitiesTest);
+						console.log(quantitiesTest);
 					});
 			});
 	}, []);

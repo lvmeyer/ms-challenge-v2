@@ -69,11 +69,11 @@ body {
 	-moz-osx-font-smoothing: grayscale;
 	min-height: 100vh;
 }
+
 code {
 	font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
 		monospace;
 }
-
 
 #payment-form {
 	border: #f6f9fc solid 1px;
@@ -89,8 +89,4 @@ code {
 	border-radius: var(--radius);
 	padding: 20px;
 	margin: 50px 0;
-}
-
-.body-content {
-	min-height: 80vh;
 }
