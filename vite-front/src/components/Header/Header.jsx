@@ -54,13 +54,6 @@ export const Header = () => {
 					<NavLink
 						onClick={() => setShowHamburger(true)}
 						style={getActiveStyle}
-						to="/configurateur"
-					>
-						PC Configurator
-					</NavLink>
-					<NavLink
-						onClick={() => setShowHamburger(true)}
-						style={getActiveStyle}
 						to="/product-listing"
 					>
 						Explore

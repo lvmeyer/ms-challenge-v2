@@ -77,7 +77,6 @@ export default function CheckoutForm() {
 		}
 		})
 		.then((res) => res.json())
-		.then((data) => console.log(data));
 
 		itemIds.forEach(itemId => {
 			const uuid = itemId.id;
@@ -92,7 +91,6 @@ export default function CheckoutForm() {
 				body: JSON.stringify({quantity: quantity})
 			})
 			.then((res) => res.json())
-			.then((data) => console.log(data));
 
 		});
 		
