@@ -30,7 +30,6 @@ export const Profile = () => {
         setNewLastName(data.lastname);
         setNewEmail(data.email);
 
-        console.log('firstName lastName', data);
       });
   }, []);
 
@@ -91,7 +90,6 @@ const handleSaveEmail = () => {
   })
     .then(response => response.json())
     .then(updatedUser => {
-      console.log('SUCCESS:');
       
       setUser(updatedUser);
       setEditingEmail(false);
@@ -100,7 +98,6 @@ const handleSaveEmail = () => {
     })
     .catch(error => {
       console.error('Error updating email:', error);
-      console.log(error);
     });
 };
 

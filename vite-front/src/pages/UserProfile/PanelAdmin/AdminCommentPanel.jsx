@@ -17,7 +17,6 @@ export const AdminCommentPanel = () => {
 		})
 			.then((response) => response.json())
 			.then((data) => {
-				console.log('report',data.data);
 				setReportedComments(data.data);
 				setIsLoading(false);
 			})

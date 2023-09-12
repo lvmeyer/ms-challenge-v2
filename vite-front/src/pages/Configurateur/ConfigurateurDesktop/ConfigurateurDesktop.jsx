@@ -83,7 +83,6 @@ export const ConfigurateurDesktop = () => {
             );
             setMemory(memory);
 
-            console.log(proc);
         });
     }, []);
 
