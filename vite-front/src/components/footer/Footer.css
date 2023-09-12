@@ -6,6 +6,8 @@
 	flex-flow: column nowrap;
 	padding: 0.8rem;
 	justify-content: space-between;
+	bottom: 0;
+	width: 100%;
 }
 .footer > * {
 	margin: 0.5rem;

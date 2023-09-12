@@ -10,6 +10,7 @@ function App() {
   return (
     <div className="App">
       <Header />
+      <div className="body-content">
       <NavRoutes />
       <ScrollToTop />
       <Toaster
@@ -23,6 +24,7 @@ function App() {
           top: "6rem",
         }}
       />
+      </div>
       <Footer />
     </div>
   );

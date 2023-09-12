@@ -11,7 +11,7 @@ export const AddProduct = () => {
     description: '',
     image: '',
     category: '',
-	quantity: 0,
+	quantity: 0
   });
 
   const [editProductData, setEditProductData] = useState({});
@@ -36,15 +36,14 @@ export const AddProduct = () => {
     })
       .then((response) => response.json())
       .then((data) => {
-        setSuccessMessage('Product added successfully'); // Définir le message de succès
+		toast.success('Product added successfully');
         setFormData({
           name: '',
           price: 0,
           description: '',
           image: '',
           category: '',
-		  quantity: 0,
-
+		  quantity: 0
         }); // Vider les champs du formulaire
       })
       .catch((error) => {
@@ -81,7 +80,7 @@ export const AddProduct = () => {
 			<form onSubmit={handleSubmit} className="d-flex flex-column">
 					<h2>Add a Product</h2>
 					<div className="mb-3">
-						<label htmlfor="name" className="form-label">
+						<label htmlFor="name" className="form-label">
 							Name
 						</label>
 						<input
@@ -92,7 +91,7 @@ export const AddProduct = () => {
 							onChange={handleChange}
 							id="name"
 						/>
-						<label htmlfor="price" className="form-label">
+						<label htmlFor="price" className="form-label">
 							Price
 						</label>
 						<input
@@ -103,7 +102,7 @@ export const AddProduct = () => {
 							onChange={handleChange}
 							id="price"
 						/>
-						<label htmlfor="description" className="form-label">
+						<label htmlFor="description" className="form-label">
 							Description
 						</label>
 						<input
@@ -114,7 +113,7 @@ export const AddProduct = () => {
 							onChange={handleChange}
 							id="description"
 						/>
-						<label htmlfor="quantity" className="form-label">
+						<label htmlFor="quantity" className="form-label">
 							Quantity
 						</label>
 						<input
@@ -126,7 +125,7 @@ export const AddProduct = () => {
 							id="quantity"
 						/>
 
-						<label htmlfor="image" className="form-label">
+						<label htmlFor="image" className="form-label">
 							Image
 						</label>
 						<input
@@ -138,7 +137,7 @@ export const AddProduct = () => {
 							id="image"
 						/>
 
-						<label htmlfor="image" className="form-label">
+						<label htmlFor="image" className="form-label">
 							Category
 						</label>
 						<select
@@ -161,6 +160,7 @@ export const AddProduct = () => {
 					</button>
 				</form>
 			</div>
+            <ToastContainer position="bottom-center" />
 		</div>
   );
 };

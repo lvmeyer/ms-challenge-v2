@@ -17,6 +17,7 @@ export const AdminCommentPanel = () => {
 		})
 			.then((response) => response.json())
 			.then((data) => {
+				console.log('report',data.data);
 				setReportedComments(data.data);
 				setIsLoading(false);
 			})
@@ -90,7 +91,7 @@ export const AdminCommentPanel = () => {
 							</p>
 							<p>
 								<strong>Reported: </strong>
-								{reportedComment.reportNb} times
+								{reportedComment.reports} times
 							</p>
 							<div className="action-button">
 								<button
